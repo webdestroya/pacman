@@ -2,11 +2,6 @@ package networking;
 
 import javax.swing.*;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.*;
 import java.net.*;
 
@@ -18,6 +13,14 @@ class Client{
 	private ObjectInputStream in;
 	private boolean connected = false;
 	private boolean inError = false;
+	
+	/**
+	Methods to ADD
+	fire
+	
+	
+	**/
+	
 	
    Client(){ 
        socket = null;
@@ -52,6 +55,25 @@ class Client{
     	 
 			}	
  }
+  
+  //when action occurs write action to output stream
+  public void fireAction(Action action){
+	   if(isConnected()){
+		          try {
+		        	  out.writeObject(null);
+				} catch (IOException e) {
+					message("Warning: Server not active");
+					connected = false;
+					finalize();
+				}
+	   	}
+  }
+  
+  //this is what happens when an input is received 
+  public void performAction(Action action){
+	
+  }
+  
   
   public boolean isConnected(){
 	  return connected;

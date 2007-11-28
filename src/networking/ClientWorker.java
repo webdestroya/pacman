@@ -1,10 +1,12 @@
 package networking;
 
-import javax.swing.*;
+
 import java.io.*;
 import java.net.*;
 
-class ClientWorker extends JFrame implements Runnable {
+import javax.swing.Action;
+
+class ClientWorker implements Runnable {
    
 	private static final long serialVersionUID = 1L;
 	private ObjectOutputStream out;
@@ -42,7 +44,17 @@ class ClientWorker extends JFrame implements Runnable {
 			}
     	} 
   }
-
+  
+  
+  public void fireVBListener(Action action){
+	  System.out.println("Server out!");
+		          try {
+		        		out.writeObject(null);
+				} catch (IOException e) {
+					System.out.println("Object could not be written");
+					e.printStackTrace();
+				}
+  }
 
   //close up connections
   protected void finalize(){
