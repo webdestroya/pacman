@@ -1,0 +1,42 @@
+package objects.controllable;
+
+import game.Direction;
+import objects.ControllableObject;
+import ucigame.Image;
+
+public class PacMan extends ControllableObject{
+
+	public PacMan(Image img, int[] frames, int width, int height, int framerate, int x, int y) {
+		super(img, frames, width, height, framerate, x, y);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	/**
+	 * life lost
+	 * change position
+	 * reset ghosts position
+	 * 
+	 */
+	public void eaten() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	/**
+	 * always called by local human
+	 */
+	public void step(Direction d) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int getValue() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+
+}
