@@ -30,7 +30,7 @@ public class TopScores extends Sprite{
 	 * 
 	 */
 	public boolean isTopList(int score){
-		
+		return false;
 	}
 	
 	/**

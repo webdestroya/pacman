@@ -1,5 +1,5 @@
 package Objects;
-import Game.*;
+import game.*;
 
 import ucigame.Sprite;
 

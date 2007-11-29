@@ -1,5 +1,5 @@
 package GUI;
-import Objects.Fruit;
+import objects.Fruit;
 import ucigame.*;
 
 /**

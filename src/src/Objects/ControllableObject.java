@@ -1,7 +1,7 @@
 package Objects;
 
+import game.*;
 import ucigame.Sprite;
-import Game.*;
 /**
  * 
  * @author Object Team

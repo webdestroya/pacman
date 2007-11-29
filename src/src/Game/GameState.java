@@ -2,9 +2,10 @@ package Game;
 
 import java.awt.Point;
 
+import objects.*;
+
 import ucigame.Sprite;
 
-import Objects.*;
 
 /**
  * 
