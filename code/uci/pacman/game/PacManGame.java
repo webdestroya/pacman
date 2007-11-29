@@ -1,7 +1,11 @@
 package code.uci.pacman.game;
 import ucigame.Image;
 import ucigame.Ucigame;
-
+/**
+ * 
+ * @author The Game Team
+ * The main game class
+ */
 public class PacManGame extends Ucigame {
 
 	/**

@@ -3,7 +3,12 @@ package code.uci.pacman.controllers;
 import code.uci.pacman.controllers.utilities.ActorController;
 import code.uci.pacman.objects.controllable.Ghost;
 
-//responsible for and controls ghosts
+
+/**
+ * 
+ * @author The Game Team
+ * responsible for and controls ghosts
+ */
 public class GhostController extends ActorController<String, Ghost> {
 
 	public GhostController() {

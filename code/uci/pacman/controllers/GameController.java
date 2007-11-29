@@ -5,7 +5,12 @@ import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
 import code.uci.pacman.objects.stationary.*;
 
-//controls the action of the game
+
+/**
+ * 
+ * @author The Game Team
+ * controls the action of the game
+ */
 public class GameController {
 
 	private static GameController gControl = new GameController();

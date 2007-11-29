@@ -4,7 +4,11 @@ import code.uci.pacman.controllers.utilities.ArtifactController;
 import code.uci.pacman.objects.stationary.*;
 
 
-
+/**
+ * 
+ * @author The Game Team
+ * responsible for and controls wall locations
+ */
 public class WallController extends ArtifactController<Wall> {
 	public WallController() {
 	   this.constructArtifacts();

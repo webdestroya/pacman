@@ -4,7 +4,11 @@ import code.uci.pacman.controllers.utilities.ArtifactController;
 import code.uci.pacman.objects.stationary.*;
 
 
-
+/**
+ * 
+ * @author The Game Team
+ * responsible for and controls pill locations and actions
+ */
 public class PillController extends ArtifactController<Pill> {
 	public PillController() {
 	   this.constructArtifacts();

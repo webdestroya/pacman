@@ -4,9 +4,11 @@ import code.uci.pacman.controllers.*;
 import code.uci.pacman.objects.controllable.*;
 import code.uci.pacman.objects.stationary.*;
 
-
-
-//holds all the information about the current state of the game
+/**
+ * 
+ * @author The Game Team
+ * holds all the information about the current state of the game
+ */
 public class GameState {
 	
 	private static final int INITIAL_LIVES = 3;
