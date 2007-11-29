@@ -3,7 +3,7 @@ package code.uci.pacman.controllers;
 
 
 import code.uci.pacman.controllers.utilities.ActorController;
-import code.uci.pacman.game1.PacManGame;
+import code.uci.pacman.game.PacManGame;
 import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
 

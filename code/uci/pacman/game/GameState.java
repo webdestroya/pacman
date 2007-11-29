@@ -1,6 +1,6 @@
 package code.uci.pacman.game;
 
-import code.uci.pacman.controllers1.*;
+import code.uci.pacman.controllers.*;
 import code.uci.pacman.objects.controllable.*;
 import code.uci.pacman.objects.stationary.*;
 
