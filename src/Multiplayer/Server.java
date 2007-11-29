@@ -1,5 +1,4 @@
-package networking;
-
+package Multiplayer;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;

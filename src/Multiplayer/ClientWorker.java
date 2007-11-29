@@ -1,4 +1,4 @@
-package networking;
+package Multiplayer;
 
 
 import java.io.*;

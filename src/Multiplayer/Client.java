@@ -1,4 +1,4 @@
-package networking;
+package Multiplayer;
 
 import javax.swing.*;
 
@@ -14,12 +14,6 @@ class Client{
 	private boolean connected = false;
 	private boolean inError = false;
 	
-	/**
-	Methods to ADD
-	fire
-	
-	
-	**/
 	
 	
    Client(){ 
@@ -27,7 +21,10 @@ class Client{
        out = null;
        in = null;
        }
-      
+      /**
+       * 
+       * @param serverAddress insert IP address
+       */
   public void connect(String serverAddress){
 	  try {
 		  	//currently the port is set to 6112
@@ -56,6 +53,10 @@ class Client{
 			}	
  }
   
+  /**
+   * 
+   * @param action
+   */
   //when action occurs write action to output stream
   public void fireAction(Action action){
 	   if(isConnected()){
