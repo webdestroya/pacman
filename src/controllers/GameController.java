@@ -15,6 +15,21 @@ public class GameController {
 
 	public void fruitEaten(Fruit fruit) {
 		// TODO Auto-generated method stub
+	}
+	public void pillEaten(Pill pill){
+		
+	}
+	public void ghostEaten(Ghost ghost){
+		
+	}
+	public void pacManEaten(PacMan pac){
+		
+	}
+	public void powerPelletEaten(PowerPellet power){
+		
+	}
+	
+	public void canMove(ControllableObject c, Direction d){
 		
 	}
 
