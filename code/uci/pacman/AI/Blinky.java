@@ -2,6 +2,10 @@ package code.uci.pacman.AI;
 
 import code.uci.pacman.game.Direction;
 
+/**
+ * @author Team Objects/AI
+ *
+ */
 public class Blinky implements AI{
 
 	/* 
