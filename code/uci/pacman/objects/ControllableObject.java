@@ -6,10 +6,11 @@ import ucigame.Image;
 import ucigame.Sprite;
 /**
  * 
- * @author Object Team
+ * @author Team Objects/AI
  * this is the class represents all objects that can be controlled (pacman and ghosts)
  *
  */
+
 public abstract class ControllableObject extends Sprite implements Eatable{
     protected GameController control;
 	public ControllableObject(Image img, int[] frames, int width, int height, int framerate, int x, int y) {

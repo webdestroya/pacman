@@ -6,7 +6,7 @@ import ucigame.Image;
 
 /**
  * 
- * @author Object Team
+ * @author Team Objects/AI
  * this is one square image
  *
  */

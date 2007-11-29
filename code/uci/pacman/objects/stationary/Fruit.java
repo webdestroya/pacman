@@ -6,6 +6,10 @@ import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
 import ucigame.Image;
 
+/**
+ * @author Team Objects/AI
+ *
+ */
 public class Fruit extends StationaryObject implements Eatable{
 	
 	/**

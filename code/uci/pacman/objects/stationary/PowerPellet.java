@@ -7,7 +7,7 @@ import ucigame.Image;
 
 /**
  * 
- * @author Object Team
+ * @author Team Objects/AI
  * power pellets are the larger pellets (only 4 on board)
  *
  */

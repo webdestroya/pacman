@@ -8,9 +8,10 @@ import ucigame.Image;
 
 /**
  * 
- * @author Object Team
+ * @author Team Objects/AI
  * 
  */
+
 public class Ghost extends ControllableObject{
 
 	private boolean isPlayer;

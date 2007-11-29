@@ -4,6 +4,10 @@ import code.uci.pacman.controllers.GameController;
 import ucigame.Image;
 import ucigame.Sprite;
 
+/**
+ * @author Team Objects/AI
+ *
+ */
 public class StationaryObject extends Sprite implements Eatable{
     protected GameController control;
 	public StationaryObject(Image img, int x, int y) {

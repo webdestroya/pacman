@@ -12,6 +12,7 @@ import ucigame.Image;
  * Pills are the small dots that get eaten
  *
  */
+
 public class Pill extends StationaryObject implements Eatable{
 	
 	public Pill(Image img, int x, int y) {
