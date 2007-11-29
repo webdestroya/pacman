@@ -1,4 +1,4 @@
-package code.uci.pacman.controllers2.utilities;
+package code.uci.pacman.controllers.utilities;
 
 import code.uci.pacman.objects.ControllableObject;
 

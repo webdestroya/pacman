@@ -1,4 +1,4 @@
-package code.uci.pacman.controllers2.utilities;
+package code.uci.pacman.controllers.utilities;
 
 import java.awt.Point;
 import java.util.Collection;

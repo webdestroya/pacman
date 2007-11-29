@@ -1,4 +1,4 @@
-package code.uci.pacman.controllers2.utilities;
+package code.uci.pacman.controllers.utilities;
 
 import java.util.Collection;
 import java.util.HashMap;

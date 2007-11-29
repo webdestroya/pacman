@@ -1,4 +1,4 @@
-package code.uci.pacman.controllers2;
+package code.uci.pacman.controllers;
 
 
 

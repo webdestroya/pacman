@@ -1,4 +1,4 @@
-package code.uci.pacman.controllers2;
+package code.uci.pacman.controllers;
 
 import code.uci.pacman.controllers.utilities.ArtifactController;
 import code.uci.pacman.objects.stationary.PowerPellet;
