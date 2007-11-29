@@ -1,4 +1,6 @@
 package GUI;
+import Objects.Fruit;
+import ucigame.*;
 
 /**
  * 
@@ -6,19 +8,50 @@ package GUI;
  * this will display the score, lives, and current fruit
  *
  */
-public class ScoreBoard {
+public class ScoreBoard extends Sprite{
 
+	private int score = 0;
+	private int remainingLives = 0;
+	private Fruit currentFruit = null;
+	
+	public ScoreBoard(int arg0, int arg1) {
+		super(arg0, arg1);
+		// TODO Auto-generated constructor stub
+	}
+	
 	/**
 	 * 
-	 * @param points
-	 * added points to the score
+	 * @param int points
+	 * adds points to the score
 	 */
 	public void addPoints(int points){
 		
 	}
 	
+	/**
+	 * 
+	 * removes a life from remainingLives
+	 * 
+	 */
 	public void removeLife(){
 		
 	}
 	
+	/**
+	 * 
+	 * adds a life to remainingLives
+	 * 
+	 */
+	public void addLife(){
+		
+	}
+	
+	/**
+	 * 
+	 * @param Fruit newFruit
+	 * sets currentFruit to newFruit
+	 */
+	public void setFruit(Fruit newFruit){
+		
+	}
 }
