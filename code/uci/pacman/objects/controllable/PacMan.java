@@ -12,7 +12,7 @@ public class PacMan extends ControllableObject{
 
 	public PacMan(Image img, int[] frames, int width, int height, int framerate, int x, int y) {
 		super(img, frames, width, height, framerate, x, y);
-		// TODO Auto-generated constructor stub
+		// TODO make this constructor take only position and define the rest here
 	}
 
 	@Override

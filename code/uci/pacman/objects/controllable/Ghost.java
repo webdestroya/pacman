@@ -18,7 +18,7 @@ public class Ghost extends ControllableObject{
 	public Ghost(Image img, int[] frames, int width, int height, int framerate, int x, int y, boolean isPlayer) {
 		super(img, frames, width, height, framerate, x, y);
 		this.isPlayer = isPlayer;
-		// TODO Auto-generated constructor stub
+		// TODO make this constructor take only position and define the rest here
 	}
 
 	/**

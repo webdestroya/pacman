@@ -12,12 +12,15 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	private static final long serialVersionUID = -917916728311505169L;
+	private GameState state;
 
 	public void setup() {
+		state = new GameState();
+		window.size(600, 600);
 	}
 	
 	public void draw(){
-		
+		state.drawState();
 	}
 	
 	public void onKeyPress(){

@@ -24,6 +24,11 @@ public class GameState {
 	public GameState(){
 		score = 0;
 		lives = INITIAL_LIVES;
+		this.createObjects();
+	}
+	
+	private void createObjects() {
+
 	}
 	
 	
@@ -32,12 +37,12 @@ public class GameState {
 	}
 	
 	public void drawState() {
-		getPacMan().draw();
-		getGhosts().drawObjects();	
-		getBonusItem().draw();
+		this.pacMan.draw();
+		this.ghosts.drawObjects();	
+		this.bonusItem.draw();
 
-		getPills().drawObjects();
-		getPellets().drawObjects();
+		this.pills.drawObjects();
+		this.pellets.drawObjects();
 	}
 
 	/**
