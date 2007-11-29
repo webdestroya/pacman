@@ -12,15 +12,9 @@ public class PacMan extends ControllableObject{
 	}
 
 	@Override
-	/**
-	 * life lost
-	 * change position
-	 * reset ghosts position
-	 * 
-	 */
 	public void eaten() {
 		// TODO Auto-generated method stub
-		
+		control.pacManEaten(this);
 	}
 
 	@Override

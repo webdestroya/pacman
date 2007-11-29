@@ -14,6 +14,11 @@ public class GameState {
 	PillController pills;
 	PowerPelletController pellets;
 	Fruit bonusItem;
+	private int score;
+	
+	public GameState(){
+		score = 0;
+	}
 	
 	
 	public static GameState getInstance() {
@@ -27,5 +32,18 @@ public class GameState {
 
 		pills.drawObjects();
 		pellets.drawObjects();
+	}
+
+	/**
+	 * 
+	 * @param score
+	 * takes in a value and adds it to the current score
+	 */
+	void updateScore(int score) {
+		this.score += score;
+	}
+
+	int getScore() {
+		return score;
 	}
 }

@@ -22,24 +22,19 @@ public class Ghost extends ControllableObject{
 	 * the point value of this object
 	 */
 	private int scoreValue;
+	private boolean scatter;
 	
-	/**
-	 * 
-	 * change/reset position
-	 * make not scattered
-	 * update score
-	 * 
-	 */
+
 	public void eaten(){
-		
+		control.ghostEaten(this);
 	}
 	
 	public boolean isScattered() {
-		return false;
+		return scatter;
 	}
 	/**
 	 * sets scatter to true
-	 * scatters the ghosts
+	 * scatters this ghost
 	 */
 	public void scatter(){
 		

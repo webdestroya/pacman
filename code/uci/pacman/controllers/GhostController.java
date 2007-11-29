@@ -15,6 +15,13 @@ public class GhostController extends ActorController<String, Ghost> {
 	public Ghost getGhost(String name) {
 	   return super.getObjectAt(name);
    }
+	
+	/**
+	 * iterates through all the ghosts and calls scatter on dem
+	 */
+	public void scatter(){
+		
+	}
 
 	public void constructActors() {
 	   //Ghost blinky = new Ghost(PacManGame.getPacImage("blinky.png"), 300, 300, );

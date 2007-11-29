@@ -12,8 +12,6 @@ public class Fruit extends StationaryObject implements Eatable{
 	 * the point value of this object
 	 */
 	private int scoreValue;
-	
-	
 
 	/**
 	 * 
@@ -27,15 +25,14 @@ public class Fruit extends StationaryObject implements Eatable{
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Gamestate.updateScore(it's own points)
-	 * delete itself
-	 */
 	public void eaten() {
 		// TODO Auto-generated method stub
-		GameController.getInstance().fruitEaten(this);
+		control.fruitEaten(this);
 	}
 
+	/**
+	 * returns the value
+	 */
 	public int getValue() {
 		return scoreValue;
 	}

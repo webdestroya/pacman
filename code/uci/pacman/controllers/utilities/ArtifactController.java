@@ -3,6 +3,7 @@ package code.uci.pacman.controllers.utilities;
 import java.awt.Point;
 import java.util.Collection;
 
+import code.uci.pacman.objects.ControllableObject;
 import code.uci.pacman.objects.StationaryObject;
 import ucigame.Image;
 
@@ -20,6 +21,11 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 	
 	public void destroyAt(int x, int y) {
 	    super.destroyAt(new Point(x, y));
+	}
+	
+	
+	public A getCollidedWith(ControllableObject c){
+		return null;
 	}
 	
 	public abstract void constructArtifacts();
