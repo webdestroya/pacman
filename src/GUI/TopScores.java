@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  * @author GUI Team
- * this will display the score, lives, and current fruit
+ * this will keep track of top 10 stores and names
  *
  */
 public class TopScores extends Sprite{
