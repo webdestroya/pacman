@@ -1,7 +1,5 @@
 package code.uci.pacman.controllers;
 
-
-
 import code.uci.pacman.controllers.utilities.ActorController;
 import code.uci.pacman.objects.controllable.Ghost;
 
