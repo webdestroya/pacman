@@ -1,4 +1,4 @@
-package Objects;
+package Objects1;
 import game.*;
 
 import ucigame.Sprite;
