@@ -8,16 +8,20 @@ import code.uci.pacman.objects.stationary.*;
 
 //holds all the information about the current state of the game
 public class GameState {
+	
+	private static final int INITIAL_LIVES = 3;
 	private static GameState gameInstance;
-	PacMan pacMan;
-	GhostController ghosts;
-	PillController pills;
-	PowerPelletController pellets;
-	Fruit bonusItem;
+	private PacMan pacMan;
+	private int lives;
+	private GhostController ghosts;
+	private PillController pills;
+	private PowerPelletController pellets;
+	private Fruit bonusItem;
 	private int score;
 	
 	public GameState(){
 		score = 0;
+		lives = INITIAL_LIVES;
 	}
 	
 	
@@ -26,12 +30,12 @@ public class GameState {
 	}
 	
 	public void drawState() {
-		pacMan.draw();
-		ghosts.drawObjects();	
-		bonusItem.draw();
+		getPacMan().draw();
+		getGhosts().drawObjects();	
+		getBonusItem().draw();
 
-		pills.drawObjects();
-		pellets.drawObjects();
+		getPills().drawObjects();
+		getPellets().drawObjects();
 	}
 
 	/**
@@ -45,5 +49,50 @@ public class GameState {
 
 	int getScore() {
 		return score;
+	}
+
+
+	/**
+	 * called when pacman is eaten
+	 */
+	void lifeLost() {
+		lives--;
+	}
+
+
+	int getLives() {
+		return lives;
+	}
+
+
+	void setGhosts(GhostController ghosts) {
+		this.ghosts = ghosts;
+	}
+
+
+	GhostController getGhosts() {
+		return ghosts;
+	}
+
+	PillController getPills() {
+		return pills;
+	}
+
+
+	PowerPelletController getPellets() {
+		return pellets;
+	}
+
+
+	void pickRandomFruit() {
+	}
+
+
+	Fruit getBonusItem() {
+		return bonusItem;
+	}
+
+	PacMan getPacMan() {
+		return pacMan;
 	}
 }

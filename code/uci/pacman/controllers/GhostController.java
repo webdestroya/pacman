@@ -15,6 +15,12 @@ public class GhostController extends ActorController<String, Ghost> {
 	public Ghost getGhost(String name) {
 	   return super.getObjectAt(name);
    }
+	/**
+	 * calls move on all ghosts that have isPlayer to false
+	 */
+	public void moveAIGhosts(){
+		
+	}
 	
 	/**
 	 * iterates through all the ghosts and calls scatter on dem

@@ -13,8 +13,10 @@ import ucigame.Image;
  */
 public class Ghost extends ControllableObject{
 
-	public Ghost(Image img, int[] frames, int width, int height, int framerate, int x, int y) {
+	private boolean isPlayer;
+	public Ghost(Image img, int[] frames, int width, int height, int framerate, int x, int y, boolean isPlayer) {
 		super(img, frames, width, height, framerate, x, y);
+		this.isPlayer = isPlayer;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -38,6 +40,17 @@ public class Ghost extends ControllableObject{
 	 */
 	public void scatter(){
 		
+	}
+	
+	/**
+	 * ghosts returns to cage and is no longer scattered
+	 */
+	public void goHome(){
+		
+	}
+	
+	public boolean isPlayer(){
+		return isPlayer;
 	}
 
 	@Override
