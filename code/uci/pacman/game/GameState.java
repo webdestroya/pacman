@@ -1,4 +1,4 @@
-package code.uci.pacman.game2;
+package code.uci.pacman.game;
 
 import code.uci.pacman.controllers1.*;
 import code.uci.pacman.objects.controllable.*;
