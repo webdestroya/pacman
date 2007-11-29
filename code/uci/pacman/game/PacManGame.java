@@ -1,6 +1,5 @@
 package code.uci.pacman.game;
 import ucigame.Image;
-import ucigame.Sprite;
 import ucigame.Ucigame;
 
 public class PacManGame extends Ucigame {

@@ -1,6 +1,5 @@
 package code.uci.pacman.gui;
 import ucigame.*;
-import java.util.*;
 
 /**
  * 

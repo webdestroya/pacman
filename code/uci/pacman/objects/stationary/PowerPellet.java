@@ -3,7 +3,6 @@ package code.uci.pacman.objects.stationary;
 import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
 import ucigame.Image;
-import ucigame.Sprite;
 
 /**
  * 

@@ -5,7 +5,6 @@ import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
 import ucigame.Image;
-import ucigame.Sprite;
 
 public class Fruit extends StationaryObject implements Eatable{
 	
