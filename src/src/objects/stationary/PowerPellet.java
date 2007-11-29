@@ -1,5 +1,8 @@
-package objects;
+package objects.stationary;
 
+import objects.Eatable;
+import objects.StationaryObject;
+import ucigame.Image;
 import ucigame.Sprite;
 
 /**
@@ -8,8 +11,12 @@ import ucigame.Sprite;
  * power pellets are the larger pellets (only 4 on board)
  *
  */
-public class PowerPellet extends Sprite implements Eatable {
+public class PowerPellet extends StationaryObject implements Eatable {
 	
+	public PowerPellet(Image img, int x, int y) {
+		super(img, x, y);
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * the point value of this object
 	 */

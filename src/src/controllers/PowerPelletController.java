@@ -1,12 +1,11 @@
 package controllers;
 
-import objects.actors.PowerPellet;
-import utilities.ArtifactController;
-import utilities.SpriteImages;
+import controllers.utilities.ArtifactController;
+import objects.*;
+import objects.stationary.PowerPellet;
 
 public class PowerPelletController extends ArtifactController<PowerPellet> {
-	public PowerPelletController(SpriteImages images) {
-		super.artifactImage = images.getImage("powerpellet");
+	public PowerPelletController() {
 		this.constructArtifacts();
 	}
 
@@ -16,7 +15,7 @@ public class PowerPelletController extends ArtifactController<PowerPellet> {
 	}
 	
 	public void addPellet(int x, int y) {
-		super.addObject(x, y, new PowerPellet(super.artifactImage, x, y));
+	//	super.addObject(x, y, new PowerPellet(super.artifactImage, x, y));
 	}
 	
 	public PowerPellet getPelletAt(int x, int y) {

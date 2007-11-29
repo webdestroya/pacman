@@ -1,4 +1,8 @@
-package objects;
+package objects.controllable;
+
+import game.Direction;
+import objects.ControllableObject;
+import ucigame.Image;
 
 
 /**
@@ -7,6 +11,11 @@ package objects;
  * 
  */
 public class Ghost extends ControllableObject{
+
+	public Ghost(Image img, int[] frames, int width, int height, int framerate, int x, int y) {
+		super(img, frames, width, height, framerate, x, y);
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * the point value of this object
@@ -47,5 +56,6 @@ public class Ghost extends ControllableObject{
 	public int getValue() {
 		return scoreValue;
 	}
+
 
 }

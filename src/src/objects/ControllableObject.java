@@ -1,6 +1,7 @@
 package objects;
 
 import game.*;
+import ucigame.Image;
 import ucigame.Sprite;
 /**
  * 
@@ -10,8 +11,11 @@ import ucigame.Sprite;
  */
 public abstract class ControllableObject extends Sprite implements Eatable{
 	
-	public ControllableObject(int arg0, int arg1) {
-		super(arg0, arg1);
+	public ControllableObject(Image img, int[] frames, int width, int height, int framerate, int x, int y) {
+		super(width, height);
+		position(x, y);
+		addFrames(img, frames);
+		framerate(framerate);
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -1,6 +1,8 @@
-package objects;
+package objects.stationary;
 
-import ucigame.Sprite;
+import objects.Eatable;
+import objects.StationaryObject;
+import ucigame.Image;
 
 /**
  * 
@@ -8,8 +10,13 @@ import ucigame.Sprite;
  * Pills are the small dots that get eaten
  *
  */
-public class Pill extends Sprite implements Eatable{
+public class Pill extends StationaryObject implements Eatable{
 	
+	public Pill(Image img, int x, int y) {
+		super(img, x, y);
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * the point value of this object
 	 */

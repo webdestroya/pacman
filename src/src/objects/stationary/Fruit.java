@@ -1,9 +1,13 @@
-package objects;
+package objects.stationary;
+import controllers.GameController;
+import objects.Eatable;
+import objects.StationaryObject;
 import game.*;
 
+import ucigame.Image;
 import ucigame.Sprite;
 
-public class Fruit extends Sprite implements Eatable{
+public class Fruit extends StationaryObject implements Eatable{
 	
 	/**
 	 * the point value of this object
@@ -19,8 +23,8 @@ public class Fruit extends Sprite implements Eatable{
 	 * sets the value
 	 * 
 	 */
-	public Fruit(int arg0, int arg1) {
-		super(arg0, arg1);
+	public Fruit(Image fruit, int arg0, int arg1) {
+		super(fruit, arg0, arg1);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -30,7 +34,7 @@ public class Fruit extends Sprite implements Eatable{
 	 */
 	public void eaten() {
 		// TODO Auto-generated method stub
-		GameState.getInstance().fruitEaten(this);
+		GameController.getInstance().fruitEaten(this);
 	}
 
 	public int getValue() {
