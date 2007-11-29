@@ -46,6 +46,17 @@ public class ScoreBoard extends Sprite{
 		
 	}
 	
+	/***
+	 * 
+	 * this method returns the lives left for the player,
+	 * to determine whether the game is finished or not.
+	 * @return int remainingLives.
+	 * 
+	 */
+	public int getLifeCount(){
+		return remainingLives;
+	}
+	
 	/**
 	 * 
 	 * @param Fruit newFruit
