@@ -5,7 +5,8 @@ import java.util.*;
 /**
  * 
  * @author GUI Team
- * this will keep track of top 10 stores and names
+ * this will handle the display for Main Menu, and additional
+ * graphics on it.
  *
  */
 public class MainMenu extends Sprite{
@@ -14,6 +15,8 @@ public class MainMenu extends Sprite{
 	Sprite multiplayerButton;
 	Sprite topScores;
 	Sprite quit;
+	
+	private int x, y;
 	
 	public MainMenu(int arg0, int arg1) {
 		super(arg0, arg1);
