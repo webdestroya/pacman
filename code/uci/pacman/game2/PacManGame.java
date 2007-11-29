@@ -1,4 +1,4 @@
-package code.uci.pacman.game;
+package code.uci.pacman.game2;
 import ucigame.Image;
 import ucigame.Sprite;
 import ucigame.Ucigame;
