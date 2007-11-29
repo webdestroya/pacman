@@ -1,6 +1,6 @@
 package code.uci.pacman.objects;
 
-import game.*;
+import code.uci.pacman.game.Direction;
 import ucigame.Image;
 import ucigame.Sprite;
 /**

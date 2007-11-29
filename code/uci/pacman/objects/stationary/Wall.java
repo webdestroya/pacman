@@ -1,6 +1,7 @@
 package code.uci.pacman.objects.stationary;
 
-import objects.StationaryObject;
+
+import code.uci.pacman.objects.StationaryObject;
 import ucigame.Image;
 import ucigame.Sprite;
 

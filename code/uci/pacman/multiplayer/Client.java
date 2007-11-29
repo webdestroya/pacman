@@ -1,4 +1,4 @@
-package multiplayer;
+package code.uci.pacman.multiplayer;
 
 import javax.swing.*;
 

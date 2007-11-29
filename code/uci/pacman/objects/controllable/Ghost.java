@@ -1,7 +1,8 @@
 package code.uci.pacman.objects.controllable;
 
-import game.Direction;
-import objects.ControllableObject;
+
+import code.uci.pacman.game.Direction;
+import code.uci.pacman.objects.ControllableObject;
 import ucigame.Image;
 
 

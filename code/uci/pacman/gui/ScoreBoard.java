@@ -1,5 +1,6 @@
 package code.uci.pacman.gui;
-import code.uci.pacman.objects.Fruit;
+
+import code.uci.pacman.objects.stationary.Fruit;
 import ucigame.*;
 
 /**
