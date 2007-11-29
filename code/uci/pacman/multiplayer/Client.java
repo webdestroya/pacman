@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.io.*;
 import java.net.*;
 
-class Client{
+public class Client{
 
 	private static final long serialVersionUID = 1L;
 	private Socket socket;

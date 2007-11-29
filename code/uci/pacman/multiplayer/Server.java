@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-class Server{
+public class Server{
 	
 	private static final long serialVersionUID = 1L;
 	private ServerSocket server;

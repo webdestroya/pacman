@@ -6,7 +6,7 @@ import java.net.*;
 
 import javax.swing.Action;
 
-class ClientWorker implements Runnable {
+public class ClientWorker implements Runnable {
    
 	private static final long serialVersionUID = 1L;
 	private ObjectOutputStream out;
