@@ -1,4 +1,4 @@
-package Objects1;
+package objects;
 
 public interface Eatable {
 	/**

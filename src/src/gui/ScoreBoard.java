@@ -1,4 +1,4 @@
-package GUI1;
+package gui;
 import objects.Fruit;
 import ucigame.*;
 

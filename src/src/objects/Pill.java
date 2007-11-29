@@ -1,21 +1,21 @@
-package Objects1;
+package objects;
 
 import ucigame.Sprite;
 
 /**
  * 
  * @author Object Team
- * power pellets are the larger pellets (only 4 on board)
+ * Pills are the small dots that get eaten
  *
  */
-public class PowerPellet extends Sprite implements Eatable {
+public class Pill extends Sprite implements Eatable{
 	
 	/**
 	 * the point value of this object
 	 */
-	private int scoreValue = 50;
+	private int scoreValue = 10;
+
 	/**
-	 * scatter ghosts
 	 * update score
 	 * delete itself
 	 */
@@ -23,9 +23,10 @@ public class PowerPellet extends Sprite implements Eatable {
 		// TODO Auto-generated method stub
 		
 	}
+
 	public int getValue() {
 		return scoreValue;
 	}
-
 	
+
 }

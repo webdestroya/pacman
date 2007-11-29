@@ -1,4 +1,4 @@
-package Game1;
+package game;
 import ucigame.Ucigame;
 
 

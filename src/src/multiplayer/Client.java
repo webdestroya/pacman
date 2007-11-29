@@ -1,4 +1,4 @@
-package Multiplayer1;
+package multiplayer;
 
 import javax.swing.*;
 

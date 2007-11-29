@@ -1,4 +1,4 @@
-package GUI1;
+package gui;
 import ucigame.*;
 import java.util.*;
 

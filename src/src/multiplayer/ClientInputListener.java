@@ -1,4 +1,4 @@
-package Multiplayer1;
+package multiplayer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

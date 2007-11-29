@@ -1,4 +1,4 @@
-package Multiplayer1;
+package multiplayer;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
