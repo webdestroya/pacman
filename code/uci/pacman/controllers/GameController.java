@@ -25,27 +25,26 @@ public class GameController {
 	}
 
 	/**
-	 * updateScore(it's own points) delete itself
+	 * updateScore(it's own points), pick new bonus item, hide for later, start show timer
 	 */
 	public void fruitEaten(Fruit fruit) {
+	    
 		// TODO Auto-generated method stub
-
 	}
 
 	/**
-	 * scatter ghosts update score delete itself
+	 * scatter ghosts, update score, delete itself
 	 */
 	public void pelletEaten(PowerPellet powerPellet) {
 		// TODO Auto-generated method stub
-
 	}
 
 	/**
-	 * update score delete itself
+	 * update score, delete itself
 	 */
 	public void pillEaten(Pill pill) {
+		
 		// TODO Auto-generated method stub
-
 	}
 
 	/**

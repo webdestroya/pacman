@@ -45,11 +45,11 @@ public class GameState {
 	 * @param score
 	 * takes in a value and adds it to the current score
 	 */
-	void updateScore(int score) {
+	public void updateScore(int score) {
 		this.score += score;
 	}
 
-	int getScore() {
+	public int getScore() {
 		return score;
 	}
 
@@ -57,44 +57,44 @@ public class GameState {
 	/**
 	 * called when pacman is eaten
 	 */
-	void lifeLost() {
+	public void lifeLost() {
 		lives--;
 	}
 
 
-	int getLives() {
+	public int getLives() {
 		return lives;
 	}
 
 
-	void setGhosts(GhostController ghosts) {
+	public void setGhosts(GhostController ghosts) {
 		this.ghosts = ghosts;
 	}
 
 
-	GhostController getGhosts() {
+	public GhostController getGhosts() {
 		return ghosts;
 	}
 
-	PillController getPills() {
+	public PillController getPills() {
 		return pills;
 	}
 
 
-	PowerPelletController getPellets() {
+	public PowerPelletController getPellets() {
 		return pellets;
 	}
 
 
-	void pickRandomFruit() {
+	public void pickRandomFruit() {
 	}
 
 
-	Fruit getBonusItem() {
+	public Fruit getBonusItem() {
 		return bonusItem;
 	}
 
-	PacMan getPacMan() {
+	public PacMan getPacMan() {
 		return pacMan;
 	}
 }

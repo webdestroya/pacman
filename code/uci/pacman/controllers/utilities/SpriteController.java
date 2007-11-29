@@ -27,6 +27,15 @@ public abstract class SpriteController<T, S extends Sprite> {
 		hash.remove(key);
 	}
 	
+	protected void destroy(S object) {
+		for (T key : hash.keySet()) {
+			S value = hash.get(key);
+			if (value.equals(object)) {
+				this.destroyAt(key);
+			}
+		}
+	}
+	
 	public void drawObjects() {
 		for (Sprite s : this.getObjects()) {
 			s.draw();

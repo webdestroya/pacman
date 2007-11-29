@@ -23,6 +23,11 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 	    super.destroyAt(new Point(x, y));
 	}
 	
+	public void destroy(A artifact) {
+		Point artifactLoc = new Point(artifact.x(), artifact.y());
+	    super.destroyAt(artifactLoc);
+	}
+	
 	/**
 	 * returns the sprite that collided with the ControllableObject
 	 * @param ControllableObject
