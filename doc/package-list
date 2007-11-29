@@ -1,0 +1,9 @@
+code.uci.pacman.AI
+code.uci.pacman.controllers
+code.uci.pacman.controllers.utilities
+code.uci.pacman.game
+code.uci.pacman.gui
+code.uci.pacman.multiplayer
+code.uci.pacman.objects
+code.uci.pacman.objects.controllable
+code.uci.pacman.objects.stationary
