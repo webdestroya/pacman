@@ -15,7 +15,7 @@ public class PillController extends ArtifactController<Pill> {
     }
 	
 	private void addPill(int x, int y) {
-		//super.addObject(x, y, new Pill(super.artifactImage, x, y));
+		super.addObject(x, y, new Pill(x, y));
 	}
 	
 	public Pill getPillAt(int x, int y) {
@@ -24,6 +24,34 @@ public class PillController extends ArtifactController<Pill> {
 
 	@Override
 	public void constructArtifacts() {
-		addPill(100, 400); //TODO fill in pills here
+		switch(state.getLevel()){
+		case 1:
+			level1();
+			break;
+		case 2:
+			level2();
+			break;
+		case 3:
+			level3();
+			break;
+		}
 	}
+
+	private void level3() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void level2() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void level1() {
+		addPill(100, 400); //TODO fill in pills here
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }

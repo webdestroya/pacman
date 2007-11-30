@@ -1,5 +1,4 @@
 package code.uci.pacman.game;
-import code.uci.pacman.controllers.GameController;
 import ucigame.Image;
 import ucigame.Ucigame;
 /**
@@ -16,7 +15,9 @@ public class PacManGame extends Ucigame {
 	private GameState state;
 
 	public void setup() {
-		state = new GameState();
+		GameState.setInstance(new GameState());
+		state = GameState.getInstance();
+		state.setupLevel();
 		window.size(600, 600);
 	}
 	

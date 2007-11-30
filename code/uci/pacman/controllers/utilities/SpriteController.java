@@ -3,12 +3,15 @@ package code.uci.pacman.controllers.utilities;
 import java.util.Collection;
 import java.util.HashMap;
 
+import code.uci.pacman.game.GameState;
+
 import ucigame.Sprite;
 
 //controller for sprites is basically an easy api for keeping track 
 // of multiple sprites which are grouped in some way
 public abstract class SpriteController<T, S extends Sprite> {
 	private static final long serialVersionUID = 1L;
+	protected static GameState state = GameState.getInstance();
 	private HashMap<T, S> hash;
 
 	public SpriteController() {

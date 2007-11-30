@@ -14,8 +14,10 @@ import ucigame.Image;
 
 public class Pill extends StationaryObject implements Eatable{
 	
-	public Pill(Image img, int x, int y) {
-		super(img, x, y);
+	private static Image i = getImage("pill.jpg");
+	
+	public Pill(int x, int y) {
+		super(i, x, y);
 		// TODO Auto-generated constructor stub
 	}
 

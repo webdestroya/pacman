@@ -12,7 +12,8 @@ import ucigame.Sprite;
 public class StationaryObject extends Sprite implements Eatable{
     protected GameController control;
 	public StationaryObject(Image img, int x, int y) {
-		super(img);
+		super(img.width(), img.height());
+		super.addFrame(img, 0, 0);
 		this.position(x, y);
 		control = GameController.getInstance();
 	}
