@@ -31,7 +31,6 @@ public class PacMan extends ControllableObject{
 	}
 
 	public int getValue() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	

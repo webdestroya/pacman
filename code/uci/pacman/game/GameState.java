@@ -50,7 +50,7 @@ public class GameState {
 	 * @param score
 	 * takes in a value and adds it to the current score
 	 */
-	public void updateScore(int score) {
+	public void addToScore(int score) {
 		this.score += score;
 	}
 
@@ -60,7 +60,7 @@ public class GameState {
 
 
 	/**
-	 * called when pacman is eaten
+	 * called when Pac-man is eaten
 	 */
 	public void lifeLost() {
 		lives--;
@@ -91,11 +91,13 @@ public class GameState {
 	}
 
 
-	public void pickRandomFruit() {
+	public void generateRandomFruit() {
+		//pick new fruit
+	    this.bonusItem.hide(); //hides the new fruit
 	}
 
 
-	public Fruit getBonusItem() {
+	public Fruit getFruit() {
 		return bonusItem;
 	}
 

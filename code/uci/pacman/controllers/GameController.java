@@ -28,8 +28,8 @@ public class GameController {
 	 * updateScore(it's own points), pick new bonus item, hide for later, start show timer
 	 */
 	public void fruitEaten(Fruit fruit) {
-	    
-		// TODO Auto-generated method stub
+	    state.addToScore(fruit.getValue()); //update score
+	    state.generateRandomFruit(); //creates a new hidden fruit
 	}
 
 	/**
