@@ -9,25 +9,22 @@ import ucigame.Image;
  *
  */
 public class PacMan extends ControllableObject{
+	
+	private static Image pacImage = getImage("Chomp1.jpg");
+	private static int pacWidth = 17;
+	private static int pacHeight = 17;
+	private static int speed = 8;
 
-	public PacMan(Image img, int[] frames, int width, int height, int framerate, int x, int y) {
-		super(img, frames, width, height, framerate, x, y);
-		// TODO make this constructor take only position and define the rest here
+	public PacMan(int x, int y) {
+		super(pacImage, new int[] {0,0}, pacWidth, pacHeight, 10, x, y);
+		super.motion(0, 4);
+		super.speed = speed;
 	}
 
 	@Override
 	public void eaten() {
 		// TODO Auto-generated method stub
 		control.pacManEaten(this);
-	}
-
-	@Override
-	/**
-	 * always called by local human
-	 */
-	public void step(Direction d) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public int getValue() {

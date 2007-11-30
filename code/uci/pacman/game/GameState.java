@@ -18,17 +18,19 @@ public class GameState {
 	private GhostController ghosts;
 	private PillController pills;
 	private PowerPelletController pellets;
+	private WallController walls;
 	private Fruit bonusItem;
 	private int score;
 	
 	public GameState(){
 		score = 0;
 		lives = INITIAL_LIVES;
-		this.createObjects();
+		this.setupLevel(1);
 	}
 	
-	private void createObjects() {
-
+	public void setupLevel(int level) {
+		pacMan = new PacMan(50,50);
+		
 	}
 	
 	
@@ -38,11 +40,15 @@ public class GameState {
 	
 	public void drawState() {
 		this.pacMan.draw();
-		this.ghosts.drawObjects();	
-		this.bonusItem.draw();
-
-		this.pills.drawObjects();
-		this.pellets.drawObjects();
+//		this.ghosts.drawObjects();	
+//		this.bonusItem.draw();
+//
+//		this.pills.drawObjects();
+//		this.pellets.drawObjects();
+	}
+	
+	public void nextMove(){
+		this.pacMan.move();
 	}
 
 	/**
@@ -103,5 +109,9 @@ public class GameState {
 
 	public PacMan getPacMan() {
 		return pacMan;
+	}
+
+	private WallController getWalls() {
+		return walls;
 	}
 }

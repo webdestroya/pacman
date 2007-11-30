@@ -2,6 +2,7 @@ package code.uci.pacman.objects;
 
 import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.game.Direction;
+import code.uci.pacman.game.PacManGame;
 import ucigame.Image;
 import ucigame.Sprite;
 /**
@@ -12,6 +13,7 @@ import ucigame.Sprite;
  */
 
 public abstract class ControllableObject extends Sprite implements Eatable{
+	protected int speed;
     protected GameController control;
 	public ControllableObject(Image img, int[] frames, int width, int height, int framerate, int x, int y) {
 		super(width, height);
@@ -22,6 +24,11 @@ public abstract class ControllableObject extends Sprite implements Eatable{
 		// TODO Auto-generated constructor stub
 	}
 	
+	protected static Image getImage(String stringPath){
+		String resources = "images/final/";
+		return PacManGame.getPacImage(resources+stringPath);
+	}
+	
 	public abstract void eaten();
 	
 	/**
@@ -29,5 +36,14 @@ public abstract class ControllableObject extends Sprite implements Eatable{
 	 * this only sets the motion and does not do any collision detection
 	 * @param d
 	 */
-	public abstract void step(Direction d);
+	public void step(Direction d){
+		if (d == Direction.UP)
+			motion(0,0-speed);
+		if (d == Direction.DOWN)
+			motion(0,speed);
+		if (d == Direction.LEFT)
+			motion(0-speed, 0);
+		if (d == Direction.RIGHT)
+			motion(speed, 0);
+	}
 }

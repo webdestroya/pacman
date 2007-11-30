@@ -1,6 +1,7 @@
 package code.uci.pacman.objects;
 
 import code.uci.pacman.controllers.GameController;
+import code.uci.pacman.game.PacManGame;
 import ucigame.Image;
 import ucigame.Sprite;
 
@@ -14,6 +15,11 @@ public class StationaryObject extends Sprite implements Eatable{
 		super(img);
 		this.position(x, y);
 		control = GameController.getInstance();
+	}
+	
+	protected static Image getImage(String stringPath){
+		String resources = "images/final/";
+		return PacManGame.getPacImage(resources+stringPath);
 	}
 	
 	
