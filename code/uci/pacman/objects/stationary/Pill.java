@@ -16,27 +16,18 @@ public class Pill extends StationaryObject implements Eatable{
 	
 	private static Image i = getImage("pill.jpg");
 	
-	public Pill(int x, int y) {
-		super(i, x, y);
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * the point value of this object
 	 */
-	private int scoreValue = 10;
+	public static final int SCOREVALUE = 10;
+	
+	public Pill(int x, int y) {
+		super(i, x, y);
+	}
 
 	public void eaten() {
 		// TODO Auto-generated method stub
 		control.pillEaten(this);
 	}
-
-	/**
-	 * returns the score value
-	 */
-	public int getValue() {
-		return scoreValue;
-	}
-	
 
 }

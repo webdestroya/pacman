@@ -3,6 +3,7 @@ package code.uci.pacman.objects.stationary;
 
 import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
+import code.uci.pacman.objects.controllable.PacMan;
 import ucigame.Image;
 
 /**
@@ -14,21 +15,32 @@ public class Fruit extends StationaryObject implements Eatable{
 	/**
 	 * the point value of this object
 	 */
-	private int scoreValue;
+	private int score;
+	private int fruitEaten;
 
 	/**
 	 * 
 	 * @author Objects Team
 	 * constructor picks random fruit image
 	 * sets the value
+	 * automatically hides itself
 	 * 
 	 */
-	public Fruit(Image fruit, int arg0, int arg1) {
-		super(fruit, arg0, arg1);
+	public Fruit(int x, int y, int initialScore) {
+		super(randomFruit(), x, y); //we assumed it always starts at 100
+		super.hide();
+		fruitEaten = 0;
+		score = initialScore;
 		// TODO Auto-generated constructor stub
+	}
+	
+
+	private static Image randomFruit() {
+		return getImage("cherry.jpg");
 	}
 
 	public void eaten() {
+		fruitEaten++;
 		// TODO Auto-generated method stub
 		control.fruitEaten(this);
 	}
@@ -37,7 +49,14 @@ public class Fruit extends StationaryObject implements Eatable{
 	 * returns the value
 	 */
 	public int getValue() {
-		return scoreValue;
+		return score;
+	}
+	public int getFruitEaten(){
+		return fruitEaten;
+	}
+	
+	public void setValue(int scoreValue){
+		this.score = scoreValue;
 	}
 
 

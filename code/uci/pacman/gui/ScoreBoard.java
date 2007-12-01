@@ -1,6 +1,9 @@
 package code.uci.pacman.gui;
 
+import com.sun.corba.se.spi.ior.MakeImmutable;
+
 import code.uci.pacman.game.GameState;
+import code.uci.pacman.game.PacManGame;
 import code.uci.pacman.objects.stationary.Fruit;
 import ucigame.*;
 
@@ -12,20 +15,24 @@ import ucigame.*;
  */
 public class ScoreBoard{
 
-	private int score = 0;
 	private int remainingLives = 0;
 	private Fruit currentFruit = null;
+	private Sprite score;
 	
 	public ScoreBoard() {
 		// Hey we dicked with your shit. 
 		// Scorebaord can't extend sprite it's gotta be a collection of sprites
 		// so you need to make multiple sprites in here
 		// TODO Auto-generated constructor stub
+		score = PacManGame.makeGameSprite("images/final/score.png");
+		score.position(0, 500);
 	}
 	
 	public void draw(){
 		//this needs to draw all the stuff that you make
 		// to get all of the information use GameState.getInstance().getTheItemYouWant()
+		score.putText(GameState.getInstance().getScore()+"", 80,22);
+		score.draw();
 	}
 	
 	/**

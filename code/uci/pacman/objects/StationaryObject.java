@@ -23,18 +23,15 @@ public class StationaryObject extends Sprite implements Eatable{
 		return PacManGame.getPacImage(resources+stringPath);
 	}
 	
-	
+	public boolean collided(ControllableObject c){
+		super.checkIfCollidesWith(c);
+		return super.collided() && super.isShown();
+	}
 
 	@Override
 	public void eaten() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public int getValue() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

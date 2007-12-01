@@ -11,7 +11,9 @@ import code.uci.pacman.objects.stationary.*;
  * responsible for and controls pill locations and actions
  */
 public class PillController extends ArtifactController<Pill> {
+	private int totalPills;
 	public PillController() {
+		totalPills = 0;
 	   this.constructArtifacts();
     }
 	
@@ -21,6 +23,7 @@ public class PillController extends ArtifactController<Pill> {
 	
 	private void addPill(int x, int y) {
 		super.addObject(x, y, new Pill(x, y));
+		totalPills++;
 	}
 	
 	public Pill getPillAt(int x, int y) {
@@ -59,6 +62,14 @@ public class PillController extends ArtifactController<Pill> {
 		addPill(100,280);
 		addPill(100,360);
 		addPill(100,400);
+	}
+
+	public int getInitialCount() {
+		return totalPills;
+	}
+	
+	public int getPillCount(){
+		return super.getObjects().size();
 	}
 	
 	

@@ -1,6 +1,9 @@
 package code.uci.pacman.game;
+import com.sun.corba.se.spi.ior.MakeImmutable;
+
 import code.uci.pacman.gui.ScoreBoard;
 import ucigame.Image;
+import ucigame.Sprite;
 import ucigame.Ucigame;
 /**
  * 
@@ -30,7 +33,17 @@ public class PacManGame extends Ucigame {
 		state.nextMove();
 		state.drawState();
 		scoreBoard.draw();
+		//canvas.putText("Score: " + state.getScore(), 200, 500);
 	}
+	
+	public static Sprite makeGameSprite(String image){
+		PacManGame instance = new PacManGame();
+		Image i = getPacImage(image);
+		Sprite s = instance.makeSprite(i.width(), i.height());
+		s.addFrame(i, 0, 0);
+		return s;
+	}
+
 	
 	public void onKeyPress() {
 //		// Arrow keys and WASD keys move the paddle

@@ -25,11 +25,11 @@ public class GameController {
 	}
 
 	/**
-	 * updateScore(it's own points), pick new bonus item, hide for later, start show timer
+	 * updateScore(it's own points), hide for later
 	 */
 	public void fruitEaten(Fruit fruit) {
 	    state.addToScore(fruit.getValue()); //update score
-	    state.generateRandomFruit(); //creates a new hidden fruit
+	    fruit.hide();
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class GameController {
 	 * update score, delete itself
 	 */
 	public void pillEaten(Pill pill) {
-		state.addToScore(pill.getValue());
+		state.addToScore(Pill.SCOREVALUE);
 		state.getPills().destroy(pill);
 		// TODO Auto-generated method stub
 	}

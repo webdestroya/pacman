@@ -19,17 +19,11 @@ public class PowerPellet extends StationaryObject implements Eatable {
 	/**
 	 * the point value of this object
 	 */
-	private int scoreValue = 50;
+	public static final int SCOREVALUE = 50;
 
 	public void eaten() {
 		// TODO Auto-generated method stub
 		control.pelletEaten(this);
-	}
-	/**
-	 * returns the score value
-	 */
-	public int getValue() {
-		return scoreValue;
 	}
 
 	

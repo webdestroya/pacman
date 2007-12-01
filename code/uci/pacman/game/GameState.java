@@ -6,11 +6,11 @@ import code.uci.pacman.objects.stationary.*;
 
 /**
  * 
- * @author The Game Team
- * holds all the information about the current state of the game
+ * @author The Game Team holds all the information about the current state of
+ *         the game
  */
 public class GameState {
-	
+
 	private static final int INITIAL_LIVES = 3;
 	private static GameState gameInstance;
 	private PacMan pacMan;
@@ -22,49 +22,65 @@ public class GameState {
 	private Fruit bonusItem;
 	private int score;
 	private int level;
-	
-	public GameState(){
+
+	public GameState() {
 		score = 0;
 		lives = INITIAL_LIVES;
 		level = 1;
 	}
-	
+
 	public void setupLevel() {
-		pacMan = new PacMan(50,50);
+		pacMan = new PacMan(50, 50);
 		pills = new PillController();
-		//pellets = new PowerPelletController(level);
+		bonusItem = new Fruit(300, 300, 100);
+		// pellets = new PowerPelletController(level);
 	}
-	
-	
+
 	public static GameState getInstance() {
 		return gameInstance;
 	}
-	
+
 	public static void setInstance(GameState gameState) {
 		gameInstance = gameState;
 	}
-	
+
 	public void drawState() {
 		this.pacMan.draw();
 		this.pills.drawObjects();
-//		this.ghosts.drawObjects();	
-//		this.bonusItem.draw();
-//
-//		this.pellets.drawObjects();
+		// this.ghosts.drawObjects();
+		this.bonusItem.draw();
+		//
+		// this.pellets.drawObjects();
 	}
-	
-	public void nextMove(){
+
+	public void nextMove() {
 		pacMan.move();
 		Pill p = pills.getCollidingPill(pacMan);
-		if (p != null){
+		if (p != null) {
 			p.eaten();
 		}
+		if (shouldShowFruit()) {
+			bonusItem.show();
+		}
+		if (bonusItem.collided(pacMan)) {
+			bonusItem.eaten();
+		}
+	}
+
+	private boolean shouldShowFruit() {
+		int initialPills = pills.getInitialCount();
+		if (initialPills - pills.getPillCount() == initialPills / 3 && bonusItem.getFruitEaten() == 0) {
+			return true;
+		} else if (initialPills - pills.getPillCount() == (initialPills / 3) * 2 && bonusItem.getFruitEaten() == 1) {
+			return true;
+		} else
+			return false;
 	}
 
 	/**
 	 * 
 	 * @param score
-	 * takes in a value and adds it to the current score
+	 *            takes in a value and adds it to the current score
 	 */
 	public void addToScore(int score) {
 		this.score += score;
@@ -74,7 +90,6 @@ public class GameState {
 		return score;
 	}
 
-
 	/**
 	 * called when Pac-man is eaten
 	 */
@@ -82,16 +97,13 @@ public class GameState {
 		lives--;
 	}
 
-
 	public int getLives() {
 		return lives;
 	}
 
-
 	public void setGhosts(GhostController ghosts) {
 		this.ghosts = ghosts;
 	}
-
 
 	public GhostController getGhosts() {
 		return ghosts;
@@ -101,17 +113,9 @@ public class GameState {
 		return pills;
 	}
 
-
 	public PowerPelletController getPellets() {
 		return pellets;
 	}
-
-
-	public void generateRandomFruit() {
-		//pick new fruit
-	    this.bonusItem.hide(); //hides the new fruit
-	}
-
 
 	public Fruit getFruit() {
 		return bonusItem;
@@ -124,8 +128,8 @@ public class GameState {
 	private WallController getWalls() {
 		return walls;
 	}
-	
-	public void nextLevel(){
+
+	public void nextLevel() {
 		level++;
 	}
 
