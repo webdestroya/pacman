@@ -29,9 +29,10 @@ public class GhostController extends ActorController<String, Ghost> {
 	 */
 	public void moveAIGhosts(){
 		for(Ghost g : getObjects()){
-			if(!g.isPlayer())
+			if(!g.isPlayer()){
 				g.step(g.getMove());
 				g.move();
+			}
 		}
 	}
 	
