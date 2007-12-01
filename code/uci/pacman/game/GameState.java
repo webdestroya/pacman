@@ -33,6 +33,7 @@ public class GameState {
 		pacMan = new PacMan(50, 50);
 		pills = new PillController();
 		bonusItem = new Fruit(300, 300, 100);
+		//walls = new WallController();
 		// pellets = new PowerPelletController(level);
 	}
 
@@ -45,10 +46,11 @@ public class GameState {
 	}
 
 	public void drawState() {
-		this.pacMan.draw();
-		this.pills.drawObjects();
+		pacMan.draw();
+		pills.drawObjects();
+		//walls.drawObjects();
 		// this.ghosts.drawObjects();
-		this.bonusItem.draw();
+		bonusItem.draw();
 		//
 		// this.pellets.drawObjects();
 	}

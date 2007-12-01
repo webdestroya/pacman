@@ -11,19 +11,15 @@ import code.uci.pacman.objects.stationary.*;
  */
 public class WallController extends ArtifactController<Wall> {
 	public WallController() {
-	   this.constructArtifacts();
+	   this.constructArtifacts("wall");
     }
-	
-	private void addWall(int x, int y) {
-		//super.addObject(x, y, new Pill(super.artifactImage, x, y));
-	}
 	
 	public Wall getWallAt(int x, int y) {
 		return super.getObjectAt(x, y);
 	}
 
 	@Override
-	public void constructArtifacts() {
-		addWall(100, 400); //TODO fill in walls here
+	public void addArtifact(int x, int y) {
+		super.addObject(x, y, new Wall(x, y));
 	}
 }
