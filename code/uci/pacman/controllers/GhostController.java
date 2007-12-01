@@ -33,7 +33,7 @@ public class GhostController extends ActorController<String, Ghost> {
 	}
 
 	public void constructActors() {
-	   Ghost blinky = new Ghost(PacManGame.getPacImage("blinky.png"), 300, 300, );
+	  // Ghost blinky = new Ghost(PacManGame.getPacImage("blinky.png"), 300, 300, );
 	   //Ghost pinky = new Ghost("Blinky", 400, 400, ghostImages.getImage("pinky"));
 	   //this.addObject("Blinky", blinky);
 	   //this.addObject("Pinky", pinky);

@@ -28,12 +28,7 @@ public class PacManGame extends Ucigame {
 
 	public void setup() {
 		
-		try {
-			Grid.grid();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//generatePositions();
 		control = GameController.setInstance(this);
 		state = GameState.getInstance();
 		state.setupLevel();
@@ -44,6 +39,15 @@ public class PacManGame extends Ucigame {
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
 		startScene("Game");
+	}
+
+	private void generatePositions() {
+		try {
+			Grid.grid();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void drawScores(){
