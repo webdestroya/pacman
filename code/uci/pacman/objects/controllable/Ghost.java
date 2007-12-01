@@ -13,10 +13,12 @@ import ucigame.Image;
  * 
  */
 
-public abstract class Ghost extends ControllableObject implements AI{
+public abstract class Ghost extends ControllableObject implements AI {
+
 	private static int ghostWidth=22;
 	private static int ghostHeight=22;
 	private boolean isPlayer;
+
 	public Ghost(Image img, int x, int y, boolean isPlayer) {
 		super(img, new int[] {0,0}, ghostWidth, ghostHeight, 5, x, y);
 		this.isPlayer = isPlayer;
@@ -42,14 +44,17 @@ public abstract class Ghost extends ControllableObject implements AI{
 	 * scatters this ghost
 	 */
 	public void scatter(){
-		
+		scatter = true;
+		// TODO change sprite?
 	}
 	
 	/**
 	 * ghosts returns to cage and is no longer scattered
 	 */
 	public void goHome(){
-		
+		scatter = false;
+		// I thought the ghost's position being reset somewhere else
+		// should it be here instead?
 	}
 	
 	public boolean isPlayer(){
@@ -79,8 +84,8 @@ public abstract class Ghost extends ControllableObject implements AI{
 	 * tells the ghost to unscatter after the timer is set (called from the ghosts controller)
 	 */
 	public void unScatter() {
-		// TODO Auto-generated method stub
-		
+		scatter = false;
+		// TODO change sprite?
 	}
 
 	@Override
