@@ -1,12 +1,19 @@
 package code.uci.pacman.ai;
 
+import ucigame.Image;
 import code.uci.pacman.game.Direction;
+import code.uci.pacman.objects.controllable.Ghost;
 
 /**
  * @author Team Objects/AI
  *
  */
-public class Clyde implements AI{
+public class Clyde extends Ghost{
+
+	public Clyde(int x, int y, boolean isPlayer) {
+		super(getImage("clyde.png"), x, y, isPlayer);
+		// TODO Auto-generated constructor stub
+	}
 
 	/* (non-Javadoc)
 	 * @see code.uci.pacman.AI.AI#getMove()

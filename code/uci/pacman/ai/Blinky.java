@@ -1,12 +1,19 @@
 package code.uci.pacman.ai;
 
+import ucigame.Image;
 import code.uci.pacman.game.Direction;
+import code.uci.pacman.objects.controllable.Ghost;
 
 /**
  * @author Team Objects/AI
  *
  */
-public class Blinky implements AI{
+public class Blinky extends Ghost{
+
+	public Blinky(int x, int y, boolean isPlayer) {
+		super(getImage("blinky.png"), x, y, isPlayer);
+		// TODO Auto-generated constructor stub
+	}
 
 	/* 
 	 * He tries to get you by your relative position. 

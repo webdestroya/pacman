@@ -21,7 +21,6 @@ public abstract class ControllableObject extends Sprite implements Eatable{
 		addFrames(img, frames);
 		framerate(framerate);
 		control = GameController.getInstance();
-		// TODO Auto-generated constructor stub
 	}
 	
 	protected static Image getImage(String stringPath){

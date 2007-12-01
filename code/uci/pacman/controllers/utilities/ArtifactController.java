@@ -66,7 +66,6 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 		} catch (FileNotFoundException e) {
 			System.err.println("Cannot find Artifact file: "+ file);
 		}
-		// TODO Auto-generated method stub
 		return null;
 	}
 

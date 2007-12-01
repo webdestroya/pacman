@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.sun.corba.se.spi.ior.MakeImmutable;
 
 import code.uci.pacman.controllers.GameController;
+import code.uci.pacman.controllers.GhostController;
 import code.uci.pacman.gui.ScoreBoard;
 import code.uci.pacman.gui.TopScores;
 import ucigame.Image;
@@ -45,7 +46,6 @@ public class PacManGame extends Ucigame {
 		try {
 			Grid.grid();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -57,6 +57,15 @@ public class PacManGame extends Ucigame {
 	
 	public void drawMenu(){
 		
+	}
+	
+	public void startScatterTimer(){
+		startTimer("unScatterGhosts",GhostController.SCATTERSECONDS);
+	}
+	
+	public void unScatterGhostsTimer(){
+		stopTimer("unScatterGhosts");
+		state.getGhosts().unScatter();
 	}
 
 	public void drawGame() {

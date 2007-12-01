@@ -1,12 +1,19 @@
 package code.uci.pacman.ai;
 
+import ucigame.Image;
 import code.uci.pacman.game.Direction;
+import code.uci.pacman.objects.controllable.Ghost;
 
 /**
  * @author Team Objects/AI
  *
  */
-public class Pinky implements AI{
+public class Pinky extends Ghost{
+
+	public Pinky(int x, int y, boolean isPlayer) {
+		super(getImage("pinky.png"), x, y, isPlayer);
+		// TODO Auto-generated constructor stub
+	}
 
 	/* (non-Javadoc)
 	 * @see code.uci.pacman.AI.AI#getMove()

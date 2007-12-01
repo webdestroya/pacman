@@ -32,6 +32,7 @@ public class GameController {
 	}
 
 	public void nextMove() {
+		state.getGhosts().moveAIGhosts();
 		state.getPacMan().move();
 
 		 state.getWalls().stopCollision(state.getPacMan());
@@ -60,7 +61,7 @@ public class GameController {
 		}
 
 	}
-
+	
 	private boolean shouldShowFruit() {
 		int initialPills = state.getPills().getInitialCount();
 		if (initialPills - state.getPills().getPillCount() == initialPills / 3 && state.getFruit().getFruitEaten() == 0) {
@@ -85,7 +86,9 @@ public class GameController {
 	public void pelletEaten(PowerPellet powerPellet) {
 		state.addToScore(PowerPellet.SCOREVALUE);
 		state.getPellets().destroy(powerPellet);
-		//state.getGhosts().scatter();
+		state.getGhosts().scatter();
+		game.startScatterTimer();
+		SoundController.pelletEaten();
 	}
 
 	/**
@@ -94,7 +97,7 @@ public class GameController {
 	public void pillEaten(Pill pill) {
 		state.addToScore(Pill.SCOREVALUE);
 		state.getPills().destroy(pill);
-		// TODO Auto-generated method stub
+		SoundController.pillEaten();
 	}
 
 	/**
@@ -104,7 +107,9 @@ public class GameController {
 	 * 
 	 */
 	public void ghostEaten(Ghost ghost) {
-		// TODO Auto-generated method stub
+		ghost.position(300, 300);
+		ghost.unScatter();
+		state.addToScore(ghost.getValue());//TODO make ghosts worth more if you eat them in the same round
 
 	}
 
@@ -112,18 +117,11 @@ public class GameController {
 	 * life lost change position reset ghosts position
 	 */
 	public void pacManEaten(PacMan pacMan) {
-		// TODO Auto-generated method stub
-
+			state.lifeLost();
+			state.getPacMan().position(290, 440);
+			state.getGhosts().respawn();
 	}
 
-	/**
-	 * returns true if a ghost has collided with pac man
-	 * 
-	 * @return boolean
-	 */
-	public boolean hasCollidedWithGhost() {
-		return false;
-	}
 
 	public PacManGame getPacInstance() {
 		return game;

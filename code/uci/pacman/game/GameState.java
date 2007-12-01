@@ -31,11 +31,13 @@ public class GameState {
 	}
 
 	public void setupLevel() {
-		pacMan = new PacMan(285, 320);
+		pacMan = new PacMan(290, 440);
 		pills = new PillController();
 		bonusItem = new Fruit(300, 330, 100);
 		walls = new WallController();
-		 pellets = new PowerPelletController();
+		pellets = new PowerPelletController();
+		ghosts = new GhostController();
+		SoundController.startAmbient();
 	}
 
 	public static GameState getInstance() {
@@ -50,10 +52,9 @@ public class GameState {
 		pacMan.draw();
 		pills.drawObjects();
 		walls.drawObjects();
-		// this.ghosts.drawObjects();
+		ghosts.drawObjects();
 		bonusItem.draw();
-		//
-		 this.pellets.drawObjects();
+		pellets.drawObjects();
 	}
 
 	/**
@@ -78,10 +79,6 @@ public class GameState {
 
 	public int getLives() {
 		return lives;
-	}
-
-	public void setGhosts(GhostController ghosts) {
-		this.ghosts = ghosts;
 	}
 
 	public GhostController getGhosts() {
@@ -112,14 +109,9 @@ public class GameState {
 		level++;
 	}
 
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
 	public int getLevel() {
 		return level;
 	}
-
 
 	public Wall getWall() {
 		return wall;
