@@ -12,8 +12,8 @@ import ucigame.Image;
  */
 public class PowerPellet extends StationaryObject implements Eatable {
 	
-	public PowerPellet(Image img, int x, int y) {
-		super(img, x, y);
+	public PowerPellet(int x, int y) {
+		super(getImage("pellet.png"), x, y);
 		// TODO Auto-generated constructor stub
 	}
 	/**

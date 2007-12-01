@@ -31,11 +31,11 @@ public class GameState {
 	}
 
 	public void setupLevel() {
-		pacMan = new PacMan(100, 100);
+		pacMan = new PacMan(285, 320);
 		pills = new PillController();
 		bonusItem = new Fruit(300, 330, 100);
 		walls = new WallController();
-		// pellets = new PowerPelletController(level);
+		 pellets = new PowerPelletController();
 	}
 
 	public static GameState getInstance() {
@@ -53,7 +53,7 @@ public class GameState {
 		// this.ghosts.drawObjects();
 		bonusItem.draw();
 		//
-		// this.pellets.drawObjects();
+		 this.pellets.drawObjects();
 	}
 
 	/**

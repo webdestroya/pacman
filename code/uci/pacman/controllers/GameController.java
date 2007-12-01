@@ -39,6 +39,12 @@ public class GameController {
 		if (p != null) {
 			p.eaten();
 		}
+		
+		PowerPellet pellet = state.getPellets().getCollidingPellet(state.getPacMan());
+		if (pellet != null) {
+			pellet.eaten();
+		}
+		
 		if (shouldShowFruit()) {
 			state.getFruit().show();
 		}
@@ -77,7 +83,9 @@ public class GameController {
 	 * scatter ghosts, update score, delete itself
 	 */
 	public void pelletEaten(PowerPellet powerPellet) {
-		// TODO Auto-generated method stub
+		state.addToScore(PowerPellet.SCOREVALUE);
+		state.getPellets().destroy(powerPellet);
+		//state.getGhosts().scatter();
 	}
 
 	/**
