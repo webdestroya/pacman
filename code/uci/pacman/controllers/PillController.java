@@ -1,6 +1,7 @@
 package code.uci.pacman.controllers;
 
 import code.uci.pacman.controllers.utilities.ArtifactController;
+import code.uci.pacman.objects.controllable.PacMan;
 import code.uci.pacman.objects.stationary.*;
 
 
@@ -13,6 +14,10 @@ public class PillController extends ArtifactController<Pill> {
 	public PillController() {
 	   this.constructArtifacts();
     }
+	
+	public Pill getCollidingPill(PacMan p){
+		return super.getCollidedWith(p);
+	}
 	
 	private void addPill(int x, int y) {
 		super.addObject(x, y, new Pill(x, y));
@@ -48,9 +53,12 @@ public class PillController extends ArtifactController<Pill> {
 	}
 
 	private void level1() {
-		addPill(100, 400); //TODO fill in pills here
-		// TODO Auto-generated method stub
-		
+		addPill(100, 320); //TODO fill in pills here
+		addPill(100,200);
+		addPill(100,240);
+		addPill(100,280);
+		addPill(100,360);
+		addPill(100,400);
 	}
 	
 	

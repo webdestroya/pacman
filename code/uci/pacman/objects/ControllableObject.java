@@ -37,6 +37,7 @@ public abstract class ControllableObject extends Sprite implements Eatable{
 	 * @param d
 	 */
 	public void step(Direction d){
+		spriteDirection(d);
 		if (d == Direction.UP)
 			motion(0,0-speed);
 		if (d == Direction.DOWN)
@@ -46,4 +47,6 @@ public abstract class ControllableObject extends Sprite implements Eatable{
 		if (d == Direction.RIGHT)
 			motion(speed, 0);
 	}
+
+	protected abstract void spriteDirection(Direction d);
 }

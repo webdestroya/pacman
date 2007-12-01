@@ -34,7 +34,12 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 	 * @return a Stationary 
 	 */
 	public A getCollidedWith(ControllableObject c){
-		return null; //TODO make not null
+		for(A artifact : super.getObjects()){
+			artifact.checkIfCollidesWith(c);
+			if(artifact.collided())
+				return artifact;
+		}
+		return null;
 	}
 	
 	public abstract void constructArtifacts();

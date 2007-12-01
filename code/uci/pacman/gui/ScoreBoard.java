@@ -1,5 +1,6 @@
 package code.uci.pacman.gui;
 
+import code.uci.pacman.game.GameState;
 import code.uci.pacman.objects.stationary.Fruit;
 import ucigame.*;
 
@@ -9,15 +10,22 @@ import ucigame.*;
  * this will display the score, lives, and current fruit
  *
  */
-public class ScoreBoard extends Sprite{
+public class ScoreBoard{
 
 	private int score = 0;
 	private int remainingLives = 0;
 	private Fruit currentFruit = null;
 	
-	public ScoreBoard(int arg0, int arg1) {
-		super(arg0, arg1);
+	public ScoreBoard() {
+		// Hey we dicked with your shit. 
+		// Scorebaord can't extend sprite it's gotta be a collection of sprites
+		// so you need to make multiple sprites in here
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void draw(){
+		//this needs to draw all the stuff that you make
+		// to get all of the information use GameState.getInstance().getTheItemYouWant()
 	}
 	
 	/**
@@ -54,8 +62,8 @@ public class ScoreBoard extends Sprite{
 	 * @return int remainingLives.
 	 * 
 	 */
-	public int getLifeCount(){
-		return remainingLives;
+	private int getLifeCount(){
+		return GameState.getInstance().getLives();
 	}
 	
 	/**

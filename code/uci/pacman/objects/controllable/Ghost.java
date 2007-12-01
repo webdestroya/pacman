@@ -67,5 +67,11 @@ public class Ghost extends ControllableObject{
 		return scoreValue;
 	}
 
+	@Override
+	protected void spriteDirection(Direction d) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

@@ -1,4 +1,5 @@
 package code.uci.pacman.game;
+import code.uci.pacman.gui.ScoreBoard;
 import ucigame.Image;
 import ucigame.Ucigame;
 /**
@@ -13,18 +14,22 @@ public class PacManGame extends Ucigame {
 	 */
 	private static final long serialVersionUID = -917916728311505169L;
 	private GameState state;
+	private ScoreBoard scoreBoard;
 
 	public void setup() {
 		GameState.setInstance(new GameState());
 		state = GameState.getInstance();
 		state.setupLevel();
 		window.size(600, 600);
+		window.title("Pac Man Fever");
+		scoreBoard = new ScoreBoard();
 	}
 	
 	public void draw(){
 		canvas.clear();
 		state.nextMove();
 		state.drawState();
+		scoreBoard.draw();
 	}
 	
 	public void onKeyPress() {

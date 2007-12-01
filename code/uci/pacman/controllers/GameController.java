@@ -43,7 +43,8 @@ public class GameController {
 	 * update score, delete itself
 	 */
 	public void pillEaten(Pill pill) {
-		
+		state.addToScore(pill.getValue());
+		state.getPills().destroy(pill);
 		// TODO Auto-generated method stub
 	}
 

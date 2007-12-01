@@ -54,7 +54,11 @@ public class GameState {
 	}
 	
 	public void nextMove(){
-		this.pacMan.move();
+		pacMan.move();
+		Pill p = pills.getCollidingPill(pacMan);
+		if (p != null){
+			p.eaten();
+		}
 	}
 
 	/**
