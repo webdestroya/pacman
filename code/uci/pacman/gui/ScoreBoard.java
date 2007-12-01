@@ -26,13 +26,14 @@ public class ScoreBoard{
 		// so you need to make multiple sprites in here
 		// TODO Auto-generated constructor stub
 		score = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/score.png");
-		score.position(0, 500);
+		score.position(0, 610);
+		score.font("Tahoma", PacManGame.BOLD, 24, 255, 255, 255);
 	}
 	
 	public void draw(){
 		//this needs to draw all the stuff that you make
 		// to get all of the information use GameState.getInstance().getTheItemYouWant()
-		score.putText(GameState.getInstance().getScore()+"", 80,22);
+		score.putText(GameState.getInstance().getScore()+"", 120,26);
 		score.draw();
 	}
 	

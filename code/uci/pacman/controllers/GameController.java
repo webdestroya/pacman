@@ -6,11 +6,9 @@ import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
 import code.uci.pacman.objects.stationary.*;
 
-
 /**
  * 
- * @author The Game Team
- * controls the action of the game
+ * @author The Game Team controls the action of the game
  */
 public class GameController {
 
@@ -24,16 +22,19 @@ public class GameController {
 		this.game = pacManGame;
 	}
 
-	public static GameController setInstance(PacManGame pacManGame){
+	public static GameController setInstance(PacManGame pacManGame) {
 		gControl = new GameController(pacManGame);
 		return gControl;
 	}
+
 	public static GameController getInstance() {
 		return gControl;
 	}
-	
+
 	public void nextMove() {
 		state.getPacMan().move();
+
+		 state.getWalls().stopCollision(state.getPacMan());
 		Pill p = state.getPills().getCollidingPill(state.getPacMan());
 		if (p != null) {
 			p.eaten();
@@ -41,16 +42,17 @@ public class GameController {
 		if (shouldShowFruit()) {
 			state.getFruit().show();
 		}
-		if (state.getFruit().collided(state.getPacMan())) {
+		if (state.getFruit().collidedPerfect(state.getPacMan())) {
 			state.getFruit().eaten();
 		}
-		if(state.getPills().getPillCount() == 0){
+		if (state.getPills().getPillCount() == 0) {
 			state.nextLevel();
-			if(state.getLevel() <= 3)
+			if (state.getLevel() <= 3)
 				state.setupLevel();
 			else
 				game.startScene("Scores");
 		}
+
 	}
 
 	private boolean shouldShowFruit() {
@@ -67,8 +69,8 @@ public class GameController {
 	 * updateScore(it's own points), hide for later
 	 */
 	public void fruitEaten(Fruit fruit) {
-	    state.addToScore(fruit.getValue()); //update score
-	    fruit.hide();
+		state.addToScore(fruit.getValue()); // update score
+		fruit.hide();
 	}
 
 	/**
@@ -89,8 +91,8 @@ public class GameController {
 
 	/**
 	 * 
-	 * change/reset position make not scattered update score
-	 * ghost returns to home box and comes out as not a scattered
+	 * change/reset position make not scattered update score ghost returns to
+	 * home box and comes out as not a scattered
 	 * 
 	 */
 	public void ghostEaten(Ghost ghost) {
@@ -108,6 +110,7 @@ public class GameController {
 
 	/**
 	 * returns true if a ghost has collided with pac man
+	 * 
 	 * @return boolean
 	 */
 	public boolean hasCollidedWithGhost() {

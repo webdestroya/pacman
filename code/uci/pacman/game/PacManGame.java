@@ -1,5 +1,7 @@
 package code.uci.pacman.game;
 
+import java.io.IOException;
+
 import com.sun.corba.se.spi.ior.MakeImmutable;
 
 import code.uci.pacman.controllers.GameController;
@@ -25,11 +27,19 @@ public class PacManGame extends Ucigame {
 	private GameController control;
 
 	public void setup() {
+		
+		try {
+			Grid.grid();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		control = GameController.setInstance(this);
 		state = GameState.getInstance();
 		state.setupLevel();
-		framerate(12);
-		window.size(600, 600);
+		framerate(20);
+		window.size(600, 650);
+		canvas.background(0, 0, 0);
 		window.title("Pac Man Fever");
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();

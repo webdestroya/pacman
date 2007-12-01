@@ -41,7 +41,7 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 	 */
 	public A getCollidedWith(ControllableObject c) {
 		for (A artifact : super.getObjects()) {
-			if (artifact.collided(c))
+			if (artifact.collidedPerfect(c))
 				return artifact;
 		}
 		return null;

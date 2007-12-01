@@ -12,8 +12,10 @@ import ucigame.Image;
  */
 public class Wall extends StationaryObject {
 
-	public Wall(int x, int y) {
-		super(getImage("wall.jpg"), x, y);
+	public Wall(int x, int y, int width, int height) {
+		super(width, height);
+		super.addFrame(getImage("level1.png"), x, y);
+		super.position(x, y);
 		// TODO Auto-generated constructor stub
 	}
 

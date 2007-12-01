@@ -18,9 +18,19 @@ public class StationaryObject extends Sprite implements Eatable{
 		control = GameController.getInstance();
 	}
 	
+	public StationaryObject(int width, int height) {
+		super(width, height);
+		
+	}
+
 	protected static Image getImage(String stringPath){
 		String resources = "images/final/";
 		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
+	}
+	
+	public boolean collidedPerfect(ControllableObject c){
+		super.checkIfCollidesWith(c, PacManGame.PIXELPERFECT);
+		return super.collided() && super.isShown();
 	}
 	
 	public boolean collided(ControllableObject c){

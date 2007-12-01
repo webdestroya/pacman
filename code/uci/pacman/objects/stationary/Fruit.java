@@ -36,7 +36,7 @@ public class Fruit extends StationaryObject implements Eatable{
 	
 
 	private static Image randomFruit() {
-		return getImage("cherry.jpg");
+		return getImage("cherry.png");
 	}
 
 	public void eaten() {

@@ -19,6 +19,7 @@ public class GameState {
 	private PillController pills;
 	private PowerPelletController pellets;
 	private WallController walls;
+	private Wall wall;
 	private Fruit bonusItem;
 	private int score;
 	private int level;
@@ -30,10 +31,10 @@ public class GameState {
 	}
 
 	public void setupLevel() {
-		pacMan = new PacMan(50, 50);
+		pacMan = new PacMan(100, 100);
 		pills = new PillController();
-		bonusItem = new Fruit(300, 300, 100);
-		//walls = new WallController();
+		bonusItem = new Fruit(300, 330, 100);
+		walls = new WallController();
 		// pellets = new PowerPelletController(level);
 	}
 
@@ -48,7 +49,7 @@ public class GameState {
 	public void drawState() {
 		pacMan.draw();
 		pills.drawObjects();
-		//walls.drawObjects();
+		walls.drawObjects();
 		// this.ghosts.drawObjects();
 		bonusItem.draw();
 		//
@@ -103,7 +104,7 @@ public class GameState {
 		return pacMan;
 	}
 
-	private WallController getWalls() {
+	public WallController getWalls() {
 		return walls;
 	}
 
@@ -117,5 +118,10 @@ public class GameState {
 
 	public int getLevel() {
 		return level;
+	}
+
+
+	public Wall getWall() {
+		return wall;
 	}
 }
