@@ -14,8 +14,8 @@ public class TopScores extends Sprite{
 	private ArrayList<Integer> scoreList;
 	
 	
-	public TopScores(int arg0, int arg1) {
-		super(arg0, arg1);
+	public TopScores() {
+		super(400,200);
 		// TODO Auto-generated constructor stub
 	}
 	

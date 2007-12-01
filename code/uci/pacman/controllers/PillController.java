@@ -46,12 +46,22 @@ public class PillController extends ArtifactController<Pill> {
 	}
 
 	private void level3() {
-		// TODO Auto-generated method stub
+		addPill(300, 320); //TODO fill in pills here
+		addPill(300,200);
+		addPill(300,240);
+		addPill(300,280);
+		addPill(300,360);
+		addPill(300,400);
 		
 	}
 
 	private void level2() {
-		// TODO Auto-generated method stub
+		addPill(200, 320); //TODO fill in pills here
+		addPill(200,200);
+		addPill(200,240);
+		addPill(200,280);
+		addPill(200,360);
+		addPill(200,400);
 		
 	}
 

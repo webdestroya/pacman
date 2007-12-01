@@ -1,14 +1,17 @@
 package code.uci.pacman.game;
+
 import com.sun.corba.se.spi.ior.MakeImmutable;
 
+import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.gui.ScoreBoard;
+import code.uci.pacman.gui.TopScores;
 import ucigame.Image;
 import ucigame.Sprite;
 import ucigame.Ucigame;
+
 /**
  * 
- * @author The Game Team
- * The main game class
+ * @author The Game Team The main game class
  */
 public class PacManGame extends Ucigame {
 
@@ -18,35 +21,40 @@ public class PacManGame extends Ucigame {
 	private static final long serialVersionUID = -917916728311505169L;
 	private GameState state;
 	private ScoreBoard scoreBoard;
+	private TopScores topScores;
+	private GameController control;
 
 	public void setup() {
-		GameState.setInstance(new GameState());
+		control = GameController.setInstance(this);
 		state = GameState.getInstance();
 		state.setupLevel();
+		framerate(12);
 		window.size(600, 600);
 		window.title("Pac Man Fever");
 		scoreBoard = new ScoreBoard();
+		topScores = new TopScores();
+		startScene("Game");
 	}
 	
-	public void draw(){
+	public void drawScores(){
 		canvas.clear();
-		state.nextMove();
-		state.drawState();
-		scoreBoard.draw();
-		//canvas.putText("Score: " + state.getScore(), 200, 500);
+		topScores.draw();
 	}
 	
-	public static Sprite makeGameSprite(String image){
-		PacManGame instance = new PacManGame();
-		Image i = getPacImage(image);
-		Sprite s = instance.makeSprite(i.width(), i.height());
-		s.addFrame(i, 0, 0);
-		return s;
+	public void drawMenu(){
+		
 	}
 
-	
-	public void onKeyPress() {
-//		// Arrow keys and WASD keys move the paddle
+	public void drawGame() {
+		canvas.clear();
+		control.nextMove();
+		state.drawState();
+		scoreBoard.draw();
+	}
+
+
+	public void onKeyPressGame() {
+		// // Arrow keys and WASD keys move the paddle
 		if (keyboard.isDown(keyboard.UP, keyboard.W))
 			state.getPacMan().step(Direction.UP);
 		if (keyboard.isDown(keyboard.DOWN, keyboard.S))
@@ -61,9 +69,8 @@ public class PacManGame extends Ucigame {
 
 	}
 
-	public static Image getPacImage(String path) {
-		PacManGame instance = new PacManGame();
-		return instance.getImage(path);
+	public Sprite makeSpriteFromPath(String string) {
+		return makeSprite(getImage(string));
 	}
 
 }

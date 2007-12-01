@@ -2,6 +2,7 @@ package code.uci.pacman.gui;
 
 import com.sun.corba.se.spi.ior.MakeImmutable;
 
+import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.game.PacManGame;
 import code.uci.pacman.objects.stationary.Fruit;
@@ -24,7 +25,7 @@ public class ScoreBoard{
 		// Scorebaord can't extend sprite it's gotta be a collection of sprites
 		// so you need to make multiple sprites in here
 		// TODO Auto-generated constructor stub
-		score = PacManGame.makeGameSprite("images/final/score.png");
+		score = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/score.png");
 		score.position(0, 500);
 	}
 	

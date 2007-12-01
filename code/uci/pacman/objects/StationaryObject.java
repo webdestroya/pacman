@@ -20,7 +20,7 @@ public class StationaryObject extends Sprite implements Eatable{
 	
 	protected static Image getImage(String stringPath){
 		String resources = "images/final/";
-		return PacManGame.getPacImage(resources+stringPath);
+		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
 	}
 	
 	public boolean collided(ControllableObject c){

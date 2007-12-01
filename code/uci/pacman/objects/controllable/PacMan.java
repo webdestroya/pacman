@@ -13,7 +13,7 @@ public class PacMan extends ControllableObject{
 	private static Image pacImage = getImage("Chomp1.jpg");
 	private static int pacWidth = 17;
 	private static int pacHeight = 17;
-	private static int speed = 8;
+	private static int speed = 12;
 	private double angle; //0,90,180,270
 
 	public PacMan(int x, int y) {

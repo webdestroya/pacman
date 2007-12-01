@@ -1,6 +1,7 @@
 package code.uci.pacman.controllers;
 
 import code.uci.pacman.game.GameState;
+import code.uci.pacman.game.PacManGame;
 import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
 import code.uci.pacman.objects.stationary.*;
@@ -13,15 +14,53 @@ import code.uci.pacman.objects.stationary.*;
  */
 public class GameController {
 
-	private static GameController gControl = new GameController();
+	private static GameController gControl;
 	private GameState state;
+	private PacManGame game;
 
-	private GameController() {
+	private GameController(PacManGame pacManGame) {
+		GameState.setInstance(new GameState());
 		state = GameState.getInstance();
+		this.game = pacManGame;
 	}
 
+	public static GameController setInstance(PacManGame pacManGame){
+		gControl = new GameController(pacManGame);
+		return gControl;
+	}
 	public static GameController getInstance() {
 		return gControl;
+	}
+	
+	public void nextMove() {
+		state.getPacMan().move();
+		Pill p = state.getPills().getCollidingPill(state.getPacMan());
+		if (p != null) {
+			p.eaten();
+		}
+		if (shouldShowFruit()) {
+			state.getFruit().show();
+		}
+		if (state.getFruit().collided(state.getPacMan())) {
+			state.getFruit().eaten();
+		}
+		if(state.getPills().getPillCount() == 0){
+			state.nextLevel();
+			if(state.getLevel() <= 3)
+				state.setupLevel();
+			else
+				game.startScene("Scores");
+		}
+	}
+
+	private boolean shouldShowFruit() {
+		int initialPills = state.getPills().getInitialCount();
+		if (initialPills - state.getPills().getPillCount() == initialPills / 3 && state.getFruit().getFruitEaten() == 0) {
+			return true;
+		} else if (initialPills - state.getPills().getPillCount() == (initialPills / 3) * 2 && state.getFruit().getFruitEaten() == 1) {
+			return true;
+		} else
+			return false;
 	}
 
 	/**
@@ -74,13 +113,9 @@ public class GameController {
 	public boolean hasCollidedWithGhost() {
 		return false;
 	}
-	
-	/**
-	 * returns true if pac man has eaten something good like a pill, pp, or fruit
-	 * @return boolean
-	 */
-	public boolean hasEatenItem() {
-		return false;
+
+	public PacManGame getPacInstance() {
+		return game;
 	}
 
 }

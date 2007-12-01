@@ -53,30 +53,6 @@ public class GameState {
 		// this.pellets.drawObjects();
 	}
 
-	public void nextMove() {
-		pacMan.move();
-		Pill p = pills.getCollidingPill(pacMan);
-		if (p != null) {
-			p.eaten();
-		}
-		if (shouldShowFruit()) {
-			bonusItem.show();
-		}
-		if (bonusItem.collided(pacMan)) {
-			bonusItem.eaten();
-		}
-	}
-
-	private boolean shouldShowFruit() {
-		int initialPills = pills.getInitialCount();
-		if (initialPills - pills.getPillCount() == initialPills / 3 && bonusItem.getFruitEaten() == 0) {
-			return true;
-		} else if (initialPills - pills.getPillCount() == (initialPills / 3) * 2 && bonusItem.getFruitEaten() == 1) {
-			return true;
-		} else
-			return false;
-	}
-
 	/**
 	 * 
 	 * @param score

@@ -26,7 +26,7 @@ public abstract class ControllableObject extends Sprite implements Eatable{
 	
 	protected static Image getImage(String stringPath){
 		String resources = "images/final/";
-		return PacManGame.getPacImage(resources+stringPath);
+		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
 	}
 	
 	public abstract void eaten();
