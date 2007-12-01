@@ -14,7 +14,7 @@ import ucigame.Image;
 
 public class Pill extends StationaryObject implements Eatable{
 	
-	private static Image i = getImage("pill.jpg");
+	private static Image i = getImage("pill.png");
 	
 	/**
 	 * the point value of this object

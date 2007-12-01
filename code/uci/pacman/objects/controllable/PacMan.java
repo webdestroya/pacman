@@ -10,15 +10,14 @@ import ucigame.Image;
  */
 public class PacMan extends ControllableObject{
 	
-	private static Image pacImage = getImage("Chomp1.jpg");
-	private static int pacWidth = 17;
-	private static int pacHeight = 17;
+	private static Image pacImage = getImage("pacman.png");
+	private static int pacWidth = 32;
+	private static int pacHeight = 32;
 	private static int speed = 12;
 	private double angle; //0,90,180,270
 
 	public PacMan(int x, int y) {
-		super(pacImage, new int[] {0,0}, pacWidth, pacHeight, 10, x, y);
-		super.motion(0, 4);
+		super(pacImage, new int[] {0,0,33,0,67,0,100,0}, pacWidth, pacHeight, 10, x, y);
 		super.speed = speed;
 		angle = 0;
 	}
