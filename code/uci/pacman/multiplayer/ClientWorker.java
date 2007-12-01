@@ -6,26 +6,24 @@ import java.net.*;
 
 import javax.swing.Action;
 
-public class ClientWorker implements Runnable {
+class ClientWorker implements Runnable {
    
 	private static final long serialVersionUID = 1L;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private Socket client;
 	private String nickname;
+	private PacManGame game;
 	
-  ClientWorker(Socket cl) {
+  ClientWorker(Socket cl, PacManGame game) {
+	  this.game = game;
 	  client = cl;
 	  out = null;
 	  in = null;
   }
   
-  public String getNickname(){
-	  return nickname;
-  }
-  
   public void run(){
-	Object A;
+	GameState inputGameState;
     try{
      out = new ObjectOutputStream(client.getOutputStream());
      in = new ObjectInputStream(client.getInputStream());
@@ -35,7 +33,7 @@ public class ClientWorker implements Runnable {
     }
     while(!client.isClosed()){//while client is open
       try{ 
-    	  A = in.readObject();
+    	  inputGameState = (GameState)in.readObject();
        } catch (IOException e) {
     	   	finalize();
        } catch (ClassNotFoundException e) {
@@ -44,9 +42,9 @@ public class ClientWorker implements Runnable {
 			}
     	} 
   }
+
   
-  
-  public void fireVBListener(Action action){
+  public void firePacket(Object packet){
 	  System.out.println("Server out!");
 		          try {
 		        		out.writeObject(null);

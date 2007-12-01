@@ -3,7 +3,7 @@ package code.uci.pacman.multiplayer;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-public class ClientInputListener implements Runnable{
+class ClientInputListener implements Runnable{
 	
 	private Client client;
 	private ObjectInputStream in;

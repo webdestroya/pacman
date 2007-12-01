@@ -5,16 +5,30 @@ import java.net.*;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+/**
+ * Server is responsible for handling incoming client requests.  It hands out responsibilites to ClientWorkers which
+ * handle the incoming data from the Clients. 
+ * @author Networking Team
+ *	
+ */
 public class Server{
 	
 	private static final long serialVersionUID = 1L;
 	private ServerSocket server;
+	private PacManGame game;
 	
-   Server(){
+/**
+ * Initializes Server
+ * @param pMG PacManGame
+ */
+   Server(PacManGame pMG){
+	   game = pMG;
+	   listenSocket()
    } 
-    
 
+   /**
+    * Starts the Server
+    */
    public void listenSocket(){
 
 	    try{
@@ -27,7 +41,7 @@ public class Server{
 		    while(true){
 		    	ClientWorker w;
 		      try {
-			    	w = new ClientWorker(server.accept());
+			    	w = new ClientWorker(server.accept(), game);
 			    	Thread t = new Thread(w);
 			    	t.start();
 				} catch (IOException e) {
@@ -36,9 +50,10 @@ public class Server{
 		      	}
 		    }
 	  }
-   
 
-
+   /**
+    * closes input and output streams
+    */
   protected void finalize(){
 //	Clean up 
 	     try{
@@ -60,7 +75,15 @@ public class Server{
 	   JOptionPane.showMessageDialog(errorFrame,
 			    message,
 			    "Server Message",
-			    JOptionPane.ERROR_MESSAGE);
+			    JOptionPane.ERROR);
 	   
+   }
+   
+   private void Messsage(String message){
+	   JFrame errorFrame = new JFrame();
+	   JOptionPane.showMessageDialog(errorFrame,
+			    message,
+			    "Server Message",
+			    JOptionPane.INFORMATION_MESSAGE);
    }
 }
