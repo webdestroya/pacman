@@ -11,7 +11,7 @@ import java.util.*;
 
 /**
  * 
- * @author GUI Team (Rick, Mike, Cameron)
+ * @author GUI Team (Rick, MikeY, Cameron)
  * this will display the score, lives, and current fruit
  *
  */
