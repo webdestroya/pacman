@@ -21,6 +21,7 @@ public class ScoreBoard{
 	private Fruit currentFruit = null;
 	private Sprite score;
 	private Sprite lives; 
+	private Fruit fruit;
 	private int scorePosX = 0;
 	private int scorePosY = 610;
 	private int livesPosX = 300;
@@ -28,6 +29,8 @@ public class ScoreBoard{
 	private int lifePosX = 355;
 	private int lifePosY = 610;
 	private int lifePosAdj = 30;
+	private int fruitPosX = 550;
+	private int fruitPosY = 610;
 	ArrayList<Sprite> lifeList = new ArrayList();
 	
 	public ScoreBoard() {
@@ -44,13 +47,16 @@ public class ScoreBoard{
 		//create lives sprite
 		lives = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/lives.png");
 		lives.position(livesPosX, livesPosY);
-		lives.font("Tahoma", PacManGame.BOLD, 24, 255, 255, 255);
 
 		//set remainLives
 		remainingLives = GameState.getInstance().getLives();
 		for(int x = 1; x <= remainingLives; x++){
 			lifeList.add(GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/life.png"));
 		}
+		
+		// set fruit: Code not function right.
+		fruit = GameState.getInstance().getFruit();
+		fruit.position(fruitPosX, fruitPosY);
 	}
 	
 	public void draw(){
@@ -68,6 +74,9 @@ public class ScoreBoard{
 			lifeList.get(x-1).position(lifePosX + x*lifePosAdj, lifePosY);
 			lifeList.get(x-1).draw();
 		}
+		
+		//add fruit to the scoreBoard.
+		fruit.draw();
 	}
 	
 	
