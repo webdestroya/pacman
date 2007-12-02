@@ -48,6 +48,7 @@ public class GameController {
 		
 		if (shouldShowFruit()) {
 			state.getFruit().show();
+			game.startFruitTimer();
 		}
 		if (state.getFruit().collidedPerfect(state.getPacMan())) {
 			state.getFruit().eaten();
@@ -66,7 +67,7 @@ public class GameController {
 		int initialPills = state.getPills().getInitialCount();
 		if (initialPills - state.getPills().getPillCount() == initialPills / 3 && state.getFruit().getFruitEaten() == 0) {
 			return true;
-		} else if (initialPills - state.getPills().getPillCount() == (initialPills / 3) * 2 && state.getFruit().getFruitEaten() == 1) {
+		} else if (initialPills - state.getPills().getPillCount() == (initialPills / 3) * 2 && state.getFruit().getFruitEaten() <= 1) {
 			return true;
 		} else
 			return false;

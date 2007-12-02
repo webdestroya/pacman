@@ -8,6 +8,7 @@ import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.controllers.GhostController;
 import code.uci.pacman.gui.ScoreBoard;
 import code.uci.pacman.gui.TopScores;
+import code.uci.pacman.objects.stationary.Fruit;
 import ucigame.Image;
 import ucigame.Sprite;
 import ucigame.Ucigame;
@@ -57,6 +58,15 @@ public class PacManGame extends Ucigame {
 	
 	public void drawMenu(){
 		
+	}
+	
+	public void startFruitTimer(){
+		startTimer("removeFruit",Fruit.ONSCREENLENGTH);
+	}
+	
+	public void removeFruitTimer(){
+		stopTimer("removeFruit");
+		state.getFruit().hide();
 	}
 	
 	public void startScatterTimer(){
