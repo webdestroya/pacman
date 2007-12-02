@@ -12,6 +12,7 @@ import ucigame.Image;
  */
 public class Fruit extends StationaryObject implements Eatable{
 	
+	public static double ONSCREENLENGTH = 8000;
 	/**
 	 * the point value of this object
 	 */
