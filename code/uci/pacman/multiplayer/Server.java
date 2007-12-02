@@ -23,7 +23,7 @@ public class Server{
  */
    Server(PacManGame pMG){
 	   game = pMG;
-	   listenSocket()
+	   listenSocket();
    } 
 
    /**
