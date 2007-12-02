@@ -53,7 +53,7 @@ public class WallController {
 		addWall(222, 238, 157, 75);
 		addWall(157, 295, 27, 77);
 		addWall(417, 295, 27, 77);
-		addWall(222, 354, 157, 17);
+		addWall(222, 354, 157, 18);
 		addWall(284, 367, 30, 61);
 		addWall(157, 409, 90, 19);
 		addWall(352, 411, 92, 17);
@@ -62,7 +62,7 @@ public class WallController {
 		addWall(222, 469, 157, 17);
 		addWall(285, 481, 30, 63);
 		addWall(353, 526, 200, 18);
-		addWall(417, 468, 27, 60);
+		addWall(417, 469, 27, 60);
 		addWall(48, 409, 70, 20);
 		addWall(89, 426, 29, 60);
 		addWall(485, 427, 29, 59);
