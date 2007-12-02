@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import code.uci.pacman.controllers.utilities.ArtifactController;
 import code.uci.pacman.game.GameState;
-import code.uci.pacman.objects.controllable.PacMan;
+import code.uci.pacman.objects.controllable.*;
 import code.uci.pacman.objects.stationary.*;
 
 /**
@@ -80,6 +80,15 @@ public class WallController {
 		for (Wall w : walls) {
 			p.stopIfCollidesWith(w);
 		}
+	}
+	
+	public boolean collidesWith(Ghost g) {
+		for (Wall w : walls) {
+			g.stopIfCollidesWith(w);
+			if (g.collided())
+				return true;
+		}
+		return false;
 	}
 
 	public void drawObjects() {

@@ -22,6 +22,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	public Ghost(Image img, int x, int y, boolean isPlayer) {
 		super(img, new int[] {0,0}, ghostWidth, ghostHeight, 5, x, y);
 		this.isPlayer = isPlayer;
+		super.speed = 7;
 		// TODO make this constructor take only position and define the rest here
 	}
 
@@ -67,7 +68,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public void step(Direction d) {
 		// TODO Auto-generated method stub
-		
+		super.step(d);
 	}
 
 	public int getValue() {
