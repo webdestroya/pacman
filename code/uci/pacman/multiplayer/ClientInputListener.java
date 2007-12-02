@@ -1,5 +1,6 @@
 package code.uci.pacman.multiplayer;
 
+import code.uci.pacman.game.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 

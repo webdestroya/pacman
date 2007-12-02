@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Grid {
 	static int space;
 	static FileWriter f;
-	static String folder = "C:\\Users\\growly-pants\\workspace\\Whole Pac\\levels\\";
+	static String folder = "levels/";
 
 	/**
 	 * @param args

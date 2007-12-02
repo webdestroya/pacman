@@ -1,5 +1,6 @@
 package code.uci.pacman.multiplayer;
 
+import code.uci.pacman.game.*;
 import java.io.*;
 import java.net.*;
 
@@ -64,11 +65,11 @@ public class Server{
 	    }
 	  }
   
-   public static void main(String[] args){
+   /*public static void main(String[] args){
 	   Server server = new Server();
 	   server.listenSocket();
        server.finalize();
-   }
+   }*/
    
    private void errorMessage(String message){
 	   JFrame errorFrame = new JFrame();

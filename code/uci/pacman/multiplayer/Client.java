@@ -1,5 +1,7 @@
 package code.uci.pacman.multiplayer;
 
+import code.uci.pacman.game.*;
+
 import javax.swing.*;
 
 import java.io.*;
