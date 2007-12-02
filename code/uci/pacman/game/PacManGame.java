@@ -30,7 +30,7 @@ public class PacManGame extends Ucigame {
 
 	public void setup() {
 		
-		//generatePositions();
+		//generatePositions(); EVERYBODY LEAVE THIS COMMENTED OUT! Call Thomas if you want to know what it does.
 		control = GameController.setInstance(this);
 		state = GameState.getInstance();
 		state.setupLevel();
