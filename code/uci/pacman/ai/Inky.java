@@ -1,6 +1,5 @@
 package code.uci.pacman.ai;
 
-import ucigame.Image;
 import code.uci.pacman.game.Direction;
 import code.uci.pacman.objects.controllable.Ghost;
 

@@ -38,7 +38,6 @@ public class StationaryObject extends Sprite implements Eatable{
 		return super.collided() && super.isShown();
 	}
 
-	@Override
 	public void eaten() {
 		// TODO Auto-generated method stub
 		

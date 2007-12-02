@@ -15,8 +15,8 @@ import ucigame.Image;
 
 public abstract class Ghost extends ControllableObject implements AI {
 
-	private static int ghostWidth=22;
-	private static int ghostHeight=22;
+	private static int ghostWidth = 22;
+	private static int ghostHeight = 22;
 	private boolean isPlayer;
 
 	public Ghost(Image img, int x, int y, boolean isPlayer) {
@@ -88,7 +88,6 @@ public abstract class Ghost extends ControllableObject implements AI {
 		// TODO change sprite?
 	}
 
-	@Override
 	public abstract Direction getMove();
 
 
