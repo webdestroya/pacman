@@ -47,7 +47,21 @@ public class PacMan extends ControllableObject {
 			angle=180;
 		if(d == Direction.RIGHT)
 			angle=0;
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
+	}
+	
+	@Override
+	public boolean moveIsAllowed(Direction d)
+	{
+		if(d == Direction.UP && control.checkForWall(this,0,8))
+			return true;
+		if(d == Direction.DOWN && control.checkForWall(this,0,-8))
+			return true;
+		if(d == Direction.LEFT && control.checkForWall(this,8,0))
+			return true;
+		if(d == Direction.RIGHT && control.checkForWall(this,-8,0))
+			return true;
+		else
+			return false;
 	}
 }
