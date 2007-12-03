@@ -79,34 +79,6 @@ public class ScoreBoard{
 		fruit.draw();
 	}
 	
-	
-	/**
-	 * 
-	 * @param int points
-	 * adds points to the score
-	 */
-	public void addPoints(int points){
-		
-	}
-	
-	/**
-	 * 
-	 * removes a life from remainingLives
-	 * 
-	 */
-	public void removeLife(){
-		
-	}
-	
-	/**
-	 * 
-	 * adds a life to remainingLives
-	 * 
-	 */
-	public void addLife(){
-		
-	}
-	
 	/***
 	 * 
 	 * this method returns the lives left for the player,
@@ -116,14 +88,5 @@ public class ScoreBoard{
 	 */
 	private int getLifeCount(){
 		return GameState.getInstance().getLives();
-	}
-	
-	/**
-	 * 
-	 * @param Fruit newFruit
-	 * sets currentFruit to newFruit
-	 */
-	public void setFruit(Fruit newFruit){
-		
 	}
 }
