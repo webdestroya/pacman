@@ -83,6 +83,10 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 			sendStep("RIGHT");
 		}
 	}
+	
+	public void adjustSpeed(int speedAdjust) {
+		this.speed += speedAdjust;
+	}
 
 	public void position(Point p) {
 		super.position(p.x, p.y);

@@ -16,7 +16,7 @@ public class Inky extends Ghost{
 	
 	public Inky(int x, int y, boolean isPlayer) {
 		super("inky.png", x, y, isPlayer);
-		// TODO Auto-generated constructor stub
+		this.speed = 5;
 	}
 
 	/* (non-Javadoc)

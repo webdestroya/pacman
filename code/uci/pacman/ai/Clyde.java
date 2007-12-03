@@ -16,7 +16,7 @@ public class Clyde extends Ghost{
 	
 	public Clyde(int x, int y, boolean isPlayer) {
 		super("clyde.png", x, y, isPlayer);
-		// TODO Auto-generated constructor stub
+		this.speed = 6;
 	}
 
 	/* (non-Javadoc)

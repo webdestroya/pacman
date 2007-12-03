@@ -14,7 +14,7 @@ public class Blinky extends Ghost{
 
 	public Blinky(int x, int y, boolean isPlayer) {
 		super("blinky.png", x, y, isPlayer);
-		// TODO Auto-generated constructor stub
+		this.speed = 7;
 	}
 
 	/* 

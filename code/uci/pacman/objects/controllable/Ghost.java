@@ -16,17 +16,19 @@ import code.uci.pacman.objects.ControllableObject;
 
 public abstract class Ghost extends ControllableObject implements AI {
 
-	private static final int GHOSTWIDTH = 22;
-	private static final int GHOSTHEIGHT = 22;
-	private static final int GHOSTFRAMERATE = 5;
-	private static final int CAGEPOS = 250;
+	private static final int GHOST_WIDTH = 22;
+	private static final int GHOST_HEIGHT = 22;
+	private static final int GHOST_FRAMERATE = 5;
+	private static final int CAGE_POS = 250;
+	
+	protected int baseGhostSpeed = 5;
 	
 	private boolean isPlayer;
 
 	public Ghost(String imgPath, int x, int y, boolean isPlayer) {
-		super(imgPath, new int[] {0,0}, GHOSTWIDTH, GHOSTHEIGHT, GHOSTFRAMERATE, x, y);
+		super(imgPath, new int[] {0,0}, GHOST_WIDTH, GHOST_HEIGHT, GHOST_FRAMERATE, x, y);
 		this.isPlayer = isPlayer;
-		super.speed = 7;
+		super.speed = baseGhostSpeed;
 	}
 
 	/**
@@ -67,7 +69,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	public void respawnInCage() {
 		Random r = new Random();
 		int randomOffset = r.nextInt(50);
-		this.position(CAGEPOS + randomOffset, CAGEPOS);
+		this.position(CAGE_POS + randomOffset, CAGE_POS);
 	}
 	
 	public boolean isPlayer(){

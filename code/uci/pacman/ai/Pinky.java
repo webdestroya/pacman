@@ -16,7 +16,7 @@ public class Pinky extends Ghost{
 	
 	public Pinky(int x, int y, boolean isPlayer) {
 		super("pinky.png", x, y, isPlayer);
-		// TODO Auto-generated constructor stub
+		this.speed = 4;
 	}
 
 	/* (non-Javadoc)

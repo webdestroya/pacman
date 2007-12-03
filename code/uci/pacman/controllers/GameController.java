@@ -59,12 +59,13 @@ public class GameController {
 		PacMan pac = state.getPacMan();
 		Collection<Ghost> collidingGhosts = ghosts.getCollidedWith(pac);
 		
-		if (ghosts.haveCollidedWithPacMan(pac)) { //if the ghosts and Pac-man have collided
+		if (ghosts.haveCollidedWithPacMan(pac)) { //if the ghosts and Pac-man have collided			
 			for (Ghost ghost : collidingGhosts) { //for each ghost that collided
-				if (ghost.isScattered() == false) { //if the ghost is on attack
-					pac.eaten();  //ghosts have eaten Pac-man and he is dead
-				} else {          //ghost is running in scatter mode
+				if (ghost.isScattered()) { //ghost is running in scatter mode
 					ghost.eaten(); //ghost has been eaten by Pac-man
+				} else {          //if the ghost is on attack
+					pac.eaten();  //ghosts have eaten Pac-man and he is dead
+					return;       //once Pac-man has been eaten stop the loop
 				}
 			}
 		}

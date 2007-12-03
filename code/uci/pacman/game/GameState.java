@@ -23,11 +23,12 @@ public class GameState {
 	private Fruit bonusItem;
 	private int score;
 	private int level;
-
-	public GameState() {
+	
+	public void startGame() {
 		score = 0;
 		lives = INITIAL_LIVES;
 		level = 1;
+		setupLevel();
 	}
 
 	public void setupLevel() {

@@ -60,7 +60,7 @@ public class PacManGame extends Ucigame {
 		
 		control = GameController.setInstance(this);
 		state = GameState.getInstance();
-		state.setupLevel();
+		state.startGame();
 		
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
@@ -131,6 +131,8 @@ public class PacManGame extends Ucigame {
 		canvas.clear();
 		canvas.font("Tahoma", PacManGame.BOLD, 40, 255, 255, 255);
 		canvas.putText("GAME OVER", 200, 300);
+		canvas.font("Tahoma", PacManGame.BOLD, 20, 255, 255, 255);
+		canvas.putText("Press R to Try Again", 210, 340);
 	}
 	
 	public void onKeyPressGame() {
@@ -143,6 +145,17 @@ public class PacManGame extends Ucigame {
 			state.getPacMan().step(Direction.LEFT);
 		if (keyboard.isDown(keyboard.RIGHT, keyboard.D))
 			state.getPacMan().step(Direction.RIGHT);
+		
+		if (keyboard.isDown(keyboard.R)) {
+			state.startGame();
+		}
+	}
+	
+	public void onKeyPressGameOver() {
+		if (keyboard.isDown(keyboard.R)) {
+			startScene("Game");
+			state.startGame();
+		}
 	}
 
 	public Sprite makeSpriteFromPath(String string) {
