@@ -9,18 +9,25 @@ import ucigame.Sprite;
  * @author Team Objects/AI
  *
  */
-public class StationaryObject extends Sprite implements Eatable{
+public abstract class StationaryObject extends Sprite {
     protected GameController control;
+    protected Image objectGraphic;
+    
 	public StationaryObject(Image img, int x, int y) {
 		super(img.width(), img.height());
 		super.addFrame(img, 0, 0);
 		this.position(x, y);
+		this.objectGraphic = img;
 		control = GameController.getInstance();
 	}
 	
 	public StationaryObject(int width, int height) {
 		super(width, height);
 		
+	}
+	
+	public Image getGraphic() {
+		return objectGraphic;
 	}
 
 	protected static Image getImage(String stringPath){
@@ -37,10 +44,4 @@ public class StationaryObject extends Sprite implements Eatable{
 		super.checkIfCollidesWith(c);
 		return super.collided() && super.isShown();
 	}
-
-	public void eaten() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

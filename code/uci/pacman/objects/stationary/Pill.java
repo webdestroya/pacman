@@ -12,7 +12,7 @@ import ucigame.Image;
  *
  */
 
-public class Pill extends StationaryObject implements Eatable{
+public class Pill extends StationaryObject implements Eatable {
 	
 	private static Image i = getImage("pill.png");
 	

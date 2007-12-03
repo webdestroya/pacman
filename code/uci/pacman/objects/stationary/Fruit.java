@@ -3,14 +3,13 @@ package code.uci.pacman.objects.stationary;
 
 import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
-import code.uci.pacman.objects.controllable.PacMan;
 import ucigame.Image;
 
 /**
  * @author Team Objects/AI
  *
  */
-public class Fruit extends StationaryObject implements Eatable{
+public class Fruit extends StationaryObject implements Eatable {
 	
 	public static double ONSCREENLENGTH = 8000;
 	/**
@@ -28,21 +27,25 @@ public class Fruit extends StationaryObject implements Eatable{
 	 * 
 	 */
 	public Fruit(int x, int y, int initialScore) {
-		super(randomFruit(), x, y); //we assumed it always starts at 100
+		this(randomFruit(), x, y, initialScore);
 		super.hide();
+	}
+	
+	public Fruit(Image fruit, int x, int y, int initialScore) {
+		super(fruit, x, y);
+	    score = initialScore;
 		fruitEaten = 0;
-		score = initialScore;
-		// TODO Auto-generated constructor stub
 	}
 	
 
 	private static Image randomFruit() {
-		return getImage("cherry.png");
+		Image randomFruit = getImage("cherry.png");
+		return randomFruit;
 	}
 
 	public void eaten() {
 		fruitEaten++;
-		// TODO Auto-generated method stub
+		score += 100; //increase score when eaten
 		control.fruitEaten(this);
 	}
 

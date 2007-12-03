@@ -1,7 +1,5 @@
 package code.uci.pacman.gui;
 
-import com.sun.corba.se.spi.ior.MakeImmutable;
-
 import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.game.PacManGame;
@@ -18,7 +16,6 @@ import java.util.*;
 public class ScoreBoard{
 
 	private int remainingLives = 0;
-	private Fruit currentFruit = null;
 	private Sprite score;
 	private Sprite lives; 
 	private Fruit fruit;
@@ -31,7 +28,7 @@ public class ScoreBoard{
 	private int lifePosAdj = 30;
 	private int fruitPosX = 550;
 	private int fruitPosY = 610;
-	ArrayList<Sprite> lifeList = new ArrayList();
+	ArrayList<Sprite> lifeList = new ArrayList<Sprite>();
 	
 	public ScoreBoard() {
 		// Hey we provided an example of how to use gameInstances to apply sprites. 
@@ -55,8 +52,8 @@ public class ScoreBoard{
 		}
 		
 		// set fruit: Code not function right.
-		fruit = GameState.getInstance().getFruit();
-		fruit.position(fruitPosX, fruitPosY);
+		Image fruitImage = GameState.getInstance().getFruit().getGraphic();
+		fruit = new Fruit(fruitImage, fruitPosX, fruitPosY, 0);
 	}
 	
 	public void draw(){
@@ -77,16 +74,5 @@ public class ScoreBoard{
 		
 		//add fruit to the scoreBoard.
 		fruit.draw();
-	}
-	
-	/***
-	 * 
-	 * this method returns the lives left for the player,
-	 * to determine whether the game is finished or not.
-	 * @return int remainingLives.
-	 * 
-	 */
-	private int getLifeCount(){
-		return GameState.getInstance().getLives();
 	}
 }

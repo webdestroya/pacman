@@ -15,13 +15,10 @@ public class GameController {
 	private static GameController gControl;
 	private GameState state;
 	private PacManGame game;
-
-	private GameController(PacManGame pacManGame) {
-		GameState.setInstance(new GameState());
-		state = GameState.getInstance();
-		this.game = pacManGame;
-	}
-
+	
+	
+	// Static Singleton Methods
+	
 	public static GameController setInstance(PacManGame pacManGame) {
 		gControl = new GameController(pacManGame);
 		return gControl;
@@ -30,37 +27,54 @@ public class GameController {
 	public static GameController getInstance() {
 		return gControl;
 	}
+	
+	// Instance Methods
+
+	private GameController(PacManGame pacManGame) {
+		GameState.setInstance(new GameState());
+		state = GameState.getInstance();
+		this.game = pacManGame;
+	}
 
 	public void nextMove() {
+		moveActors(); //moves the actors for tick
+		handleItemCollisions(); //handle item collisions
+		checkStageClear(); //handle stage being clear (loading next stage)
+	}
+
+	private void moveActors() {
 		state.getGhosts().moveAIGhosts();
 		state.getPacMan().move();
-
-		 state.getWalls().stopCollision(state.getPacMan());
+		state.getWalls().stopCollision(state.getPacMan());
+	}
+	
+	private void handleItemCollisions() {
 		Pill p = state.getPills().getCollidingPill(state.getPacMan());
-		if (p != null) {
-			p.eaten();
-		}
+		if (p != null) { p.eaten(); }
 		
 		PowerPellet pellet = state.getPellets().getCollidingPellet(state.getPacMan());
-		if (pellet != null) {
-			pellet.eaten();
-		}
+		if (pellet != null) { pellet.eaten(); }
 		
 		if (shouldShowFruit()) {
 			state.getFruit().show();
 			game.startFruitTimer();
 		}
+		
 		if (state.getFruit().collidedPerfect(state.getPacMan())) {
 			state.getFruit().eaten();
 		}
-		if (state.getPills().getPillCount() == 0) {
-			state.nextLevel();
-			if (state.getLevel() <= 3)
-				state.setupLevel();
-			else
-				game.startScene("Scores");
-		}
+	}
 
+	private void checkStageClear() {
+		if (state.levelIsFinished()) {
+			state.nextLevel();
+			if (state.getLevel() <= 3) {
+				state.setupLevel();
+			}
+			else {
+				game.startScene("Scores");
+			}
+		}
 	}
 	
 	private boolean shouldShowFruit() {
