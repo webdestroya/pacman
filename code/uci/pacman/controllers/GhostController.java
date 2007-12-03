@@ -51,14 +51,12 @@ public class GhostController extends ActorController<String, Ghost> {
 	 * iterates through all the ghosts and calls scatter on dem
 	 */
 	public void scatter(){
-		System.out.println("GHOSTS SCATTERED");
 		for(Ghost g : getObjects()){
 			g.scatter();
 		}
 	}
 	
 	public void unScatter(){
-		System.out.println("GHOSTS ATTACK");
 		for(Ghost g : getObjects()){
 			g.unScatter();
 		}

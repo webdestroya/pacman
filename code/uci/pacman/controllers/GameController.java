@@ -60,7 +60,6 @@ public class GameController {
 		Collection<Ghost> collidingGhosts = ghosts.getCollidedWith(pac);
 		
 		if (ghosts.haveCollidedWithPacMan(pac)) { //if the ghosts and Pac-man have collided
-			System.out.println("COLLISION WITH " + collidingGhosts.size() + " GHOSTS");
 			for (Ghost ghost : collidingGhosts) { //for each ghost that collided
 				if (ghost.isScattered() == false) { //if the ghost is on attack
 					pac.eaten();  //ghosts have eaten Pac-man and he is dead
@@ -141,7 +140,6 @@ public class GameController {
 	 * 
 	 */
 	public void ghostEaten(Ghost ghost) {
-		System.out.println("Ghost eaten: " + ghost.getClass().getSimpleName());
 		ghost.respawnInCage();  //restart in cage
 		state.addToScore(ghost.getValue());//TODO make ghosts worth more if you eat them in the same round
 	}
