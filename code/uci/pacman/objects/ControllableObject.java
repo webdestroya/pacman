@@ -9,7 +9,7 @@ import ucigame.Image;
 import ucigame.Sprite;
 
 /**
- * this is the class represents all objects that can be controlled (pacman and ghosts)
+ * this is the class represents all objects that can be controlled (pacman and ghosts) also implements eatable.
  * @author Team Objects/AI
  *
  */
@@ -18,6 +18,7 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	protected double speed;
     protected GameController control;
     protected Direction currentDirection;
+    private int blah;
     
 	public ControllableObject(String imgPath, int[] frames, int width, int height, int framerate, int x, int y) {
 		super(width, height);
@@ -38,8 +39,17 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 		return super.collided();
 	}
 	
+	
+	/**
+	 * @see code.uci.pacman.objects.Eatable#eaten()
+	 */
 	public abstract void eaten();
 	
+	
+	/**
+	 * Takes in a direction and sends the direction to the Client (for multiplayer use). 
+	 * @param dir the direction to send to the client
+	 */
 	public void sendStep(String dir)
 	{
 		if( this instanceof code.uci.pacman.objects.controllable.PacMan )
@@ -60,7 +70,7 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	 * this is called when you want to move an object (locally, remotely, AI)
 	 * this only sets the motion and does not do any collision detection. It will do a
 	 * collision detection to block unallowable movements.
-	 * @param d
+	 * @param d the direction to move
 	 */
 	public void step(Direction d){
 		if(moveIsAllowed(d))
@@ -90,21 +100,48 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 		}
 	}
 	
+	
+	/**
+	 * Used to adjust the speed of a controllable object from the current speed (does not replace the current speed but just adjusts it).
+	 * @param speedAdjust the amount to adjust the speed by.
+	 */
 	public void adjustSpeed(int speedAdjust) {
 		this.speed += speedAdjust;
 	}
 
+	
+	/**
+	 * Changes the position of the controllable object to a point on the board.
+	 * @param p the position to move the object to
+	 */
 	public void position(Point p) {
 		super.position(p.x, p.y);
 	}
 	
+	
+	/**
+	 * This method is used to change the sprite, depending on the parameter that is passed.
+	 * @param d the direction to change the sprite image to
+	 */
 	protected abstract void spriteForDirection(Direction d);
 	
+	
+	/**
+	 * This method checks to see whether the controllable object can move in the given direction.
+	 * @param d the direction to check to for a valid move
+	 * @return true if the move is allowed.
+	 */
 	public boolean moveIsAllowed(Direction d)
 	{
-		return true;
+		return true;//TO-DO
 	}
 	
+	
+	
+	/**
+	 * @param stringPath the name fo the image of the sprite.
+	 * @return the sprite image.
+	 */
 	private static Image getImage(String stringPath){
 		String resources = "images/final/";
 		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
