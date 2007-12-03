@@ -6,7 +6,6 @@ import java.util.Random;
 import code.uci.pacman.ai.AI;
 import code.uci.pacman.game.Direction;
 import code.uci.pacman.objects.ControllableObject;
-import ucigame.Image;
 
 
 /**

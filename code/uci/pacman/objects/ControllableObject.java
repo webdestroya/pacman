@@ -89,18 +89,6 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 			sendStep("RIGHT");
 		}
 	}
-	
-	/**
-	 * Switches the sprite graphics for this object by loading
-	 * in a new image and new frame coordinates to allow
-	 * for different animations when needed
-	 * 
-	 * @param image The 
-	 * @param frames
-	 */
-	public void switchToFrames(String imagePath, int... frames) {
-		
-	}
 
 	public void position(Point p) {
 		super.position(p.x, p.y);
