@@ -2,6 +2,7 @@ package code.uci.pacman.controllers;
 
 import java.awt.Point;
 import java.util.Collection;
+import java.util.ArrayList;
 
 import code.uci.pacman.game.Direction;
 import code.uci.pacman.game.GameState;
@@ -9,6 +10,7 @@ import code.uci.pacman.game.PacManGame;
 import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
 import code.uci.pacman.objects.stationary.*;
+import ucigame.Sprite;
 
 /**
  * 
@@ -179,6 +181,28 @@ public class GameController {
 		else { //if Pac-man has died one too many times
 			game.startScene("GameOver");
 		}	
+	}
+	
+	public boolean checkForWall(PacMan pac, int xCheck, int yCheck)
+	{
+		// To check for a possible immediate future collision with a wall, we move the PacMan object
+		// xCheck/yCheck pixels from where it is and then check for a collision before proceeding.
+		
+		double curX = pac.x() + pac.xspeed();
+		double curY = pac.y() + pac.yspeed();
+		pac.nextX(pac.x() + xCheck);
+		pac.nextY(pac.y() + yCheck);
+		ArrayList<Sprite> walls = new ArrayList(state.getWalls().walls);
+		Sprite [] spriteWalls = walls.toArray(new Sprite[0]);
+		pac.checkIfCollidesWith(spriteWalls);
+		boolean r = pac.collided();
+		System.out.println("Checking collision: " + r);
+		pac.nextX(curX);
+		pac.nextY(curY);
+		if(r)
+			return false;
+		else
+			return true;
 	}
 
 
