@@ -6,7 +6,10 @@ import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.controllers.GhostController;
 import code.uci.pacman.gui.ScoreBoard;
 import code.uci.pacman.gui.TopScores;
+import code.uci.pacman.gui.IntroPlayer;
 import code.uci.pacman.objects.stationary.Fruit;
+import ucigame.Image;
+import ucigame.Sound;
 import ucigame.Sprite;
 import ucigame.Ucigame;
 
@@ -27,13 +30,14 @@ public class PacManGame extends Ucigame {
 	private GameController control;
 	private ScoreBoard scoreBoard;
 	private TopScores topScores;
+	private IntroPlayer introPlayer;
 	
 	public static int multiplayerType = 1; // 1=server, 2=client
 	public static String hostname = "127.0.0.1"; // used for network
 	
 	public static void main(String[] args)
 	{
-		//System.out.println(args[0]+"|"+args[1]+"|"+args[2]);
+		//System.out.println(args[0]+"|"+args[1]+"|"+args[2]);		
 		
 		List<String> cargs = Arrays.asList(args);
 		
@@ -58,12 +62,18 @@ public class PacManGame extends Ucigame {
 		canvas.background(0, 0, 0);
 		window.title("Pac Man Fever");
 		
+		// This code is for displaying the opening
+		// Pass a 1 if you want to play the intro or 0 to skip it
+		//introPlayer = new IntroPlayer(1, this);
+		//startScene("Intro");
+		
 		control = GameController.setInstance(this);
 		state = GameState.getInstance();
 		state.startGame();
 		
 		scoreBoard = new ScoreBoard();
-		topScores = new TopScores();
+		topScores = new TopScores();		
+		
 		startScene("Game");
 		
 		// Make the server
@@ -126,6 +136,51 @@ public class PacManGame extends Ucigame {
 		state.drawState();
 		scoreBoard.draw();
 	}
+	
+	public void drawIntro() {
+		canvas.clear();
+		introPlayer.draw();
+		//screwAround();
+	}
+	
+	//public void screwAround()
+	//{
+		//String themeLocation = 	("sounds\\final\\IntroTheme.mp3");
+		//Sound music = getSound(themeLocation);			
+		//music.play();
+		
+		//try
+		//{
+			//for(int i = 1; i <= 30; i++)
+			//{
+				//String workingString = "images\\final\\intro\\0";
+				//if (i < 10)
+				//{
+				//	workingString += ("0" + i);
+				//}
+				//if (i >= 10)
+				//{
+				//	workingString += i;
+				//}
+				//workingString += ".png";
+								
+			//	Image currentImage =  getImage(workingString);
+				//Sprite test = makeSprite(currentImage, 600, 650);
+				//test.position(0, 0);
+				//test.show();
+		//		canvas.background(currentImage);
+	//			Thread.sleep(1200);				
+//				canvas.clear();
+				//currentFrame.hide();					
+				//canvas.clear();
+//			}				
+//		}
+//		catch (InterruptedException e)
+//		{
+			//System.out.println("Intro Thread was Interrupted!");
+			//e.printStackTrace();
+		//}
+	//}
 	
 	public void drawGameOver() {
 		canvas.clear();
