@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Grid {
+public class ItemGenerator {
 	static int space;
 	static FileWriter f;
 	static String folder = "levels/";
@@ -12,13 +12,10 @@ public class Grid {
 	 * @param args
 	 * @throws IOException
 	 */
-	public static void grid() throws IOException {
+	public static void execute() throws IOException {
 		// pills
 		makePillsOne();
 		f.close();
-		// walls
-
-
 	}
 
 	private static void makePillsOne() throws IOException {

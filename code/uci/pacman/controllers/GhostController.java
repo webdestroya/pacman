@@ -6,6 +6,7 @@ import code.uci.pacman.ai.Inky;
 import code.uci.pacman.ai.Pinky;
 import code.uci.pacman.controllers.utilities.ActorController;
 import code.uci.pacman.objects.controllable.Ghost;
+import code.uci.pacman.objects.controllable.PacMan;
 
 
 /**
@@ -34,6 +35,10 @@ public class GhostController extends ActorController<String, Ghost> {
 				g.move();
 			}
 		}
+	}
+	
+	public boolean haveCollidedWithPacMan(PacMan p) {
+		return super.getCollidedWith(p).size() > 0;
 	}
 	
 	/**
@@ -65,5 +70,14 @@ public class GhostController extends ActorController<String, Ghost> {
 		getObjectAt("Inky").position(300, 250);
 		getObjectAt("Clyde").position(325, 250);
 		
+	}
+
+	public boolean haveScattered() {
+	    for (Ghost g : super.getObjects()) {
+	    	if (g.isScattered()){
+	    		return true;
+	    	}
+	    }
+		return false;
 	}
 }

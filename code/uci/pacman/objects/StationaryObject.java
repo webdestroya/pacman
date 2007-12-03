@@ -35,13 +35,8 @@ public abstract class StationaryObject extends Sprite {
 		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
 	}
 	
-	public boolean collidedPerfect(ControllableObject c){
+	public boolean collidedWith(ControllableObject c){
 		super.checkIfCollidesWith(c, PacManGame.PIXELPERFECT);
-		return super.collided() && super.isShown();
-	}
-	
-	public boolean collided(ControllableObject c){
-		super.checkIfCollidesWith(c);
 		return super.collided() && super.isShown();
 	}
 }

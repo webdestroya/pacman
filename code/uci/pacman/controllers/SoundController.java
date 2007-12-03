@@ -1,7 +1,6 @@
 package code.uci.pacman.controllers;
 
 import ucigame.Sound;
-import code.uci.pacman.game.PacManGame;
 
 public class SoundController {
 	

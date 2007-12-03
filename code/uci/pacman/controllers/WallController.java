@@ -2,7 +2,6 @@ package code.uci.pacman.controllers;
 
 import java.util.ArrayList;
 
-import code.uci.pacman.controllers.utilities.ArtifactController;
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.objects.controllable.*;
 import code.uci.pacman.objects.stationary.*;

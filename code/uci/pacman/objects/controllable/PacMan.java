@@ -8,7 +8,7 @@ import ucigame.Image;
  * @author Team Objects/AI
  *
  */
-public class PacMan extends ControllableObject{
+public class PacMan extends ControllableObject {
 	
 	private static Image pacImage = getImage("pacman.png");
 	private static int pacWidth = 20;

@@ -2,7 +2,6 @@ package code.uci.pacman.objects;
 
 import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.game.Direction;
-import code.uci.pacman.game.PacManGame;
 import ucigame.Image;
 import ucigame.Sprite;
 /**
@@ -12,7 +11,7 @@ import ucigame.Sprite;
  *
  */
 
-public abstract class ControllableObject extends Sprite implements Eatable{
+public abstract class ControllableObject extends Sprite implements Eatable {
 	protected int speed;
     protected GameController control;
 	public ControllableObject(Image img, int[] frames, int width, int height, int framerate, int x, int y) {
@@ -26,6 +25,18 @@ public abstract class ControllableObject extends Sprite implements Eatable{
 	protected static Image getImage(String stringPath){
 		String resources = "images/final/";
 		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
+	}
+	
+	
+	/**
+	 * Returns whether the current object has collided with the specified sprite.
+	 * 
+	 * @param a the actor with which to check collisions
+	 * @return true if this object collided with the specified sprite
+	 */
+	public boolean collidedWith(Sprite a) {
+		super.checkIfCollidesWith(a);
+		return super.collided();
 	}
 	
 	public abstract void eaten();

@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 import code.uci.pacman.objects.ControllableObject;
 import code.uci.pacman.objects.StationaryObject;
-import ucigame.Image;
 
 public abstract class ArtifactController<A extends StationaryObject> extends SpriteController<Point, A> {
 	private static final long serialVersionUID = 1L;
@@ -41,7 +40,7 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 	 */
 	public A getCollidedWith(ControllableObject c) {
 		for (A artifact : super.getObjects()) {
-			if (artifact.collidedPerfect(c))
+			if (artifact.collidedWith(c))
 				return artifact;
 		}
 		return null;

@@ -1,5 +1,7 @@
 package code.uci.pacman.controllers;
 
+import java.util.Collection;
+
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.game.PacManGame;
 import code.uci.pacman.objects.controllable.Ghost;
@@ -38,6 +40,7 @@ public class GameController {
 
 	public void nextMove() {
 		moveActors(); //moves the actors for tick
+		handleActorCollisions(); //handles the actors colliding
 		handleItemCollisions(); //handle item collisions
 		checkStageClear(); //handle stage being clear (loading next stage)
 	}
@@ -46,6 +49,25 @@ public class GameController {
 		state.getGhosts().moveAIGhosts();
 		state.getPacMan().move();
 		state.getWalls().stopCollision(state.getPacMan());
+	}
+	
+
+	private void handleActorCollisions() {
+		GhostController ghosts = state.getGhosts();
+		PacMan pac = state.getPacMan();
+		Collection<Ghost> collidingGhosts = ghosts.getCollidedWith(pac);
+		
+		if (ghosts.haveCollidedWithPacMan(pac)) { //if the ghosts and Pac-man have collided
+			if (ghosts.haveScattered() == false) { 
+				//ghost have hit Pac-man and he is dead
+				pac.eaten();
+			}
+			else { //Pac-man CAN kill ghosts on collision
+			   for (Ghost g : collidingGhosts) {
+				   g.eaten();
+			   }
+			}
+		}
 	}
 	
 	private void handleItemCollisions() {
@@ -60,7 +82,7 @@ public class GameController {
 			game.startFruitTimer();
 		}
 		
-		if (state.getFruit().collidedPerfect(state.getPacMan())) {
+		if (state.getFruit().collidedWith(state.getPacMan())) {
 			state.getFruit().eaten();
 		}
 	}
@@ -132,9 +154,14 @@ public class GameController {
 	 * life lost change position reset ghosts position
 	 */
 	public void pacManEaten(PacMan pacMan) {
+		if (state.getLives() > 0) { // if Pac-man has more lives
 			state.lifeLost();
 			state.getPacMan().position(290, 440);
 			state.getGhosts().respawn();
+		}
+		else { //if Pac-man has died one too many times
+			game.startScene("GameOver");
+		}	
 	}
 
 

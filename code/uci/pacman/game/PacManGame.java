@@ -2,14 +2,11 @@ package code.uci.pacman.game;
 
 import java.io.IOException;
 
-import com.sun.corba.se.spi.ior.MakeImmutable;
-
 import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.controllers.GhostController;
 import code.uci.pacman.gui.ScoreBoard;
 import code.uci.pacman.gui.TopScores;
 import code.uci.pacman.objects.stationary.Fruit;
-import ucigame.Image;
 import ucigame.Sprite;
 import ucigame.Ucigame;
 
@@ -29,8 +26,7 @@ public class PacManGame extends Ucigame {
 	private GameController control;
 
 	public void setup() {
-		
-		//generatePositions(); EVERYBODY LEAVE THIS COMMENTED OUT! Call Thomas if you want to know what it does.
+		generatePositions(false); 
 		control = GameController.setInstance(this);
 		state = GameState.getInstance();
 		state.setupLevel();
@@ -43,21 +39,14 @@ public class PacManGame extends Ucigame {
 		startScene("Game");
 	}
 
-	private void generatePositions() {
+	private void generatePositions(boolean run) {
 		try {
-			Grid.grid();
+			if (run) {
+			   ItemGenerator.execute();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void drawScores(){
-		canvas.clear();
-		topScores.draw();
-	}
-	
-	public void drawMenu(){
-		
 	}
 	
 	public void startFruitTimer(){
@@ -77,6 +66,16 @@ public class PacManGame extends Ucigame {
 		stopTimer("unScatterGhosts");
 		state.getGhosts().unScatter();
 	}
+	
+	
+    public void drawMenu(){
+		
+	}
+
+	public void drawScores(){
+		canvas.clear();
+		topScores.draw();
+	}
 
 	public void drawGame() {
 		canvas.clear();
@@ -84,8 +83,13 @@ public class PacManGame extends Ucigame {
 		state.drawState();
 		scoreBoard.draw();
 	}
-
-
+	
+	public void drawGameOver() {
+		canvas.clear();
+		canvas.font("Tahoma", PacManGame.BOLD, 40, 255, 255, 255);
+		canvas.putText("GAME OVER", 200, 300);
+	}
+	
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
 		if (keyboard.isDown(keyboard.UP, keyboard.W))
