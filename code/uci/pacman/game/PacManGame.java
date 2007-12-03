@@ -48,15 +48,14 @@ public class PacManGame extends Ucigame {
 	public void setup() {
 		generatePositions(false);
 		initializeWindow(); // creates the window, sets the title, initialize
-							// control
+		// control
 
 		// This code is for displaying the opening
 		// Pass a 1 if you want to play the intro or 0 to skip it
 		// Doesn't work right now
 		// introPlayer = new IntroPlayer(1, this);
-		// startScene("Intro");
-		
-		startScene("Game"); // switch to the "scene" containing the actual game
+		startScene("Intro");
+		//startScene("Game"); // switch to the "scene" containing the actual game
 		setupServerOrClient(); //make the server or client connection
 
 	}
@@ -95,12 +94,12 @@ public class PacManGame extends Ucigame {
 	}
 
 	/*  Painting the Game Scenes  */
-	
+
 	//Draws the "Menu" scene
 	public void drawMenu() {
 
 	}
-	
+
 	//Draws the "Scores" scene
 	public void drawScores() {
 		canvas.clear();
@@ -118,49 +117,24 @@ public class PacManGame extends Ucigame {
 	//Draws the "Intro" scene
 	public void drawIntro() {
 		canvas.clear();
-		introPlayer.draw();
-		// screwAround();
+        Sprite button1 = makeButton("Play",
+                getImage("images\\final\\singleplayerButton.png", 0, 255, 0),
+                249, 228);
+        button1.draw();
+		//introPlayer.draw();
+		//screwAround(); 
+        ///////////////////// MIKE THIS IS WHERE YOU PUT YOUR INTO and from your intro you need to call 
+        ///////////////////// startScene("Game"); to start the game. so put that in a button somewhere. 
+        ///////////////////// I made a basic start game screen, to show you about how it works.. my button sucks lol
 	}
 
-	// this was just a test
-	// public void screwAround()
-	// {
-	// String themeLocation = ("sounds\\final\\IntroTheme.mp3");
-	// Sound music = getSound(themeLocation);
-	// music.play();
-
-	// try
-	// {
-	// for(int i = 1; i <= 30; i++)
-	// {
-	// String workingString = "images\\final\\intro\\0";
-	// if (i < 10)
-	// {
-	// workingString += ("0" + i);
-	// }
-	// if (i >= 10)
-	// {
-	// workingString += i;
-	// }
-	// workingString += ".png";
-
-	// Image currentImage = getImage(workingString);
-	// Sprite test = makeSprite(currentImage, 600, 650);
-	// test.position(0, 0);
-	// test.show();
-	// canvas.background(currentImage);
-	// Thread.sleep(1200);
-	// canvas.clear();
-	// currentFrame.hide();
-	// canvas.clear();
-	// }
-	// }
-	// catch (InterruptedException e)
-	// {
-	// System.out.println("Intro Thread was Interrupted!");
-	// e.printStackTrace();
-	// }
-	// }
+//	this was just a test
+	public void screwAround()
+	{
+		String themeLocation = ("sounds\\final\\IntroTheme.mp3");
+		Sound music = getSound(themeLocation);
+		music.play();
+	}
 
 	//Draws the "GameOver" scene
 	public void drawGameOver() {
@@ -191,7 +165,15 @@ public class PacManGame extends Ucigame {
 		control.unscatterGhosts();
 	}
 
+	public void startGameTimer(){
+		stopTimer("startGame");
+		startScene("Game");
+	}
 	/* Event Input Handling */
+
+	public void onClickPlay(){
+		startScene("Game");
+	}
 	
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
