@@ -8,6 +8,7 @@ import ucigame.Image;
 import ucigame.Sprite;
 
 /**
+ * Represents all objects that are stationary (Fruit, Pill, PowerPellet, Wall).
  * @author Team Objects/AI
  *
  */

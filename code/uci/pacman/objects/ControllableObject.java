@@ -9,9 +9,8 @@ import ucigame.Image;
 import ucigame.Sprite;
 
 /**
- * 
- * @author Team Objects/AI
  * this is the class represents all objects that can be controlled (pacman and ghosts)
+ * @author Team Objects/AI
  *
  */
 

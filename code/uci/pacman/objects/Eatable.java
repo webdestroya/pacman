@@ -1,6 +1,7 @@
 package code.uci.pacman.objects;
 
 /**
+ * Represents all objects that are eatable (Ghost, Pacman, Fruit, Pill, PowerPellet).
  * @author Team Objects/AI
  *
  */
