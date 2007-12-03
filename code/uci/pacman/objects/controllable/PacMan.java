@@ -53,13 +53,13 @@ public class PacMan extends ControllableObject {
 	@Override
 	public boolean moveIsAllowed(Direction d)
 	{
-		if(d == Direction.UP && control.checkForWall(this,0,8))
+		if(d == Direction.UP && control.checkForWall(this,0,-13))
 			return true;
-		if(d == Direction.DOWN && control.checkForWall(this,0,-8))
+		if(d == Direction.DOWN && control.checkForWall(this,0,13 + this.height()))
 			return true;
-		if(d == Direction.LEFT && control.checkForWall(this,8,0))
+		if(d == Direction.LEFT && control.checkForWall(this,-10,0))
 			return true;
-		if(d == Direction.RIGHT && control.checkForWall(this,-8,0))
+		if(d == Direction.RIGHT && control.checkForWall(this,10 + this.width(),0))
 			return true;
 		else
 			return false;

@@ -18,6 +18,8 @@ import ucigame.Sprite;
 public abstract class ControllableObject extends Sprite implements Eatable {
 	protected double speed;
     protected GameController control;
+    protected Direction currentDirection;
+    
 	public ControllableObject(String imgPath, int[] frames, int width, int height, int framerate, int x, int y) {
 		super(width, height);
 		position(x, y);
@@ -57,33 +59,35 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	
 	/**
 	 * this is called when you want to move an object (locally, remotely, AI)
-	 * this only sets the motion and does not do any collision detection
+	 * this only sets the motion and does not do any collision detection. It will do a
+	 * collision detection to block unallowable movements.
 	 * @param d
 	 */
 	public void step(Direction d){
 		if(moveIsAllowed(d))
+			currentDirection = d;
+		
+		spriteForDirection(currentDirection);
+		
+		if (currentDirection == Direction.UP)
 		{
-			spriteForDirection(d);
-			if (d == Direction.UP)
-			{
-				motion(0,0-speed);
-				sendStep("UP");
-			}
-			else if (d == Direction.DOWN)
-			{
-				motion(0,speed);
-				sendStep("DOWN");
-			}
-			else if (d == Direction.LEFT)
-			{
-				motion(0-speed, 0);
-				sendStep("LEFT");
-			}
-			else if (d == Direction.RIGHT)
-			{
-				motion(speed, 0);
-				sendStep("RIGHT");
-			}
+			motion(0,0-speed);
+			sendStep("UP");
+		}
+		else if (currentDirection == Direction.DOWN)
+		{
+			motion(0,speed);
+			sendStep("DOWN");
+		}
+		else if (currentDirection == Direction.LEFT)
+		{
+			motion(0-speed, 0);
+			sendStep("LEFT");
+		}
+		else if (currentDirection == Direction.RIGHT)
+		{
+			motion(speed, 0);
+			sendStep("RIGHT");
 		}
 	}
 	

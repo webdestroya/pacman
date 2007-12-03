@@ -196,7 +196,6 @@ public class GameController {
 		Sprite [] spriteWalls = walls.toArray(new Sprite[0]);
 		pac.checkIfCollidesWith(spriteWalls);
 		boolean r = pac.collided();
-		System.out.println("Checking collision: " + r);
 		pac.nextX(curX);
 		pac.nextY(curY);
 		if(r)
