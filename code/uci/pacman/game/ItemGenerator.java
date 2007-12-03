@@ -3,8 +3,25 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * This class is responsible for generating item positions for
+ * different game objects. For now, the only items it needs to generate
+ * are the locations for all the pill objects within the game
+ * 
+ * This class works by constructing rectangular blocks of items that 
+ * contain a certain group of the item. For instance, the pill locations
+ * are specified by drawing vertical and horizontal rectangles by x, y and
+ * then pills are filled inside these rectangles
+ * 
+ * All the positions are then stored into a file and this file is
+ * read by the object class during the game in order to construct
+ * the locations of all the objects
+ * 
+ * @author Game Team
+ *
+ */
 public class ItemGenerator {
-	static int space;
+	static int spacingBetweenPills;
 	static FileWriter f;
 	static String folder = "levels/";
 
@@ -13,108 +30,98 @@ public class ItemGenerator {
 	 * @throws IOException
 	 */
 	public static void execute() throws IOException {
-		// pills
+		// Generate pill object locations
 		makePillsOne();
-		f.close();
 	}
 
+	/**
+	 * This is the function that should generate the locations for all
+	 * the pills within a certain stage. This function is for generating
+	 * pills in the first stage.
+	 * 
+	 * There are both horizontal and vertical blocks of pills. To
+	 * easily determine coordinates, open up "images/final/level1.png" which
+	 * is the graphic that these coordinates and the game map is based on.
+	 * 
+	 * 
+	 * @throws IOException
+	 */
 	private static void makePillsOne() throws IOException {
 		String item = "pills";
 		f = new FileWriter(new File(folder + item + "/1.txt"));
-		space = 20;
+		spacingBetweenPills = 20;
 		
 		//unique ones
-		h(42, 100, 520);
-		h(20, 560, 562);
-		h(131, 441, 342);
+		horizontalBlock(42, 100, 520);
+		horizontalBlock(20, 560, 562);
+		horizontalBlock(131, 441, 342);
 		
+		//horizontal blocks of pills
+		horizontalBlock(42,20,227);
+		horizontalBlock(334, 20, 227);
 		
-		v(20, 20, 150);
-		v(573, 20, 150);
+		horizontalBlock(334, 388, 250);
+		horizontalBlock(20, 388, 250);
 		
-		h(42,20,227);
-		h(334, 20, 227);
+		horizontalBlock(20,500,125);
+		horizontalBlock(450, 500, 125);
 		
-		h(334, 388, 250);
-		h(20, 388, 250);
+		horizontalBlock(40,160,65);
+		horizontalBlock(490,160,65);
 		
-		v(130, 125, 250);
-		v(460, 125, 250);
+		horizontalBlock(530, 444, 58);
+		horizontalBlock(20, 444, 58);
 		
-		h(20,500,125);
-		h(450, 500, 125);
+		horizontalBlock(198, 500, 78);
+		horizontalBlock(330, 500, 78);
 		
-		h(40,160,65);
-		h(490,160,65);
+		horizontalBlock(198, 160, 78);
+		horizontalBlock(330, 160, 78);
 		
-		h(530, 444, 58);
-		h(20, 444, 58);
+		//vertical rectangles of pills
+		verticalBlock(20,  20, 150);
+		verticalBlock(573, 20, 150);
 		
-		h(198, 500, 78);
-		h(330,500,78);
-		h(198, 160, 78);
-		h(330,160,78);
+		verticalBlock(130, 125, 250);
+		verticalBlock(460, 125, 250);
 		
-		v(20, 406, 22);
-		v(131, 406, 22);
-		v(260, 406, 22);
-		v(332, 406, 22);
-		v(460, 406, 22);
-		v(573, 406, 22);
+		verticalBlock(20,  406, 22);
+		verticalBlock(131, 406, 22);
+		verticalBlock(260, 406, 22);
+		verticalBlock(332, 406, 22);
+		verticalBlock(460, 406, 22);
+		verticalBlock(573, 406, 22);
 		
-		v(60, 461, 22);
-		v(128, 461, 22);
-		v(200, 461, 22);
-		v(390, 461, 22);
-		v(460, 461, 22);
-		v(530, 461, 22);
+		verticalBlock(60,  461, 22);
+		verticalBlock(128, 461, 22);
+		verticalBlock(200, 461, 22);
+		verticalBlock(390, 461, 22);
+		verticalBlock(460, 461, 22);
+		verticalBlock(530, 461, 22);
 		
-		v(22, 520, 22);
-		v(260, 520, 22);
-		v(332, 520, 22);
-		v(573, 520, 22);
+		verticalBlock(22,  520, 22);
+		verticalBlock(260, 520, 22);
+		verticalBlock(332, 520, 22);
+		verticalBlock(573, 520, 22);
 		
-		v(130, 42, 42);
-		v(260, 42, 42);
-		v(332, 42, 42);
-		v(462, 42, 42);
+		verticalBlock(130, 42, 42);
+		verticalBlock(260, 42, 42);
+		verticalBlock(332, 42, 42);
+		verticalBlock(462, 42, 42);
 		
-		v(198, 120, 22);
-		v(390, 120, 22);
-		
-		
+		verticalBlock(198, 120, 22);
+		verticalBlock(390, 120, 22);
+		f.close();
 	}
 
-//	private static void makeWalls() throws IOException {
-//		String item = "walls";
-//		f = new FileWriter(new File(folder + item + "/1.txt"));
-//		space = 2;
-//		//box
-//		makeWall(0, 0, 600, 10);
-//		makeWall(0, 0, 10, 540);
-//		makeWall(590, 0, 10, 540);
-//		makeWall(0, 540, 600, 10);
-//		
-//		//row 1
-//		makeWall(40, 40, 80, 55);
-//		makeWall(154, 40, 120, 60);
-//		makeWall(303, 10, 18, 88);
-//		makeWall(352, 40, 120, 60);
-//		makeWall(504,40, 60,55);
-//		
-//		makeWall(43, 126, 80, 20);
-//		makeWall(10, 173, 110, 214);
-//
-//	}
-//
-	private static void v(int xPos, int yPos, int height) throws IOException {
-			for (int y = yPos; y < yPos + height; y += space) {
+	private static void verticalBlock(int xPos, int yPos, int height) throws IOException {
+			for (int y = yPos; y < yPos + height; y += spacingBetweenPills) {
 				f.write(xPos + "," + y);
 				f.write("\r\n");
 			}
 	}
-	private static void h(int xPos, int yPos, int width) throws IOException{
-		for (int x = xPos; x < xPos + width; x += space) {
+	private static void horizontalBlock(int xPos, int yPos, int width) throws IOException{
+		for (int x = xPos; x < xPos + width; x += spacingBetweenPills) {
 			f.write(x + "," + yPos);
 			f.write("\r\n");
 		}
