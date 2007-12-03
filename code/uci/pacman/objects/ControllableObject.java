@@ -18,10 +18,10 @@ import ucigame.Sprite;
 public abstract class ControllableObject extends Sprite implements Eatable {
 	protected int speed;
     protected GameController control;
-	public ControllableObject(Image img, int[] frames, int width, int height, int framerate, int x, int y) {
+	public ControllableObject(String imgPath, int[] frames, int width, int height, int framerate, int x, int y) {
 		super(width, height);
 		position(x, y);
-		addFrames(img, frames);
+		addFrames(getImage(imgPath), frames);
 		framerate(framerate);
 		control = GameController.getInstance();
 	}
@@ -88,6 +88,18 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 			motion(speed, 0);
 			sendStep("RIGHT");
 		}
+	}
+	
+	/**
+	 * Switches the sprite graphics for this object by loading
+	 * in a new image and new frame coordinates to allow
+	 * for different animations when needed
+	 * 
+	 * @param image The 
+	 * @param frames
+	 */
+	public void switchToFrames(String imagePath, int... frames) {
+		
 	}
 
 	public void position(Point p) {

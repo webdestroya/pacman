@@ -24,8 +24,8 @@ public abstract class Ghost extends ControllableObject implements AI {
 	
 	private boolean isPlayer;
 
-	public Ghost(Image img, int x, int y, boolean isPlayer) {
-		super(img, new int[] {0,0}, GHOSTWIDTH, GHOSTHEIGHT, GHOSTFRAMERATE, x, y);
+	public Ghost(String imgPath, int x, int y, boolean isPlayer) {
+		super(imgPath, new int[] {0,0}, GHOSTWIDTH, GHOSTHEIGHT, GHOSTFRAMERATE, x, y);
 		this.isPlayer = isPlayer;
 		super.speed = 7;
 	}

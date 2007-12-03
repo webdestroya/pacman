@@ -15,7 +15,7 @@ public class Pinky extends Ghost{
 	private Direction curDirection;
 	
 	public Pinky(int x, int y, boolean isPlayer) {
-		super(getImage("pinky.png"), x, y, isPlayer);
+		super("pinky.png", x, y, isPlayer);
 		// TODO Auto-generated constructor stub
 	}
 

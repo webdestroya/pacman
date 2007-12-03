@@ -15,7 +15,7 @@ public class Clyde extends Ghost{
 	private Direction curDirection;
 	
 	public Clyde(int x, int y, boolean isPlayer) {
-		super(getImage("clyde.png"), x, y, isPlayer);
+		super("clyde.png", x, y, isPlayer);
 		// TODO Auto-generated constructor stub
 	}
 

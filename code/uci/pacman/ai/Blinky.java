@@ -13,7 +13,7 @@ public class Blinky extends Ghost{
 	private Direction curDirection;
 
 	public Blinky(int x, int y, boolean isPlayer) {
-		super(getImage("blinky.png"), x, y, isPlayer);
+		super("blinky.png", x, y, isPlayer);
 		// TODO Auto-generated constructor stub
 	}
 
