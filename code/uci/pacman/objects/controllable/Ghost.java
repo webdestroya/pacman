@@ -57,7 +57,6 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 * tells the ghost to stop scattering and begin attack
 	 */
 	public void unScatter() {
-		System.out.println("UNSCATTER");
 		scatter = false;
 		// TODO change sprite? yes
 	}

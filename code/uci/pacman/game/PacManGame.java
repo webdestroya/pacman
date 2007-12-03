@@ -55,9 +55,7 @@ public class PacManGame extends Ucigame {
 		// Doesn't work right now
 		// introPlayer = new IntroPlayer(1, this);
 		// startScene("Intro");
-
 		startScene("Game"); // switch to the "scene" containing the actual game
-		control.startGame(); // start the game
 		setupServerOrClient();
 
 	}
@@ -68,6 +66,7 @@ public class PacManGame extends Ucigame {
 		canvas.background(0, 0, 0);
 		window.title("Pac Man Fever");
 		control = GameController.setInstance(this);
+		control.startGame(); // start the game
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
 	}
