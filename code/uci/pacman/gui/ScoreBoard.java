@@ -74,5 +74,7 @@ public class ScoreBoard{
 		
 		//add fruit to the scoreBoard.
 		fruit.draw();
+		
+		
 	}
 }
