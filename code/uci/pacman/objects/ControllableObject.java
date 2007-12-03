@@ -9,7 +9,7 @@ import ucigame.Image;
 import ucigame.Sprite;
 
 /**
- * this is the class represents all objects that can be controlled (pacman and ghosts) also implements eatable.
+ * This is the class represents all objects that can be controlled (pacman and ghosts) also implements eatable.
  * @author Team Objects/AI
  *
  */
@@ -138,7 +138,7 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	
 	
 	/**
-	 * @param stringPath the name fo the image of the sprite.
+	 * @param stringPath the name for the image of the sprite.
 	 * @return the sprite image.
 	 */
 	private static Image getImage(String stringPath){
