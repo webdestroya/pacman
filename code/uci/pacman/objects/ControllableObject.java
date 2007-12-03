@@ -24,13 +24,7 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 		addFrames(getImage(imgPath), frames);
 		framerate(framerate);
 		control = GameController.getInstance();
-	}
-	
-	protected static Image getImage(String stringPath){
-		String resources = "images/final/";
-		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
-	}
-	
+	}	
 	
 	/**
 	 * Returns whether the current object has collided with the specified sprite.
@@ -95,4 +89,9 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	}
 	
 	protected abstract void spriteForDirection(Direction d);
+	
+	private static Image getImage(String stringPath){
+		String resources = "images/final/";
+		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
+	}
 }

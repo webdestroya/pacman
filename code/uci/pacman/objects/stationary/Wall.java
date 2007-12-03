@@ -13,7 +13,7 @@ public class Wall extends StationaryObject {
 
 	public Wall(int x, int y, int width, int height) {
 		super(width, height);
-		super.addFrame(getImage("level1.png"), x, y);
+		super.addFrame("level1.png", x, y);
 		super.position(x, y);
 		// TODO Auto-generated constructor stub
 	}

@@ -35,11 +35,6 @@ public abstract class StationaryObject extends Sprite {
 	public String getGraphicPath() {
 		return objectGraphicPath;
 	}
-
-	protected static Image getImage(String stringPath){
-		String resources = "images/final/";
-		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
-	}
 	
 	public boolean collidedWith(ControllableObject c){
 		super.checkIfCollidesWith(c, PacManGame.PIXELPERFECT);
@@ -48,5 +43,14 @@ public abstract class StationaryObject extends Sprite {
 	
 	public void position(Point p) {
 		super.position(p.x, p.y);
+	}
+	
+	public void addFrame(String imgPath, int x, int y){
+		super.addFrame(getImage(imgPath), x, y);
+	}
+	
+	private static Image getImage(String stringPath){
+		String resources = "images/final/";
+		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
 	}
 }
