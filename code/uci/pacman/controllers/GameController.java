@@ -49,9 +49,9 @@ public class GameController {
 		state.getGhosts().moveAIGhosts();
 		state.getPacMan().move();
 		state.getWalls().stopCollision(state.getPacMan());
+		state.getGhosts().stopWallCollisions(state.getWalls());
 	}
 	
-
 	private void handleActorCollisions() {
 		GhostController ghosts = state.getGhosts();
 		PacMan pac = state.getPacMan();

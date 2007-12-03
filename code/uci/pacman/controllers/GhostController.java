@@ -41,6 +41,12 @@ public class GhostController extends ActorController<String, Ghost> {
 		return super.getCollidedWith(p).size() > 0;
 	}
 	
+	public void stopWallCollisions(WallController walls) {
+		for(Ghost g : getObjects()){
+			walls.stopCollision(g);
+		}
+	}
+	
 	/**
 	 * iterates through all the ghosts and calls scatter on dem
 	 */

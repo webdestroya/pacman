@@ -3,6 +3,7 @@ package code.uci.pacman.controllers;
 import java.util.ArrayList;
 
 import code.uci.pacman.game.GameState;
+import code.uci.pacman.objects.ControllableObject;
 import code.uci.pacman.objects.controllable.*;
 import code.uci.pacman.objects.stationary.*;
 
@@ -75,9 +76,9 @@ public class WallController {
 		walls.add(new Wall(x, y, width, height));
 	}
 
-	public void stopCollision(PacMan p) {
+	public void stopCollision(ControllableObject c) {
 		for (Wall w : walls) {
-			p.stopIfCollidesWith(w);
+			c.stopIfCollidesWith(w);
 		}
 	}
 	
