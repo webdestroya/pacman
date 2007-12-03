@@ -42,6 +42,11 @@ public class Fruit extends StationaryObject implements Eatable {
 		Image randomFruit = getImage("cherry.png");
 		return randomFruit;
 	}
+	
+	public void showWithTimer() {
+		control.getPacInstance().startFruitTimer();
+		super.show();
+	}
 
 	public void eaten() {
 		fruitEaten++;

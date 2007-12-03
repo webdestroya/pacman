@@ -58,29 +58,28 @@ public class GameController {
 		Collection<Ghost> collidingGhosts = ghosts.getCollidedWith(pac);
 		
 		if (ghosts.haveCollidedWithPacMan(pac)) { //if the ghosts and Pac-man have collided
-			if (ghosts.haveScattered() == false) { //not in scatter mode
-				pac.eaten();  //ghosts have eaten Pac-man and he is dead
-			} else { //ghosts are in scatter mode
-			   pac.hasEaten(collidingGhosts); //Pac-man have eaten ghosts on collision
+			System.out.println("COLLISION WITH " + collidingGhosts.size() + " GHOSTS");
+			for (Ghost ghost : collidingGhosts) { //for each ghost that collided
+				if (ghost.isScattered() == false) { //if the ghost is on attack
+					pac.eaten();  //ghosts have eaten Pac-man and he is dead
+				} else {          //ghost is running in scatter mode
+					ghost.eaten(); //ghost has been eaten by Pac-man
+				}
 			}
 		}
 	}
 	
 	private void handleItemCollisions() {
-		Pill p = state.getPills().getCollidingPill(state.getPacMan());
-		if (p != null) { p.eaten(); }
-		
+		//handle pill collisions
+		Pill pill = state.getPills().getCollidingPill(state.getPacMan());
+		if (pill != null) { pill.eaten(); }
+		//handle pellet collisions
 		PowerPellet pellet = state.getPellets().getCollidingPellet(state.getPacMan());
 		if (pellet != null) { pellet.eaten(); }
-		
-		if (shouldShowFruit()) {
-			state.getFruit().show();
-			game.startFruitTimer();
-		}
-		
-		if (state.getFruit().collidedWith(state.getPacMan())) {
-			state.getFruit().eaten();
-		}
+		//handle fruit collisions and visibility
+		Fruit fruit = state.getFruit();
+		if (fruit.collidedWith(state.getPacMan())) { fruit.eaten(); }
+		if (shouldShowFruit()) { fruit.showWithTimer(); }
 	}
 
 	private void checkStageClear() {
@@ -140,10 +139,9 @@ public class GameController {
 	 * 
 	 */
 	public void ghostEaten(Ghost ghost) {
-		ghost.position(300, 300);
-		ghost.unScatter();
+		System.out.println("Ghost eaten: " + ghost.getClass().getSimpleName());
+		ghost.respawnInCage();  //restart in cage
 		state.addToScore(ghost.getValue());//TODO make ghosts worth more if you eat them in the same round
-
 	}
 
 	/**

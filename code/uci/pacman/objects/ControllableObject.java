@@ -1,13 +1,11 @@
 package code.uci.pacman.objects;
 
-import java.util.Collection;
-
 import code.uci.pacman.multiplayer.*;
-
 import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.game.Direction;
 import ucigame.Image;
 import ucigame.Sprite;
+
 /**
  * 
  * @author Team Objects/AI
@@ -45,16 +43,6 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	
 	public abstract void eaten();
 	
-	/** 
-	 * Fires the eaten event for each controllable object within the specified collection
-	 * @param eatenActors the collection of actors to eat
-	 */
-	public void hasEaten(Collection<? extends ControllableObject> eatenActors) {
-		for (ControllableObject eatenActor : eatenActors) {
-			eatenActor.eaten();
-		}
-	}
-	
 	public void sendStep(String dir)
 	{
 		if( this instanceof code.uci.pacman.objects.controllable.PacMan )
@@ -77,7 +65,7 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	 * @param d
 	 */
 	public void step(Direction d){
-		spriteDirection(d);
+		spriteForDirection(d);
 		if (d == Direction.UP)
 		{
 			motion(0,0-speed);
@@ -100,5 +88,5 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 		}
 	}
 
-	protected abstract void spriteDirection(Direction d);
+	protected abstract void spriteForDirection(Direction d);
 }

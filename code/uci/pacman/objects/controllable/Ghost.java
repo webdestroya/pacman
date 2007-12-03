@@ -1,6 +1,8 @@
 package code.uci.pacman.objects.controllable;
 
 
+import java.util.Random;
+
 import code.uci.pacman.ai.AI;
 import code.uci.pacman.game.Direction;
 import code.uci.pacman.objects.ControllableObject;
@@ -40,35 +42,35 @@ public abstract class Ghost extends ControllableObject implements AI {
 	public boolean isScattered() {
 		return scatter;
 	}
+	
 	/**
 	 * sets scatter to true
 	 * scatters this ghost
 	 */
 	public void scatter(){
 		scatter = true;
-		// TODO change sprite?
+		// TODO change sprite? yes
 	}
 	
 	/**
-	 * ghosts returns to cage and is no longer scattered
+	 * tells the ghost to stop scattering and begin attack
 	 */
-	public void goHome(){
+	public void unScatter() {
 		scatter = false;
-		// I thought the ghost's position being reset somewhere else
-		// should it be here instead?
+		// TODO change sprite? yes
+	}
+	
+	/***
+	 * Respawns this ghost back within the cage and disables scatter for this ghost
+	 */
+	public void respawnInCage() {
+		Random r = new Random();
+		int randomOffset = r.nextInt(50);
+		this.position(250 + randomOffset, 250);
 	}
 	
 	public boolean isPlayer(){
 		return isPlayer;
-	}
-
-	@Override
-	/**
-	 * can be called by either AI or remote
-	 */
-	public void step(Direction d) {
-		// TODO Auto-generated method stub
-		super.step(d);
 	}
 
 	public int getValue() {
@@ -76,17 +78,10 @@ public abstract class Ghost extends ControllableObject implements AI {
 	}
 
 	@Override
-	protected void spriteDirection(Direction d) {
+	//this is for changing the sprite based on direction
+	protected void spriteForDirection(Direction d) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	/**
-	 * tells the ghost to unscatter after the timer is set (called from the ghosts controller)
-	 */
-	public void unScatter() {
-		scatter = false;
-		// TODO change sprite?
 	}
 
 	public abstract Direction getMove();

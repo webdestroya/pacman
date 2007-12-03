@@ -38,7 +38,7 @@ public class PacMan extends ControllableObject {
 	}
 
 	@Override
-	protected void spriteDirection(Direction d) {
+	protected void spriteForDirection(Direction d) {
 		if(d == Direction.UP)
 			angle=270;
 		if(d == Direction.DOWN)
