@@ -14,9 +14,10 @@ public class Inky extends Ghost{
 	private Direction lastDirection;
 	private Direction curDirection;
 	
+	private final static int SPEED = 5;
+	
 	public Inky(int x, int y, boolean isPlayer) {
-		super("inky.png", x, y, isPlayer);
-		this.speed = 5;
+		super("inky.png", x, y, SPEED, isPlayer);
 	}
 
 	/* (non-Javadoc)

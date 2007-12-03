@@ -16,7 +16,7 @@ import ucigame.Sprite;
  */
 
 public abstract class ControllableObject extends Sprite implements Eatable {
-	protected int speed;
+	protected double speed;
     protected GameController control;
 	public ControllableObject(String imgPath, int[] frames, int width, int height, int framerate, int x, int y) {
 		super(width, height);

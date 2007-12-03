@@ -14,9 +14,10 @@ public class Clyde extends Ghost{
 	private Direction lastDirection;
 	private Direction curDirection;
 	
+	private final static int SPEED = 4;
+	
 	public Clyde(int x, int y, boolean isPlayer) {
-		super("clyde.png", x, y, isPlayer);
-		this.speed = 6;
+		super("clyde.png", x, y, SPEED, isPlayer);
 	}
 
 	/* (non-Javadoc)

@@ -11,10 +11,11 @@ public class Blinky extends Ghost{
 
 	private Direction lastDirection;
 	private Direction curDirection;
+	
+	private final static int SPEED = 7;
 
 	public Blinky(int x, int y, boolean isPlayer) {
-		super("blinky.png", x, y, isPlayer);
-		this.speed = 7;
+		super("blinky.png", x, y, SPEED, isPlayer);
 	}
 
 	/* 
