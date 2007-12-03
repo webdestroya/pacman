@@ -24,7 +24,7 @@ public class GameState {
 	private int score;
 	private int level;
 	
-	public void startGame() {
+	public void initialize() {
 		score = 0;
 		lives = INITIAL_LIVES;
 		level = 1;
@@ -49,7 +49,7 @@ public class GameState {
 		gameInstance = gameState;
 	}
 
-	public void drawState() {
+	public void draw() {
 		walls.drawObjects();
 		pacMan.draw();
 		pills.drawObjects();

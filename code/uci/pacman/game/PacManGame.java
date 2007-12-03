@@ -2,20 +2,14 @@ package code.uci.pacman.game;
 
 import java.io.IOException;
 
-import code.uci.pacman.controllers.GameController;
-import code.uci.pacman.controllers.GhostController;
-import code.uci.pacman.gui.ScoreBoard;
-import code.uci.pacman.gui.TopScores;
-import code.uci.pacman.gui.IntroPlayer;
-import code.uci.pacman.objects.stationary.Fruit;
-import ucigame.Image;
-import ucigame.Sound;
-import ucigame.Sprite;
-import ucigame.Ucigame;
+import code.uci.pacman.controllers.*;
+import code.uci.pacman.gui.*;
+import code.uci.pacman.objects.stationary.*;
+import code.uci.pacman.multiplayer.*;
+import ucigame.*;
 
 import java.util.*;
 
-import code.uci.pacman.multiplayer.*;
 /**
  * 
  * @author The Game Team The main game class
@@ -26,164 +20,152 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	private static final long serialVersionUID = -917916728311505169L;
-	private GameState state;
 	private GameController control;
 	private ScoreBoard scoreBoard;
 	private TopScores topScores;
 	private IntroPlayer introPlayer; // for playing the intro
-	
+
 	public static int multiplayerType = 1; // 1=server, 2=client
 	public static String hostname = "127.0.0.1"; // used for network
-	
-	public static void main(String[] args)
-	{
-		//System.out.println(args[0]+"|"+args[1]+"|"+args[2]);		
-		
+
+	/* Main Class */
+
+	public static void main(String[] args) {
+		// System.out.println(args[0]+"|"+args[1]+"|"+args[2]);
+
 		List<String> cargs = Arrays.asList(args);
-		
-		if( cargs.contains("CLIENT") )
-		{
+
+		if (cargs.contains("CLIENT")) {
 			System.out.println("Starting Client");
 			PacManGame.multiplayerType = 2;
-			PacManGame.hostname = (String)cargs.get(2);
+			PacManGame.hostname = (String) cargs.get(2);
 		}
-		
+
 		Ucigame.main(args);
-		
-		//System.out.println(args[2]);
+
+		// System.out.println(args[2]);
 	}
-	
+
+	/* Initialization */
 
 	public void setup() {
-		generatePositions(false); 
-		
+		generatePositions(false);
+		initializeWindow(); // creates the window, sets the title, initialize
+							// control
+
+		// This code is for displaying the opening
+		// Pass a 1 if you want to play the intro or 0 to skip it
+		// Doesn't work right now
+		// introPlayer = new IntroPlayer(1, this);
+		// startScene("Intro");
+
+		startScene("Game"); // switch to the "scene" containing the actual game
+		control.startGame(); // start the game
+		setupServerOrClient();
+
+	}
+
+	private void initializeWindow() {
 		framerate(20);
 		window.size(600, 650);
 		canvas.background(0, 0, 0);
 		window.title("Pac Man Fever");
-		
-		// This code is for displaying the opening
-		// Pass a 1 if you want to play the intro or 0 to skip it
-		// Doesn't work right now
-		//introPlayer = new IntroPlayer(1, this);
-		//startScene("Intro");
-		
 		control = GameController.setInstance(this);
-		state = GameState.getInstance();
-		state.startGame();
-		
 		scoreBoard = new ScoreBoard();
-		topScores = new TopScores();		
-		
-		startScene("Game");
-		
+		topScores = new TopScores();
+	}
+
+	private void setupServerOrClient() {
 		// Make the server
-		if(PacManGame.multiplayerType==1)
-		{
-			try
-			{
+		if (PacManGame.multiplayerType == 1) {
+			try {
 				new Server().start();
+			} catch (Exception e) {
 			}
-			catch(Exception e){}
-		}
-		else if(PacManGame.multiplayerType==2)
-		{
+		} else if (PacManGame.multiplayerType == 2) {
 			Client.hostname = hostname;
 		}
-		
 	}
 
 	private void generatePositions(boolean run) {
 		try {
 			if (run) {
-			   ItemGenerator.execute();
+				ItemGenerator.execute();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void startFruitTimer(){
-		startTimer("removeFruit", Fruit.SHOW_FRUIT_DURATION);
-	}
-	
-	public void removeFruitTimer(){
-		stopTimer("removeFruit");
-		state.getFruit().hide();
-	}
-	
-	public void startScatterTimer(){
-		startTimer("unScatterGhosts",GhostController.SCATTERSECONDS);
-	}
-	
-	public void unScatterGhostsTimer(){
-		stopTimer("unScatterGhosts");
-		state.getGhosts().unScatter();
-	}
-	
-	
-    public void drawMenu(){
-		
-	}
 
-	public void drawScores(){
+	/*  Painting the Game Scenes  */
+	
+	//Draws the "Menu" scene
+	public void drawMenu() {
+
+	}
+	
+	//Draws the "Scores" scene
+	public void drawScores() {
 		canvas.clear();
 		topScores.draw();
 	}
 
+	//Draws the "Game" scene
 	public void drawGame() {
 		canvas.clear();
 		control.nextMove();
-		state.drawState();
+		control.drawState();
 		scoreBoard.draw();
 	}
-	
+
+	//Draws the "Intro" scene
 	public void drawIntro() {
 		canvas.clear();
 		introPlayer.draw();
-		//screwAround(); 
+		// screwAround();
 	}
-	
+
 	// this was just a test
-	//public void screwAround()
-	//{
-		//String themeLocation = 	("sounds\\final\\IntroTheme.mp3");
-		//Sound music = getSound(themeLocation);			
-		//music.play();
-		
-		//try
-		//{
-			//for(int i = 1; i <= 30; i++)
-			//{
-				//String workingString = "images\\final\\intro\\0";
-				//if (i < 10)
-				//{
-				//	workingString += ("0" + i);
-				//}
-				//if (i >= 10)
-				//{
-				//	workingString += i;
-				//}
-				//workingString += ".png";
-								
-			//	Image currentImage =  getImage(workingString);
-				//Sprite test = makeSprite(currentImage, 600, 650);
-				//test.position(0, 0);
-				//test.show();
-		//		canvas.background(currentImage);
-	//			Thread.sleep(1200);				
-//				canvas.clear();
-				//currentFrame.hide();					
-				//canvas.clear();
-//			}				
-//		}
-//		catch (InterruptedException e)
-//		{
-			//System.out.println("Intro Thread was Interrupted!");
-			//e.printStackTrace();
-		//}
-	//}
-	
+	// public void screwAround()
+	// {
+	// String themeLocation = ("sounds\\final\\IntroTheme.mp3");
+	// Sound music = getSound(themeLocation);
+	// music.play();
+
+	// try
+	// {
+	// for(int i = 1; i <= 30; i++)
+	// {
+	// String workingString = "images\\final\\intro\\0";
+	// if (i < 10)
+	// {
+	// workingString += ("0" + i);
+	// }
+	// if (i >= 10)
+	// {
+	// workingString += i;
+	// }
+	// workingString += ".png";
+
+	// Image currentImage = getImage(workingString);
+	// Sprite test = makeSprite(currentImage, 600, 650);
+	// test.position(0, 0);
+	// test.show();
+	// canvas.background(currentImage);
+	// Thread.sleep(1200);
+	// canvas.clear();
+	// currentFrame.hide();
+	// canvas.clear();
+	// }
+	// }
+	// catch (InterruptedException e)
+	// {
+	// System.out.println("Intro Thread was Interrupted!");
+	// e.printStackTrace();
+	// }
+	// }
+
+	//Draws the "GameOver" scene
 	public void drawGameOver() {
 		canvas.clear();
 		canvas.font("Tahoma", PacManGame.BOLD, 40, 255, 255, 255);
@@ -191,27 +173,49 @@ public class PacManGame extends Ucigame {
 		canvas.font("Tahoma", PacManGame.BOLD, 20, 255, 255, 255);
 		canvas.putText("Press R to Try Again", 210, 340);
 	}
+
+	/* Timer Handling */
+
+	public void startFruitTimer() {
+		startTimer("removeFruit", Fruit.SHOW_FRUIT_DURATION);
+	}
+
+	public void removeFruitTimer() {
+		stopTimer("removeFruit");
+		control.hideFruit();
+	}
+
+	public void startScatterTimer() {
+		startTimer("unScatterGhosts", GhostController.SCATTERSECONDS);
+	}
+
+	public void unScatterGhostsTimer() {
+		stopTimer("unScatterGhosts");
+		control.unscatterGhosts();
+	}
+
+	/* Event Input Handling */
 	
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
 		if (keyboard.isDown(keyboard.UP, keyboard.W))
-			state.getPacMan().step(Direction.UP);
+			control.setPacManDirection(Direction.UP);
 		if (keyboard.isDown(keyboard.DOWN, keyboard.S))
-			state.getPacMan().step(Direction.DOWN);
+			control.setPacManDirection(Direction.DOWN);
 		if (keyboard.isDown(keyboard.LEFT, keyboard.A))
-			state.getPacMan().step(Direction.LEFT);
+			control.setPacManDirection(Direction.LEFT);
 		if (keyboard.isDown(keyboard.RIGHT, keyboard.D))
-			state.getPacMan().step(Direction.RIGHT);
-		
+			control.setPacManDirection(Direction.RIGHT);
+
 		if (keyboard.isDown(keyboard.R)) {
-			state.startGame();
+			control.startGame();
 		}
 	}
-	
+
 	public void onKeyPressGameOver() {
 		if (keyboard.isDown(keyboard.R)) {
 			startScene("Game");
-			state.startGame();
+			control.startGame();
 		}
 	}
 

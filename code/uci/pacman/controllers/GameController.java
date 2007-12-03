@@ -3,6 +3,7 @@ package code.uci.pacman.controllers;
 import java.awt.Point;
 import java.util.Collection;
 
+import code.uci.pacman.game.Direction;
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.game.PacManGame;
 import code.uci.pacman.objects.controllable.Ghost;
@@ -38,6 +39,14 @@ public class GameController {
 		GameState.setInstance(new GameState());
 		state = GameState.getInstance();
 		this.game = pacManGame;
+	}
+	
+	public void startGame() {
+		state.initialize();
+	}
+	
+	public void drawState() {
+		state.draw();
 	}
 
 	public void nextMove() {
@@ -104,6 +113,18 @@ public class GameController {
 			return true;
 		} else
 			return false;
+	}
+	
+	public void hideFruit() {
+		state.getFruit().hide();
+	}
+	
+	public void unscatterGhosts() {
+		state.getGhosts().unScatter();
+	}
+	
+	public void setPacManDirection(Direction d) {
+		state.getPacMan().step(d);
 	}
 
 	/**
