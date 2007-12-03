@@ -21,7 +21,8 @@ public class PacManGame extends Ucigame {
 	private ScoreBoard scoreBoard;
 	private TopScores topScores;
 	private IntroPlayer introPlayer; // for playing the intro
-
+	private Sprite button1;
+	
 	public static int multiplayerType = 1; // 1=server, 2=client
 	public static String hostname = "127.0.0.1"; // used for network
 
@@ -54,6 +55,7 @@ public class PacManGame extends Ucigame {
 		// Pass a 1 if you want to play the intro or 0 to skip it
 		// Doesn't work right now
 		// introPlayer = new IntroPlayer(1, this);
+		
 		startScene("Intro");
 		//startScene("Game"); // switch to the "scene" containing the actual game
 		setupServerOrClient(); //make the server or client connection
@@ -69,6 +71,11 @@ public class PacManGame extends Ucigame {
 		control.startGame(); // start the game
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
+        button1 = makeButton("Play",
+                getImage("images\\final\\singleplayerButton.png"),
+                249, 76);
+        button1.position(canvas.width()/2 - button1.width()/2,
+                canvas.height()/2 - button1.height()/2);
 	}
 
 	private void setupServerOrClient() {
@@ -117,10 +124,8 @@ public class PacManGame extends Ucigame {
 	//Draws the "Intro" scene
 	public void drawIntro() {
 		canvas.clear();
-        Sprite button1 = makeButton("Play",
-                getImage("images\\final\\singleplayerButton.png", 0, 255, 0),
-                249, 228);
         button1.draw();
+
 		//introPlayer.draw();
 		//screwAround(); 
         ///////////////////// MIKE THIS IS WHERE YOU PUT YOUR INTO and from your intro you need to call 
