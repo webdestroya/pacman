@@ -55,8 +55,9 @@ public class PacManGame extends Ucigame {
 		// Doesn't work right now
 		// introPlayer = new IntroPlayer(1, this);
 		// startScene("Intro");
+		
 		startScene("Game"); // switch to the "scene" containing the actual game
-		setupServerOrClient();
+		setupServerOrClient(); //make the server or client connection
 
 	}
 
