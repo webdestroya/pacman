@@ -10,6 +10,9 @@ import code.uci.pacman.objects.stationary.Fruit;
 import ucigame.Sprite;
 import ucigame.Ucigame;
 
+import java.util.*;
+
+import code.uci.pacman.multiplayer.*;
 /**
  * 
  * @author The Game Team The main game class
@@ -24,6 +27,10 @@ public class PacManGame extends Ucigame {
 	private ScoreBoard scoreBoard;
 	private TopScores topScores;
 	private GameController control;
+	
+	public static int multiplayerType = 1; // 1=server, 2=client
+	public static String hostname	= "127.0.0.1"; // used for network
+	
 
 	public void setup() {
 		generatePositions(false); 
@@ -37,6 +44,21 @@ public class PacManGame extends Ucigame {
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
 		startScene("Game");
+		
+		// Make the server
+		if(PacManGame.multiplayerType==1)
+		{
+			try
+			{
+				new Server().start();
+			}
+			catch(Exception e){}
+		}
+		else if(PacManGame.multiplayerType==2)
+		{
+			Client.hostname = hostname;
+		}
+		
 	}
 
 	private void generatePositions(boolean run) {
@@ -83,6 +105,26 @@ public class PacManGame extends Ucigame {
 		state.drawState();
 		scoreBoard.draw();
 	}
+
+	public static void main(String[] args)
+	{
+		//System.out.println(args[0]+"|"+args[1]+"|"+args[2]);
+		
+		List cargs = Arrays.asList(args);
+		
+		if( cargs.contains("CLIENT") )
+		{
+			System.out.println("Starting Client");
+			PacManGame.multiplayerType = 2;
+			PacManGame.hostname = (String)cargs.get(2);
+		}
+		
+		Ucigame.main(args);
+		
+		//System.out.println(args[2]);
+		
+	}
+	
 	
 	public void drawGameOver() {
 		canvas.clear();

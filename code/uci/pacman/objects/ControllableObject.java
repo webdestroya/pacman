@@ -1,5 +1,7 @@
 package code.uci.pacman.objects;
 
+import code.uci.pacman.multiplayer.*;
+
 import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.game.Direction;
 import ucigame.Image;
@@ -41,6 +43,22 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	
 	public abstract void eaten();
 	
+	public void sendStep(String dir)
+	{
+		if( this instanceof code.uci.pacman.objects.controllable.PacMan )
+		{
+			Client.send("PacMan", dir);
+		} 
+		else if( this instanceof code.uci.pacman.ai.Blinky )
+		{
+			Client.send("Blinky", dir);
+		}
+		else
+		{
+			Client.send("Inky", dir);
+		}
+	}
+	
 	/**
 	 * this is called when you want to move an object (locally, remotely, AI)
 	 * this only sets the motion and does not do any collision detection
@@ -49,13 +67,25 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	public void step(Direction d){
 		spriteDirection(d);
 		if (d == Direction.UP)
+		{
 			motion(0,0-speed);
-		if (d == Direction.DOWN)
+			sendStep("UP");
+		}
+		else if (d == Direction.DOWN)
+		{
 			motion(0,speed);
-		if (d == Direction.LEFT)
+			sendStep("DOWN");
+		}
+		else if (d == Direction.LEFT)
+		{
 			motion(0-speed, 0);
-		if (d == Direction.RIGHT)
+			sendStep("LEFT");
+		}
+		else if (d == Direction.RIGHT)
+		{
 			motion(speed, 0);
+			sendStep("RIGHT");
+		}
 	}
 
 	protected abstract void spriteDirection(Direction d);

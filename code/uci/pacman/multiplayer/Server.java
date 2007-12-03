@@ -1,106 +1,100 @@
 package code.uci.pacman.multiplayer;
 
 import code.uci.pacman.game.*;
+
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 /**
  * Server is responsible for handling incoming client requests.  It hands out responsibilites to ClientWorkers which
  * handle the incoming data from the Clients. 
  * @author Networking Team
  *	
  */
-public class Server
+public class Server extends Thread
 {
-	
 	private static final long serialVersionUID = 1L;
-	private ServerSocket server;
-	private PacManGame game;
+	protected DatagramSocket socket = null;
+    protected BufferedReader in = null;
+    protected boolean moreQuotes = true;
 
-	/**
-	* Initializes Server
-	* @param pMG PacManGame
-	*/
-	Server(PacManGame pMG)
-	{
-		game = pMG;
-		listenSocket();
-	} 
+    public Server() throws IOException 
+    {
+		this("Server");
+    }
 
-	/**
-	* Starts the Server
-	*/
-	public void listenSocket()
-	{
+    public Server(String name) throws IOException
+    {
+        super(name);
+        socket = new DatagramSocket(4445);
+        System.out.println("START SERVER");
+    }
 
-		try
+    public void run() {
+
+		while (moreQuotes) 
 		{
-			server = new ServerSocket(6112);//server is a socket made through port 6112
-		}
-		catch (IOException e)
-		{//if port cannot be found/port-failed exit
-			errorMessage("Server Cannot Connect\nport 6112 is in use");
-			System.exit(-1);
-		}
-		//READ IN DATA
-		while(true)
-		{
-			ClientWorker w;
-			try
+			try 
 			{
-				w = new ClientWorker(server.accept(), game);
-				Thread t = new Thread(w);
-				t.start();
+				byte[] buf = new byte[256];
+
+				// receive request
+				DatagramPacket packet = new DatagramPacket(buf, buf.length);
+				socket.receive(packet);
+				
+				//System.out.println("RECV: " + packet.getData() );
+
+				// figure out response
+				String dString = null;
+				//if (in == null)
+				dString = new Date().toString();
+				//else
+				//    dString = getNextQuote();
+
+				buf = dString.getBytes();
+				//buf = GameState.getInstance().getBytes();//dString.getBytes();
+
+				// send the response to the client at "address" and "port"
+				InetAddress address = packet.getAddress();
+				int port = packet.getPort();
+				packet = new DatagramPacket(buf, buf.length, address, port);
+				socket.send(packet);
 			}
 			catch (IOException e)
 			{
-				System.out.println("IO connection could not be made");
 				e.printStackTrace();
+				moreQuotes = false;
 			}
 		}
-	}
+		System.out.println("CLOSE");
+		socket.close();
+    }
 
-	/**
-	* closes input and output streams
-	*/
-	protected void finalize()
-	{
-		//	Clean up 
+    protected GameState getNextQuote()
+    {
+		String returnValue = null;
+		/*
 		try
 		{
-			server.close();
+			if ((returnValue = in.readLine()) == null) 
+			{
+				in.close();
+				moreQuotes = false;
+				returnValue = "No more quotes. Goodbye.";
+			}
 		}
 		catch (IOException e)
 		{
-			System.out.println("Could not close.");
-			System.exit(-1);
+			returnValue = "IOException occurred in server.";
 		}
-	}
+		*/
 
-	/*public static void main(String[] args)
-	{
-		Server server = new Server();
-		server.listenSocket();
-		server.finalize();
-	}*/
+		//return returnValue;
+		return GameState.getInstance();
+    }
 
-	private void errorMessage(String message)
-	{
-		JFrame errorFrame = new JFrame();
-		JOptionPane.showMessageDialog(errorFrame,
-		message,
-		"Server Message",
-		JOptionPane.ERROR);
-
-	}
-
-	private void Messsage(String message){
-	JFrame errorFrame = new JFrame();
-	JOptionPane.showMessageDialog(errorFrame,
-	message,
-	"Server Message",
-	JOptionPane.INFORMATION_MESSAGE);
-	}
+	
+	
+	
 }
