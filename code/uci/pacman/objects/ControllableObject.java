@@ -1,5 +1,7 @@
 package code.uci.pacman.objects;
 
+import java.util.Collection;
+
 import code.uci.pacman.multiplayer.*;
 
 import code.uci.pacman.controllers.GameController;
@@ -42,6 +44,16 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	}
 	
 	public abstract void eaten();
+	
+	/** 
+	 * Fires the eaten event for each controllable object within the specified collection
+	 * @param eatenActors the collection of actors to eat
+	 */
+	public void hasEaten(Collection<? extends ControllableObject> eatenActors) {
+		for (ControllableObject eatenActor : eatenActors) {
+			eatenActor.eaten();
+		}
+	}
 	
 	public void sendStep(String dir)
 	{
