@@ -18,9 +18,10 @@ public abstract class StationaryObject extends Sprite {
     protected String objectGraphicPath;
     
     /**
-     * @param img
-     * @param x
-     * @param y
+     * Declares a new StationaryObject using an image.
+     * @param img to set.
+     * @param x is the position x
+     * @param y is the position y
      */
     private StationaryObject(Image img, int x, int y) {
 		super(img.width(), img.height());
@@ -30,9 +31,10 @@ public abstract class StationaryObject extends Sprite {
 	}
 	
 	/**
-	 * @param path
-	 * @param x
-	 * @param y
+	 * Declares a new StationaryObject using a path to the image.
+	 * @param path is the path to the image to set.
+     * @param x is the position x
+     * @param y is the position y
 	 */
 	public StationaryObject(String path, int x, int y) {
 		this(getImage(path), x, y);
