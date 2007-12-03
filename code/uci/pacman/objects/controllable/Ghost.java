@@ -57,6 +57,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 * tells the ghost to stop scattering and begin attack
 	 */
 	public void unScatter() {
+		System.out.println("UNSCATTER");
 		scatter = false;
 		// TODO change sprite? yes
 	}
@@ -67,7 +68,8 @@ public abstract class Ghost extends ControllableObject implements AI {
 	public void respawnInCage() {
 		Random r = new Random();
 		int randomOffset = r.nextInt(50);
-		this.position(CAGE_POS + randomOffset, CAGE_POS);
+		super.position(CAGE_POS + randomOffset, CAGE_POS);
+		this.unScatter();
 	}
 	
 	public boolean isPlayer(){
