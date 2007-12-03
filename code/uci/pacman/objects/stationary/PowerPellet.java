@@ -11,8 +11,10 @@ import code.uci.pacman.objects.StationaryObject;
  */
 public class PowerPellet extends StationaryObject implements Eatable {
 	
+	private static final String PELLET_IMAGE_PATH = "pellet.png";
+	
 	public PowerPellet(int x, int y) {
-		super(getImage("pellet.png"), x, y);
+		super(PELLET_IMAGE_PATH, x, y);
 	}
 	/**
 	 * the point value of this object

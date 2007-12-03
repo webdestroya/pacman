@@ -3,7 +3,6 @@ package code.uci.pacman.objects.stationary;
 
 import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
-import ucigame.Image;
 
 /**
  * @author Team Objects/AI
@@ -11,7 +10,7 @@ import ucigame.Image;
  */
 public class Fruit extends StationaryObject implements Eatable {
 	
-	public static double ONSCREENLENGTH = 8000;
+	public static double SHOW_FRUIT_DURATION = 8000;
 	/**
 	 * the point value of this object
 	 */
@@ -27,20 +26,19 @@ public class Fruit extends StationaryObject implements Eatable {
 	 * 
 	 */
 	public Fruit(int x, int y, int initialScore) {
-		this(randomFruit(), x, y, initialScore);
+		this(randomFruitPath(), x, y, initialScore);
 		super.hide();
 	}
 	
-	public Fruit(Image fruit, int x, int y, int initialScore) {
-		super(fruit, x, y);
+	public Fruit(String fruitImagePath, int x, int y, int initialScore) {
+		super(fruitImagePath, x, y);
 	    score = initialScore;
 		fruitEaten = 0;
 	}
 	
-
-	private static Image randomFruit() {
-		Image randomFruit = getImage("cherry.png");
-		return randomFruit;
+	private static String randomFruitPath() {
+		String randomFruitPath = "cherry.png";
+		return randomFruitPath;
 	}
 	
 	public void showWithTimer() {

@@ -1,5 +1,7 @@
 package code.uci.pacman.objects;
 
+import java.awt.Point;
+
 import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.game.PacManGame;
 import ucigame.Image;
@@ -11,14 +13,18 @@ import ucigame.Sprite;
  */
 public abstract class StationaryObject extends Sprite {
     protected GameController control;
-    protected Image objectGraphic;
+    protected String objectGraphicPath;
     
-	public StationaryObject(Image img, int x, int y) {
+	private StationaryObject(Image img, int x, int y) {
 		super(img.width(), img.height());
 		super.addFrame(img, 0, 0);
 		this.position(x, y);
-		this.objectGraphic = img;
 		control = GameController.getInstance();
+	}
+	
+	public StationaryObject(String path, int x, int y) {
+		this(getImage(path), x, y);
+		this.objectGraphicPath = path;
 	}
 	
 	public StationaryObject(int width, int height) {
@@ -26,8 +32,8 @@ public abstract class StationaryObject extends Sprite {
 		
 	}
 	
-	public Image getGraphic() {
-		return objectGraphic;
+	public String getGraphicPath() {
+		return objectGraphicPath;
 	}
 
 	protected static Image getImage(String stringPath){
@@ -38,5 +44,9 @@ public abstract class StationaryObject extends Sprite {
 	public boolean collidedWith(ControllableObject c){
 		super.checkIfCollidesWith(c, PacManGame.PIXELPERFECT);
 		return super.collided() && super.isShown();
+	}
+	
+	public void position(Point p) {
+		super.position(p.x, p.y);
 	}
 }

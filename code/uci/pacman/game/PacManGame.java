@@ -72,7 +72,7 @@ public class PacManGame extends Ucigame {
 	}
 	
 	public void startFruitTimer(){
-		startTimer("removeFruit",Fruit.ONSCREENLENGTH);
+		startTimer("removeFruit", Fruit.SHOW_FRUIT_DURATION);
 	}
 	
 	public void removeFruitTimer(){
@@ -110,7 +110,7 @@ public class PacManGame extends Ucigame {
 	{
 		//System.out.println(args[0]+"|"+args[1]+"|"+args[2]);
 		
-		List cargs = Arrays.asList(args);
+		List<String> cargs = Arrays.asList(args);
 		
 		if( cargs.contains("CLIENT") )
 		{

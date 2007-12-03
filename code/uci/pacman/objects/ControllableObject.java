@@ -1,5 +1,7 @@
 package code.uci.pacman.objects;
 
+import java.awt.Point;
+
 import code.uci.pacman.multiplayer.*;
 import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.game.Direction;
@@ -88,5 +90,9 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 		}
 	}
 
+	public void position(Point p) {
+		super.position(p.x, p.y);
+	}
+	
 	protected abstract void spriteForDirection(Direction d);
 }

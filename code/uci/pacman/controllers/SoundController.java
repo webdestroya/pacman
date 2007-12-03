@@ -5,26 +5,28 @@ import ucigame.Sound;
 public class SoundController {
 	
 	//private static Sound ambient = makeSound("pacchomp.mp3");
-	//private static Sound pellet = makeSound("fruiteat.mp3");
+	private static Sound pellet = makeSound("fruiteat.mp3");
 	//private static Sound mainMenu = makeSound("menu.mp3");
-	//private static Sound pill = makeSound("fruiteat.mp3");
+	private static Sound pill = makeSound("fruiteat.mp3");
 	//private static Sound topScore = makeSound("scores.mp3");
 	
 	public static void pelletEaten(){
-	//	pellet.play();
+		pellet.play();
 	}
 	
 	public static void pillEaten(){
-	//	pill.play();
+		pill.play();
 	}
 	
 	public static void startAmbient(){
-	//	ambient.loop();
+		//ambient.loop();
 	}
 	
-	private static void stopAllSounds(){
-		
-	}
+	//private static void stopAllSounds(){
+		//pellet.stop();
+		//pill.stop();
+		//ambient.stop();
+	//}
 	
 	private static Sound makeSound(String file){
 		return GameController.getInstance().getPacInstance().getSound("sounds\\final\\"+file);

@@ -3,7 +3,6 @@ package code.uci.pacman.objects.stationary;
 
 import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
-import ucigame.Image;
 
 /**
  * 
@@ -14,7 +13,7 @@ import ucigame.Image;
 
 public class Pill extends StationaryObject implements Eatable {
 	
-	private static Image i = getImage("pill.png");
+	private static final String PILL_IMAGE_PATH = "pill.png";
 	
 	/**
 	 * the point value of this object
@@ -22,7 +21,7 @@ public class Pill extends StationaryObject implements Eatable {
 	public static final int SCOREVALUE = 10;
 	
 	public Pill(int x, int y) {
-		super(i, x, y);
+		super(PILL_IMAGE_PATH, x, y);
 	}
 
 	public void eaten() {

@@ -17,15 +17,17 @@ import ucigame.Image;
 
 public abstract class Ghost extends ControllableObject implements AI {
 
-	private static int ghostWidth = 22;
-	private static int ghostHeight = 22;
+	private static final int GHOSTWIDTH = 22;
+	private static final int GHOSTHEIGHT = 22;
+	private static final int GHOSTFRAMERATE = 5;
+	private static final int CAGEPOS = 250;
+	
 	private boolean isPlayer;
 
 	public Ghost(Image img, int x, int y, boolean isPlayer) {
-		super(img, new int[] {0,0}, ghostWidth, ghostHeight, 5, x, y);
+		super(img, new int[] {0,0}, GHOSTWIDTH, GHOSTHEIGHT, GHOSTFRAMERATE, x, y);
 		this.isPlayer = isPlayer;
 		super.speed = 7;
-		// TODO make this constructor take only position and define the rest here
 	}
 
 	/**
@@ -66,7 +68,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	public void respawnInCage() {
 		Random r = new Random();
 		int randomOffset = r.nextInt(50);
-		this.position(250 + randomOffset, 250);
+		this.position(CAGEPOS + randomOffset, CAGEPOS);
 	}
 	
 	public boolean isPlayer(){

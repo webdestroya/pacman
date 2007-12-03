@@ -1,5 +1,6 @@
 package code.uci.pacman.controllers;
 
+import java.awt.Point;
 import java.util.Collection;
 
 import code.uci.pacman.game.GameState;
@@ -15,6 +16,7 @@ import code.uci.pacman.objects.stationary.*;
 public class GameController {
 
 	private static GameController gControl;
+	private static final Point PACMANSTART = new Point(290, 440);
 	private GameState state;
 	private PacManGame game;
 	
@@ -150,7 +152,8 @@ public class GameController {
 	public void pacManEaten(PacMan pacMan) {
 		if (state.getLives() > 0) { // if Pac-man has more lives
 			state.lifeLost();
-			state.getPacMan().position(290, 440);
+			state.getFruit().hide();
+			state.getPacMan().position(PACMANSTART);
 			state.getGhosts().respawn();
 		}
 		else { //if Pac-man has died one too many times

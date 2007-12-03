@@ -51,9 +51,9 @@ public class ScoreBoard{
 			lifeList.add(GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/life.png"));
 		}
 		
-		// set fruit: Code not function right.
-		Image fruitImage = GameState.getInstance().getFruit().getGraphic();
-		fruit = new Fruit(fruitImage, fruitPosX, fruitPosY, 0);
+		// set fruit
+		String fruitImagePath = GameState.getInstance().getFruit().getGraphicPath();
+		fruit = new Fruit(fruitImagePath, fruitPosX, fruitPosY, 0);
 	}
 	
 	public void draw(){
