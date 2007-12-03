@@ -42,7 +42,7 @@ public class Client// extends Thread
 
 			// display response
 			String received = new String(packet.getData(), 0, packet.getLength());
-			System.out.println("Quote of the Moment: " + received);
+			//System.out.println("Quote of the Moment: " + received);
 			socket.close();
 		}
 		catch(Exception e)
