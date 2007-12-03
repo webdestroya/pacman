@@ -3,6 +3,7 @@ package code.uci.pacman.gui;
 import ucigame.*;
 import java.util.*;
 import code.uci.pacman.game.PacManGame;
+import code.uci.pacman.controllers.GameController;
 //import java.io.FileNotFoundException;
 //import java.io.IOException;
 
@@ -15,17 +16,14 @@ import code.uci.pacman.game.PacManGame;
  */
 public class IntroPlayer{	
 	
-	ArrayList<String> frames;
-	String introSound;
-	int shouldDraw;
-	PacManGame game;
-	//canvas canv;
-	
+	private ArrayList<String> frames;
+	private String introSound;
+	private int drawCounter;
+		
 	// The constructor creates the ArrayList containing the filenames of 
 	// each image in the opening.
-	public IntroPlayer(int play, PacManGame mainGame) {
-		shouldDraw = play;
-		game = mainGame;
+	public IntroPlayer() {
+		drawCounter = 1;
 		introSound = "IntroTheme.mp3";
 		frames = new ArrayList<String>();
 		
@@ -44,41 +42,31 @@ public class IntroPlayer{
 			frames.add("images\\final\\intro\\" + workingString);
 		}
 
+		String themeLocation = 	("sounds\\final\\" + introSound);
+		Sound music = GameController.getInstance().getPacInstance().getSound(themeLocation);			
+		music.play();
 	}
 	
 	public void draw(){
-		if (shouldDraw == 1) // if you should draw, then draws.
-		{
-			String themeLocation = 	("sounds\\final\\" + introSound);
-			Sound music = game.getSound(themeLocation);			
-			music.play();
-			
-			try
+			//load intro music file
+			//String themeLocation = 	("sounds\\final\\" + introSound);
+			//Sound music = GameController.getInstance().getPacInstance().getSound(themeLocation);			
+			//music.play();
+			if (drawCounter < 30)
 			{
-				for(int i = 0; i < frames.size(); i++)
+				try
 				{
-					String frameLocation = frames.get(i);
-					//Sprite currentFrame = game.makeSpriteFromPath(frameLocation);  
-					Image currentFrame = game.getImage(frameLocation);
-					//Sprite currentFrame =  game.makeSprite(currentImage, 600, 650);
-					//currentFrame.position(0, 0);
-					currentFrame.draw(0, 0);
-					//canvas.background(currentImage);
-					Thread.sleep(1000);
-					//currentFrame.hide();
-					//frames.remove(0);
-					//canvas.clear();
-				}				
+					String frameLocation = frames.get(drawCounter);
+					Sprite currentFrame =  GameController.getInstance().getPacInstance().makeSpriteFromPath(frameLocation);
+					Thread.sleep(1525);	
+					currentFrame.draw();
+					drawCounter ++;
+				}
+				catch (InterruptedException e)
+				{
+					System.out.println("Intro Thread was Interrupted!");
+					e.printStackTrace();
+				}
 			}
-			catch (InterruptedException e)
-			{
-				System.out.println("Intro Thread was Interrupted!");
-				e.printStackTrace();
-			}
-			
-			shouldDraw = 0;
-		}
-		
-		
 	}
 }
