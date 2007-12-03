@@ -22,6 +22,8 @@ public class PacManGame extends Ucigame {
 	private TopScores topScores;
 	private IntroPlayer introPlayer; // for playing the intro
 	private Sprite button1;
+
+	public static String font = "Dialog.bold";
 	
 	public static int multiplayerType = 1; // 1=server, 2=client
 	public static String hostname = "127.0.0.1"; // used for network
@@ -72,7 +74,7 @@ public class PacManGame extends Ucigame {
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
         button1 = makeButton("Play",
-                getImage("images\\final\\singleplayerButton.png"),
+                getImage("images/final/singleplayerButton.png"),
                 249, 76);
         button1.position(canvas.width()/2 - button1.width()/2,
                 canvas.height()/2 - button1.height()/2);
@@ -136,7 +138,7 @@ public class PacManGame extends Ucigame {
 //	this was just a test
 	public void screwAround()
 	{
-		String themeLocation = ("sounds\\final\\IntroTheme.mp3");
+		String themeLocation = "sounds/final/IntroTheme.mp3";
 		Sound music = getSound(themeLocation);
 		music.play();
 	}
@@ -144,9 +146,9 @@ public class PacManGame extends Ucigame {
 	//Draws the "GameOver" scene
 	public void drawGameOver() {
 		canvas.clear();
-		canvas.font("Tahoma", PacManGame.BOLD, 40, 255, 255, 255);
+		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
 		canvas.putText("GAME OVER", 200, 300);
-		canvas.font("Tahoma", PacManGame.BOLD, 20, 255, 255, 255);
+		canvas.font(PacManGame.font, PacManGame.BOLD, 20, 255, 255, 255);
 		canvas.putText("Press R to Try Again", 210, 340);
 	}
 

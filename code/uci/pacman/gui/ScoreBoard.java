@@ -39,7 +39,7 @@ public class ScoreBoard{
 		//create score sprite
 		score = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/score.png");
 		score.position(scorePosX, scorePosY);
-		score.font("Tahoma", PacManGame.BOLD, 24, 255, 255, 255);
+		score.font(PacManGame.font, PacManGame.BOLD, 24, 255, 255, 255);
 		
 		//create lives sprite
 		lives = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/lives.png");

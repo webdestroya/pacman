@@ -29,7 +29,7 @@ public class SoundController {
 	//}
 	
 	private static Sound makeSound(String file){
-		return GameController.getInstance().getPacInstance().getSound("sounds\\final\\"+file);
+		return GameController.getInstance().getPacInstance().getSound("sounds/final/"+file);
 	}
 
 }
