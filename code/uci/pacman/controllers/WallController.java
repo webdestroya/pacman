@@ -2,6 +2,8 @@ package code.uci.pacman.controllers;
 
 import java.util.ArrayList;
 
+import ucigame.Sprite;
+
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.objects.ControllableObject;
 import code.uci.pacman.objects.controllable.*;
@@ -12,7 +14,7 @@ import code.uci.pacman.objects.stationary.*;
  * @author The Game Team responsible for and controls wall locations
  */
 public class WallController {
-	ArrayList<Wall> walls;
+	private ArrayList<Wall> walls;
 
 	public WallController() {
 		walls = new ArrayList<Wall>();
@@ -96,5 +98,25 @@ public class WallController {
 			w.draw();
 		}
 
+	}
+	
+	public boolean existsAtPos(PacMan pac, int xCheck, int yCheck)
+	{
+		// To check for a possible immediate future collision with a wall, we move the PacMan object
+		// xCheck/yCheck pixels from where it is and then check for a collision before proceeding.
+		
+		double curX = pac.x() + pac.xspeed();
+		double curY = pac.y() + pac.yspeed();
+		pac.nextX(pac.x() + xCheck);
+		pac.nextY(pac.y() + yCheck);
+		Sprite [] spriteWalls = walls.toArray(new Sprite[0]);
+		pac.checkIfCollidesWith(spriteWalls);
+		boolean r = pac.collided();
+		pac.nextX(curX);
+		pac.nextY(curY);
+		if(r)
+			return false;
+		else
+			return true;
 	}
 }

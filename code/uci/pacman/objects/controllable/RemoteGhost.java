@@ -1,9 +1,7 @@
 package code.uci.pacman.objects.controllable;
 
 import code.uci.pacman.game.Direction;
-import code.uci.pacman.game.GameState;
 import code.uci.pacman.objects.controllable.Ghost;
-import code.uci.pacman.objects.controllable.PacMan;
 
 /**
  * @author Team Objects/AI

@@ -1,6 +1,8 @@
 package code.uci.pacman.objects.controllable;
 
+import code.uci.pacman.controllers.WallController;
 import code.uci.pacman.game.Direction;
+import code.uci.pacman.game.GameState;
 import code.uci.pacman.objects.ControllableObject;
 
 /**
@@ -53,13 +55,14 @@ public class PacMan extends ControllableObject {
 	@Override
 	public boolean moveIsAllowed(Direction d)
 	{
-		if(d == Direction.UP && control.checkForWall(this,0,-13))
+		WallController walls = GameState.getInstance().getWalls();
+		if(d == Direction.UP && walls.existsAtPos(this,0,-13))
 			return true;
-		if(d == Direction.DOWN && control.checkForWall(this,0,13 + this.height()))
+		if(d == Direction.DOWN && walls.existsAtPos(this,0,13 + this.height()))
 			return true;
-		if(d == Direction.LEFT && control.checkForWall(this,-10,0))
+		if(d == Direction.LEFT && walls.existsAtPos(this,-10,0))
 			return true;
-		if(d == Direction.RIGHT && control.checkForWall(this,10 + this.width(),0))
+		if(d == Direction.RIGHT && walls.existsAtPos(this,10 + this.width(),0))
 			return true;
 		else
 			return false;

@@ -18,7 +18,6 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	protected double speed;
     protected GameController control;
     protected Direction currentDirection;
-    private int blah;
     
 	public ControllableObject(String imgPath, int[] frames, int width, int height, int framerate, int x, int y) {
 		super(width, height);
