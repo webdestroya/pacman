@@ -6,6 +6,7 @@ import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
 
 /**
+ * This class contains the AI for the teal ghost, Inky.
  * @author Team Objects/AI
  *
  */

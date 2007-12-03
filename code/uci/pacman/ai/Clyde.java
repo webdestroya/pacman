@@ -6,6 +6,7 @@ import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
 
 /**
+ * This class contains the AI for the orange ghost, Clyde.
  * @author Team Objects/AI
  *
  */

@@ -4,6 +4,7 @@ import code.uci.pacman.game.*;
 import code.uci.pacman.objects.controllable.*;
 
 /**
+ * This class contains the AI for the red ghost, Blinky.
  * @author Team Objects/AI
  *
  */

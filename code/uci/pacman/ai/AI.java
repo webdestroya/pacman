@@ -5,6 +5,7 @@ import code.uci.pacman.game.Direction;
 
 
 /**
+ * This class is the interface for the AI's in the game.
  * @author Team Objects/AI
  *
  */
