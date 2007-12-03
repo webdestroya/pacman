@@ -30,7 +30,7 @@ public class PacManGame extends Ucigame {
 	private GameController control;
 	private ScoreBoard scoreBoard;
 	private TopScores topScores;
-	private IntroPlayer introPlayer;
+	private IntroPlayer introPlayer; // for playing the intro
 	
 	public static int multiplayerType = 1; // 1=server, 2=client
 	public static String hostname = "127.0.0.1"; // used for network
@@ -64,6 +64,7 @@ public class PacManGame extends Ucigame {
 		
 		// This code is for displaying the opening
 		// Pass a 1 if you want to play the intro or 0 to skip it
+		// Doesn't work right now
 		//introPlayer = new IntroPlayer(1, this);
 		//startScene("Intro");
 		
@@ -140,9 +141,10 @@ public class PacManGame extends Ucigame {
 	public void drawIntro() {
 		canvas.clear();
 		introPlayer.draw();
-		//screwAround();
+		//screwAround(); 
 	}
 	
+	// this was just a test
 	//public void screwAround()
 	//{
 		//String themeLocation = 	("sounds\\final\\IntroTheme.mp3");
