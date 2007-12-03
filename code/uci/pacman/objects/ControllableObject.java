@@ -61,26 +61,29 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	 * @param d
 	 */
 	public void step(Direction d){
-		spriteForDirection(d);
-		if (d == Direction.UP)
+		if(moveIsAllowed(d))
 		{
-			motion(0,0-speed);
-			sendStep("UP");
-		}
-		else if (d == Direction.DOWN)
-		{
-			motion(0,speed);
-			sendStep("DOWN");
-		}
-		else if (d == Direction.LEFT)
-		{
-			motion(0-speed, 0);
-			sendStep("LEFT");
-		}
-		else if (d == Direction.RIGHT)
-		{
-			motion(speed, 0);
-			sendStep("RIGHT");
+			spriteForDirection(d);
+			if (d == Direction.UP)
+			{
+				motion(0,0-speed);
+				sendStep("UP");
+			}
+			else if (d == Direction.DOWN)
+			{
+				motion(0,speed);
+				sendStep("DOWN");
+			}
+			else if (d == Direction.LEFT)
+			{
+				motion(0-speed, 0);
+				sendStep("LEFT");
+			}
+			else if (d == Direction.RIGHT)
+			{
+				motion(speed, 0);
+				sendStep("RIGHT");
+			}
 		}
 	}
 	
@@ -93,6 +96,11 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	}
 	
 	protected abstract void spriteForDirection(Direction d);
+	
+	public boolean moveIsAllowed(Direction d)
+	{
+		return true;
+	}
 	
 	private static Image getImage(String stringPath){
 		String resources = "images/final/";
