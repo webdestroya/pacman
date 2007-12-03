@@ -2,7 +2,6 @@ package code.uci.pacman.controllers;
 
 import java.awt.Point;
 import java.util.Collection;
-import java.util.ArrayList;
 
 import code.uci.pacman.game.Direction;
 import code.uci.pacman.game.GameState;
@@ -10,7 +9,6 @@ import code.uci.pacman.game.PacManGame;
 import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
 import code.uci.pacman.objects.stationary.*;
-import ucigame.Sprite;
 
 /**
  * 
