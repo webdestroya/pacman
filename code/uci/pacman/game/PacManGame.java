@@ -24,23 +24,44 @@ public class PacManGame extends Ucigame {
 	 */
 	private static final long serialVersionUID = -917916728311505169L;
 	private GameState state;
+	private GameController control;
 	private ScoreBoard scoreBoard;
 	private TopScores topScores;
-	private GameController control;
 	
 	public static int multiplayerType = 1; // 1=server, 2=client
-	public static String hostname	= "127.0.0.1"; // used for network
+	public static String hostname = "127.0.0.1"; // used for network
+	
+	public static void main(String[] args)
+	{
+		//System.out.println(args[0]+"|"+args[1]+"|"+args[2]);
+		
+		List<String> cargs = Arrays.asList(args);
+		
+		if( cargs.contains("CLIENT") )
+		{
+			System.out.println("Starting Client");
+			PacManGame.multiplayerType = 2;
+			PacManGame.hostname = (String)cargs.get(2);
+		}
+		
+		Ucigame.main(args);
+		
+		//System.out.println(args[2]);
+	}
 	
 
 	public void setup() {
 		generatePositions(false); 
-		control = GameController.setInstance(this);
-		state = GameState.getInstance();
-		state.setupLevel();
+		
 		framerate(20);
 		window.size(600, 650);
 		canvas.background(0, 0, 0);
 		window.title("Pac Man Fever");
+		
+		control = GameController.setInstance(this);
+		state = GameState.getInstance();
+		state.setupLevel();
+		
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
 		startScene("Game");
@@ -105,26 +126,6 @@ public class PacManGame extends Ucigame {
 		state.drawState();
 		scoreBoard.draw();
 	}
-
-	public static void main(String[] args)
-	{
-		//System.out.println(args[0]+"|"+args[1]+"|"+args[2]);
-		
-		List<String> cargs = Arrays.asList(args);
-		
-		if( cargs.contains("CLIENT") )
-		{
-			System.out.println("Starting Client");
-			PacManGame.multiplayerType = 2;
-			PacManGame.hostname = (String)cargs.get(2);
-		}
-		
-		Ucigame.main(args);
-		
-		//System.out.println(args[2]);
-		
-	}
-	
 	
 	public void drawGameOver() {
 		canvas.clear();
@@ -142,10 +143,6 @@ public class PacManGame extends Ucigame {
 			state.getPacMan().step(Direction.LEFT);
 		if (keyboard.isDown(keyboard.RIGHT, keyboard.D))
 			state.getPacMan().step(Direction.RIGHT);
-	}
-
-	public PacManGame() {
-
 	}
 
 	public Sprite makeSpriteFromPath(String string) {
