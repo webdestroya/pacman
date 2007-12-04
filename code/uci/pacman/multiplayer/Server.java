@@ -17,15 +17,6 @@ enum PType { JOIN, GMOVE, PMOVE, GAMEOVER, GAMESTART };
  * @author Networking Team
  *	
  */
-import java.net.*;
-import java.util.*;
-
-/**
- * Server is responsible for handling incoming client requests and sending out information
- * @author Networking Team
- *	
- */
-
 public class Server extends Thread
 {
 	private static final long serialVersionUID = 1L;

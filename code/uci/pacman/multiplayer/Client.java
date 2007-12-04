@@ -1,23 +1,10 @@
-<<<<<<< .mine
 package code.uci.pacman.multiplayer;
 
 import code.uci.pacman.game.*;
 
-
 import java.io.*;
 import java.net.*;
-/**
- * Client handles the input and output of the server.
- * @author Networking Team
- */
-=======
-package code.uci.pacman.multiplayer;
 
-import code.uci.pacman.game.*;
-
-
-import java.io.*;
-import java.net.*;
 /**
  * Client handles the input and output of the server. 
  * @author Networking Team
@@ -30,8 +17,6 @@ public class Client// extends Thread
 	/**
 	 * 
 	 * @param host name/ip of the host(String)
-	/**
-	 * 
 	 * @param host
 	 */
 	public Client(String host)
