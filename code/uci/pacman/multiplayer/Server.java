@@ -180,6 +180,8 @@ public class Server extends Thread
 				int data1 = buf[1] & 0x000000FF;
 				int data2 = buf[2] & 0x000000FF;
 				int data3 = buf[3] & 0x000000FF;
+				System.out.print("PACKET ("+packetType+","+data1+","+data2+","+data3+"): ");
+
 				if( PType.JOIN.ordinal() == packetType )
 				{
 					System.out.println("JOIN");
