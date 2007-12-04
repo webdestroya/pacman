@@ -3,31 +3,24 @@ import ucigame.*;
 
 /**
  * 
- * @author GUI Team
+ * @author GUI Team (Rick, MikeY, Cameron)
  * this will handle the display for Multiplayer Menu, and
  * additional buttons on it.
  *
  */
-public class MultiplayerMenu extends Sprite{
+public class MultiplayerMenu{
 
 	Sprite host;
 	Sprite join;
 	Sprite backToMainMenu;
 	
-	private int x, y;
-	
-	public MultiplayerMenu(int arg0, int arg1) {
-		super(arg0, arg1);
-
-		this.pin(host, x, y);
-		this.pin(join, x, y);
-		this.pin(backToMainMenu, x, y);
+	public MultiplayerMenu() {
+		
 	}
 
 	/**
 	 * 
-	 * this method is responsible for drawing the MultiplayreMenu
-	 * sprites, and any other sprites that are pinned to it.
+	 * draw() draws the MultiplayerMenu buttons. Each are accessible through OnClick in PacManGame.java 
 	 * 
 	 */
 	public void draw(){
