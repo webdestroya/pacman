@@ -208,13 +208,14 @@ public class Server extends Thread
 				
 				// get client address
 				InetAddress address = packet.getAddress();
+
 				
 				// get the packet type
 				int packetType = buf[0] & 0x000000FF;
 				int data1 = buf[1] & 0x000000FF;
 				int data2 = buf[2] & 0x000000FF;
 				int data3 = buf[3] & 0x000000FF;
-				System.out.print("PACKET ("+packetType+","+data1+","+data2+","+data3+"): ");
+				System.out.print("PACKET ["+packet.getPort()+"] ("+packetType+","+data1+","+data2+","+data3+"): ");
 
 				if( PType.JOIN.ordinal() == packetType )
 				{
