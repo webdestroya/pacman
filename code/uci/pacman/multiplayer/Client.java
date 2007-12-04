@@ -13,7 +13,7 @@ import java.net.*;
 public class Client extends Thread
 {
 	private static final long serialVersionUID = 1L;
-	public static InetAddress address;
+	private static InetAddress address;
 	protected DatagramSocket socket = null;
 	private static boolean moreQuotes = true;
 	private static int ghostType = 0;
@@ -44,8 +44,7 @@ public class Client extends Thread
 
 	/**
 	 * Sends a packet to the Server;
-	 * @param ghost which ghost you are sending
-	 * @param dir stuff
+	 * @param type the packet type
 	 */
 	public static void send(PType type)
 	{
@@ -55,6 +54,10 @@ public class Client extends Thread
 		Client.sendData(buf);
 	}
 
+	/**
+	 * Sends a packet to the Server;
+	 * @param dir the direction the ghost is moving
+	 */
 	public static void send(Direction dir)
 	{
 		byte[] buf = new byte[4];
@@ -65,6 +68,7 @@ public class Client extends Thread
 		Client.sendData(buf);
 	}
 
+	// send the raw packet to the server
 	private static void sendData(byte[] buf)
 	{
 		try
@@ -80,7 +84,9 @@ public class Client extends Thread
 		}
 	}
 
-
+	/**
+	 * This is the client listener, that listens for updates
+	 */
 	public void run()
 	{
 		// should be while game is not over
@@ -143,4 +149,4 @@ public class Client extends Thread
 
 
 
-}
+}//Client

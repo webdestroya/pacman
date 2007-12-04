@@ -15,6 +15,7 @@ enum PType
 	PMOVE, 		// DIR					( direction of pacman)
 	GAMEOVER, 	// 						(duh)
 	LEAVE, 		// GHOST_TYPE			(tells the server to drop the ghost)
+	GAMEFULL,	//						(tells a client that the game is full)
 	GAMESTART	//						(duh)
 };
 
@@ -32,7 +33,7 @@ public class Server extends Thread
 	protected DatagramSocket socket = null;
 
 	protected static ArrayList<InetAddress> clients;
-
+	private static InetAddress localAddr;
     protected boolean moreQuotes = true;
 
    /**
@@ -56,11 +57,11 @@ public class Server extends Thread
 		Server.clients = new ArrayList<InetAddress>();
 
 		// We first fill the list up with fake stuff as a placeholder
-		InetAddress local = InetAddress.getByName("127.0.0.1");
-		Server.clients.add(local);
-		Server.clients.add(local);
-		Server.clients.add(local);
-		Server.clients.add(local);
+		Server.localAddr = InetAddress.getByName("127.0.0.1");
+		Server.clients.add(localAddr);
+		Server.clients.add(localAddr);
+		Server.clients.add(localAddr);
+		Server.clients.add(localAddr);
 
         System.out.println("START SERVER");
     }
@@ -78,7 +79,11 @@ public class Server extends Thread
 		Server.sendData(buf);
 	}
 
-	// moving a ghost
+	/**
+     * Sends a command
+     * @param ghost the type of ghost
+	 * @param dir the direction its moving
+     */
 	public static void send(GhostType ghost, Direction dir)
 	{
 		byte[] buf = new byte[4];
@@ -88,7 +93,10 @@ public class Server extends Thread
 		Server.sendData(buf);
 	}
 
-	// only for moving pacman
+	/**
+	 * Used for moving pacman
+	 * @param dir the direction pacman is moving
+	 */
 	public static void send(Direction dir)
 	{
 		byte[] buf = new byte[4];
@@ -120,18 +128,29 @@ public class Server extends Thread
 		}
 	}
 
+	// sends raw data to a client
+	private static void sendClientData(InetAddress addr, byte[] buf)
+	{
+		if( !Server.localAddr.equals( addr ) )
+		{
+			try
+			{
+				DatagramSocket socketSend = new DatagramSocket();
+				DatagramPacket packet = new DatagramPacket(buf, buf.length, addr, 4445);
+				socketSend.send(packet);
+				socketSend.close();
+			}
+			catch(Exception e)
+			{
+				// they failed out, so remove from player table
+				Server.clients.remove(addr);
+			}
+		}
+	}
+	// just an alias
 	private static void sendClientData(int clientID, byte[] buf)
 	{
-		try
-		{
-			DatagramSocket socketSend = new DatagramSocket();
-			DatagramPacket packet = new DatagramPacket(buf, buf.length, Server.clients.get(clientID), 4445);
-			socketSend.send(packet);
-		}
-		catch(Exception e)
-		{
-			Server.clients.remove(clientID);
-		}
+		sendClientData( Server.clients.get(clientID), buf);
 	}
 	
 
@@ -153,13 +172,9 @@ public class Server extends Thread
 				socket.receive(packet);
 				buf = packet.getData();
 				
-				// add them to the clients list to receive updates
+				// get client address
 				InetAddress address = packet.getAddress();
-				if( !Server.clients.contains(address) )
-				{
-					Server.clients.add( address );
-				}
-
+				
 				// get the packet type
 				int packetType = buf[0] & 0x000000FF;
 				int data1 = buf[1] & 0x000000FF;
@@ -168,13 +183,26 @@ public class Server extends Thread
 				if( PType.JOIN.ordinal() == packetType )
 				{
 					System.out.println("JOIN");
-					InetAddress local = InetAddress.getByName("127.0.0.1");
-					int localIndex = Server.clients.indexOf(local);
 					
-					bufOut[0] = new Integer( PType.GTYPE.ordinal() ).byteValue();
-					bufOut[1] = new Integer( localIndex  ).byteValue();
-					Server.clients.set( localIndex, address );
-					sendClientData( localIndex, bufOut );
+					if( Server.clients.contains(Server.localAddr) )
+					{
+						// find the next slot available
+						int localIndex = Server.clients.indexOf(Server.localAddr);
+						
+						// get their address
+
+						// build the packet
+						bufOut[0] = new Integer( PType.GTYPE.ordinal() ).byteValue();
+						bufOut[1] = new Integer( localIndex  ).byteValue();
+						Server.clients.set( localIndex, address );
+						sendClientData( address, bufOut );
+					}
+					else
+					{
+						// game is full
+						bufOut[0] = new Integer( PType.GAMEFULL.ordinal() ).byteValue();
+						sendClientData( address, bufOut );
+					}
 				}
 				else if( PType.GMOVE.ordinal() == packetType )
 				{
@@ -192,7 +220,7 @@ public class Server extends Thread
 				}
 				
 				// figure out response
-				String dString = null;
+				/*String dString = null;
 				dString = new Date().toString();
 				buf = dString.getBytes();
 
@@ -200,7 +228,7 @@ public class Server extends Thread
 
 				int port = packet.getPort();
 				packet = new DatagramPacket(buf, buf.length, address, port);
-				socket.send(packet);
+				socket.send(packet);*/
 			}
 			catch (IOException e)
 			{
@@ -210,7 +238,7 @@ public class Server extends Thread
 		}
 		System.out.println("Server Shutdown");
 		socket.close();
-    }
+    }//run
 
 	
 	
