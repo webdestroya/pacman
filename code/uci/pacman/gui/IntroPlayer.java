@@ -35,7 +35,7 @@ public class IntroPlayer{
 		
 		menuButton = GameController.getInstance().getPacInstance().makeButton("MenuStart",GameController.getInstance().getPacInstance().getImage("images/final/startButton.png"),
                 249, 76);
-		menuButton.position(200, 450);
+		menuButton.position(175, 450);
 		
 		for (int currentImage = 1; currentImage <= 30; currentImage++)
 		{
