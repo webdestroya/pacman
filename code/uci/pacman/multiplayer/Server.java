@@ -209,6 +209,46 @@ public class Server extends Thread
 				else if( PType.GMOVE.ordinal() == packetType )
 				{
 					// a ghost move
+					System.out.print("GMOVE");
+
+					// get direction
+					switch(data1)
+					{
+						case 0://up
+							System.out.print(" UP");
+							break;
+						case 1://down
+							System.out.print(" DOWN");
+							break;
+						case 2://left
+							System.out.print(" LEFT");
+							break;
+						case 3://right
+							System.out.print(" RIGHT");
+							break;
+					}
+
+					// get the ghost
+					switch(data2)
+					{
+						case 0://blinky
+							System.out.print(" BLINKY");
+							
+							break;
+						
+						case 1://clyde
+							System.out.print(" CLYDE");
+							break;
+
+						case 2://inky
+							System.out.print(" INKY");
+							break;
+
+						case 3://pinky
+							System.out.print(" PINKY");
+							break;
+					}
+					System.out.println();
 				}
 				else if( PType.LEAVE.ordinal() == packetType )
 				{
