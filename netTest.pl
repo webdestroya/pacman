@@ -62,11 +62,19 @@ $MSG = pack('CCCC', $DATA1, $DATA2, $DATA3, $DATA4);
 print "Message: [".$DATA1."|".$DATA2."|".$DATA3."|".$DATA4."]\n";
 print "Message: ".$MSG."\n";
 
+# Send
 $ipaddr   = inet_aton($HOSTNAME);
 $portaddr = sockaddr_in($PORTNO, $ipaddr);
 send(SOCKET, $MSG, 0, $portaddr) == length($MSG) or die "cannot send to $HOSTNAME($PORTNO): $!";
 
+# Receive
+$portaddr = recv(SOCKET, $MSG, 4, 0) or die "recv: $!";
+($portno, $ipaddr) = sockaddr_in($portaddr);
+$host = gethostbyaddr($ipaddr, AF_INET);
 
-$portaddr = recv(
+# Unpack
+($var1,$var2,$var3,$var4) = unpack('CCCC', $MSG);
+print "Receive: [".$MSG."]\n";
+print "Receive: ".$var1.",".$var2.",".$var3.",".$var4."\n";
 
 

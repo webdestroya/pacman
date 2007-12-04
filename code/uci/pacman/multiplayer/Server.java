@@ -16,11 +16,18 @@ enum PType
 	GAMEOVER, 	// 						(duh)
 	LEAVE, 		// GHOST_TYPE			(tells the server to drop the ghost)
 	GAMEFULL,	//						(tells a client that the game is full)
-	GAMESTART	//						(duh)
+	GAMESTART,	//						(duh)
+	ACK,		//						(Response that server acknowledges them - not really used, but good for debugging)
+	ERROR		// SERV_ERROR			( Error, you broke something)
 };
 
 // The ghost type
 enum GhostType { BLINKY,CLYDE,INKY,PINKY };
+
+// Server Errors
+enum ServErrors {
+	UNKNOWN_COM,	// unknown command
+};
 
 /**
  * Server is responsible for handling incoming client requests.
@@ -152,7 +159,34 @@ public class Server extends Thread
 	{
 		sendClientData( Server.clients.get(clientID), buf);
 	}
-	
+
+	// Send an acknowledgement packet
+	private static void sendAck(int clientID)
+	{
+		sendAck( Server.clients.get(clientID) );
+	}
+	private static void sendAck(InetAddress addr)
+	{
+		byte[] buf = new byte[4];
+		buf[0] = new Integer( PType.ACK.ordinal() ).byteValue();
+		sendClientData(addr,buf);
+	}
+
+	// Send an error
+	private static void sendError(int clientID, ServErrors err)
+	{
+		byte[] buf = new byte[4];
+		buf[0] = new Integer( PType.ERROR.ordinal() ).byteValue();
+		buf[1] = new Integer( err.ordinal() ).byteValue();
+		sendClientData(clientID, buf);
+	}
+	private static void sendError(InetAddress addr, ServErrors err)
+	{
+		byte[] buf = new byte[4];
+		buf[0] = new Integer( PType.ERROR.ordinal() ).byteValue();
+		buf[1] = new Integer( err.ordinal() ).byteValue();
+		sendClientData(addr, buf);
+	}
 
 	/**
 	 * runs the server
@@ -191,8 +225,6 @@ public class Server extends Thread
 						// find the next slot available
 						int localIndex = Server.clients.indexOf(Server.localAddr);
 						
-						// get their address
-
 						// build the packet
 						bufOut[0] = new Integer( PType.GTYPE.ordinal() ).byteValue();
 						bufOut[1] = new Integer( localIndex  ).byteValue();
@@ -249,16 +281,21 @@ public class Server extends Thread
 							break;
 					}
 					System.out.println();
+					
+					sendAck(address);
+
 				}
 				else if( PType.LEAVE.ordinal() == packetType )
 				{
 					// a ghost is leaving
 					
+					sendAck(address);
 				}
 				else
 				{
 					// some other junk packet
 					System.out.println("UNKNOWN("+packetType+")");
+					sendError(address,ServErrors.UNKNOWN_COM);
 				}
 				
 				// figure out response
