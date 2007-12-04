@@ -7,8 +7,19 @@ import java.net.*;
 import java.util.*;
 
 /// COMMAND ENUMS
-enum PType { JOIN, GMOVE, PMOVE, GAMEOVER, GAMESTART };
+enum PType 
+{ 
+	JOIN,		// 						(duh)
+	GTYPE,		// GHOST_TYPE			(Tells the ghost what ghost he will be)
+	GMOVE, 		// DIR, GHOST_TYPE		(tells the direction and what ghost to move)
+	PMOVE, 		// DIR					( direction of pacman)
+	GAMEOVER, 	// 						(duh)
+	LEAVE, 		// GHOST_TYPE			(tells the server to drop the ghost)
+	GAMESTART	//						(duh)
+};
 
+// The ghost type
+enum GhostType { BLINKY,CLYDE,INKY,PINKY };
 
 /**
  * Server is responsible for handling incoming client requests.
@@ -32,11 +43,12 @@ public class Server extends Thread
     {
 		this("Server");
     }
-/**
- * Starts a server at socket 4445
- * @param name unknown
- * @throws IOException
- */
+	
+	/**
+	 * Starts a server at socket 4445
+	 * @param name unknown
+	 * @throws IOException
+	 */
     public Server(String name) throws IOException
     {
         super(name);
@@ -53,12 +65,29 @@ public class Server extends Thread
      */
 	public static void send(PType type)
 	{
-		byte[] buf = new byte[256];
-
+		byte[] buf = new byte[4];
+		buf[0] = new Integer(type.ordinal()).byteValue();
 		Server.sendData(buf);
 	}
-	
-	// for a move type
+
+	// moving a ghost
+	public static void send(GhostType ghost, Direction dir)
+	{
+		byte[] buf = new byte[4];
+		buf[0] = new Integer(PType.GMOVE.ordinal()).byteValue(); // TYPE
+		buf[1] = new Integer(dir.ordinal()).byteValue(); // DIRECTION
+		buf[2] = new Integer(ghost.ordinal()).byteValue(); // GHOST_TYPE
+		Server.sendData(buf);
+	}
+
+	// only for moving pacman
+	public static void send(Direction dir)
+	{
+		byte[] buf = new byte[4];
+		buf[0] = new Integer(PType.PMOVE.ordinal()).byteValue();
+		buf[1] = new Integer(dir.ordinal()).byteValue();
+		Server.sendData(buf);
+	}
 	
 	/**
 	 * Sends a command
@@ -67,8 +96,9 @@ public class Server extends Thread
 	 */
 	public static void send(PType type, Direction dir)
 	{
-		byte[] buf = new byte[256];
-		
+		byte[] buf = new byte[4];
+		buf[0] = new Integer(type.ordinal()).byteValue();
+		buf[1] = new Integer(dir.ordinal()).byteValue();
 		
 		Server.sendData(buf);
 	}
@@ -76,21 +106,27 @@ public class Server extends Thread
 
 	private static void sendData(byte[] buf)
 	{
+		for(int i=0; i < Server.clients.size(); i++)
+		{
+			Server.sendClientData(i, buf);
+		}
+	}
+
+	private static void sendClientData(int clientID, byte[] buf)
+	{
 		try
 		{
-			for(int i=0; i < Server.clients.size(); i++)
-			{
-				//byte[] buf = new byte[256];
-				DatagramSocket socketSend = new DatagramSocket();
-				DatagramPacket packet = new DatagramPacket(buf, buf.length, Server.clients.get(i), 4445);
-				socketSend.send(packet);
-			}
+			DatagramSocket socketSend = new DatagramSocket();
+			DatagramPacket packet = new DatagramPacket(buf, buf.length, Server.clients.get(clientID), 4445);
+			socketSend.send(packet);
 		}
 		catch(Exception e)
 		{
-
+			Server.clients.remove(clientID);
 		}
 	}
+	
+
 	/**
 	 * runs the server
 	 */
@@ -101,26 +137,56 @@ public class Server extends Thread
 		{
 			try 
 			{
-				byte[] buf = new byte[256];
+				byte[] buf = new byte[4];
+				byte[] bufOut = new byte[4];
 
 				// receive request
 				DatagramPacket packet = new DatagramPacket(buf, buf.length);
 				socket.receive(packet);
+				buf = packet.getData();
+				
+				// add them to the clients list to receive updates
+				InetAddress address = packet.getAddress();
+				if( !Server.clients.contains(address) )
+				{
+					Server.clients.add( address );
+				}
+
+				// get the packet type
+				int packetType = buf[0] & 0x000000FF;
+				int data1 = buf[1] & 0x000000FF;
+				int data2 = buf[2] & 0x000000FF;
+				int data3 = buf[3] & 0x000000FF;
+				if( PType.JOIN.ordinal() == packetType )
+				{
+					System.out.println("JOIN");
+					
+					bufOut[0] = new Integer( PType.GTYPE.ordinal() ).byteValue();
+					bufOut[1] = new Integer(  Server.clients.indexOf( address ) ).byteValue();
+					
+					sendClientData( Server.clients.indexOf( address ), bufOut );
+				}
+				else if( PType.GMOVE.ordinal() == packetType )
+				{
+					// a ghost move
+				}
+				else if( PType.LEAVE.ordinal() == packetType )
+				{
+					// a ghost is leaving
+
+				}
+				else
+				{
+					// some other junk packet
+					System.out.println("UNKNOWN");
+				}
 				
 				// figure out response
 				String dString = null;
 				dString = new Date().toString();
 				buf = dString.getBytes();
 
-				// send the response to the client at "address" and "port"
-				InetAddress address = packet.getAddress();
 				
-				// add them to the clients list to receive updates
-				if( !Server.clients.contains(address) )
-				{
-					Server.clients.add( address );
-				}
-
 
 				int port = packet.getPort();
 				packet = new DatagramPacket(buf, buf.length, address, port);

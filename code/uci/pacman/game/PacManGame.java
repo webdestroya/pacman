@@ -34,7 +34,6 @@ public class PacManGame extends Ucigame {
 	public static int gameType = 1; // 1=single, 2 = multi
 
 	/* Initialization */
-
 	public void setup() {
 		generatePositions(false);
 		// creates the window, sets the title, initialize
