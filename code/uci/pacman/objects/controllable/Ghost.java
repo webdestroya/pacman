@@ -9,7 +9,10 @@ import code.uci.pacman.objects.ControllableObject;
 
 
 /**
- * 
+ * Represents a Ghost character that chases PacMan.  A Ghost can be controlled by human
+ * or by an AI as denoted by the boolean isPlayer.  Ghosts can chase PacMan and try to
+ * eat him by colliding with him.  If PacMan eats a Power Pellet, scatter mode is 
+ * initiated and a ghost can be eaten if touched by PacMan.  
  * @author Team Objects/AI
  * 
  */
@@ -36,17 +39,24 @@ public abstract class Ghost extends ControllableObject implements AI {
 	private boolean scatter;
 	
 
+	/**
+	 * Tells the game controller that this ghost has been eaten.
+	 */
 	public void eaten(){
 		control.ghostEaten(this);
 	}
 	
+	/**
+	 * Tests if the ghost is in Scatter Mode.
+	 * @return true if the ghost is currently in Scatter Mode.
+	 */
 	public boolean isScattered() {
 		return scatter;
 	}
 	
 	/**
-	 * sets scatter to true
-	 * scatters this ghost
+	 * Sets scatter to true.
+	 * Scatters this ghost.
 	 */
 	public void scatter(){
 		scatter = true;
@@ -54,7 +64,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	}
 	
 	/**
-	 * tells the ghost to stop scattering and begin attack
+	 * Tells the ghost to stop scattering and begin attack.
 	 */
 	public void unScatter() {
 		scatter = false;
@@ -62,7 +72,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	}
 	
 	/***
-	 * Respawns this ghost back within the cage and disables scatter for this ghost
+	 * Respawns this ghost back within the cage and disables scatter for this ghost.
 	 */
 	public void respawnInCage() {
 		Random r = new Random();
@@ -71,14 +81,25 @@ public abstract class Ghost extends ControllableObject implements AI {
 		this.unScatter();
 	}
 	
+	/**
+	 * Returns true if the ghost is controlled by a player.
+	 * @return true if the ghost is controlled by a human; false if it is controlled by AI 
+	 */
 	public boolean isPlayer(){
 		return isPlayer;
 	}
 
+	/**
+	 * Gets the score of the ghost.
+	 * @return The score of the ghost.
+	 */
 	public int getValue() {
 		return scoreValue;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	//this is for changing the sprite based on direction
 	protected void spriteForDirection(Direction d) {
@@ -86,6 +107,9 @@ public abstract class Ghost extends ControllableObject implements AI {
 		
 	}
 
+	/**
+	 * 
+	 */
 	public abstract Direction getMove();
 
 
