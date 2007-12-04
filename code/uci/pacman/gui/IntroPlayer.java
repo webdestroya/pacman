@@ -10,7 +10,7 @@ import code.uci.pacman.controllers.GameController;
 
 /**
  * 
- * this will display the opening at the beginning of the game
+ * This will display the opening at the beginning of the game
  * @author GUI Team (Rick, MikeY, Cameron)
  *  
  */
@@ -25,7 +25,7 @@ public class IntroPlayer{
 	// each image in the opening.
 	/**
 	 * 
-	 * constructor for IntroPlayer; sets into sound, creates frames array, creates menuStart button	 * 
+	 * Constructor for IntroPlayer; sets into sound, creates frames array, creates menuStart button	 * 
 	 * 
 	 */
 	public IntroPlayer() {
@@ -57,7 +57,7 @@ public class IntroPlayer{
 	
 	/**
 	 * 
-	 * draws the frames for the Intro graphics, adds the button to access MainMenu
+	 * Draws the frames for the Intro graphics, adds the button to access MainMenu
 	 * 
 	 */
 	public void draw(){
@@ -89,7 +89,7 @@ public class IntroPlayer{
 	
 	/**
 	 * 
-	 * plays Intro theme
+	 * Plays Intro theme
 	 * 
 	 */
 	public void playIntroTheme()
@@ -99,7 +99,7 @@ public class IntroPlayer{
 	
 	/**
 	 * 
-	 * stops Intro theme
+	 * Stops Intro theme
 	 * 
 	 */
 	public void stopIntroTheme()
