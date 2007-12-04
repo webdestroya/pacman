@@ -30,6 +30,11 @@ public class ScoreBoard{
 	private int fruitPosY = 610;
 	ArrayList<Sprite> lifeList = new ArrayList<Sprite>();
 	
+	/**
+	 * 
+	 * Constructor for ScoreBoard.  Constructs score, fruit, and lives sprites.
+	 * 
+	 */
 	public ScoreBoard() {
 		//create score sprite
 		score = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/score.png");

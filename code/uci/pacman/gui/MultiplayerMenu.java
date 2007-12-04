@@ -13,6 +13,11 @@ public class MultiplayerMenu{
 	Sprite join;
 	Sprite backToMainMenu;
 	
+	/**
+	 * 
+	 * Constructor for MultiplayerMenu.  Constructs join, host, and back to menu buttons. 
+	 * 
+	 */
 	public MultiplayerMenu() {
 		
 	}

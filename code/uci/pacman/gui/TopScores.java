@@ -18,8 +18,7 @@ public class TopScores{
 	
 	/**
 	 * 
-	 * Constructor for TopScores:
-	 * This will load from a file top 10 players and their corresponding scores.
+	 * Constructor for TopScores.  This will load from a file top 10 players and their corresponding scores.
 	 *
 	 */
 	public TopScores(){

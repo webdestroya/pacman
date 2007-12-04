@@ -21,8 +21,12 @@ public class MainMenu{
 	private int buttonStartHeight = 105;
 	private int buttonHeight = 83;
 	
+	/**
+	 * 
+	 * Constructor for MainMenu, creates all the buttons in the menu 
+	 * 
+	 */
 	
-	//constructor for MainMenu, creates all the buttons in the menu
 	public MainMenu() {
 		//single player button creation
 		menuTheme = GameController.getInstance().getPacInstance().getSound("sounds\\final\\MainMenu.mp3");
