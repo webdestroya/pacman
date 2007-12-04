@@ -158,6 +158,7 @@ public class Client extends Thread
 				{
 					// the game is full. tell the player to suck it.
 					System.out.println("Game Server is FULL. You cannot join.");
+					System.exit(0);
 				}
 				else if( PType.GMOVE.ordinal() == packetType )
 				{
@@ -173,12 +174,16 @@ public class Client extends Thread
 					switch(data1)
 					{
 						case 0://up
+							GameState.getInstance().getPacMan().step(Direction.UP);
 							break;
 						case 1://down
+							GameState.getInstance().getPacMan().step(Direction.DOWN);
 							break;
 						case 2://left
+							GameState.getInstance().getPacMan().step(Direction.LEFT);
 							break;
 						case 3://right
+							GameState.getInstance().getPacMan().step(Direction.RIGHT);
 							break;
 					}
 				}
@@ -198,16 +203,11 @@ public class Client extends Thread
 					switch(data1)
 					{
 						case 0://blinky joined
-							
 							break;
-
 						case 1:// clyde joined
-							
 							break;
-
 						case 2:// inky joined
 							break;
-						
 						case 3:// pinky joined
 							break;
 					}
