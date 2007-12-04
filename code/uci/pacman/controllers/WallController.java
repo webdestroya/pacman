@@ -88,17 +88,6 @@ public class WallController extends SpriteController<Point, Wall> {
 	}
 
 	/**
-	 * Draws every wall object onto the game screen. Usually used from within
-	 * another draw function or within the main draw function in PacManGame.
-	 * 
-	 */
-	public void drawObjects() {
-		for (Wall w : super.getObjects()) {
-			w.draw();
-		}
-	}
-
-	/**
 	 * 
 	 * To check for a possible immediate future collision with a wall, we move
 	 * the PacMan or Ghost object xCheck/yCheck pixels from where it is and then
