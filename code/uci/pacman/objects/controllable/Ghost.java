@@ -31,11 +31,11 @@ public abstract class Ghost extends ControllableObject implements AI {
 	/**
 	 * Constructs a ghost with a sprite, initial position, speed, and a boolean denoting if it
 	 * is controlled by a human or by AI.  
-	 * @param imgPath - the image/sprite associated with the ghost
-	 * @param x - it's initial x coordinate on the level
-	 * @param y - it's initial y coordinate on the level
-	 * @param speed - the speed at which the ghost moves
-	 * @param isPlayer - true if the ghost is controlled by a human; false if it's controlled by AI
+	 * @param imgPath the image/sprite associated with the ghost
+	 * @param x it's initial x coordinate on the level
+	 * @param y it's initial y coordinate on the level
+	 * @param speed the speed at which the ghost moves
+	 * @param isPlayer true if the ghost is controlled by a human; false if it's controlled by AI
 	 */
 	public Ghost(String imgPath, int x, int y, int speed, boolean isPlayer) {
 		super(imgPath, new int[] {0,0}, GHOST_WIDTH, GHOST_HEIGHT, GHOST_FRAMERATE, x, y);
@@ -109,7 +109,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 
 	/**
 	 * This changes the sprite based on its direction.
-	 * @param d - direction of the ghost.
+	 * @param d direction of the ghost.
 	 */
 	@Override
 	//this is for changing the sprite based on direction
