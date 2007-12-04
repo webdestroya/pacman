@@ -92,8 +92,8 @@ public class GameController {
 	 */
 	public void ghostEaten(Ghost ghost) {
 		ghost.respawnInCage(); // restart in cage
-		state.addToScore(ghost.getValue());// TODO make ghosts worth more if
-		// you eat them in the same round
+		state.addToScore(ghost.getValue());
+		// TODO make ghosts worth more if you eat them in the same round
 	}
 
 	/**

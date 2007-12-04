@@ -22,7 +22,6 @@ public class Wall extends StationaryObject {
 		super(width, height);
 		super.addFrame("level1.png", x, y);
 		super.position(x, y);
-		// TODO Auto-generated constructor stub
 	}
 
 }

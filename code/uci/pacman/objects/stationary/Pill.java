@@ -36,7 +36,6 @@ public class Pill extends StationaryObject implements Eatable {
 	 * Tells the game controller that it's been eaten
 	 */
 	public void eaten() {
-		// TODO Auto-generated method stub
 		control.pillEaten(this);
 	}
 

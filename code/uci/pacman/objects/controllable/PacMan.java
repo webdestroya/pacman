@@ -38,7 +38,6 @@ public class PacMan extends ControllableObject {
 	 * Tells the game controller that PacMan has been eaten.
 	 */
 	public void eaten() {
-		// TODO Auto-generated method stub
 		control.pacManEaten(this);
 	}
 
@@ -72,7 +71,6 @@ public class PacMan extends ControllableObject {
 			angle=180;
 		if(d == Direction.RIGHT)
 			angle=0;
-		// TODO Auto-generated method stub	
 	}
 	
 	/**
