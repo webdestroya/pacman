@@ -132,33 +132,33 @@ public class GameState {
 
 	/**
 	 * 
-	 * Gets the controller responsible for all actions relating
-	 * to the ghosts within the game world.
+	 * Gets the controller responsible for all actions relating to the ghosts
+	 * within the game world.
 	 * 
 	 * @return the ghosts controller
-	 */ 
+	 */
 	public GhostController getGhosts() {
 		return ghosts;
 	}
 
 	/**
 	 * 
-	 * Gets the controller responsible for all actions relating
-	 * to the pills within the game world.
+	 * Gets the controller responsible for all actions relating to the pills
+	 * within the game world.
 	 * 
 	 * @return the pills controller
-	 */ 
+	 */
 	public PillController getPills() {
 		return pills;
 	}
 
 	/**
 	 * 
-	 * Gets the controller responsible for all actions relating
-	 * to the pellets within the game world.
+	 * Gets the controller responsible for all actions relating to the pellets
+	 * within the game world.
 	 * 
 	 * @return the pellets controller
-	 */ 
+	 */
 	public PowerPelletController getPellets() {
 		return pellets;
 	}
@@ -183,14 +183,13 @@ public class GameState {
 		return pacMan;
 	}
 
-
 	/**
 	 * 
-	 * Gets the controller responsible for all actions relating
-	 * to the walls within the game world.
+	 * Gets the controller responsible for all actions relating to the walls
+	 * within the game world.
 	 * 
 	 * @return the walls controller
-	 */ 
+	 */
 	public WallController getWalls() {
 		return walls;
 	}
@@ -204,6 +203,7 @@ public class GameState {
 
 	/**
 	 * Gets the current stage number for the game.
+	 * 
 	 * @return the current stage
 	 */
 	public int getLevel() {

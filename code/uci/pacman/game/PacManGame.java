@@ -14,12 +14,12 @@ import com.sun.xml.internal.ws.util.StringUtils;
 
 /**
  * 
- * The main game class for PacMan. This class extends from the UciGame
- * class which is part of the UciGame game framework. Thanks to Professor
- * Frost for making this great framework which made our lives easier. This
- * is the class that should be run to play PacMan.
+ * The main game class for PacMan. This class extends from the UciGame class
+ * which is part of the UciGame game framework. Thanks to Professor Frost for
+ * making this great framework which made our lives easier. This is the class
+ * that should be run to play PacMan.
  * 
- * @author The Game Team 
+ * @author The Game Team
  */
 public class PacManGame extends Ucigame {
 
@@ -29,19 +29,14 @@ public class PacManGame extends Ucigame {
 	private TopScores topScores;
 	private MainMenu mainMenu;
 	private IntroPlayer introPlayer; // for playing the intro
-
 	private ScreenMode currentScene; // stores the current scene displayed
-
 	public static String font = "Dialog.bold";
-
 	public static int multiplayerType = 1; // 1=server, 2=client
 	public static String hostname = "127.0.0.1"; // used for network
 
 	/* Main Class */
 
 	public static void main(String[] args) {
-		// System.out.println(args[0]+"|"+args[1]+"|"+args[2]);
-
 		List<String> cargs = Arrays.asList(args);
 
 		if (cargs.contains("CLIENT")) {
@@ -51,24 +46,18 @@ public class PacManGame extends Ucigame {
 		}
 
 		Ucigame.main(args);
-
-		// System.out.println(args[2]);
 	}
 
 	/* Initialization */
 
 	public void setup() {
 		generatePositions(false);
-
 		// creates the window, sets the title, initialize
 		initializeWindow();
-
 		// starts the intro for the game
 		showIntroScreen();
-
 		// make the server or client connection
 		setupServerOrClient();
-
 	}
 
 	private void initializeWindow() {
@@ -82,15 +71,17 @@ public class PacManGame extends Ucigame {
 		// initialize screens
 		introPlayer = new IntroPlayer();
 		// show intro screen
-		canvas.background(0, 0, 0); // Background has to be black for the intro (sorry for removing)
+		canvas.background(0, 0, 0); // Background has to be black for the intro
+									// (sorry for removing)
 		showScene(ScreenMode.INTRO);
-		introPlayer.playIntroTheme(); // Play intro theme after starting scene. (so it syncs properly)
+		introPlayer.playIntroTheme(); // Play intro theme after starting
+										// scene. (so it syncs properly)
 	}
 
 	private void showMenuScreen() {
 		// stop intro theme
 		introPlayer.stopIntroTheme();
-		//initialize menu
+		// initialize menu
 		mainMenu = new MainMenu();
 		// show menu
 		canvas.background(getImage("images/final/mainMenuBackGroundDim.png"));
@@ -108,7 +99,7 @@ public class PacManGame extends Ucigame {
 		scoreBoard = new ScoreBoard();
 		showScene(ScreenMode.GAME);
 	}
-	
+
 	public void showScoresScreen() {
 		topScores = new TopScores();
 		showScene(ScreenMode.SCORES);
@@ -138,24 +129,32 @@ public class PacManGame extends Ucigame {
 
 	/* Painting the Game Scenes */
 
-	// Draws the "Intro" scene
+	/**
+	 * Draws the "Intro" scene
+	 */
 	public void drawIntro() {
 		introPlayer.draw();
 	}
 
-	// Draws the "Menu" scene
+	/**
+	 * Draws the "Menu" scene
+	 */
 	public void drawMenu() {
 		canvas.clear();
 		mainMenu.draw();
 	}
 
-	// Draws the "Scores" scene
+	/**
+	 * Draws the "Scores" scene
+	 */
 	public void drawScores() {
 		canvas.clear();
 		topScores.draw();
 	}
 
-	// Draws the "Game" scene
+	/**
+	 * Draws the "Game" scene
+	 */
 	public void drawGame() {
 		canvas.clear();
 		control.nextMove();
@@ -163,7 +162,9 @@ public class PacManGame extends Ucigame {
 		scoreBoard.draw();
 	}
 
-	// Draws the "GameOver" scene
+	/**
+	 * Draws the "Game Over" scene
+	 */
 	public void drawGameover() {
 		canvas.clear();
 		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
@@ -290,12 +291,24 @@ public class PacManGame extends Ucigame {
 		return makeSprite(getImage(string));
 	}
 
+	/**
+	 * Displays the specified scene onto the window, while also storing the
+	 * scene for later reference
+	 * 
+	 * @param scene
+	 *            the scene to display
+	 */
 	public void showScene(ScreenMode scene) {
 		this.currentScene = scene;
 		String sceneName = StringUtils.capitalize(scene.toString().toLowerCase());
 		super.startScene(sceneName);
 	}
-	
+
+	/**
+	 * Determines if the scene currently displayed is the one specified.
+	 * @param scene the scene to check
+	 * @return true if the scene specified is currently displayed; false otherwise.
+	 */
 	public boolean isShowingScene(ScreenMode scene) {
 		return currentScene.equals(scene);
 	}

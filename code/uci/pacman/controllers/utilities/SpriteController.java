@@ -61,19 +61,6 @@ public abstract class SpriteController<T, S extends Sprite> {
 		hash.remove(key);
 	}
 	
-	/**
-	 * Destroys a sprite and removes it from the collection.
-	 * 
-	 * @param object the sprite to remove.
-	 */
-	protected void destroy(S object) {
-		for (T key : hash.keySet()) {
-			S value = hash.get(key);
-			if (value.equals(object)) {
-				this.destroyAt(key);
-			}
-		}
-	}
 	
 	/**
 	 * Draws each sprite in this collection onto the screen. Called from
@@ -90,7 +77,7 @@ public abstract class SpriteController<T, S extends Sprite> {
 	 * 
 	 * @return the collection of sprites controlled by this instance.
 	 */
-	protected Collection<S> getObjects() {
+	public Collection<S> getObjects() {
 		return hash.values();
 	}
 }

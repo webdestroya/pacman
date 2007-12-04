@@ -40,7 +40,7 @@ public class GhostController extends ActorController<String, Ghost> {
 	 * is created.
 	 * 
 	 */
-	public void constructActors() {
+	protected void constructActors() {
 		addObject("Blinky", new Blinky(250, 250, false));
 		addObject("Pinky", new Pinky(275, 250, false));
 		addObject("Inky", new Inky(300, 250, false));
@@ -48,18 +48,6 @@ public class GhostController extends ActorController<String, Ghost> {
 
 	}
 
-	/**
-	 * 
-	 * Retrieves a given ghost based on his name. Each ghost contains
-	 * all the information for that particular object. Typically this is used
-	 * when the game needs to access information about an individual ghost.
-	 * 
-	 * @param name the name of the ghost to retrieve
-	 * @return the ghost that was specified
-	 */
-	public Ghost getGhost(String name) {
-		return super.getObjectAt(name);
-	}
 
 	/**
 	 * 
@@ -140,7 +128,7 @@ public class GhostController extends ActorController<String, Ghost> {
 	 * PacMan will now risk being eaten again by the ghosts.
 	 * 
 	 */
-	public void unScatter() {
+	public void unscatter() {
 		for (Ghost g : getObjects()) {
 			g.unScatter();
 		}

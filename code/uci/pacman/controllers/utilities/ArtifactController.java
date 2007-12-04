@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
 import code.uci.pacman.objects.ControllableObject;
@@ -92,7 +91,15 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 		ArrayList<Integer> coords = loadFromFile(state.getLevel(), filePrefix);
 		constructLevel(coords);
 	}
-
+	
+	private void constructLevel(ArrayList<Integer> coords) {
+		for (int index = 0; index < coords.size() - 1; index += 2) {
+			int x = coords.get(index);
+			int y = coords.get(index + 1);
+			addArtifact(x, y);
+		}
+	}
+	
 	private ArrayList<Integer> loadFromFile(int level, String filePrefix) {
 		ArrayList<Integer> coordsList = new ArrayList<Integer>();
 		String file = "levels/" + filePrefix + "s/" + level + ".txt";
@@ -108,20 +115,5 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 			System.err.println("Cannot find Artifact file: " + file);
 		}
 		return null;
-	}
-
-	protected void constructLevel(ArrayList<Integer> coords) {
-		for (int index = 0; index < coords.size() - 1; index += 2) {
-			int x = coords.get(index);
-			int y = coords.get(index + 1);
-			addArtifact(x, y);
-		}
-	}
-
-	/**
-	 * Gets a collection of all game objects that are handled by this controller.
-	 */
-	public Collection<A> getObjects() {
-		return super.getObjects();
 	}
 }

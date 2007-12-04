@@ -23,7 +23,7 @@ import code.uci.pacman.objects.ControllableObject;
  * @param <S> the type of object that will be controlled
  */
 public abstract class ActorController<T, S extends ControllableObject> extends SpriteController<T, S> {
-	public abstract void constructActors();
+	protected abstract void constructActors();
 
 	/**
 	 * Gets a collection of all the actors that have collided with a specified object.

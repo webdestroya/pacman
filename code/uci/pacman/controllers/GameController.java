@@ -214,7 +214,7 @@ public class GameController {
 	 * 
 	 */
 	public void unscatterGhosts() {
-		state.getGhosts().unScatter();
+		state.getGhosts().unscatter();
 	}
 
 	/**
