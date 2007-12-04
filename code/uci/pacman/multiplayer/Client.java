@@ -26,7 +26,14 @@ public class Client extends Thread
 	public Client(String host)
 	{
 		Client.setHost(host);
-		socket = new DatagramSocket(4446);
+		try
+		{
+			socket = new DatagramSocket(4446);
+		}
+		catch(Exception e)
+		{
+			// cant make a socket?
+		}
 	}
 	/**
 	 * Changes the host

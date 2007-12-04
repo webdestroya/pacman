@@ -242,8 +242,8 @@ public class Server extends Thread
 					// ack the player
 					sendAck(address);
 					
-					GhostType gtype;
-					Direction dir;
+					GhostType gtype = GhostType.BLINKY;
+					Direction dir = Direction.UP;
 
 					// get direction
 					switch(data1)
