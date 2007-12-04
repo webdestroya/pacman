@@ -76,14 +76,16 @@ public class PacManGame extends Ucigame {
 	private void displayIntroScreen() {
 		// initialize screens
 		introPlayer = new IntroPlayer();
-		mainMenu = new MainMenu();
 		// show intro screen
-		canvas.background(0, 0, 0); // Stop removing this! The background has to be black for the intro - Cameron.
+		introPlayer.playIntroTheme();
+		canvas.background(0, 0, 0); // Background has to be black for the intro (sorry for removing)
 		showScene(ScreenMode.INTRO);
 		introPlayer.playIntroTheme(); // Play intro theme after starting scene. (so it syncs properly)
 	}
 
 	private void displayMenuScreen() {
+		//initialize menu
+		mainMenu = new MainMenu();
 		// stop intro theme
 		introPlayer.stopIntroTheme();
 		// show menu
@@ -129,6 +131,7 @@ public class PacManGame extends Ucigame {
 
 	// Draws the "Intro" scene
 	public void drawIntro() {
+		canvas.clear();
 		introPlayer.draw();
 	}
 
@@ -199,7 +202,7 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	public void onClickSinglePlay() {
-		if (currentScene == ScreenMode.MENU) {
+		if (isShowingScene(ScreenMode.MENU)) {
 			System.out.println("single player click");
 			beginGame();
 		}
@@ -211,7 +214,7 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	public void onClickMultiPlay() {
-		if (currentScene == ScreenMode.MENU) {
+		if (isShowingScene(ScreenMode.MENU)) {
 			System.out.println("multi playter click");
 			// beginGame();
 		}
@@ -223,7 +226,7 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	public void onClickTopScores() {
-		if (currentScene == ScreenMode.MENU) {
+		if (isShowingScene(ScreenMode.MENU)) {
 			System.out.println("topScore click");
 			// beginGame();
 		}
@@ -235,7 +238,7 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	public void onClickQuit() {
-		if (currentScene == ScreenMode.MENU) {
+		if (isShowingScene(ScreenMode.MENU)) {
 			System.out.println("quit click");
 			// beginGame();
 		}
@@ -248,7 +251,7 @@ public class PacManGame extends Ucigame {
 	}
 
 	public void onMousePressed() {
-		if (currentScene == ScreenMode.INTRO) {
+		if (isShowingScene(ScreenMode.INTRO)) {
 			displayMenuScreen();
 		}
 	}
@@ -283,5 +286,9 @@ public class PacManGame extends Ucigame {
 		this.currentScene = scene;
 		String sceneName = StringUtils.capitalize(scene.toString().toLowerCase());
 		super.startScene(sceneName);
+	}
+	
+	public boolean isShowingScene(ScreenMode scene) {
+		return currentScene.equals(scene);
 	}
 }
