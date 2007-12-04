@@ -26,6 +26,7 @@ public class Client extends Thread
 	public Client(String host)
 	{
 		Client.setHost(host);
+		socket = new DatagramSocket(4446);
 	}
 	/**
 	 * Changes the host
@@ -114,11 +115,38 @@ public class Client extends Thread
 				if( PType.GTYPE.ordinal() == packetType )
 				{
 					// tells the player what ghost he will be
+					switch(data1)
+					{
+						case 0://blinky
+							
+							break;
+						case 1://clyde
+
+							break;
+						case 2://inky
+
+							break;
+						case 3://p
+
+							break;
+					}
+				}
+				else if( PType.ERROR.ordinal() == packetType )
+				{
+					// client was a dumbass, and sent a bad packet
+				}
+				else if( PType.ACK.ordinal() == packetType )
+				{
+					// just an acknowledge, i dont think we need to process it, but can be used for consistency
+				}
+				else if( PType.GAMEFULL.ordinal() == packetType )
+				{
+					// the game is full. tell the player to suck it.
 				}
 				else if( PType.GMOVE.ordinal() == packetType )
 				{
-					// a ghost move
-
+					// another ghost moved. (We may or may not use this to also update the current player as consistency)
+					
 				}
 				else if( PType.PMOVE.ordinal() == packetType )
 				{
@@ -130,6 +158,16 @@ public class Client extends Thread
 					// game commencing
 
 				}
+				else if( PType.JOIN.ordinal() == packetType )
+				{
+					// notify us that another ghost has joined
+					// readd them to the board or something
+				}
+				else if( PType.LEAVE.ordinal() == packetType )
+				{
+					// notify that a ghost has left the game
+					// if the ghost type is the same as the client, then client drops out.
+				}
 				else if( PType.GAMEOVER.ordinal() == packetType )
 				{
 					// game ended
@@ -138,14 +176,12 @@ public class Client extends Thread
 				}
 				else
 				{
-					// some other junk packet
-					System.out.println("UNKNOWN");
+					// some other junk packet (these are discarded as nobody cares about a client
+					//System.out.println("UNKNOWN");
 				}
 			}
 			catch (IOException e)
 			{
-				//e.printStackTrace();
-				//moreQuotes = false;
 			}
 		}
 		socket.close();

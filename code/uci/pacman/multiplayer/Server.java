@@ -36,43 +36,12 @@ enum ServErrors {
  */
 public class Server extends Thread
 {
-	/*
-	private class Peer implements Comparable
-	{
-		private InetAddress addr;
-		private int port;
-		public Peer(InetAddress ia, int p)
-		{
-			addr = ia;
-			port = p;
-		}
-		
-		public InetAddress getAddr(){return addr;}
-		public int getPort(){return port;}
-		public int setPort(int p){port=p;}
-
-		public int compareTo(Peer peer)
-		{
-			if( peer.getAddr().equals(addr) && peer.getPort()==port)
-			{
-				return 0;
-			}
-			else
-			{
-				return -1;
-			}
-		}
-	}
-	*/
-	
 	private static final long serialVersionUID = 1L;
 	protected DatagramSocket socket = null;
 
 	protected static ArrayList<InetAddress> clients;
 	private static InetAddress localAddr;
     protected boolean moreQuotes = true;
-
-	private static int portREMOVEME = 4445;
 
    /**
     * Starts the Server.
@@ -146,14 +115,13 @@ public class Server extends Thread
 	/**
 	 * Sends a command
 	 * @param type the type of command to send
-	 * @param dir the direction command to send
+	 * @param ghost the ghost to associate with
 	 */
-	public static void send(PType type, Direction dir)
+	public static void send(PType type, GhostType ghost)
 	{
 		byte[] buf = new byte[4];
 		buf[0] = new Integer(type.ordinal()).byteValue();
-		buf[1] = new Integer(dir.ordinal()).byteValue();
-		
+		buf[1] = new Integer(ghost.ordinal()).byteValue();
 		Server.sendData(buf);
 	}
 
@@ -174,7 +142,7 @@ public class Server extends Thread
 			try
 			{
 				DatagramSocket socketSend = new DatagramSocket();
-				DatagramPacket packet = new DatagramPacket(buf, buf.length, addr, Server.portREMOVEME );
+				DatagramPacket packet = new DatagramPacket(buf, buf.length, addr, 4446 );
 				socketSend.send(packet);
 				socketSend.close();
 			}
@@ -240,9 +208,6 @@ public class Server extends Thread
 				// get client address
 				InetAddress address = packet.getAddress();
 				
-				// TODO: REMOVE THIS SOON
-				Server.portREMOVEME = packet.getPort();
-				
 				// get the packet type
 				int packetType = buf[0] & 0x000000FF;
 				int data1 = buf[1] & 0x000000FF;
@@ -252,8 +217,6 @@ public class Server extends Thread
 
 				if( PType.JOIN.ordinal() == packetType )
 				{
-					System.out.println("JOIN");
-					
 					if( Server.clients.contains(Server.localAddr) )
 					{
 						// find the next slot available
@@ -275,22 +238,27 @@ public class Server extends Thread
 				else if( PType.GMOVE.ordinal() == packetType )
 				{
 					// a ghost move
-					System.out.print("GMOVE");
+					
+					// ack the player
+					sendAck(address);
+					
+					GhostType gtype;
+					Direction dir;
 
 					// get direction
 					switch(data1)
 					{
 						case 0://up
-							System.out.print(" UP");
+							dir = Direction.UP;
 							break;
 						case 1://down
-							System.out.print(" DOWN");
+							dir = Direction.DOWN;
 							break;
 						case 2://left
-							System.out.print(" LEFT");
+							dir = Direction.LEFT;
 							break;
 						case 3://right
-							System.out.print(" RIGHT");
+							dir = Direction.RIGHT;
 							break;
 					}
 
@@ -298,50 +266,58 @@ public class Server extends Thread
 					switch(data2)
 					{
 						case 0://blinky
-							System.out.print(" BLINKY");
-							
+							gtype = GhostType.BLINKY;
 							break;
 						
 						case 1://clyde
-							System.out.print(" CLYDE");
+							gtype = GhostType.CLYDE;
 							break;
 
 						case 2://inky
-							System.out.print(" INKY");
+							gtype = GhostType.INKY;
 							break;
 
 						case 3://pinky
-							System.out.print(" PINKY");
+							gtype = GhostType.PINKY;
 							break;
 					}
 					System.out.println();
 					
-					sendAck(address);
+					// notify all the clients
+					send(gtype, dir);
+					
+
 
 				}
 				else if( PType.LEAVE.ordinal() == packetType )
 				{
 					// a ghost is leaving
-					
+
+					// acknowledge the player 
 					sendAck(address);
+
+					// find which ghost it is, and notify all the clients that they dropped
+					switch( data1 )
+					{
+						case 0://b
+							send(PType.LEAVE, GhostType.BLINKY);
+							break;
+						case 1://c
+							send(PType.LEAVE, GhostType.CLYDE);
+							break;
+						case 2://i
+							send(PType.LEAVE, GhostType.INKY);
+							break;
+						case 3://p
+							send(PType.LEAVE, GhostType.PINKY);
+							break;
+					}
 				}
 				else
 				{
 					// some other junk packet
-					System.out.println("UNKNOWN("+packetType+")");
 					sendError(address,ServErrors.UNKNOWN_COM);
 				}
-				
-				// figure out response
-				/*String dString = null;
-				dString = new Date().toString();
-				buf = dString.getBytes();
-
-				
-
-				int port = packet.getPort();
-				packet = new DatagramPacket(buf, buf.length, address, port);
-				socket.send(packet);*/
 			}
 			catch (IOException e)
 			{
