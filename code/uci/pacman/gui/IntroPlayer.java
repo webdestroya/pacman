@@ -23,6 +23,11 @@ public class IntroPlayer{
 		
 	// The constructor creates the ArrayList containing the filenames of 
 	// each image in the opening.
+	/**
+	 * 
+	 * constructor for IntroPlayer; sets into sound, creates frames array, creates menuStart button	 * 
+	 * 
+	 */
 	public IntroPlayer() {
 		drawCounter = 1;
 		introSound = GameController.getInstance().getPacInstance().getSound("sounds\\final\\IntroTheme.mp3");
@@ -50,6 +55,11 @@ public class IntroPlayer{
 
 	}
 	
+	/**
+	 * 
+	 * draws the frames for the Intro graphics, adds the button to access MainMenu
+	 * 
+	 */
 	public void draw(){
 			//load intro music file
 			//String themeLocation = 	("sounds\\final\\" + introSound);
@@ -77,11 +87,21 @@ public class IntroPlayer{
 			}
 	}
 	
+	/**
+	 * 
+	 * plays Intro theme
+	 * 
+	 */
 	public void playIntroTheme()
 	{
 		introSound.play();
 	}
 	
+	/**
+	 * 
+	 * stops Intro theme
+	 * 
+	 */
 	public void stopIntroTheme()
 	{
 		introSound.stop();
