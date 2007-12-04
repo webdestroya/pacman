@@ -36,12 +36,43 @@ enum ServErrors {
  */
 public class Server extends Thread
 {
+	/*
+	private class Peer implements Comparable
+	{
+		private InetAddress addr;
+		private int port;
+		public Peer(InetAddress ia, int p)
+		{
+			addr = ia;
+			port = p;
+		}
+		
+		public InetAddress getAddr(){return addr;}
+		public int getPort(){return port;}
+		public int setPort(int p){port=p;}
+
+		public int compareTo(Peer peer)
+		{
+			if( peer.getAddr().equals(addr) && peer.getPort()==port)
+			{
+				return 0;
+			}
+			else
+			{
+				return -1;
+			}
+		}
+	}
+	*/
+	
 	private static final long serialVersionUID = 1L;
 	protected DatagramSocket socket = null;
 
 	protected static ArrayList<InetAddress> clients;
 	private static InetAddress localAddr;
     protected boolean moreQuotes = true;
+
+	private static int portREMOVEME = 4445;
 
    /**
     * Starts the Server.
@@ -143,7 +174,7 @@ public class Server extends Thread
 			try
 			{
 				DatagramSocket socketSend = new DatagramSocket();
-				DatagramPacket packet = new DatagramPacket(buf, buf.length, addr, 4445);
+				DatagramPacket packet = new DatagramPacket(buf, buf.length, addr, Server.portREMOVEME );
 				socketSend.send(packet);
 				socketSend.close();
 			}
@@ -208,7 +239,9 @@ public class Server extends Thread
 				
 				// get client address
 				InetAddress address = packet.getAddress();
-
+				
+				// TODO: REMOVE THIS SOON
+				Server.portREMOVEME = packet.getPort();
 				
 				// get the packet type
 				int packetType = buf[0] & 0x000000FF;
