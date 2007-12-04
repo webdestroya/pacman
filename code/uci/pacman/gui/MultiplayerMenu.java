@@ -2,10 +2,9 @@ package code.uci.pacman.gui;
 import ucigame.*;
 
 /**
- * 
+ *  
+ * this will handle the display for Multiplayer Menu, and additional buttons on it.
  * @author GUI Team (Rick, MikeY, Cameron)
- * this will handle the display for Multiplayer Menu, and
- * additional buttons on it.
  *
  */
 public class MultiplayerMenu{
