@@ -80,7 +80,7 @@ public class PacManGame extends Ucigame {
 		// show intro screen
 		canvas.background(0, 0, 0); // Stop removing this! The background has to be black for the intro - Cameron.
 		showScene(ScreenMode.INTRO);
-		introPlayer.playIntroTheme();
+		introPlayer.playIntroTheme(); // Play intro theme after starting scene. (so it syncs properly)
 	}
 
 	private void displayMenuScreen() {
