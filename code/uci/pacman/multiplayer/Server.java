@@ -7,11 +7,11 @@ import java.net.*;
 import java.util.*;
 
 /**
- * Server is responsible for handling incoming client requests.  It hands out responsibilites to ClientWorkers which
- * handle the incoming data from the Clients. 
+ * Server is responsible for handling incoming client requests and sending out information
  * @author Networking Team
  *	
  */
+
 public class Server extends Thread
 {
 	private static final long serialVersionUID = 1L;

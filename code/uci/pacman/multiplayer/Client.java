@@ -6,7 +6,7 @@ import code.uci.pacman.game.*;
 import java.io.*;
 import java.net.*;
 /**
- * Client handles the input and output of the server.
+ * Client handles the input and output of the server. 
  * @author Networking Team
  */
 public class Client// extends Thread
@@ -14,20 +14,16 @@ public class Client// extends Thread
 	private static final long serialVersionUID = 1L;
 	public static String hostname;
 	
+	
 	/**
 	 * 
-	 * @param host name/ip of the host(String)
+	 * @param host
 	 */
 	public Client(String host)
 	{
 		hostname = host;
 	}
 	
-	/**
-	 * 
-	 * @param ghost which ghost you are sending
-	 * @param dir stuff
-	 */
 	public static void send(String ghost, String dir)
 	{
 		try
