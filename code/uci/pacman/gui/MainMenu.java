@@ -18,7 +18,7 @@ public class MainMenu{
 	private int canvasWidth = 600;
 	private int canvasHeight = 650;
 	private Sound menuTheme;
-	private int buttonStartHeight = 105;
+	private int buttonStartHeight = 120;
 	private int buttonHeight = 83;
 	
 	/**
