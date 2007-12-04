@@ -17,7 +17,9 @@ public class Client extends Thread
 	private static InetAddress address;
 	protected DatagramSocket socket = null;
 	private static boolean moreQuotes = true;
-	private static int ghostType = 0;
+
+	// This tells the client what type he is
+	private static GhostType ghostType = GhostType.BLINKY;
 
 	/**
 	 * Starts a Client
@@ -59,7 +61,7 @@ public class Client extends Thread
 	{
 		byte[] buf = new byte[4];
 		buf[0] = new Integer( type.ordinal() ).byteValue();	
-		buf[1] = new Integer( ghostType ).byteValue();
+		buf[1] = new Integer( ghostType.ordinal() ).byteValue();
 		Client.sendData(buf);
 	}
 
@@ -72,7 +74,7 @@ public class Client extends Thread
 		byte[] buf = new byte[4];
 		buf[0] = new Integer( PType.GMOVE.ordinal() ).byteValue();	
 		buf[1] = new Integer( dir.ordinal() ).byteValue();
-		buf[2] = new Integer( ghostType ).byteValue();
+		buf[2] = new Integer( ghostType.ordinal() ).byteValue();
 
 		Client.sendData(buf);
 	}
@@ -125,22 +127,28 @@ public class Client extends Thread
 					switch(data1)
 					{
 						case 0://blinky
-							
+							Client.ghostType = GhostType.BLINKY;
 							break;
 						case 1://clyde
-
+							Client.ghostType = GhostType.CLYDE;
 							break;
 						case 2://inky
-
+							Client.ghostType = GhostType.INKY;
 							break;
 						case 3://p
-
+							Client.ghostType = GhostType.PINKY;
 							break;
 					}
+
+					System.out.println("GhostType Set: " + data1);
+						
+					//TODO: setup the player or something, go hooray?
+				
 				}
 				else if( PType.ERROR.ordinal() == packetType )
 				{
 					// client was a dumbass, and sent a bad packet
+					System.out.println("ERROR-Rx: " + data1);
 				}
 				else if( PType.ACK.ordinal() == packetType )
 				{
@@ -149,31 +157,83 @@ public class Client extends Thread
 				else if( PType.GAMEFULL.ordinal() == packetType )
 				{
 					// the game is full. tell the player to suck it.
+					System.out.println("Game Server is FULL. You cannot join.");
 				}
 				else if( PType.GMOVE.ordinal() == packetType )
 				{
 					// another ghost moved. (We may or may not use this to also update the current player as consistency)
 					
+
 				}
 				else if( PType.PMOVE.ordinal() == packetType )
 				{
 					// pacman made a move
-					
+
+					// what direction did he move?
+					switch(data1)
+					{
+						case 0://up
+							break;
+						case 1://down
+							break;
+						case 2://left
+							break;
+						case 3://right
+							break;
+					}
 				}
 				else if( PType.GAMESTART.ordinal() == packetType )
 				{
 					// game commencing
+					
+					// TODO: start the game up or something
 
 				}
 				else if( PType.JOIN.ordinal() == packetType )
 				{
 					// notify us that another ghost has joined
 					// readd them to the board or something
+					
+					// what ghost just joined?
+					switch(data1)
+					{
+						case 0://blinky joined
+							
+							break;
+
+						case 1:// clyde joined
+							
+							break;
+
+						case 2:// inky joined
+							break;
+						
+						case 3:// pinky joined
+							break;
+					}
 				}
 				else if( PType.LEAVE.ordinal() == packetType )
 				{
 					// notify that a ghost has left the game
 					// if the ghost type is the same as the client, then client drops out.
+
+					if( data1==Client.ghostType.ordinal() )
+					{
+						// the ghost leaving is the current player
+						moreQuotes = false;
+						
+						System.out.println("You were dropped from the server, or you just left.");
+
+						// drop them and explode
+						System.exit(0);
+						//GameController.getInstance().getPacInstance().drawGameover();
+						//explode(); crash(); burn();
+					}
+					else
+					{
+						// someone else is leaving
+						// TODO: Process the drop
+					}
 				}
 				else if( PType.GAMEOVER.ordinal() == packetType )
 				{

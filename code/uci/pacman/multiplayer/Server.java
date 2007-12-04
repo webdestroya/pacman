@@ -9,7 +9,7 @@ import java.util.*;
 /// COMMAND ENUMS
 enum PType 
 { 
-	JOIN,		// 						(duh)
+	JOIN,		// [GHOST_TYPE]			(duh - GHOST_TYPE is optional (not used on server, but used on clients))
 	GTYPE,		// GHOST_TYPE			(Tells the ghost what ghost he will be)
 	GMOVE, 		// DIR, GHOST_TYPE		(tells the direction and what ghost to move)
 	PMOVE, 		// DIR					( direction of pacman)
