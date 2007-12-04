@@ -42,7 +42,7 @@ public class PacManGame extends Ucigame {
 		// starts the intro for the game
 		showIntroScreen();
 		// make the server or client connection
-		setupServerOrClient();
+		//setupServerOrClient();
 	}
 
 	private void initializeWindow() {
@@ -234,6 +234,7 @@ public class PacManGame extends Ucigame {
 	public void onClickQuit() {
 		if (isShowingScene(ScreenMode.MENU)) {
 			System.out.println("quit click");
+			System.exit(0);
 			// beginGame();
 		}
 	}
