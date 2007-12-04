@@ -20,6 +20,7 @@ public class PacManGame extends Ucigame {
 	private GameController control;
 	private ScoreBoard scoreBoard;
 	private TopScores topScores;
+	private MainMenu mainMenu;
 	private IntroPlayer introPlayer; // for playing the intro
 	private Sprite button1;
 
@@ -59,6 +60,7 @@ public class PacManGame extends Ucigame {
 		// introPlayer = new IntroPlayer(1, this);
 		
 		startScene("Intro");
+				
 		//startScene("Game"); // switch to the "scene" containing the actual game
 		setupServerOrClient(); //make the server or client connection
 
@@ -70,14 +72,12 @@ public class PacManGame extends Ucigame {
 		canvas.background(0, 0, 0);
 		window.title("Pac Man Fever");
 		control = GameController.setInstance(this);
+		introPlayer = new IntroPlayer();
 		control.startGame(); // start the game
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
-        button1 = makeButton("Play",
-                getImage("images/final/singleplayerButton.png"),
-                249, 76);
-        button1.position(canvas.width()/2 - button1.width()/2,
-                canvas.height()/2 - button1.height()/2);
+		mainMenu = new MainMenu();
+        
 	}
 
 	private void setupServerOrClient() {
@@ -106,7 +106,7 @@ public class PacManGame extends Ucigame {
 
 	//Draws the "Menu" scene
 	public void drawMenu() {
-
+		mainMenu.draw();
 	}
 
 	//Draws the "Scores" scene
@@ -125,8 +125,7 @@ public class PacManGame extends Ucigame {
 
 	//Draws the "Intro" scene
 	public void drawIntro() {
-		canvas.clear();
-        button1.draw();
+		introPlayer.draw();
 
 		//introPlayer.draw();
 		//screwAround(); 
@@ -153,7 +152,6 @@ public class PacManGame extends Ucigame {
 	}
 
 	/* Timer Handling */
-
 	public void startFruitTimer() {
 		startTimer("removeFruit", Fruit.SHOW_FRUIT_DURATION);
 	}
@@ -181,7 +179,29 @@ public class PacManGame extends Ucigame {
 	public void onClickPlay(){
 		startScene("Game");
 	}
+
+	///
+	public void onClickSinglePlay(){
+		System.out.println("single playter click");
+		startScene("Game");
+	}
 	
+	public void onClickMultiPlay(){
+		System.out.println("multi playter click");
+		//startScene("Game");
+	}
+	
+	public void onClickTopScores(){
+		System.out.println("topScore click");
+		//startScene("Game");
+	}
+	
+	public void onClickQuit(){
+		System.out.println("quit click");
+		//startScene("Game");
+	}
+	
+	////
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
 		if (keyboard.isDown(keyboard.UP, keyboard.W))
@@ -208,5 +228,4 @@ public class PacManGame extends Ucigame {
 	public Sprite makeSpriteFromPath(String string) {
 		return makeSprite(getImage(string));
 	}
-
 }
