@@ -1,12 +1,12 @@
 package code.uci.pacman.controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import ucigame.Sprite;
 
 import code.uci.pacman.game.GameState;
-import code.uci.pacman.objects.ControllableObject;
-import code.uci.pacman.objects.controllable.*;
+import code.uci.pacman.objects.*;
 import code.uci.pacman.objects.stationary.*;
 
 /**
@@ -78,11 +78,6 @@ public class WallController {
 		walls.add(new Wall(x, y, width, height));
 	}
 
-	public void stopCollision(ControllableObject c) {
-		for (Wall w : walls) {
-			c.stopIfCollidesWith(w);
-		}
-	}
 
 	public void drawObjects() {
 		for (Wall w : walls) {
@@ -109,5 +104,15 @@ public class WallController {
 			return false;
 		else
 			return true;
+	}
+
+	public void stopCollisions(Collection<? extends ControllableObject> objects) {
+		for (ControllableObject c : objects) {
+			this.stopCollisions(c);
+		}
+	}
+	
+	public void stopCollisions(ControllableObject c) {
+	    c.stopIfCollidesWith(walls);
 	}
 }

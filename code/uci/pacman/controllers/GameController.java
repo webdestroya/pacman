@@ -6,6 +6,7 @@ import java.util.Collection;
 import code.uci.pacman.game.Direction;
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.game.PacManGame;
+import code.uci.pacman.game.ScreenMode;
 import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
 import code.uci.pacman.objects.stationary.*;
@@ -57,9 +58,11 @@ public class GameController {
 	}
 
 	private void moveActors() {
+		//move the actors
 		state.getGhosts().moveAIGhosts();
 		state.getPacMan().move();
-		state.getWalls().stopCollision(state.getPacMan());
+		//stop their collisions with walls NOTE this must go after the move statements
+		state.getWalls().stopCollisions(state.getPacMan());
 		state.getGhosts().stopWallCollisions(state.getWalls());
 	}
 	
@@ -100,7 +103,7 @@ public class GameController {
 				state.setupLevel();
 			}
 			else {
-				game.startScene("Scores");
+				game.showScene(ScreenMode.SCORES);
 			}
 		}
 	}
@@ -177,7 +180,7 @@ public class GameController {
 			state.getGhosts().respawn();
 		}
 		else { //if Pac-man has died one too many times
-			game.startScene("GameOver");
+			game.showScene(ScreenMode.GAMEOVER);
 		}	
 	}
 	

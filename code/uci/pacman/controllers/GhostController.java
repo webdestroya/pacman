@@ -42,9 +42,7 @@ public class GhostController extends ActorController<String, Ghost> {
 	}
 	
 	public void stopWallCollisions(WallController walls) {
-		for(Ghost g : getObjects()){
-			walls.stopCollision(g);
-		}
+	    walls.stopCollisions(super.getObjects());
 	}
 	
 	/**
@@ -75,7 +73,6 @@ public class GhostController extends ActorController<String, Ghost> {
 		getObjectAt("Pinky").position(275, 250);
 		getObjectAt("Inky").position(300, 250);
 		getObjectAt("Clyde").position(325, 250);
-		
 	}
 
 	public boolean haveScattered() {

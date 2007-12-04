@@ -1,12 +1,12 @@
 package code.uci.pacman.objects;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import code.uci.pacman.multiplayer.*;
-import code.uci.pacman.controllers.GameController;
+import code.uci.pacman.controllers.*;
 import code.uci.pacman.game.Direction;
-import ucigame.Image;
-import ucigame.Sprite;
+import ucigame.*;
 
 /**
  * This is the class represents all objects that can be controlled (pacman and ghosts) also implements eatable.
@@ -141,5 +141,10 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	private static Image getImage(String stringPath){
 		String resources = "images/final/";
 		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
+	}
+
+	public void stopIfCollidesWith(ArrayList<? extends Sprite> sprites) {
+		Sprite[] spriteArray = sprites.toArray(new Sprite[0]);
+		super.stopIfCollidesWith(spriteArray);
 	}
 }
