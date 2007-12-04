@@ -11,11 +11,13 @@ import code.uci.pacman.objects.stationary.*;
 
 /**
  * 
- * @author The Game Team responsible for and controls wall locations
+ * This controller is responsible for all the walls located within the game
+ * world. Intended to abstract and control all wall-related actions within the
+ * game such as constructing walls for a stage, drawing walls, checking wall
+ * collisions and stopping collisions.
+ * 
+ * @author The Game Team
  */
-
-
-
 public class WallController {
 	private static int TOP_CAGEPOS_X = 222;
 	private static int TOP_CAGEPOS_Y = 235;
@@ -42,10 +44,10 @@ public class WallController {
 		addWall(0, 0, 600, 8);// top
 		addWall(0, 580, 600, 8);// bottom
 		addWall(592, 0, 8, 600);// right
-		
-		addWall(TOP_CAGEPOS_X, TOP_CAGEPOS_Y, 157, 10); //top of the cage
-		addWall(222, 245, 157, 75); //rest of the cage
-		
+
+		addWall(TOP_CAGEPOS_X, TOP_CAGEPOS_Y, 157, 10); // top of the cage
+		addWall(222, 245, 157, 75); // rest of the cage
+
 		addWall(0, 177, 118, 195);
 		addWall(46, 46, 72, 38);
 		addWall(157, 46, 95, 38);
@@ -87,41 +89,71 @@ public class WallController {
 		walls.add(new Wall(x, y, width, height));
 	}
 
-
+	/**
+	 * Draws every wall object onto the game screen. Usually used from within
+	 * another draw function or within the main draw function in PacManGame.
+	 * 
+	 */
 	public void drawObjects() {
 		for (Wall w : walls) {
 			w.draw();
 		}
 	}
-	
-	public boolean willCollideAtPos(ControllableObject pac, int xCheck, int yCheck)
-	{
-		// To check for a possible immediate future collision with a wall, we move the PacMan or Ghost object
-		// xCheck/yCheck pixels from where it is and then check for a collision before proceeding.
-		
+
+	/**
+	 * 
+	 * To check for a possible immediate future collision with a wall, we move
+	 * the PacMan or Ghost object xCheck/yCheck pixels from where it is and then
+	 * check for a collision before proceeding.
+	 * 
+	 * @param pac the PacMan instance
+	 * @param xCheck the x offset from current position
+	 * @param yCheck the y offset from current position
+	 * @return true if a wall will collide at that position; false otherwise.
+	 */
+	public boolean willCollideAtPos(ControllableObject pac, int xCheck, int yCheck) {
+
 		double curX = pac.x() + pac.xspeed();
 		double curY = pac.y() + pac.yspeed();
 		pac.nextX(pac.x() + xCheck);
 		pac.nextY(pac.y() + yCheck);
-		Sprite [] spriteWalls = walls.toArray(new Sprite[0]);
+		Sprite[] spriteWalls = walls.toArray(new Sprite[0]);
 		pac.checkIfCollidesWith(spriteWalls);
 		boolean r = pac.collided();
 		pac.nextX(curX);
 		pac.nextY(curY);
-		if(r)
+		if (r)
 			return false;
 		else
 			return true;
 	}
 
+	/**
+	 * 
+	 * Commands all objects within the collection to no longer be able to
+	 * collide with the walls in the game. This method is used to
+	 * instruct the ghosts not to collide with the walls and to abide by
+	 * them as boundaries for movement.
+	 * 
+	 * @param objects the collection of objects to stop from colliding
+	 */
 	public void stopCollisions(Collection<? extends ControllableObject> objects) {
 		for (ControllableObject c : objects) {
 			this.stopCollisions(c);
 		}
 	}
-	
+
+	/**
+	 * 
+	 * Commands the specified game object to no longer be able to
+	 * collide with the walls in the game. This method is used to
+	 * instruct PacMan not to collide with the walls and to abide by
+	 * them as boundaries for movement.
+	 * 
+	 * @param the object to stop from colliding with walls
+	 */
 	public void stopCollisions(ControllableObject c) {
 		Collection<Wall> wallsToApply = walls;
-	    c.stopIfCollidesWith(wallsToApply);
+		c.stopIfCollidesWith(wallsToApply);
 	}
 }
