@@ -5,9 +5,8 @@ import ucigame.*;
 
 /**
  * 
+ * This will handle the display for Main Menu, and additional graphics on it.
  * @author GUI Team (Rick, MikeY, Cameron)
- * This will handle the display for Main Menu, and additional
- * graphics on it.
  *
  */
 public class MainMenu{
