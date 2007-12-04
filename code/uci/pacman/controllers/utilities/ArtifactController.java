@@ -17,7 +17,7 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 		super.addObject(new Point(x, y), object);
 	}
 
-	public abstract void addArtifact(int x, int y);
+	protected abstract void addArtifact(int x, int y);
 
 	public A getObjectAt(int x, int y) {
 		return super.getObjectAt(new Point(x, y));
