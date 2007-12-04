@@ -1,9 +1,11 @@
+
 package code.uci.pacman.multiplayer;
 
 import code.uci.pacman.game.*;
 
 import java.io.*;
 import java.net.*;
+
 
 /**
  * Client handles the input and output of the server. 
@@ -14,10 +16,10 @@ public class Client// extends Thread
 	private static final long serialVersionUID = 1L;
 	public static InetAddress address;
 	
+
 	/**
-	 * 
-	 * @param host name/ip of the host(String)
-	 * @param host
+	 * Starts a Client
+	 * @param host IP address or host name
 	 */
 	public Client(String host)
 	{

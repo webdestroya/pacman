@@ -12,8 +12,7 @@ enum PType { JOIN, GMOVE, PMOVE, GAMEOVER, GAMESTART };
 
 
 /**
- * Server is responsible for handling incoming client requests.  It hands out responsibilites to ClientWorkers which
- * handle the incoming data from the Clients. 
+ * Server is responsible for handling incoming client requests. Set up UPD Sytle
  * @author Networking Team
  *	
  */
@@ -26,14 +25,17 @@ public class Server extends Thread
 
     protected boolean moreQuotes = true;
 
-   
+   /**
+    * Starts the Server.
+    * @throws IOException
+    */
     public Server() throws IOException 
     {
 		this("Server");
     }
 /**
- * 
- * @param name
+ * Starts a server at socket 4445
+ * @param name unknown
  * @throws IOException
  */
     public Server(String name) throws IOException
@@ -45,6 +47,11 @@ public class Server extends Thread
     }
 	
 	// a single command
+    
+    /**
+     * Sends a command
+     * @param type the command to send out
+     */
 	public static void send(PType type)
 	{
 		byte[] buf = new byte[256];
@@ -53,6 +60,12 @@ public class Server extends Thread
 	}
 	
 	// for a move type
+	
+	/**
+	 * Sends a command
+	 * @param type the type of command to send
+	 * @param dir the direction command to send
+	 */
 	public static void send(PType type, Direction dir)
 	{
 		byte[] buf = new byte[256];
@@ -62,7 +75,10 @@ public class Server extends Thread
 	}
 
 
-
+	/**
+	 * 
+	 * @param buf
+	 */
 	public static void sendData(byte[] buf)
 	{
 		try
