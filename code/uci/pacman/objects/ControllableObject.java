@@ -130,10 +130,7 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	 * @param d the direction to check to for a valid move
 	 * @return true if the move is allowed.
 	 */
-	public boolean moveIsAllowed(Direction d)
-	{
-		return true;//TO-DO
-	}
+	public abstract boolean moveIsAllowed(Direction d);
 	
 	
 	

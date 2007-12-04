@@ -24,7 +24,6 @@ public class PacMan extends ControllableObject {
 		angle = 0;
 	}
 
-	@Override
 	public void eaten() {
 		// TODO Auto-generated method stub
 		control.pacManEaten(this);
@@ -39,7 +38,6 @@ public class PacMan extends ControllableObject {
 		super.draw();
 	}
 
-	@Override
 	protected void spriteForDirection(Direction d) {
 		if(d == Direction.UP)
 			angle=270;
@@ -52,7 +50,6 @@ public class PacMan extends ControllableObject {
 		// TODO Auto-generated method stub	
 	}
 	
-	@Override
 	public boolean moveIsAllowed(Direction d)
 	{
 		WallController walls = GameState.getInstance().getWalls();

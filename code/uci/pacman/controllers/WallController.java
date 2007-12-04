@@ -83,15 +83,6 @@ public class WallController {
 			c.stopIfCollidesWith(w);
 		}
 	}
-	
-	public boolean collidesWith(Ghost g) {
-		for (Wall w : walls) {
-			g.stopIfCollidesWith(w);
-			if (g.collided())
-				return true;
-		}
-		return false;
-	}
 
 	public void drawObjects() {
 		for (Wall w : walls) {
@@ -100,9 +91,9 @@ public class WallController {
 
 	}
 	
-	public boolean existsAtPos(PacMan pac, int xCheck, int yCheck)
+	public boolean existsAtPos(ControllableObject pac, int xCheck, int yCheck)
 	{
-		// To check for a possible immediate future collision with a wall, we move the PacMan object
+		// To check for a possible immediate future collision with a wall, we move the PacMan or Ghost object
 		// xCheck/yCheck pixels from where it is and then check for a collision before proceeding.
 		
 		double curX = pac.x() + pac.xspeed();

@@ -4,7 +4,9 @@ package code.uci.pacman.objects.controllable;
 import java.util.Random;
 
 import code.uci.pacman.ai.AI;
+import code.uci.pacman.controllers.WallController;
 import code.uci.pacman.game.Direction;
+import code.uci.pacman.game.GameState;
 import code.uci.pacman.objects.ControllableObject;
 
 
@@ -121,5 +123,19 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public abstract Direction getMove();
 
+	public boolean moveIsAllowed(Direction d)
+	{
+		WallController walls = GameState.getInstance().getWalls();
+		if(d == Direction.UP && walls.existsAtPos(this,0,-13))
+			return true;
+		if(d == Direction.DOWN && walls.existsAtPos(this,0,13 + this.height()))
+			return true;
+		if(d == Direction.LEFT && walls.existsAtPos(this,-10,0))
+			return true;
+		if(d == Direction.RIGHT && walls.existsAtPos(this,10 + this.width(),0))
+			return true;
+		else
+			return false;
+	}
 
 }

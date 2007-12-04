@@ -42,17 +42,9 @@ public class Clyde extends Ghost{
 			int curY = this.y();
 			// check to see if in center (just spawned)
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				if (curX < 275)
-					return Direction.RIGHT;
-				else if (curX > 300)
-					return Direction.LEFT;
-				// otherwise, right in between
-				this.nextY(205);
+				this.position(this.x(), 205);
 				lastDirection = Direction.LEFT;
 				curDirection = Direction.UP;
-			} else if ((curY >= 190 && curY <= 215) && (curX >= 250 && curX <= 325)) {
-				//temporary until starting wall doesn't allow coming in
-				curDirection = Direction.LEFT;
 			} else {
 				PacMan pm = GameState.getInstance().getPacMan();
 				int pmX = pm.x();
@@ -62,64 +54,35 @@ public class Clyde extends Ghost{
 				Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
 				Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
 				boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
-				if (verticalMoreImportant) {
+				if (verticalMoreImportant)
 					curDirection = preferredVertical;
-				} else {
+				else
 					curDirection = preferredHorizontal;
-				}
-				this.step(curDirection);
-				this.move();
-				// there has to be a better way of doing this next part with looping,
-				// but for now it works...
-				if (GameState.getInstance().getWalls().collidesWith(this)) {
+				if (!this.moveIsAllowed(curDirection)) {
 					if (verticalMoreImportant) {
 						if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
 							curDirection = lastDirection;
-							this.step(curDirection);
-							this.move();
-							if (GameState.getInstance().getWalls().collidesWith(this)) {
+							if (!this.moveIsAllowed(curDirection))
 								curDirection = curDirection == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-								this.step(curDirection);
-								this.move();
-							}
 						} else {
 							curDirection = preferredHorizontal;
-							this.step(curDirection);
-							this.move();
-							if (GameState.getInstance().getWalls().collidesWith(this)) {
+							if (!this.moveIsAllowed(curDirection)) {
 								curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-								this.step(curDirection);
-								this.move();
-								if (GameState.getInstance().getWalls().collidesWith(this)) {
+								if (!this.moveIsAllowed(curDirection))
 									curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-									this.step(curDirection);
-									this.move();
-								}
 							}
 						}
 					} else {
 						if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
 							curDirection = lastDirection;
-							this.step(curDirection);
-							this.move();
-							if (GameState.getInstance().getWalls().collidesWith(this)) {
+							if (!this.moveIsAllowed(curDirection))
 								curDirection = curDirection == Direction.UP ? Direction.DOWN : Direction.UP;
-								this.step(curDirection);
-								this.move();
-							}
 						} else {
 							curDirection = preferredVertical;
-							this.step(curDirection);
-							this.move();
-							if (GameState.getInstance().getWalls().collidesWith(this)) {
+							if (!this.moveIsAllowed(curDirection)) {
 								curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-								this.step(curDirection);
-								this.move();
-								if (GameState.getInstance().getWalls().collidesWith(this)) {
+								if (!this.moveIsAllowed(curDirection))
 									curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-									this.step(curDirection);
-									this.move();
-								}
 							}
 						}
 					}
