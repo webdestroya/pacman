@@ -54,7 +54,7 @@ public class PacManGame extends Ucigame {
 		initializeWindow(); 
 		
 		// starts the intro for the game
-		startScene("Intro");
+		displayIntroScreen();
 		
 		//make the server or client connection
 		setupServerOrClient(); 
@@ -62,18 +62,25 @@ public class PacManGame extends Ucigame {
 	}
 
 	private void initializeWindow() {
+		control = GameController.setInstance(this);
 		framerate(20);
 		window.size(600, 650);
 		canvas.background(0, 0, 0);
-		window.title("Pac Man Fever");
-		control = GameController.setInstance(this);
+		window.title("Pac Man Fever");        
+	}
+	
+	private void displayIntroScreen() {
 		introPlayer = new IntroPlayer();
+		mainMenu = new MainMenu();
+		startScene("Intro");
 		introPlayer.playIntroTheme();
+	}
+	
+	private void beginGame() {
 		control.startGame(); // start the game
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
-		mainMenu = new MainMenu();
-        
+		startScene("Game");
 	}
 
 	private void setupServerOrClient() {
@@ -181,7 +188,7 @@ public class PacManGame extends Ucigame {
 		System.out.println("single playter click");
 		mainMenu.stopMenuTheme();
 		canvas.background(0, 0, 0);
-		startScene("Game");
+		beginGame();
 	}
 	
 	/**
