@@ -8,7 +8,7 @@ import code.uci.pacman.controllers.GameController;
 
 
 /**
- * this will display the credits at the end of the game
+ * This will display the credits at the end of the game
  * @author GUI Team (Rick, MikeY, Cameron)
  *
  */
@@ -24,7 +24,7 @@ public class CreditsScreen{
 	// each image in the opening.
 	/**
 	 * 
-	 * constructor for CreditsScreen; sets into sound, creates frames array, creates play again and quit buttons 
+	 * Constructor for CreditsScreen; sets into sound, creates frames array, creates play again and quit buttons 
 	 * 
 	 */
 	public CreditsScreen() {
@@ -56,7 +56,7 @@ public class CreditsScreen{
 	
 	/**
 	 * 
-	 * draws the frames for the credits graphics, adds the buttons to play again or quit
+	 * Draws the frames for the credits graphics, adds the buttons to play again or quit
 	 * 
 	 */
 	public void draw(){
@@ -84,7 +84,7 @@ public class CreditsScreen{
 	
 	/**
 	 * 
-	 * plays Credits theme
+	 * Plays Credits theme
 	 * 
 	 */
 	public void playCreditsTheme()
@@ -94,7 +94,7 @@ public class CreditsScreen{
 	
 	/**
 	 * 
-	 * stops Credits theme
+	 * Stops Credits theme
 	 * 
 	 */
 	public void stopCreditsTheme()
