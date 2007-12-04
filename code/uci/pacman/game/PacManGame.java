@@ -69,11 +69,9 @@ public class PacManGame extends Ucigame {
 		// initialize screens
 		introPlayer = new IntroPlayer();
 		// show intro screen
-		canvas.background(0, 0, 0); // Background has to be black for the intro
-									// (sorry for removing)
+		canvas.background(0, 0, 0); 
 		showScene(ScreenMode.INTRO);
-		introPlayer.playIntroTheme(); // Play intro theme after starting
-										// scene. (so it syncs properly)
+		introPlayer.playIntroTheme(); 
 	}
 
 	private void showMenuScreen() {
@@ -304,16 +302,19 @@ public class PacManGame extends Ucigame {
 
 	/**
 	 * Determines if the scene currently displayed is the one specified.
-	 * @param scene the scene to check
-	 * @return true if the scene specified is currently displayed; false otherwise.
+	 * 
+	 * @param scene
+	 *            the scene to check
+	 * @return true if the scene specified is currently displayed; false
+	 *         otherwise.
 	 */
 	public boolean isShowingScene(ScreenMode scene) {
 		return currentScene.equals(scene);
 	}
-	
-	
+
 	private String capitalize(String s) {
-        if (s.length() == 0) return s;
-        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
-    }
+		if (s.length() == 0)
+			return s;
+		return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+	}
 }
