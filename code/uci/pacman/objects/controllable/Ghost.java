@@ -55,8 +55,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	}
 	
 	/**
-	 * Sets scatter to true.
-	 * Scatters this ghost.
+	 * Tells the ghost to go into Scatter Mode.
 	 */
 	public void scatter(){
 		scatter = true;
@@ -64,7 +63,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	}
 	
 	/**
-	 * Tells the ghost to stop scattering and begin attack.
+	 * Tells the ghost to come out of Scatter Mode.
 	 */
 	public void unScatter() {
 		scatter = false;
@@ -72,7 +71,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	}
 	
 	/***
-	 * Respawns this ghost back within the cage and disables scatter for this ghost.
+	 * Respawns the ghost back within the cage and disables scatter for the ghost.
 	 */
 	public void respawnInCage() {
 		Random r = new Random();
@@ -98,7 +97,8 @@ public abstract class Ghost extends ControllableObject implements AI {
 	}
 
 	/**
-	 * 
+	 * This changes the sprite based on its direction.
+	 * @param d - direction of the ghost.
 	 */
 	@Override
 	//this is for changing the sprite based on direction
