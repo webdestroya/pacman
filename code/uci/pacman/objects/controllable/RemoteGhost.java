@@ -4,6 +4,9 @@ import code.uci.pacman.game.Direction;
 import code.uci.pacman.objects.controllable.Ghost;
 
 /**
+ * A remote ghost is a Ghost that is controlled by a human that is
+ * on a remote computer (one different than the computer used to
+ * control PacMan).
  * @author Team Objects/AI
  *
  */
@@ -41,7 +44,7 @@ public class RemoteGhost extends Ghost{
 	
 	/**
 	 * Sets the ghost in a direction.
-	 * @param d - The direction the ghost will be set to move towards.
+	 * @param d The direction the ghost will be set to move towards.
 	 */
 	public void setDirection(Direction d)
 	{
