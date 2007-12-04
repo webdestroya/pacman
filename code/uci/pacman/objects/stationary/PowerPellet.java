@@ -5,9 +5,10 @@ import code.uci.pacman.objects.StationaryObject;
 
 /**
  * 
- * @author Team Objects/AI
  * Power Pellets are the larger pellets (only 4 on board)
  * When eaten by Pac Man, the ghosts go into Scatter Mode
+ * 
+ * @author Team Objects/AI
  *
  */
 public class PowerPellet extends StationaryObject implements Eatable {

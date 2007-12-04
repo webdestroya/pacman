@@ -4,9 +4,9 @@ package code.uci.pacman.objects.stationary;
 import code.uci.pacman.objects.StationaryObject;
 
 /**
+ * These are the square images making up the walls of the game
  * 
  * @author Team Objects/AI
- * These are the square images making up the walls of the game
  *
  */
 public class Wall extends StationaryObject {
