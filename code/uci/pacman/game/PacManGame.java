@@ -52,11 +52,18 @@ public class PacManGame extends Ucigame {
 	public void setup() {
 		generatePositions(false);
 		initializeWindow(); // creates the window, sets the title, initialize
+		// control
 
-		// start the very first scene in the game, Intro Scene
+		// Run these lines to see the intro
+		//introPlayer.playIntroTheme();
 		startScene("Intro");
 				
 		//startScene("Game"); // switch to the "scene" containing the actual game
+		
+		// Run these lines to see the main menu
+		//canvas.background(getImage("images/final/mainMenuBackGroundDim.png"));
+		//mainMenu.startMenuTheme();
+		//startScene("Menu");
 		setupServerOrClient(); //make the server or client connection
 
 	}
@@ -67,11 +74,13 @@ public class PacManGame extends Ucigame {
 		canvas.background(0, 0, 0);
 		window.title("Pac Man Fever");
 		control = GameController.setInstance(this);
-		introPlayer = new IntroPlayer(); 
-		mainMenu = new MainMenu(); 
+		introPlayer = new IntroPlayer();
+		introPlayer.playIntroTheme();
 		control.startGame(); // start the game
-		scoreBoard = new ScoreBoard(); 
-		topScores = new TopScores(); 
+		scoreBoard = new ScoreBoard();
+		topScores = new TopScores();
+		mainMenu = new MainMenu();
+        
 	}
 
 	private void setupServerOrClient() {
@@ -98,13 +107,9 @@ public class PacManGame extends Ucigame {
 
 	/*  Painting the Game Scenes  */
 
-	//Draws the "Intro" scene
-	public void drawIntro() {
-		introPlayer.draw();
-	}
-	
 	//Draws the "Menu" scene
 	public void drawMenu() {
+		canvas.clear();
 		mainMenu.draw();
 	}
 
@@ -120,6 +125,17 @@ public class PacManGame extends Ucigame {
 		control.nextMove();
 		control.drawState();
 		scoreBoard.draw();
+	}
+
+	//Draws the "Intro" scene
+	public void drawIntro() {
+		introPlayer.draw();
+
+		//introPlayer.draw();
+		//screwAround(); 
+        ///////////////////// MIKE THIS IS WHERE YOU PUT YOUR INTO and from your intro you need to call 
+        ///////////////////// startScene("Game"); to start the game. so put that in a button somewhere. 
+        ///////////////////// I made a basic start game screen, to show you about how it works.. my button sucks lol
 	}
 
 //	this was just a test
@@ -162,11 +178,25 @@ public class PacManGame extends Ucigame {
 		stopTimer("startGame");
 		startScene("Game");
 	}
-	
 	/* Event Input Handling */
 
-	// events from MainMenu buttons //
+	public void onClickPlay(){
+		startScene("Game");
+	}
+	
+	public void onClickMenuStart()
+	{
+		introPlayer.stopIntroTheme();
+		canvas.background(getImage("images/final/mainMenuBackGroundDim.png"));
+		mainMenu.startMenuTheme();
+		startScene("Menu");
+	}
+
+	///
 	public void onClickSinglePlay(){
+		System.out.println("single playter click");
+		mainMenu.stopMenuTheme();
+		canvas.background(0, 0, 0);
 		startScene("Game");
 	}
 	
