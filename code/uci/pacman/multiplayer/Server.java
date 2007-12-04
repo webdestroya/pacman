@@ -16,7 +16,9 @@ public class Server extends Thread
 {
 	private static final long serialVersionUID = 1L;
 	protected DatagramSocket socket = null;
-    protected BufferedReader in = null;
+
+	protected ArrayList<InetAddress> clients;
+
     protected boolean moreQuotes = true;
 
    
@@ -33,11 +35,31 @@ public class Server extends Thread
     {
         super(name);
         socket = new DatagramSocket(4445);
+		clients = new ArrayList<InetAddress>();
         System.out.println("START SERVER");
     }
+	
+	public void send()
+	{
+		try
+		{
+			for(int i=0; i < clients.size(); i++)
+			{
+				byte[] buf = new byte[256];
+				DatagramSocket socketSend = new DatagramSocket();
+				DatagramPacket packet = new DatagramPacket(buf, buf.length, clients.get(i), 4445);
+				socketSend.send(packet);
+			}
+		}
+		catch(Exception e)
+		{
 
-    public void run() {
+		}
+	}
 
+    public void run()
+	{
+		// should be while game is not over
 		while (moreQuotes) 
 		{
 			try 
@@ -48,20 +70,20 @@ public class Server extends Thread
 				DatagramPacket packet = new DatagramPacket(buf, buf.length);
 				socket.receive(packet);
 				
-				//System.out.println("RECV: " + packet.getData() );
-
 				// figure out response
 				String dString = null;
-				//if (in == null)
 				dString = new Date().toString();
-				//else
-				//    dString = getNextQuote();
-
 				buf = dString.getBytes();
-				//buf = GameState.getInstance().getBytes();//dString.getBytes();
 
 				// send the response to the client at "address" and "port"
 				InetAddress address = packet.getAddress();
+				
+				if( !clients.contains(address) )
+				{
+					clients.add( address );
+				}
+
+
 				int port = packet.getPort();
 				packet = new DatagramPacket(buf, buf.length, address, port);
 				socket.send(packet);
@@ -72,34 +94,12 @@ public class Server extends Thread
 				moreQuotes = false;
 			}
 		}
-		System.out.println("CLOSE");
+		System.out.println("Server Shutdown");
 		socket.close();
     }
     /**
      * @return resulting GameState
      */
-    protected GameState getNextQuote()
-    {
-		String returnValue = null;
-		/*
-		try
-		{
-			if ((returnValue = in.readLine()) == null) 
-			{
-				in.close();
-				moreQuotes = false;
-				returnValue = "No more quotes. Goodbye.";
-			}
-		}
-		catch (IOException e)
-		{
-			returnValue = "IOException occurred in server.";
-		}
-		*/
-
-		//return returnValue;
-		return GameState.getInstance();
-    }
 
 	
 	
