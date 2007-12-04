@@ -6,6 +6,11 @@ import code.uci.pacman.game.GameState;
 import code.uci.pacman.objects.ControllableObject;
 
 /**
+ * Represents PacMan - the main character of the game.
+ * PacMan is controlled by a human and can eat fruit,
+ * pellets and power pellets.  PacMan can be eaten by
+ * ghosts.  If he eats a power pellet, PacMan can eat
+ * ghosts within a short window of time.
  * @author Team Objects/AI
  *
  */
@@ -18,26 +23,46 @@ public class PacMan extends ControllableObject {
 	private static final int PACSPEED = 7;
 	private double angle; //0,90,180,270
 
+	/**
+	 * Makes a new PacMan given it's initial coordinates on the level.
+	 * @param x The initial x coordinate of PacMan.
+	 * @param y The initial y coordinate of PacMan.
+	 */
 	public PacMan(int x, int y) {
 		super(pacImagePath, new int[] {0,0,22,0,43,0,64,0}, PACWIDTH, PACHEIGHT, PACFRAMERATE, x, y);
 		super.speed = PACSPEED;
 		angle = 0;
 	}
 
+	/**
+	 * Tells the game controller that PacMan has been eaten.
+	 */
 	public void eaten() {
 		// TODO Auto-generated method stub
 		control.pacManEaten(this);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getValue() {
 		return 0;
 	}
 	
+	/**
+	 * Draws PacMan.  Internally, it is based upon his direction.
+	 */
 	public void draw(){
 		super.rotate(angle);
 		super.draw();
 	}
 
+	/**
+	 * This changes the sprite based on its direction.  Specifically,
+	 * it sets the angle at which the sprite should be rotated.
+	 * @param d direction of PacMan.
+	 */
 	protected void spriteForDirection(Direction d) {
 		if(d == Direction.UP)
 			angle=270;
@@ -50,6 +75,11 @@ public class PacMan extends ControllableObject {
 		// TODO Auto-generated method stub	
 	}
 	
+	/**
+	 * Determines whether a move in a particular direction is allowed.
+	 * @param d The direction PacMan may try to move towards.
+	 * @return true if moving in the direction provided is allowed; false if that way is obstructed by a wall.
+	 */
 	public boolean moveIsAllowed(Direction d)
 	{
 		WallController walls = GameState.getInstance().getWalls();
