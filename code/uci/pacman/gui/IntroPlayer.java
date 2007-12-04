@@ -17,15 +17,20 @@ import code.uci.pacman.controllers.GameController;
 public class IntroPlayer{	
 	
 	private ArrayList<String> frames;
-	private String introSound;
+	private Sound introSound;
 	private int drawCounter;
+	private Sprite menuButton; 
 		
 	// The constructor creates the ArrayList containing the filenames of 
 	// each image in the opening.
 	public IntroPlayer() {
 		drawCounter = 1;
-		introSound = "IntroTheme.mp3";
+		introSound = GameController.getInstance().getPacInstance().getSound("sounds\\final\\IntroTheme.mp3");
 		frames = new ArrayList<String>();
+		
+		menuButton = GameController.getInstance().getPacInstance().makeButton("MenuStart",GameController.getInstance().getPacInstance().getImage("images/final/singleplayerButton.png"),
+                249, 76);
+		menuButton.position(200, 450);
 		
 		for (int currentImage = 1; currentImage <= 30; currentImage++)
 		{
@@ -42,9 +47,7 @@ public class IntroPlayer{
 			frames.add("images\\final\\intro\\" + workingString);
 		}
 
-		String themeLocation = 	("sounds\\final\\" + introSound);
-		Sound music = GameController.getInstance().getPacInstance().getSound(themeLocation);			
-		music.play();
+
 	}
 	
 	public void draw(){
@@ -58,7 +61,7 @@ public class IntroPlayer{
 				{
 					String frameLocation = frames.get(drawCounter);
 					Sprite currentFrame =  GameController.getInstance().getPacInstance().makeSpriteFromPath(frameLocation);
-					Thread.sleep(1525);	
+					Thread.sleep(1525);	//orig 1525
 					currentFrame.draw();
 					drawCounter ++;
 				}
@@ -68,5 +71,19 @@ public class IntroPlayer{
 					e.printStackTrace();
 				}
 			}
+			if (drawCounter == 30)
+			{
+				menuButton.draw();				
+			}
+	}
+	
+	public void playIntroTheme()
+	{
+		introSound.play();
+	}
+	
+	public void stopIntroTheme()
+	{
+		introSound.stop();
 	}
 }
