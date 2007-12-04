@@ -51,7 +51,7 @@ public class PacMan extends ControllableObject {
 	}
 	
 	/**
-	 * Draws PacMan.  Internally, it is based upon his direction.
+	 * Draws PacMan on the screen.
 	 */
 	public void draw(){
 		super.rotate(angle);
