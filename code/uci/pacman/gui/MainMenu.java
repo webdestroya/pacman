@@ -51,7 +51,7 @@ public class MainMenu{
 
 	/**
 	 * 
-	 * draw() draws all the buttons in the MainMenu. Each button corresponds to a OnClick state located 
+	 * Draws all the buttons in the MainMenu. Each button corresponds to a OnClick state located 
 	 * in PacManGame.java.
 	 * 
 	 */
