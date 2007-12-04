@@ -131,7 +131,6 @@ public class PacManGame extends Ucigame {
 
 	// Draws the "Intro" scene
 	public void drawIntro() {
-		canvas.clear();
 		introPlayer.draw();
 	}
 
