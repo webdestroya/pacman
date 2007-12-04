@@ -9,8 +9,8 @@ import java.util.*;
 
 /**
  * 
- * @author GUI Team (Rick, MikeY, Cameron)
  * This will display the score, lives, and current fruit
+ * @author GUI Team (Rick, MikeY, Cameron) 
  *
  */
 public class ScoreBoard{
