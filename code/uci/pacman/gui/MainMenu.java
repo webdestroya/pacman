@@ -6,7 +6,7 @@ import ucigame.*;
 /**
  * 
  * @author GUI Team
- * this will handle the display for Main Menu, and additional
+ * This will handle the display for Main Menu, and additional
  * graphics on it.
  *
  */
@@ -52,8 +52,8 @@ public class MainMenu{
 
 	/**
 	 * 
-	 * draw() method is responsible for drawing the MainMenu, it draws a background and 
-	 * adds 4 buttons to it. Each button corresponds to a different gameState.
+	 * draw() draws all the buttons in the MainMenu. Each button corresponds to a OnClick state located 
+	 * in PacManGame.java.
 	 * 
 	 */
 	public void draw(){
@@ -63,11 +63,21 @@ public class MainMenu{
 		quit.draw();
 	}
 	
+	/**
+	 *	 
+	 * Plays the main theme in a loop until stopMenuTheme is called
+	 * 
+	 */
 	public void startMenuTheme()
 	{
 		menuTheme.loop();		
 	}
 	
+	/**
+	 *	 
+	 * Stops the main theme
+	 *  
+	 */
 	public void stopMenuTheme()
 	{
 		menuTheme.stop();
