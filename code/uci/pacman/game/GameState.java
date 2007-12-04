@@ -6,8 +6,17 @@ import code.uci.pacman.objects.stationary.*;
 
 /**
  * 
- * @author The Game Team holds all the information about the current state of
- *         the game
+ * This is the model that encompasses all information about the current state of
+ * the game world. This game state contains all the objects within the game
+ * world, the score, lives, and level along with all information about the
+ * current state of these objects.
+ * 
+ * This class is a singleton and is usually the place where the actual changes
+ * are taking place when a controller invokes an action. The game controller
+ * usually is the object that should be used to interact with this state.
+ * 
+ * @author The Game Team
+ * 
  */
 public class GameState {
 
@@ -19,11 +28,26 @@ public class GameState {
 	private PillController pills;
 	private PowerPelletController pellets;
 	private WallController walls;
-	private Wall wall;
 	private Fruit bonusItem;
 	private int score;
 	private int level;
 
+	public static GameState getInstance() {
+		return gameInstance;
+	}
+
+	public static void setInstance(GameState gameState) {
+		gameInstance = gameState;
+	}
+
+	/**
+	 * Initializes all the various game related objects and defaults the score,
+	 * lives and level to their initial values. This method is generally used
+	 * when the game is about to begin or to restart the game. This method
+	 * should not be invoked directly but instead should be used through
+	 * invoking methods in the game controller.
+	 * 
+	 */
 	public void initialize() {
 		score = 0;
 		lives = INITIAL_LIVES;
@@ -31,6 +55,10 @@ public class GameState {
 		setupLevel();
 	}
 
+	/**
+	 * Constructs all the game objects that exist for the upcoming game stage.
+	 * This is called at the beginning of the game and on each subsequent level.
+	 */
 	public void setupLevel() {
 		pacMan = new PacMan(290, 440);
 		pills = new PillController();
@@ -41,14 +69,10 @@ public class GameState {
 		SoundController.startAmbient();
 	}
 
-	public static GameState getInstance() {
-		return gameInstance;
-	}
-
-	public static void setInstance(GameState gameState) {
-		gameInstance = gameState;
-	}
-
+	/**
+	 * Draws every object within the game onto the screen. Invoked through the
+	 * game controller and should only be called in a draw function.
+	 */
 	public void draw() {
 		walls.drawObjects();
 		pacMan.draw();
@@ -58,67 +82,131 @@ public class GameState {
 		bonusItem.draw();
 	}
 
-	public boolean levelIsFinished() {
+	/**
+	 * Determines if the level has been completed which is when all the pills on
+	 * the stage have been eaten by PacMan. This method is used in the game
+	 * controller.
+	 * 
+	 * @return if the stage has been cleared.
+	 */
+	public boolean stageHasBeenCleared() {
 		return this.getPills().getPillCount() == 0;
 	}
 
 	/**
 	 * 
+	 * Adds the specified value to the existing score.
+	 * 
 	 * @param score
-	 *            takes in a value and adds it to the current score
+	 *            amount of points to add
 	 */
 	public void addToScore(int score) {
 		this.score += score;
 	}
 
+	/**
+	 * Gets the current game score.
+	 * 
+	 * @return the score for the game.
+	 */
 	public int getScore() {
 		return score;
 	}
 
 	/**
-	 * called when Pac-man is eaten
+	 * Removes a life from PacMan. Called from the controller when PacMan is
+	 * eaten by a ghost.
 	 */
 	public void lifeLost() {
 		lives--;
 	}
 
+	/**
+	 * Gets the total number of remaining lives for PacMan.
+	 * 
+	 * @return the number of lives PacMan has remaining.
+	 */
 	public int getLives() {
 		return lives;
 	}
 
+	/**
+	 * 
+	 * Gets the controller responsible for all actions relating
+	 * to the ghosts within the game world.
+	 * 
+	 * @return the ghosts controller
+	 */ 
 	public GhostController getGhosts() {
 		return ghosts;
 	}
 
+	/**
+	 * 
+	 * Gets the controller responsible for all actions relating
+	 * to the pills within the game world.
+	 * 
+	 * @return the pills controller
+	 */ 
 	public PillController getPills() {
 		return pills;
 	}
 
+	/**
+	 * 
+	 * Gets the controller responsible for all actions relating
+	 * to the pellets within the game world.
+	 * 
+	 * @return the pellets controller
+	 */ 
 	public PowerPelletController getPellets() {
 		return pellets;
 	}
 
+	/**
+	 * 
+	 * Gets the instance of the fruit object currently within the game world.
+	 * 
+	 * @return the fruit inside the game world.
+	 */
 	public Fruit getFruit() {
 		return bonusItem;
 	}
 
+	/**
+	 * 
+	 * Gets the instance of PacMan currently within the game world.
+	 * 
+	 * @return the PacMan instance inside the game world.
+	 */
 	public PacMan getPacMan() {
 		return pacMan;
 	}
 
+
+	/**
+	 * 
+	 * Gets the controller responsible for all actions relating
+	 * to the walls within the game world.
+	 * 
+	 * @return the walls controller
+	 */ 
 	public WallController getWalls() {
 		return walls;
 	}
 
-	public void nextLevel() {
+	/**
+	 * Increments the game to the next stage.
+	 */
+	public void nextStage() {
 		level++;
 	}
 
+	/**
+	 * Gets the current stage number for the game.
+	 * @return the current stage
+	 */
 	public int getLevel() {
 		return level;
-	}
-
-	public Wall getWall() {
-		return wall;
 	}
 }

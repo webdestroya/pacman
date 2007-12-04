@@ -14,7 +14,12 @@ import com.sun.xml.internal.ws.util.StringUtils;
 
 /**
  * 
- * @author The Game Team The main game class
+ * The main game class for PacMan. This class extends from the UciGame
+ * class which is part of the UciGame game framework. Thanks to Professor
+ * Frost for making this great framework which made our lives easier. This
+ * is the class that should be run to play PacMan.
+ * 
+ * @author The Game Team 
  */
 public class PacManGame extends Ucigame {
 
