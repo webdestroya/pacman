@@ -20,7 +20,6 @@ public class Fruit extends StationaryObject implements Eatable {
 	private int fruitEaten;
 
 	/**
-	 * 
 	 * constructor picks random fruit image sets the value automatically hides
 	 * itself
 	 * 
