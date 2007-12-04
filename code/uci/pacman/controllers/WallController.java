@@ -1,10 +1,11 @@
 package code.uci.pacman.controllers;
 
-import java.util.ArrayList;
+import java.awt.Point;
 import java.util.Collection;
 
 import ucigame.Sprite;
 
+import code.uci.pacman.controllers.utilities.SpriteController;
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.objects.*;
 import code.uci.pacman.objects.stationary.*;
@@ -18,14 +19,11 @@ import code.uci.pacman.objects.stationary.*;
  * 
  * @author The Game Team
  */
-public class WallController {
+public class WallController extends SpriteController<Point, Wall> {
 	private static int TOP_CAGEPOS_X = 222;
 	private static int TOP_CAGEPOS_Y = 235;
-	private Collection<Wall> walls;
 
 	public WallController() {
-		walls = new ArrayList<Wall>();
-		// this.constructArtifacts("wall");
 		switch (GameState.getInstance().getLevel()) {
 		case 1:
 			makeWalls1();
@@ -86,7 +84,7 @@ public class WallController {
 	}
 
 	private void addWall(int x, int y, int width, int height) {
-		walls.add(new Wall(x, y, width, height));
+		super.addObject(new Point(x, y), new Wall(x, y, width, height));
 	}
 
 	/**
@@ -95,7 +93,7 @@ public class WallController {
 	 * 
 	 */
 	public void drawObjects() {
-		for (Wall w : walls) {
+		for (Wall w : super.getObjects()) {
 			w.draw();
 		}
 	}
@@ -117,7 +115,7 @@ public class WallController {
 		double curY = pac.y() + pac.yspeed();
 		pac.nextX(pac.x() + xCheck);
 		pac.nextY(pac.y() + yCheck);
-		Sprite[] spriteWalls = walls.toArray(new Sprite[0]);
+		Sprite[] spriteWalls = super.getObjects().toArray(new Sprite[0]);
 		pac.checkIfCollidesWith(spriteWalls);
 		boolean r = pac.collided();
 		pac.nextX(curX);
@@ -153,7 +151,6 @@ public class WallController {
 	 * @param the object to stop from colliding with walls
 	 */
 	public void stopCollisions(ControllableObject c) {
-		Collection<Wall> wallsToApply = walls;
-		c.stopIfCollidesWith(wallsToApply);
+		c.stopIfCollidesWith(super.getObjects());
 	}
 }
