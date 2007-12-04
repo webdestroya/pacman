@@ -14,11 +14,20 @@ public class Client// extends Thread
 	private static final long serialVersionUID = 1L;
 	public static String hostname;
 	
-	/*public Client(String host)
+	/**
+	 * 
+	 * @param host name/ip of the host(String)
+	 */
+	public Client(String host)
 	{
 		hostname = host;
-	}*/
+	}
 	
+	/**
+	 * 
+	 * @param ghost which ghost you are sending
+	 * @param dir stuff
+	 */
 	public static void send(String ghost, String dir)
 	{
 		try

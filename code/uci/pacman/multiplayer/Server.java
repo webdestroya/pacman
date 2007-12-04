@@ -19,11 +19,16 @@ public class Server extends Thread
     protected BufferedReader in = null;
     protected boolean moreQuotes = true;
 
+   
     public Server() throws IOException 
     {
 		this("Server");
     }
-
+/**
+ * 
+ * @param name
+ * @throws IOException
+ */
     public Server(String name) throws IOException
     {
         super(name);
@@ -70,7 +75,9 @@ public class Server extends Thread
 		System.out.println("CLOSE");
 		socket.close();
     }
-
+    /**
+     * @return
+     */
     protected GameState getNextQuote()
     {
 		String returnValue = null;
