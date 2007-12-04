@@ -53,14 +53,14 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	 * @param dir
 	 *            the direction to send to the client
 	 */
-	public void sendStep(String dir) {
-		if (this instanceof code.uci.pacman.objects.controllable.PacMan) {
+	public void sendStep(Direction dir) {
+		/*if (this instanceof code.uci.pacman.objects.controllable.PacMan) {
 			Client.send("PacMan", dir);
 		} else if (this instanceof code.uci.pacman.ai.Blinky) {
 			Client.send("Blinky", dir);
 		} else {
 			Client.send("Inky", dir);
-		}
+		}*/
 	}
 
 	/**
@@ -79,16 +79,16 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 
 		if (currentDirection == Direction.UP) {
 			motion(0, 0 - speed);
-			sendStep("UP");
+			sendStep(d);
 		} else if (currentDirection == Direction.DOWN) {
 			motion(0, speed);
-			sendStep("DOWN");
+			sendStep(d);
 		} else if (currentDirection == Direction.LEFT) {
 			motion(0 - speed, 0);
-			sendStep("LEFT");
+			sendStep(d);
 		} else if (currentDirection == Direction.RIGHT) {
 			motion(speed, 0);
-			sendStep("RIGHT");
+			sendStep(d);
 		}
 	}
 

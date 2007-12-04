@@ -53,7 +53,15 @@ public class Server extends Thread
     {
         super(name);
         socket = new DatagramSocket(4445);
-		clients = new ArrayList<InetAddress>();
+		Server.clients = new ArrayList<InetAddress>();
+
+		// We first fill the list up with fake stuff as a placeholder
+		InetAddress local = InetAddress.getByName("127.0.0.1");
+		Server.clients.add(local);
+		Server.clients.add(local);
+		Server.clients.add(local);
+		Server.clients.add(local);
+
         System.out.println("START SERVER");
     }
 	
@@ -160,11 +168,13 @@ public class Server extends Thread
 				if( PType.JOIN.ordinal() == packetType )
 				{
 					System.out.println("JOIN");
+					InetAddress local = InetAddress.getByName("127.0.0.1");
+					int localIndex = Server.clients.indexOf(local);
 					
 					bufOut[0] = new Integer( PType.GTYPE.ordinal() ).byteValue();
-					bufOut[1] = new Integer(  Server.clients.indexOf( address ) ).byteValue();
-					
-					sendClientData( Server.clients.indexOf( address ), bufOut );
+					bufOut[1] = new Integer( localIndex  ).byteValue();
+					Server.clients.set( localIndex, address );
+					sendClientData( localIndex, bufOut );
 				}
 				else if( PType.GMOVE.ordinal() == packetType )
 				{
@@ -173,7 +183,7 @@ public class Server extends Thread
 				else if( PType.LEAVE.ordinal() == packetType )
 				{
 					// a ghost is leaving
-
+					
 				}
 				else
 				{
