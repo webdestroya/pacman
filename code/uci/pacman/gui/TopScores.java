@@ -28,6 +28,15 @@ public class TopScores{
 	
 	/**
 	 * 
+	 * displays the top score screen.
+	 * 
+	 */
+	public void draw(){
+		
+	}
+	
+	/**
+	 * 
 	 * Retrieves player's score from GameState,
 	 * and checks it against scoreList to see if it qualifies
 	 * to be on the top score list
