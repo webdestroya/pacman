@@ -1,4 +1,5 @@
 package code.uci.pacman.gui;
+import code.uci.pacman.controllers.GameController;
 import ucigame.*;
 
 /**
@@ -8,22 +9,22 @@ import ucigame.*;
  * graphics on it.
  *
  */
-public class MainMenu extends Sprite{
+public class MainMenu{
 
-	Sprite singlePlayerButton;
-	Sprite multiplayerButton;
-	Sprite topScores;
-	Sprite quit;
+	private Sprite singlePlayerButton;
+	private Sprite multiplayerButton;
+	private Sprite topScores;
+	private Sprite quit;
+	private int canvasWidth = 600;
+	private int canvasHeight = 650;
 	
-	private int x, y;
 	
-	public MainMenu(int arg0, int arg1) {
-		super(arg0, arg1);
-
-		this.pin(singlePlayerButton, x, y);
-		this.pin(multiplayerButton, x, y);
-		this.pin(topScores, x, y);
-		this.pin(quit, x, y);
+	public MainMenu() {
+		singlePlayerButton = GameController.getInstance().getPacInstance().makeButton("SinglePlay",GameController.getInstance().getPacInstance().getImage("images/final/singleplayerButton.png"),
+                249, 76);
+		singlePlayerButton.position(canvasWidth/2 - singlePlayerButton.width()/2,
+				canvasHeight/2 - singlePlayerButton.height()/2);
+		
 	}
 
 	/**
@@ -33,6 +34,8 @@ public class MainMenu extends Sprite{
 	 * 
 	 */
 	public void draw(){
-		
+		//Sprite currentFrame =  GameController.getInstance().getPacInstance().makeSpriteFromPath(frameLocation);
+		//Thread.sleep(1525);	
+		//currentFrame.draw();
 	}
 }
