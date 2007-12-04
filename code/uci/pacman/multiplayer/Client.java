@@ -2,6 +2,7 @@
 package code.uci.pacman.multiplayer;
 
 import code.uci.pacman.game.*;
+import code.uci.pacman.controllers.*;
 import java.io.*;
 import java.net.*;
 
@@ -117,6 +118,7 @@ public class Client extends Thread
 				else if( PType.GMOVE.ordinal() == packetType )
 				{
 					// a ghost move
+
 				}
 				else if( PType.PMOVE.ordinal() == packetType )
 				{
@@ -126,10 +128,13 @@ public class Client extends Thread
 				else if( PType.GAMESTART.ordinal() == packetType )
 				{
 					// game commencing
+
 				}
 				else if( PType.GAMEOVER.ordinal() == packetType )
 				{
 					// game ended
+					moreQuotes = false;
+					GameController.getInstance().getPacInstance().drawGameover();
 				}
 				else
 				{
