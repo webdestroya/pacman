@@ -31,20 +31,7 @@ public class PacManGame extends Ucigame {
 	public static String font = "Dialog.bold";
 	public static int multiplayerType = 1; // 1=server, 2=client
 	public static String hostname = "127.0.0.1"; // used for network
-
-	/* Main Class */
-
-	public static void main(String[] args) {
-		List<String> cargs = Arrays.asList(args);
-
-		if (cargs.contains("CLIENT")) {
-			System.out.println("Starting Client");
-			PacManGame.multiplayerType = 2;
-			PacManGame.hostname = (String) cargs.get(2);
-		}
-
-		Ucigame.main(args);
-	}
+	public static int gameType = 1; // 1=single, 2 = multi
 
 	/* Initialization */
 
@@ -208,6 +195,7 @@ public class PacManGame extends Ucigame {
 	 */
 	public void onClickSinglePlay() {
 		if (isShowingScene(ScreenMode.MENU)) {
+			PacManGame.gameType = 1;
 			System.out.println("single player click");
 			showGameScreen();
 		}
@@ -220,6 +208,7 @@ public class PacManGame extends Ucigame {
 	 */
 	public void onClickMultiPlay() {
 		if (isShowingScene(ScreenMode.MENU)) {
+			PacManGame.gameType = 2;
 			System.out.println("multi playter click");
 			// beginGame();
 		}
