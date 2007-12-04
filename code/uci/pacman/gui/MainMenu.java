@@ -1,5 +1,6 @@
 package code.uci.pacman.gui;
 import code.uci.pacman.controllers.GameController;
+import code.uci.pacman.*;
 import ucigame.*;
 
 /**
@@ -56,8 +57,10 @@ public class MainMenu{
 	 * 
 	 */
 	public void draw(){
-		//Sprite currentFrame =  GameController.getInstance().getPacInstance().makeSpriteFromPath(frameLocation);
-		//Thread.sleep(1525);	
-		//currentFrame.draw();
+		singlePlayerButton.draw();
+		multiplayerButton.draw();
+		topScores.draw();
+		quit.draw();
 	}
+		
 }
