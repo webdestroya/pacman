@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * 
- * @author GUI Team
+ * @author GUI Team (Rick, MikeY, Cameron)
  * this will keep track of top 10 stores and names
  *
  */
@@ -47,4 +47,5 @@ public class TopScores extends Sprite{
 	public void addTopScore(int score){
 		
 	}
+		
 }
