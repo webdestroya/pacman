@@ -18,9 +18,9 @@ public class RemoteGhost extends Ghost{
 	
 	/**
 	 * Constructs a remote ghost given its inital position and its name. 
-	 * @param x - the initial x coordinate of the ghost.
-	 * @param y - the initial y coordinate of the ghost.
-	 * @param ghostName - the name of the ghost.  For example, "Blinky"
+	 * @param x the initial x coordinate of the ghost.
+	 * @param y the initial y coordinate of the ghost.
+	 * @param ghostName the name of the ghost.  For example, "Blinky"
 	 */
 	public RemoteGhost(int x, int y, String ghostName) {
 		super(ghostName + ".png", x, y, SPEED, true);
