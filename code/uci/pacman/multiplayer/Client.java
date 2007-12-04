@@ -1,3 +1,16 @@
+<<<<<<< .mine
+package code.uci.pacman.multiplayer;
+
+import code.uci.pacman.game.*;
+
+
+import java.io.*;
+import java.net.*;
+/**
+ * Client handles the input and output of the server.
+ * @author Networking Team
+ */
+=======
 package code.uci.pacman.multiplayer;
 
 import code.uci.pacman.game.*;
@@ -12,17 +25,37 @@ import java.net.*;
 public class Client// extends Thread
 {
 	private static final long serialVersionUID = 1L;
-	public static String hostname;
+	public static InetAddress address;
 	
-	
+	/**
+	 * 
+	 * @param host name/ip of the host(String)
 	/**
 	 * 
 	 * @param host
 	 */
 	public Client(String host)
 	{
-		hostname = host;
+		Client.setHost(host);
 	}
+
+	public static void setHost(String host)
+	{
+		try
+		{
+			Client.address = InetAddress.getByName(host);
+		}
+		catch(Exception e)
+		{
+
+		}
+	}
+
+	/**
+	 * 
+	 * @param ghost which ghost you are sending
+	 * @param dir stuff
+	 */
 	
 	public static void send(String ghost, String dir)
 	{
@@ -35,7 +68,6 @@ public class Client// extends Thread
 			String sending = ghost + "|" + dir;
 			buf = sending.getBytes();
 		
-			InetAddress address = InetAddress.getByName(hostname);
 			DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 4445);
 		
 			socket.send(packet);

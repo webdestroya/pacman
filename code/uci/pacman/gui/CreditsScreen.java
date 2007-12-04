@@ -29,7 +29,7 @@ public class CreditsScreen{
 	 */
 	public CreditsScreen() {
 		drawCounter = 1;
-		creditsSound = GameController.getInstance().getPacInstance().getSound("sounds\\final\\CreditsTheme.mp3");
+		creditsSound = GameController.getInstance().getPacInstance().getSound("sounds/final/CreditsTheme.mp3");
 		frames = new ArrayList<String>();
 		
 		playAgainButton = GameController.getInstance().getPacInstance().makeButton("PlayAgain",GameController.getInstance().getPacInstance().getImage("images/final/singleplayerButton.png"),
@@ -48,7 +48,7 @@ public class CreditsScreen{
 				workingString += currentImage;
 			}
 			workingString += ".png";
-			frames.add("images\\final\\intro\\" + workingString);
+			frames.add("images/final/intro/" + workingString);
 		}
 
 

@@ -109,7 +109,7 @@ public class PacManGame extends Ucigame {
 			} catch (Exception e) {
 			}
 		} else if (PacManGame.multiplayerType == 2) {
-			Client.hostname = hostname;
+			Client.setHost(hostname);
 		}
 	}
 
@@ -251,6 +251,9 @@ public class PacManGame extends Ucigame {
 
 	public void onKeyPressIntro() {
 		if (keyboard.isDown(keyboard.S)) {
+			showMenuScreen();
+		}
+		if (keyboard.isDown(keyboard.SPACE)) {
 			showMenuScreen();
 		}
 	}

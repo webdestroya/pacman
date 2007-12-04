@@ -29,7 +29,7 @@ public class MainMenu{
 	
 	public MainMenu() {
 		//single player button creation
-		menuTheme = GameController.getInstance().getPacInstance().getSound("sounds\\final\\MainMenu.mp3");
+		menuTheme = GameController.getInstance().getPacInstance().getSound("sounds/final/MainMenu.mp3");
 		
 		singlePlayerButton = GameController.getInstance().getPacInstance().makeButton("SinglePlay",GameController.getInstance().getPacInstance().getImage("images/final/singleplayerButton.png"),
                 249, 76);

@@ -30,10 +30,10 @@ public class IntroPlayer{
 	 */
 	public IntroPlayer() {
 		drawCounter = 1;
-		introSound = GameController.getInstance().getPacInstance().getSound("sounds\\final\\IntroTheme.mp3");
+		introSound = GameController.getInstance().getPacInstance().getSound("sounds/final/IntroTheme.mp3");
 		frames = new ArrayList<String>();
 		
-		menuButton = GameController.getInstance().getPacInstance().makeButton("MenuStart",GameController.getInstance().getPacInstance().getImage("images/final/startButton.png"),
+		menuButton = GameController.getInstance().getPacInstance().makeButton("MenuStart",GameController.getInstance().getPacInstance().getImage("images/final/startbutton.png"),
                 249, 76);
 		menuButton.position(175, 450);
 		
@@ -49,7 +49,7 @@ public class IntroPlayer{
 				workingString += currentImage;
 			}
 			workingString += ".png";
-			frames.add("images\\final\\intro\\" + workingString);
+			frames.add("images/final/intro/" + workingString);
 		}
 
 
@@ -62,7 +62,7 @@ public class IntroPlayer{
 	 */
 	public void draw(){
 			//load intro music file
-			//String themeLocation = 	("sounds\\final\\" + introSound);
+			//String themeLocation = 	("sounds/final/" + introSound);
 			//Sound music = GameController.getInstance().getPacInstance().getSound(themeLocation);			
 			//music.play();
 			if (drawCounter < 30)
