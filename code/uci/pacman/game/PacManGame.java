@@ -10,8 +10,6 @@ import ucigame.*;
 
 import java.util.*;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 /**
  * 
  * The main game class for PacMan. This class extends from the UciGame class
@@ -300,7 +298,7 @@ public class PacManGame extends Ucigame {
 	 */
 	public void showScene(ScreenMode scene) {
 		this.currentScene = scene;
-		String sceneName = StringUtils.capitalize(scene.toString().toLowerCase());
+		String sceneName = capitalize(scene.toString().toLowerCase());
 		super.startScene(sceneName);
 	}
 
@@ -312,4 +310,10 @@ public class PacManGame extends Ucigame {
 	public boolean isShowingScene(ScreenMode scene) {
 		return currentScene.equals(scene);
 	}
+	
+	
+	private String capitalize(String s) {
+        if (s.length() == 0) return s;
+        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+    }
 }
