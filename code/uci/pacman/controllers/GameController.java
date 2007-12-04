@@ -232,8 +232,8 @@ public class GameController {
 	/* Private Methods */
 
 	private void checkStageClear() {
-		if (state.levelIsFinished()) {
-			state.nextLevel();
+		if (state.stageHasBeenCleared()) {
+			state.nextStage();
 			if (state.getLevel() <= 3) {
 				state.setupLevel();
 			} else {

@@ -42,8 +42,8 @@ public abstract class StationaryObject extends Sprite {
 	}
 	
 	/**
-	 * @param width
-	 * @param height
+	 * @param width the width of the object
+	 * @param height the height of the object
 	 */
 	public StationaryObject(int width, int height) {
 		super(width, height);
@@ -51,7 +51,8 @@ public abstract class StationaryObject extends Sprite {
 	}
 	
 	/**
-	 * @return
+	 * Gets the graphic path for the image displayed in this sprite.
+	 * @return the graphic image path for this object.
 	 */
 	public String getGraphicPath() {
 		return objectGraphicPath;

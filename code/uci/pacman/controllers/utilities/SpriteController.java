@@ -25,7 +25,7 @@ import ucigame.Sprite;
  */
 public abstract class SpriteController<T, S extends Sprite> {
 	private static final long serialVersionUID = 1L;
-	protected static GameState state = GameState.getInstance();
+	protected static GameState state = GameState.getInstance(); 
 	private HashMap<T, S> hash;
 
 	public SpriteController() {
