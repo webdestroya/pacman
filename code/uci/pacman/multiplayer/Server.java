@@ -216,7 +216,7 @@ public class Server extends Thread
 				else
 				{
 					// some other junk packet
-					System.out.println("UNKNOWN");
+					System.out.println("UNKNOWN("+packetType+")");
 				}
 				
 				// figure out response

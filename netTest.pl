@@ -11,13 +11,13 @@ socket(SOCKET, PF_INET, SOCK_DGRAM, getprotobyname("udp")) or die "socket: $!";
 	GAMEOVER=>4,
 	LEAVE=>5,
 	GAMEFULL=>6,
-	GAMESTART=>7
+	GAMESTART=>7,
 	
 	
 	BLINKY=>0,
 	CLYDE=>1,
 	INKY=>2,
-	PINKY=>3
+	PINKY=>3,
 	
 	
 	UP=>0,
@@ -28,11 +28,10 @@ socket(SOCKET, PF_INET, SOCK_DGRAM, getprotobyname("udp")) or die "socket: $!";
 
 $HOSTNAME = "127.0.0.1";
 $PORTNO = 4445;
-
-$DATA1 = 0
-$DATA2 = 0;
-$DATA3 = 0;
-$DATA4 = 0;
+$DATA1 = 0;
+$DATA2 = 2;
+$DATA3 = 2;
+$DATA4 = 2;
 
 if( $#ARGV>0 )
 {
