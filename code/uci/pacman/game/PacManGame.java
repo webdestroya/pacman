@@ -84,10 +84,10 @@ public class PacManGame extends Ucigame {
 	}
 
 	private void displayMenuScreen() {
-		//initialize menu
-		mainMenu = new MainMenu();
 		// stop intro theme
 		introPlayer.stopIntroTheme();
+		//initialize menu
+		mainMenu = new MainMenu();
 		// show menu
 		canvas.background(getImage("images/final/mainMenuBackGroundDim.png"));
 		mainMenu.startMenuTheme();
