@@ -42,6 +42,7 @@ public class PacManGame extends Ucigame {
 		showIntroScreen();
 		// make the server or client connection
 		//setupServerOrClient();
+		startPacManServer();
 	}
 
 	private void initializeWindow() {
@@ -108,6 +109,19 @@ public class PacManGame extends Ucigame {
 		} else if (PacManGame.multiplayerType == 2) {
 			Client.setHost(hostname);
 		}
+	}
+	
+	private void startPacManServer()
+	{
+		try
+		{
+			new Server().start();
+		}
+		catch (Exception e)
+		{
+
+		}
+
 	}
 
 	private void generatePositions(boolean run) {
