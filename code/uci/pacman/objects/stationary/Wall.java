@@ -11,6 +11,13 @@ import code.uci.pacman.objects.StationaryObject;
  */
 public class Wall extends StationaryObject {
 
+	/**
+	 * 
+	 * @author Objects Team
+	 * constructor sets the wall dimensions and position in the game
+	 * overlays the wall with the correct level image
+	 * 
+	 */
 	public Wall(int x, int y, int width, int height) {
 		super(width, height);
 		super.addFrame("level1.png", x, y);

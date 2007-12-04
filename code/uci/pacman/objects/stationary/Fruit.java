@@ -36,16 +36,27 @@ public class Fruit extends StationaryObject implements Eatable {
 		fruitEaten = 0;
 	}
 	
+	/**
+	 * @return a random fruit to be associated with the current level
+	 */
 	private static String randomFruitPath() {
 		String randomFruitPath = "cherry.png";
 		return randomFruitPath;
 	}
 	
+	/**
+	 * Shows the fruit in the game
+	 * Starts the timer that when elapsed will remove the fruit from the game if not already eaten
+	 */
 	public void showWithTimer() {
 		control.getPacInstance().startFruitTimer();
 		super.show();
 	}
 
+	/**
+	 * Called when a fruit is eaten
+	 * Updates the number of fruit eaten and the score
+	 */
 	public void eaten() {
 		fruitEaten++;
 		score += 100; //increase score when eaten
@@ -53,15 +64,22 @@ public class Fruit extends StationaryObject implements Eatable {
 	}
 
 	/**
-	 * returns the value
+	 * @return the score value of the fruit
 	 */
 	public int getValue() {
 		return score;
 	}
+	/**
+	 * @return the total number of fruit eaten
+	 */
 	public int getFruitEaten(){
 		return fruitEaten;
 	}
 	
+	/**
+	 * Set the score value of the fruit
+	 * @param scoreValue is the value to change it to
+	 */
 	public void setValue(int scoreValue){
 		this.score = scoreValue;
 	}

@@ -20,10 +20,20 @@ public class Pill extends StationaryObject implements Eatable {
 	 */
 	public static final int SCOREVALUE = 10;
 	
+	/**
+	 * 
+	 * @author Objects Team
+	 * constructor creates the Pill sprite in the game
+	 * 
+	 */
 	public Pill(int x, int y) {
 		super(PILL_IMAGE_PATH, x, y);
 	}
 
+	/**
+	 * Called when a pill is eaten
+	 * Tells the game controller that it's been eaten
+	 */
 	public void eaten() {
 		// TODO Auto-generated method stub
 		control.pillEaten(this);
