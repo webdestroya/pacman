@@ -50,6 +50,7 @@ public class PacManGame extends Ucigame {
 
 	public void setup() {
 		generatePositions(false);
+		
 		// creates the window, sets the title, initialize
 		initializeWindow(); 
 		
@@ -63,20 +64,34 @@ public class PacManGame extends Ucigame {
 
 	private void initializeWindow() {
 		control = GameController.setInstance(this);
-		framerate(20);
+		this.framerate(20);
 		window.size(600, 650);
-		canvas.background(0, 0, 0);
 		window.title("Pac Man Fever");        
 	}
 	
 	private void displayIntroScreen() {
+		//initialize screens
 		introPlayer = new IntroPlayer();
 		mainMenu = new MainMenu();
+		//show intro screen
 		startScene("Intro");
 		introPlayer.playIntroTheme();
 	}
 	
+	private void displayMenuScreen() {
+		//stop intro theme
+		introPlayer.stopIntroTheme();
+		//show menu
+		canvas.background(getImage("images/final/mainMenuBackGroundDim.png"));
+		mainMenu.startMenuTheme();
+		startScene("Menu");
+	}
+	
 	private void beginGame() {
+		//stop menu theme
+		mainMenu.stopMenuTheme();
+		//show game
+		canvas.background(0, 0, 0);
 		control.startGame(); // start the game
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
@@ -173,10 +188,7 @@ public class PacManGame extends Ucigame {
 	 */
 	public void onClickMenuStart()
 	{
-		introPlayer.stopIntroTheme();
-		canvas.background(getImage("images/final/mainMenuBackGroundDim.png"));
-		mainMenu.startMenuTheme();
-		startScene("Menu");
+		displayMenuScreen();
 	}
 
 	/**
@@ -185,9 +197,7 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	public void onClickSinglePlay(){
-		System.out.println("single playter click");
-		mainMenu.stopMenuTheme();
-		canvas.background(0, 0, 0);
+		System.out.println("single player click");
 		beginGame();
 	}
 	
@@ -221,6 +231,13 @@ public class PacManGame extends Ucigame {
 		//startScene("Game");
 	}
 	
+	public void onKeyPressIntro() {
+		System.out.println("test");
+		if (keyboard.isDown(keyboard.R)) {
+			beginGame();
+		}
+	}
+	
 	
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
@@ -234,14 +251,13 @@ public class PacManGame extends Ucigame {
 			control.setPacManDirection(Direction.RIGHT);
 
 		if (keyboard.isDown(keyboard.R)) {
-			control.startGame();
+			beginGame();
 		}
 	}
 
 	public void onKeyPressGameOver() {
 		if (keyboard.isDown(keyboard.R)) {
-			startScene("Game");
-			control.startGame();
+			beginGame();
 		}
 	}
 
