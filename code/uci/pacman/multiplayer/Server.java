@@ -6,7 +6,6 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-
 /// COMMAND ENUMS
 enum PType { JOIN, GMOVE, PMOVE, GAMEOVER, GAMESTART };
 
