@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * 
  * @author GUI Team (Rick, MikeY, Cameron)
- * this will display the score, lives, and current fruit
+ * This will display the score, lives, and current fruit
  *
  */
 public class ScoreBoard{
@@ -31,11 +31,6 @@ public class ScoreBoard{
 	ArrayList<Sprite> lifeList = new ArrayList<Sprite>();
 	
 	public ScoreBoard() {
-		// Hey we provided an example of how to use gameInstances to apply sprites. 
-		// Scoreboard can't extend sprite it's gotta be a collection of sprites
-		// so you need to make multiple sprites in here
-		// TODO Auto-generated constructor stub
-		
 		//create score sprite
 		score = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/score.png");
 		score.position(scorePosX, scorePosY);
@@ -56,6 +51,11 @@ public class ScoreBoard{
 		fruit = new Fruit(fruitImagePath, fruitPosX, fruitPosY, 0);
 	}
 	
+	/**
+	 * 
+	 * Shows the scoreboard and the fruit at the bottom of the screen during gameplay
+	 * 
+	 */
 	public void draw(){
 		//this needs to draw all the stuff that you make
 		// to get all of the information use GameState.getInstance().getTheItemYouWant()
@@ -74,7 +74,5 @@ public class ScoreBoard{
 		
 		//add fruit to the scoreBoard.
 		fruit.draw();
-		
-		
 	}
 }
