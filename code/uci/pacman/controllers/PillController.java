@@ -18,7 +18,7 @@ public class PillController extends ArtifactController<Pill> {
 
 	public PillController() {
 		totalPills = 0;
-		this.constructArtifacts("pill");
+		this.constructArtifactsFromFile("pill");
 	}
 
 	/**

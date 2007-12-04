@@ -23,7 +23,7 @@ public class GameState {
 	private Fruit bonusItem;
 	private int score;
 	private int level;
-	
+
 	public void initialize() {
 		score = 0;
 		lives = INITIAL_LIVES;
@@ -57,7 +57,7 @@ public class GameState {
 		pellets.drawObjects();
 		bonusItem.draw();
 	}
-	
+
 	public boolean levelIsFinished() {
 		return this.getPills().getPillCount() == 0;
 	}

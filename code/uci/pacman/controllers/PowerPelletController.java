@@ -15,7 +15,7 @@ import code.uci.pacman.objects.stationary.PowerPellet;
  */
 public class PowerPelletController extends ArtifactController<PowerPellet> {
 	public PowerPelletController() {
-		this.constructArtifacts("powerpellet");
+		this.constructArtifactsFromFile("powerpellet");
 	}
 
 	/**
