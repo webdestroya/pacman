@@ -28,7 +28,7 @@ public class TopScores{
 	
 	/**
 	 * 
-	 * displays the top score screen.
+	 * Displays the top score screen.
 	 * 
 	 */
 	public void draw(){
@@ -40,9 +40,9 @@ public class TopScores{
 	 * 
 	 * Retrieves player's score from GameState,
 	 * and checks it against scoreList to see if it qualifies
-	 * to be on the top score list
+	 * to be on the top score list.
 	 * 
-	 * returns true if score qualifies to be on the list,
+	 * Returns true if score qualifies to be on the list,
 	 * false otherwise.
 	 * 
 	 */
@@ -56,7 +56,7 @@ public class TopScores{
 	 * Retrieves player's score from GameState, and
 	 * adds the score to the scoreList at the proper place.
 	 * the method will also request the user for his/her name
-	 * to be put into the nameList
+	 * to be put into the nameList.
 	 * 
 	 * scoreList stores a limit of 10 scores, therefore when 1 is
 	 * added the last one will be removed
