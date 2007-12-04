@@ -10,9 +10,9 @@ import code.uci.pacman.controllers.GameController;
 
 /**
  * 
- * @author GUI Team (Rick, MikeY, Cameron)
  * this will display the opening at the beginning of the game
- *
+ * @author GUI Team (Rick, MikeY, Cameron)
+ *  
  */
 public class IntroPlayer{	
 	
