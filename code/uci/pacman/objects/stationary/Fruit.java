@@ -64,6 +64,7 @@ public class Fruit extends StationaryObject implements Eatable {
 	}
 
 	/**
+	 * Returns the score value of the fruit
 	 * @return the score value of the fruit
 	 */
 	public int getValue() {
@@ -71,6 +72,7 @@ public class Fruit extends StationaryObject implements Eatable {
 	}
 
 	/**
+	 * Returns the total number of fruit eaten
 	 * @return the total number of fruit eaten
 	 */
 	public int getFruitEaten() {
@@ -78,8 +80,7 @@ public class Fruit extends StationaryObject implements Eatable {
 	}
 
 	/**
-	 * Set the score value of the fruit
-	 * 
+	 * Sets the score value of the fruit
 	 * @param scoreValue
 	 *            is the value to change it to
 	 */
