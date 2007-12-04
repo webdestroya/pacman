@@ -97,7 +97,7 @@ public class WallController extends SpriteController<Point, Wall> {
 	/* Private Methods */
 	
 	private void makeWalls1() {
-		addWall(0, 0, 8, 600);// left
+		addWall(2, 0, 8, 600);// left
 		addWall(0, 0, 600, 8);// top
 		addWall(0, 580, 600, 8);// bottom
 		addWall(592, 0, 8, 600);// right
