@@ -5,7 +5,7 @@ import ucigame.*;
 
 /**
  * 
- * @author GUI Team
+ * @author GUI Team (Rick, MikeY, Cameron)
  * This will handle the display for Main Menu, and additional
  * graphics on it.
  *
