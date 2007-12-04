@@ -40,14 +40,6 @@ public class PacMan extends ControllableObject {
 	public void eaten() {
 		control.pacManEaten(this);
 	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int getValue() {
-		return 0;
-	}
 	
 	/**
 	 * Draws PacMan on the screen.

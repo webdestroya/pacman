@@ -13,7 +13,6 @@ public class Wall extends StationaryObject {
 
 	/**
 	 * 
-	 * @author Objects Team
 	 * constructor sets the wall dimensions and position in the game
 	 * overlays the wall with the correct level image
 	 * 

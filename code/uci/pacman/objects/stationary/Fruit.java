@@ -21,8 +21,8 @@ public class Fruit extends StationaryObject implements Eatable {
 
 	/**
 	 * 
-	 * @author Objects Team constructor picks random fruit image sets the value
-	 *         automatically hides itself
+	 * constructor picks random fruit image sets the value automatically hides
+	 * itself
 	 * 
 	 */
 	public Fruit(int x, int y, int initialScore) {

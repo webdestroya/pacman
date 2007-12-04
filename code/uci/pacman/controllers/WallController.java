@@ -88,7 +88,7 @@ public class WallController extends SpriteController<Point, Wall> {
 	 * instruct PacMan not to collide with the walls and to abide by
 	 * them as boundaries for movement.
 	 * 
-	 * @param the object to stop from colliding with walls
+	 * @param c the object to stop from colliding with walls
 	 */
 	public void stopCollisions(ControllableObject c) {
 		c.stopIfCollidesWith(super.getObjects());

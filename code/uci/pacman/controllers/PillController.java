@@ -40,7 +40,7 @@ public class PillController extends ArtifactController<Pill> {
 	 * this round before PacMan began chomping. This method is used to determine
 	 * if a fruit should be displayed on the screen.
 	 * 
-	 * @return
+	 * @return the total pills placed on screen
 	 */
 	public int getInitialCount() {
 		return totalPills;
@@ -52,7 +52,7 @@ public class PillController extends ArtifactController<Pill> {
 	 * method is useful in determining when all the pills are gone and the stage
 	 * has been cleared.
 	 * 
-	 * @return
+	 * @return the total remaining pills
 	 */
 	public int getPillCount() {
 		return super.getObjects().size();

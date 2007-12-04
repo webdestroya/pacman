@@ -26,7 +26,6 @@ public class ItemGenerator {
 	static String folder = "levels/";
 
 	/**
-	 * @param args
 	 * @throws IOException
 	 */
 	public static void execute() throws IOException {

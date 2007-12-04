@@ -68,7 +68,7 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 	/**
 	 * Gets the sprite that collided with the specified object
 	 * 
-	 * @param ControllableObject the object to check against
+	 * @param c the object to check against
 	 * @return the artifact that collided with this object
 	 */
 	public A getCollidedWith(ControllableObject c) {

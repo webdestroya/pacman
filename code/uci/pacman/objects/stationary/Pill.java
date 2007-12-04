@@ -22,7 +22,7 @@ public class Pill extends StationaryObject implements Eatable {
 
 	/**
 	 * 
-	 * @author Objects Team constructor creates the Pill sprite in the game
+	 * constructor creates the Pill sprite in the game
 	 * 
 	 */
 	public Pill(int x, int y) {

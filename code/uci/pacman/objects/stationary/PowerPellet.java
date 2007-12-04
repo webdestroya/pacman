@@ -17,7 +17,6 @@ public class PowerPellet extends StationaryObject implements Eatable {
 	
 	/**
 	 * 
-	 * @author Objects Team
 	 * constructor creates the Power Pellet sprite in the game
 	 * 
 	 */
