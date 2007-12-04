@@ -103,7 +103,7 @@ public class GameController {
 				state.setupLevel();
 			}
 			else {
-				game.showScene(ScreenMode.SCORES);
+				game.showScoresScreen();
 			}
 		}
 	}

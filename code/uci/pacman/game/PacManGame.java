@@ -101,8 +101,12 @@ public class PacManGame extends Ucigame {
 		canvas.background(0, 0, 0);
 		control.startGame(); // start the game
 		scoreBoard = new ScoreBoard();
-		topScores = new TopScores();
 		showScene(ScreenMode.GAME);
+	}
+	
+	public void showScoresScreen() {
+		topScores = new TopScores();
+		showScene(ScreenMode.SCORES);
 	}
 
 	private void setupServerOrClient() {
