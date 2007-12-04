@@ -2,40 +2,48 @@ package code.uci.pacman.gui;
 import ucigame.*;
 import java.util.*;
 
+import code.uci.pacman.game.GameState;
+
 /**
  * 
  * This will keep track of top 10 stores and names
  * @author GUI Team (Rick, MikeY, Cameron)
  *
  */
-public class TopScores extends Sprite{
+public class TopScores{
 
 	private ArrayList<String> nameList;
 	private ArrayList<Integer> scoreList;
+	private int score;
 	
-	
-	public TopScores() {
-		super(400,200);
+	/**
+	 * 
+	 * Constructor for TopScores:
+	 * This will load from a file top 10 players and their corresponding scores.
+	 *
+	 */
+	public TopScores(){
 		// TODO Auto-generated constructor stub
 	}
 	
 	/**
 	 * 
-	 * @param int score
-	 * checks score against scoreList to see if it qualifies
+	 * Retrieves player's score from GameState,
+	 * and checks it against scoreList to see if it qualifies
 	 * to be on the top score list
 	 * 
 	 * returns true if score qualifies to be on the list,
 	 * false otherwise.
 	 * 
 	 */
-	public boolean isTopList(int score){
+	public boolean isTopList(){
+		score = GameState.getInstance().getScore();
 		return false;
 	}
 	
 	/**
 	 * 
-	 * @param int score
+	 * Retrieves player's score from GameState, and
 	 * adds the score to the scoreList at the proper place.
 	 * the method will also request the user for his/her name
 	 * to be put into the nameList
@@ -44,8 +52,7 @@ public class TopScores extends Sprite{
 	 * added the last one will be removed
 	 * 
 	 */
-	public void addTopScore(int score){
-		
+	public void addTopScore(){
+		GameState.getInstance().getScore();		
 	}
-		
 }
