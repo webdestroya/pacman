@@ -76,7 +76,7 @@ public class Server extends Thread
 		socket.close();
     }
     /**
-     * @return
+     * @return resulting GameState
      */
     protected GameState getNextQuote()
     {

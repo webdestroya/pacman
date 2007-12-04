@@ -6,7 +6,7 @@ import code.uci.pacman.game.*;
 import java.io.*;
 import java.net.*;
 /**
- * Client handles the input and output of the server. It is responsible for starting the ClientInputListener thread.
+ * Client handles the input and output of the server.
  * @author Networking Team
  */
 public class Client// extends Thread
