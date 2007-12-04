@@ -19,15 +19,6 @@ public class Blinky extends Ghost{
 		super("blinky.png", x, y, SPEED, isPlayer);
 	}
 
-	/*
-	 * Gets a move using the network, 
-	 */
-	public Direction getNetMove()
-	{
-		
-		return Direction.UP;
-	}
-
 	/* 
 	 * He tries to get you by your relative position. 
 	 * He takes the fastest route to find you. I believe he 
