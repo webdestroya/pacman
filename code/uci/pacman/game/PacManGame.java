@@ -156,7 +156,7 @@ public class PacManGame extends Ucigame {
 	}
 
 	// Draws the "GameOver" scene
-	public void drawGameOver() {
+	public void drawGameover() {
 		canvas.clear();
 		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
 		canvas.putText("GAME OVER", 200, 300);
@@ -191,7 +191,7 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	public void onClickMenuStart() {
-		if (currentScene == ScreenMode.INTRO) {
+		if (isShowingScene(ScreenMode.INTRO)) {
 			displayMenuScreen();
 		}
 	}

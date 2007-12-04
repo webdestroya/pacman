@@ -13,8 +13,13 @@ import code.uci.pacman.objects.stationary.*;
  * 
  * @author The Game Team responsible for and controls wall locations
  */
+
+
+
 public class WallController {
-	private ArrayList<Wall> walls;
+	private static int TOP_CAGEPOS_X = 222;
+	private static int TOP_CAGEPOS_Y = 235;
+	private Collection<Wall> walls;
 
 	public WallController() {
 		walls = new ArrayList<Wall>();
@@ -37,6 +42,10 @@ public class WallController {
 		addWall(0, 0, 600, 8);// top
 		addWall(0, 580, 600, 8);// bottom
 		addWall(592, 0, 8, 600);// right
+		
+		addWall(TOP_CAGEPOS_X, TOP_CAGEPOS_Y, 157, 10); //top of the cage
+		addWall(222, 245, 157, 75); //rest of the cage
+		
 		addWall(0, 177, 118, 195);
 		addWall(46, 46, 72, 38);
 		addWall(157, 46, 95, 38);
@@ -52,7 +61,7 @@ public class WallController {
 		addWall(417, 122, 27, 135);
 		addWall(485, 122, 70, 20);
 		addWall(485, 178, 114, 194);
-		addWall(222, 238, 157, 75);
+
 		addWall(157, 295, 27, 77);
 		addWall(417, 295, 27, 77);
 		addWall(222, 354, 157, 18);
@@ -83,10 +92,9 @@ public class WallController {
 		for (Wall w : walls) {
 			w.draw();
 		}
-
 	}
 	
-	public boolean existsAtPos(ControllableObject pac, int xCheck, int yCheck)
+	public boolean willCollideAtPos(ControllableObject pac, int xCheck, int yCheck)
 	{
 		// To check for a possible immediate future collision with a wall, we move the PacMan or Ghost object
 		// xCheck/yCheck pixels from where it is and then check for a collision before proceeding.
@@ -113,6 +121,7 @@ public class WallController {
 	}
 	
 	public void stopCollisions(ControllableObject c) {
-	    c.stopIfCollidesWith(walls);
+		Collection<Wall> wallsToApply = walls;
+	    c.stopIfCollidesWith(wallsToApply);
 	}
 }

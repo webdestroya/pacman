@@ -42,6 +42,7 @@ public class GhostController extends ActorController<String, Ghost> {
 	}
 	
 	public void stopWallCollisions(WallController walls) {
+		
 	    walls.stopCollisions(super.getObjects());
 	}
 	

@@ -126,13 +126,13 @@ public abstract class Ghost extends ControllableObject implements AI {
 	public boolean moveIsAllowed(Direction d)
 	{
 		WallController walls = GameState.getInstance().getWalls();
-		if(d == Direction.UP && walls.existsAtPos(this,0,-13))
+		if(d == Direction.UP && walls.willCollideAtPos(this,0,-13))
 			return true;
-		if(d == Direction.DOWN && walls.existsAtPos(this,0,13 + this.height()))
+		if(d == Direction.DOWN && walls.willCollideAtPos(this,0,13 + this.height()))
 			return true;
-		if(d == Direction.LEFT && walls.existsAtPos(this,-10,0))
+		if(d == Direction.LEFT && walls.willCollideAtPos(this,-10,0))
 			return true;
-		if(d == Direction.RIGHT && walls.existsAtPos(this,10 + this.width(),0))
+		if(d == Direction.RIGHT && walls.willCollideAtPos(this,10 + this.width(),0))
 			return true;
 		else
 			return false;

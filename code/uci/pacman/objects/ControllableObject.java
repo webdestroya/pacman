@@ -2,6 +2,7 @@ package code.uci.pacman.objects;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import code.uci.pacman.multiplayer.*;
 import code.uci.pacman.controllers.*;
@@ -143,7 +144,7 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
 	}
 
-	public void stopIfCollidesWith(ArrayList<? extends Sprite> sprites) {
+	public void stopIfCollidesWith(Collection<? extends Sprite> sprites) {
 		Sprite[] spriteArray = sprites.toArray(new Sprite[0]);
 		super.stopIfCollidesWith(spriteArray);
 	}
