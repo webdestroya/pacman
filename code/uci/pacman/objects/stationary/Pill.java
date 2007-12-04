@@ -7,7 +7,8 @@ import code.uci.pacman.objects.StationaryObject;
 /**
  * 
  * @author Object Team
- * Pills are the small dots that get eaten
+ * Pills are the small dots that get eaten for points
+ * The level is completed by successfully eating every pill
  *
  */
 

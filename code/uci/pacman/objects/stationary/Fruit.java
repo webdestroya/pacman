@@ -5,6 +5,7 @@ import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
 
 /**
+ * This class represents the fruit available in the game at various intervals for extra points
  * @author Team Objects/AI
  *
  */

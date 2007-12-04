@@ -6,7 +6,7 @@ import code.uci.pacman.objects.StationaryObject;
 /**
  * 
  * @author Team Objects/AI
- * this is one square image
+ * These are the square images making up the walls of the game
  *
  */
 public class Wall extends StationaryObject {
