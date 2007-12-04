@@ -59,7 +59,7 @@ public class PacManGame extends Ucigame {
 		initializeWindow();
 
 		// starts the intro for the game
-		displayIntroScreen();
+		showIntroScreen();
 
 		// make the server or client connection
 		setupServerOrClient();
@@ -73,7 +73,7 @@ public class PacManGame extends Ucigame {
 		window.title("Pac Man Fever");
 	}
 
-	private void displayIntroScreen() {
+	private void showIntroScreen() {
 		// initialize screens
 		introPlayer = new IntroPlayer();
 		// show intro screen
@@ -83,7 +83,7 @@ public class PacManGame extends Ucigame {
 		introPlayer.playIntroTheme(); // Play intro theme after starting scene. (so it syncs properly)
 	}
 
-	private void displayMenuScreen() {
+	private void showMenuScreen() {
 		// stop intro theme
 		introPlayer.stopIntroTheme();
 		//initialize menu
@@ -94,7 +94,7 @@ public class PacManGame extends Ucigame {
 		showScene(ScreenMode.MENU);
 	}
 
-	private void beginGame() {
+	private void showGameScreen() {
 		// stop menu theme
 		mainMenu.stopMenuTheme();
 		// show game
@@ -192,7 +192,7 @@ public class PacManGame extends Ucigame {
 	 */
 	public void onClickMenuStart() {
 		if (isShowingScene(ScreenMode.INTRO)) {
-			displayMenuScreen();
+			showMenuScreen();
 		}
 	}
 
@@ -204,7 +204,7 @@ public class PacManGame extends Ucigame {
 	public void onClickSinglePlay() {
 		if (isShowingScene(ScreenMode.MENU)) {
 			System.out.println("single player click");
-			beginGame();
+			showGameScreen();
 		}
 	}
 
@@ -246,13 +246,13 @@ public class PacManGame extends Ucigame {
 
 	public void onKeyPressIntro() {
 		if (keyboard.isDown(keyboard.S)) {
-			displayMenuScreen();
+			showMenuScreen();
 		}
 	}
 
 	public void onMousePressed() {
 		if (isShowingScene(ScreenMode.INTRO)) {
-			displayMenuScreen();
+			showMenuScreen();
 		}
 	}
 
@@ -268,13 +268,13 @@ public class PacManGame extends Ucigame {
 			control.setPacManDirection(Direction.RIGHT);
 
 		if (keyboard.isDown(keyboard.R)) {
-			beginGame();
+			showGameScreen();
 		}
 	}
 
 	public void onKeyPressGameOver() {
 		if (keyboard.isDown(keyboard.R)) {
-			beginGame();
+			showGameScreen();
 		}
 	}
 
