@@ -22,8 +22,7 @@ public class PacManGame extends Ucigame {
 	private TopScores topScores;
 	private MainMenu mainMenu;
 	private IntroPlayer introPlayer; // for playing the intro
-	private Sprite button1;
-
+	
 	public static String font = "Dialog.bold";
 	
 	public static int multiplayerType = 1; // 1=server, 2=client
@@ -51,20 +50,14 @@ public class PacManGame extends Ucigame {
 
 	public void setup() {
 		generatePositions(false);
-		initializeWindow(); // creates the window, sets the title, initialize
-		// control
-
-		// Run these lines to see the intro
-		//introPlayer.playIntroTheme();
-		startScene("Intro");
-				
-		//startScene("Game"); // switch to the "scene" containing the actual game
+		// creates the window, sets the title, initialize
+		initializeWindow(); 
 		
-		// Run these lines to see the main menu
-		//canvas.background(getImage("images/final/mainMenuBackGroundDim.png"));
-		//mainMenu.startMenuTheme();
-		//startScene("Menu");
-		setupServerOrClient(); //make the server or client connection
+		// starts the intro for the game
+		startScene("Intro");
+		
+		//make the server or client connection
+		setupServerOrClient(); 
 
 	}
 
@@ -107,6 +100,11 @@ public class PacManGame extends Ucigame {
 
 	/*  Painting the Game Scenes  */
 
+	//Draws the "Intro" scene
+	public void drawIntro() {
+		introPlayer.draw();
+	}
+	
 	//Draws the "Menu" scene
 	public void drawMenu() {
 		canvas.clear();
@@ -125,25 +123,6 @@ public class PacManGame extends Ucigame {
 		control.nextMove();
 		control.drawState();
 		scoreBoard.draw();
-	}
-
-	//Draws the "Intro" scene
-	public void drawIntro() {
-		introPlayer.draw();
-
-		//introPlayer.draw();
-		//screwAround(); 
-        ///////////////////// MIKE THIS IS WHERE YOU PUT YOUR INTO and from your intro you need to call 
-        ///////////////////// startScene("Game"); to start the game. so put that in a button somewhere. 
-        ///////////////////// I made a basic start game screen, to show you about how it works.. my button sucks lol
-	}
-
-//	this was just a test
-	public void screwAround()
-	{
-		String themeLocation = "sounds/final/IntroTheme.mp3";
-		Sound music = getSound(themeLocation);
-		music.play();
 	}
 
 	//Draws the "GameOver" scene
@@ -180,10 +159,11 @@ public class PacManGame extends Ucigame {
 	}
 	/* Event Input Handling */
 
-	public void onClickPlay(){
-		startScene("Game");
-	}
-	
+	/**
+	 * 
+	 * displays the menu and plays the menu theme. 
+	 * 
+	 */
 	public void onClickMenuStart()
 	{
 		introPlayer.stopIntroTheme();
@@ -192,7 +172,11 @@ public class PacManGame extends Ucigame {
 		startScene("Menu");
 	}
 
-	///
+	/**
+	 * 
+	 * starts a single-player game. 
+	 * 
+	 */
 	public void onClickSinglePlay(){
 		System.out.println("single playter click");
 		mainMenu.stopMenuTheme();
@@ -200,22 +184,37 @@ public class PacManGame extends Ucigame {
 		startScene("Game");
 	}
 	
+	/**
+	 * 
+	 * goes to the multiplayer menu. 
+	 * 
+	 */
 	public void onClickMultiPlay(){
 		System.out.println("multi playter click");
 		//startScene("Game");
 	}
 	
+	/**
+	 * 
+	 * shows top scores screen. 
+	 * 
+	 */
 	public void onClickTopScores(){
 		System.out.println("topScore click");
 		//startScene("Game");
 	}
 	
+	/**
+	 * 
+	 * writes out the high scores, then quits the game. 
+	 * 
+	 */
 	public void onClickQuit(){
 		System.out.println("quit click");
 		//startScene("Game");
 	}
 	
-	////
+	
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
 		if (keyboard.isDown(keyboard.UP, keyboard.W))
