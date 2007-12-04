@@ -18,6 +18,7 @@ public class MainMenu{
 	private Sprite quit;
 	private int canvasWidth = 600;
 	private int canvasHeight = 650;
+	private Sound menuTheme;
 	private int buttonStartHeight = 105;
 	private int buttonHeight = 83;
 	
@@ -25,6 +26,8 @@ public class MainMenu{
 	//constructor for MainMenu, creates all the buttons in the menu
 	public MainMenu() {
 		//single player button creation
+		menuTheme = GameController.getInstance().getPacInstance().getSound("sounds\\final\\MainMenu.mp3");
+		
 		singlePlayerButton = GameController.getInstance().getPacInstance().makeButton("SinglePlay",GameController.getInstance().getPacInstance().getImage("images/final/singleplayerButton.png"),
                 249, 76);
 		singlePlayerButton.position(canvasWidth/2 - singlePlayerButton.width()/2, buttonStartHeight);
@@ -58,6 +61,16 @@ public class MainMenu{
 		multiplayerButton.draw();
 		topScores.draw();
 		quit.draw();
+	}
+	
+	public void startMenuTheme()
+	{
+		menuTheme.loop();		
+	}
+	
+	public void stopMenuTheme()
+	{
+		menuTheme.stop();
 	}
 		
 }
