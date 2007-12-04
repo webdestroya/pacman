@@ -10,6 +10,8 @@ import ucigame.*;
 
 import java.util.*;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+
 /**
  * 
  * @author The Game Team The main game class
@@ -22,9 +24,11 @@ public class PacManGame extends Ucigame {
 	private TopScores topScores;
 	private MainMenu mainMenu;
 	private IntroPlayer introPlayer; // for playing the intro
-	
+
+	private ScreenMode currentScene; // stores the current scene displayed
+
 	public static String font = "Dialog.bold";
-	
+
 	public static int multiplayerType = 1; // 1=server, 2=client
 	public static String hostname = "127.0.0.1"; // used for network
 
@@ -50,15 +54,15 @@ public class PacManGame extends Ucigame {
 
 	public void setup() {
 		generatePositions(false);
-		
+
 		// creates the window, sets the title, initialize
-		initializeWindow(); 
-		
+		initializeWindow();
+
 		// starts the intro for the game
 		displayIntroScreen();
-		
-		//make the server or client connection
-		setupServerOrClient(); 
+
+		// make the server or client connection
+		setupServerOrClient();
 
 	}
 
@@ -66,36 +70,36 @@ public class PacManGame extends Ucigame {
 		control = GameController.setInstance(this);
 		this.framerate(20);
 		window.size(600, 650);
-		window.title("Pac Man Fever");        
+		window.title("Pac Man Fever");
 	}
-	
+
 	private void displayIntroScreen() {
-		//initialize screens
+		// initialize screens
 		introPlayer = new IntroPlayer();
 		mainMenu = new MainMenu();
-		//show intro screen
-		startScene("Intro");
+		// show intro screen
+		showScene(ScreenMode.INTRO);
 		introPlayer.playIntroTheme();
 	}
-	
+
 	private void displayMenuScreen() {
-		//stop intro theme
+		// stop intro theme
 		introPlayer.stopIntroTheme();
-		//show menu
+		// show menu
 		canvas.background(getImage("images/final/mainMenuBackGroundDim.png"));
 		mainMenu.startMenuTheme();
-		startScene("Menu");
+		showScene(ScreenMode.MENU);
 	}
-	
+
 	private void beginGame() {
-		//stop menu theme
+		// stop menu theme
 		mainMenu.stopMenuTheme();
-		//show game
+		// show game
 		canvas.background(0, 0, 0);
 		control.startGame(); // start the game
 		scoreBoard = new ScoreBoard();
 		topScores = new TopScores();
-		startScene("Game");
+		showScene(ScreenMode.GAME);
 	}
 
 	private void setupServerOrClient() {
@@ -120,26 +124,26 @@ public class PacManGame extends Ucigame {
 		}
 	}
 
-	/*  Painting the Game Scenes  */
+	/* Painting the Game Scenes */
 
-	//Draws the "Intro" scene
+	// Draws the "Intro" scene
 	public void drawIntro() {
 		introPlayer.draw();
 	}
-	
-	//Draws the "Menu" scene
+
+	// Draws the "Menu" scene
 	public void drawMenu() {
 		canvas.clear();
 		mainMenu.draw();
 	}
 
-	//Draws the "Scores" scene
+	// Draws the "Scores" scene
 	public void drawScores() {
 		canvas.clear();
 		topScores.draw();
 	}
 
-	//Draws the "Game" scene
+	// Draws the "Game" scene
 	public void drawGame() {
 		canvas.clear();
 		control.nextMove();
@@ -147,7 +151,7 @@ public class PacManGame extends Ucigame {
 		scoreBoard.draw();
 	}
 
-	//Draws the "GameOver" scene
+	// Draws the "GameOver" scene
 	public void drawGameOver() {
 		canvas.clear();
 		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
@@ -175,70 +179,79 @@ public class PacManGame extends Ucigame {
 		control.unscatterGhosts();
 	}
 
-	public void startGameTimer(){
-		stopTimer("startGame");
-		startScene("Game");
-	}
 	/* Event Input Handling */
 
 	/**
 	 * 
-	 * displays the menu and plays the menu theme. 
+	 * displays the menu and plays the menu theme.
 	 * 
 	 */
-	public void onClickMenuStart()
-	{
-		displayMenuScreen();
+	public void onClickMenuStart() {
+		if (currentScene == ScreenMode.INTRO) {
+			displayMenuScreen();
+		}
 	}
 
 	/**
 	 * 
-	 * starts a single-player game. 
+	 * starts a single-player game.
 	 * 
 	 */
-	public void onClickSinglePlay(){
-		System.out.println("single player click");
-		beginGame();
-	}
-	
-	/**
-	 * 
-	 * goes to the multiplayer menu. 
-	 * 
-	 */
-	public void onClickMultiPlay(){
-		System.out.println("multi playter click");
-		//startScene("Game");
-	}
-	
-	/**
-	 * 
-	 * shows top scores screen. 
-	 * 
-	 */
-	public void onClickTopScores(){
-		System.out.println("topScore click");
-		//startScene("Game");
-	}
-	
-	/**
-	 * 
-	 * writes out the high scores, then quits the game. 
-	 * 
-	 */
-	public void onClickQuit(){
-		System.out.println("quit click");
-		//startScene("Game");
-	}
-	
-	public void onKeyPressIntro() {
-		System.out.println("test");
-		if (keyboard.isDown(keyboard.R)) {
+	public void onClickSinglePlay() {
+		if (currentScene == ScreenMode.MENU) {
+			System.out.println("single player click");
 			beginGame();
 		}
 	}
-	
-	
+
+	/**
+	 * 
+	 * goes to the multiplayer menu.
+	 * 
+	 */
+	public void onClickMultiPlay() {
+		if (currentScene == ScreenMode.MENU) {
+			System.out.println("multi playter click");
+			// beginGame();
+		}
+	}
+
+	/**
+	 * 
+	 * shows top scores screen.
+	 * 
+	 */
+	public void onClickTopScores() {
+		if (currentScene == ScreenMode.MENU) {
+			System.out.println("topScore click");
+			// beginGame();
+		}
+	}
+
+	/**
+	 * 
+	 * writes out the high scores, then quits the game.
+	 * 
+	 */
+	public void onClickQuit() {
+		if (currentScene == ScreenMode.MENU) {
+			System.out.println("quit click");
+			// beginGame();
+		}
+	}
+
+	public void onKeyPressIntro() {
+		if (keyboard.isDown(keyboard.S)) {
+			displayMenuScreen();
+		}
+	}
+
+	public void onMousePressed() {
+		if (currentScene == ScreenMode.INTRO) {
+			displayMenuScreen();
+		}
+	}
+
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
 		if (keyboard.isDown(keyboard.UP, keyboard.W))
@@ -263,5 +276,11 @@ public class PacManGame extends Ucigame {
 
 	public Sprite makeSpriteFromPath(String string) {
 		return makeSprite(getImage(string));
+	}
+
+	public void showScene(ScreenMode scene) {
+		this.currentScene = scene;
+		String sceneName = StringUtils.capitalize(scene.toString().toLowerCase());
+		super.startScene(sceneName);
 	}
 }
