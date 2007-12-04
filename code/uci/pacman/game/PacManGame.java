@@ -57,8 +57,19 @@ public class PacManGame extends Ucigame {
 		introPlayer = new IntroPlayer();
 		// show intro screen
 		canvas.background(0, 0, 0); 
-		showScene(ScreenMode.INTRO);
-		introPlayer.playIntroTheme(); 
+		// This part was added so that it could better sync.  Untested.
+		try
+		{
+			System.out.println("LOADING INTRO!");
+			Thread.sleep(3000);
+			showScene(ScreenMode.INTRO);
+			introPlayer.playIntroTheme();
+		}
+		catch(InterruptedException e)
+		{
+			System.out.println("Intro thread interuppted before start!");
+			e.printStackTrace();
+		}
 	}
 
 	private void showMenuScreen() {
@@ -115,7 +126,7 @@ public class PacManGame extends Ucigame {
 	/**
 	 * Draws the "Intro" scene
 	 */
-	public void drawIntro() {
+	public void drawIntro() {		
 		introPlayer.draw();
 	}
 
