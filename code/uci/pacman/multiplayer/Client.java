@@ -25,7 +25,10 @@ public class Client// extends Thread
 	{
 		Client.setHost(host);
 	}
-
+	/**
+	 * Changes the host
+	 * @param host IP Address or Host Name
+	 */
 	public static void setHost(String host)
 	{
 		try
@@ -39,11 +42,10 @@ public class Client// extends Thread
 	}
 
 	/**
-	 * 
+	 * Sends a packet to the Server;
 	 * @param ghost which ghost you are sending
 	 * @param dir stuff
 	 */
-	
 	public static void send(String ghost, String dir)
 	{
 		try

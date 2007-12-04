@@ -12,7 +12,7 @@ enum PType { JOIN, GMOVE, PMOVE, GAMEOVER, GAMESTART };
 
 
 /**
- * Server is responsible for handling incoming client requests. Set up UPD Sytle
+ * Server is responsible for handling incoming client requests.
  * @author Networking Team
  *	
  */
@@ -75,11 +75,7 @@ public class Server extends Thread
 	}
 
 
-	/**
-	 * 
-	 * @param buf
-	 */
-	public static void sendData(byte[] buf)
+	private static void sendData(byte[] buf)
 	{
 		try
 		{
@@ -96,7 +92,9 @@ public class Server extends Thread
 
 		}
 	}
-
+	/**
+	 * runs the server
+	 */
     public void run()
 	{
 		// should be while game is not over
@@ -138,9 +136,6 @@ public class Server extends Thread
 		System.out.println("Server Shutdown");
 		socket.close();
     }
-    /**
-     * @return resulting GameState
-     */
 
 	
 	
