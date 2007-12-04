@@ -91,7 +91,7 @@ public class WallController extends SpriteController<Point, Wall> {
 	 * @param c the object to stop from colliding with walls
 	 */
 	public void stopCollisions(ControllableObject c) {
-		c.stopIfCollidesWith(super.getObjects());
+		c.stopIfCollidesWith(super.getObjects().toArray(new Sprite[0]));
 	}
 	
 	/* Private Methods */

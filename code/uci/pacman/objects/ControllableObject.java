@@ -142,8 +142,4 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 		return GameController.getInstance().getPacInstance().getImage(resources + stringPath);
 	}
 
-	public void stopIfCollidesWith(Collection<? extends Sprite> sprites) {
-		Sprite[] spriteArray = sprites.toArray(new Sprite[0]);
-		super.stopIfCollidesWith(spriteArray);
-	}
 }
