@@ -52,13 +52,8 @@ public class PacManGame extends Ucigame {
 	public void setup() {
 		generatePositions(false);
 		initializeWindow(); // creates the window, sets the title, initialize
-		// control
 
-		// This code is for displaying the opening
-		// Pass a 1 if you want to play the intro or 0 to skip it
-		// Doesn't work right now
-		// introPlayer = new IntroPlayer(1, this);
-		
+		// start the very first scene in the game, Intro Scene
 		startScene("Intro");
 				
 		//startScene("Game"); // switch to the "scene" containing the actual game
@@ -72,12 +67,11 @@ public class PacManGame extends Ucigame {
 		canvas.background(0, 0, 0);
 		window.title("Pac Man Fever");
 		control = GameController.setInstance(this);
-		introPlayer = new IntroPlayer();
+		introPlayer = new IntroPlayer(); 
+		mainMenu = new MainMenu(); 
 		control.startGame(); // start the game
-		scoreBoard = new ScoreBoard();
-		topScores = new TopScores();
-		mainMenu = new MainMenu();
-        
+		scoreBoard = new ScoreBoard(); 
+		topScores = new TopScores(); 
 	}
 
 	private void setupServerOrClient() {
@@ -104,6 +98,11 @@ public class PacManGame extends Ucigame {
 
 	/*  Painting the Game Scenes  */
 
+	//Draws the "Intro" scene
+	public void drawIntro() {
+		introPlayer.draw();
+	}
+	
 	//Draws the "Menu" scene
 	public void drawMenu() {
 		mainMenu.draw();
@@ -121,17 +120,6 @@ public class PacManGame extends Ucigame {
 		control.nextMove();
 		control.drawState();
 		scoreBoard.draw();
-	}
-
-	//Draws the "Intro" scene
-	public void drawIntro() {
-		introPlayer.draw();
-
-		//introPlayer.draw();
-		//screwAround(); 
-        ///////////////////// MIKE THIS IS WHERE YOU PUT YOUR INTO and from your intro you need to call 
-        ///////////////////// startScene("Game"); to start the game. so put that in a button somewhere. 
-        ///////////////////// I made a basic start game screen, to show you about how it works.. my button sucks lol
 	}
 
 //	this was just a test
@@ -174,15 +162,11 @@ public class PacManGame extends Ucigame {
 		stopTimer("startGame");
 		startScene("Game");
 	}
+	
 	/* Event Input Handling */
 
-	public void onClickPlay(){
-		startScene("Game");
-	}
-
-	///
+	// events from MainMenu buttons //
 	public void onClickSinglePlay(){
-		System.out.println("single playter click");
 		startScene("Game");
 	}
 	
