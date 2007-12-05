@@ -76,6 +76,7 @@ public class GameController {
 	 * 
 	 */
 	public void fruitEaten(Fruit fruit) {
+		SoundController.fruitEaten();
 		state.addToScore(fruit.getValue()); // update score
 		fruit.hide();
 	}
@@ -91,6 +92,7 @@ public class GameController {
 	 * 
 	 */
 	public void ghostEaten(Ghost ghost) {
+		SoundController.ghostEaten();
 		ghost.respawnInCage(); // restart in cage
 		state.addToScore(ghost.getValue());
 		// TODO make ghosts worth more if you eat them in the same round
@@ -136,6 +138,7 @@ public class GameController {
 	 * 
 	 */
 	public void pacManEaten(PacMan pacMan) {
+		SoundController.pacmanEaten();
 		if (state.getLives() > 0) { // if Pac-man has more lives
 			state.lifeLost();
 			state.getFruit().hide();
@@ -205,6 +208,8 @@ public class GameController {
 	 */
 	public void startGame() {
 		state.initialize();
+		// we need to wait 5 seconds for the intro music to stop playing like in real pacman.
+		SoundController.gameStarted();
 	}
 
 	/**
