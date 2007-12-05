@@ -33,6 +33,20 @@ public class PacManGame extends Ucigame {
 	public static String hostname = "127.0.0.1"; // used for network
 	public static int gameType = 1; // 1=single, 2 = multi
 
+
+	// TODO: REMOVE THIS WHEN DONE TESTING
+	public static void main(String[] args)
+	{
+		if( args.length>=1)
+		{
+			System.out.println("REQUESTING CLIENT");
+
+		}
+		
+		Ucigame.main(args);
+	}
+
+
 	/* Initialization */
 	public void setup() {
 		generatePositions(false);

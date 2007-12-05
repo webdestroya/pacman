@@ -38,7 +38,7 @@ public abstract class SpriteController<T, S extends Sprite> {
 	 * @param key the key
 	 * @param object the sprite to add
 	 */
-	protected void addObject(T key, S object) {
+	/*protected*/public void addObject(T key, S object) {
 		hash.put(key, object);
 	}
 	
@@ -48,7 +48,7 @@ public abstract class SpriteController<T, S extends Sprite> {
 	 * @param key the key for the object
 	 * @return the sprite associated with the key
 	 */
-	protected S getObjectAt(T key) {
+	/*protected*/public S getObjectAt(T key) {
 		return hash.get(key);
 	}
 	
@@ -57,7 +57,7 @@ public abstract class SpriteController<T, S extends Sprite> {
 	 * 
 	 * @param key the key for the sprite to remove.
 	 */
-	protected void destroyAt(T key) {
+	/*protected*/public void destroyAt(T key) {
 		hash.remove(key);
 	}
 	
