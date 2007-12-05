@@ -215,7 +215,7 @@ public class Server extends Thread
 				int data1 = buf[1] & 0x000000FF;
 				int data2 = buf[2] & 0x000000FF;
 				int data3 = buf[3] & 0x000000FF;
-				System.out.print("PACKET ["+packet.getPort()+"] ("+packetType+","+data1+","+data2+","+data3+"): ");
+				//System.out.print("PACKET ["+packet.getPort()+"] ("+packetType+","+data1+","+data2+","+data3+"): ");
 
 				if( PType.JOIN.ordinal() == packetType )
 				{
@@ -225,10 +225,10 @@ public class Server extends Thread
 						int localIndex = Server.clients.indexOf(Server.localAddr);
 						
 						// build the packet
-						//bufOut[0] = new Integer( PType.GTYPE.ordinal() ).byteValue();
-						//bufOut[1] = new Integer( localIndex  ).byteValue();
+						bufOut[0] = new Integer( PType.GTYPE.ordinal() ).byteValue();
+						bufOut[1] = new Integer( data1  ).byteValue();
 						//Server.clients.set( localIndex, address );
-						//sendClientData( address, bufOut );
+						sendClientData( address, bufOut );
 
 						// TODO: HACKS
 						Server.clients.set( data1, address );
@@ -315,7 +315,7 @@ public class Server extends Thread
 							GameState.getInstance().getGhosts().getObjectAt("Pinky").setDirection(dir);
 							break;
 					}
-					System.out.println("Moving "+data2+" in dir "+data1);
+					//System.out.println("Moving "+data2+" in dir "+data1);
 					
 					// notify all the clients
 					send(gtype, dir);
