@@ -34,11 +34,13 @@ public class Blinky extends Ghost{
 	 */
 	@Override
 	public Direction getMove() {
-			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				this.position(this.x(), 205);
-				lastDirection = Direction.LEFT;
-				curDirection = Direction.UP;
-			}
+		int curX = this.x();
+		int curY = this.y();
+		if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
+			this.position(this.x(), 205);
+			lastDirection = Direction.LEFT;
+			curDirection = Direction.UP;
+		}
 		if(isBeingControlled)
 		{
 			return curDirection;
@@ -52,8 +54,8 @@ public class Blinky extends Ghost{
 		if (this.isScattered()) {
 			
 		} else {
-			int curX = this.x();
-			int curY = this.y();
+			//int curX = this.x();
+			//int curY = this.y();
 			// check to see if in center (just spawned)
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
 				this.position(this.x(), 205);
