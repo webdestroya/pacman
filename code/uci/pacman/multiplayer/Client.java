@@ -15,7 +15,7 @@ public class Client extends Thread
 {
 	private static final long serialVersionUID = 1L;
 	private static InetAddress address;
-	protected DatagramSocket socket = null;
+	protected MulticastSocket socket = null;
 	private static boolean moreQuotes = true;
 
 	// This tells the client what type he is
@@ -25,12 +25,11 @@ public class Client extends Thread
 	 * Starts a Client
 	 * @param host IP address or host name
 	 */
-	public Client(String host)
+	public Client()
 	{
-		Client.setHost(host);
 		try
 		{
-			socket = new DatagramSocket(4446);
+			socket = new MulticastSocket(4446);
 		}
 		catch(Exception e)
 		{
@@ -101,10 +100,14 @@ public class Client extends Thread
 	public void run()
 	{
 		// should be while game is not over
-		while (moreQuotes) 
+		try
 		{
-			try 
+			InetAddress group = InetAddress.getByName("230.0.0.1");
+			socket.joinGroup(group);
+
+			while (moreQuotes) 
 			{
+
 				byte[] buf = new byte[4];
 
 				// receive request
@@ -121,9 +124,9 @@ public class Client extends Thread
 				int data2 = buf[2] & 0x000000FF;
 				int data3 = buf[3] & 0x000000FF;
 
-				if( PType.GTYPE.ordinal() == packetType )
+				if( PType.SPOTFREE.ordinal() == packetType )
 				{
-					// tells the player what ghost he will be
+					// tells the player that a spot is open on the server
 					switch(data1)
 					{
 						case 0://blinky
@@ -140,19 +143,10 @@ public class Client extends Thread
 							break;
 					}
 
-					System.out.println("GhostType Set: " + data1);
+					System.out.println("SPOTFREE GhostType Set: " + data1);
 						
 					//TODO: setup the player or something, go hooray?
 				
-				}
-				else if( PType.ERROR.ordinal() == packetType )
-				{
-					// client was a dumbass, and sent a bad packet
-					System.out.println("ERROR-Rx: " + data1);
-				}
-				else if( PType.ACK.ordinal() == packetType )
-				{
-					// just an acknowledge, i dont think we need to process it, but can be used for consistency
 				}
 				else if( PType.GAMEFULL.ordinal() == packetType )
 				{
@@ -186,13 +180,6 @@ public class Client extends Thread
 							GameState.getInstance().getPacMan().step(Direction.RIGHT);
 							break;
 					}
-				}
-				else if( PType.GAMESTART.ordinal() == packetType )
-				{
-					// game commencing
-					
-					// TODO: start the game up or something
-
 				}
 				else if( PType.JOIN.ordinal() == packetType )
 				{
@@ -247,11 +234,13 @@ public class Client extends Thread
 					//System.out.println("UNKNOWN");
 				}
 			}
-			catch (IOException e)
-			{
-			}
+			socket.leaveGroup(group);
+			socket.close();
 		}
-		socket.close();
+		catch(Exception e)
+		{
+
+		}
     }
 
 

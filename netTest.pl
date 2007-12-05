@@ -12,7 +12,7 @@ socket(SOCKET, PF_INET, SOCK_DGRAM, getprotobyname("udp")) or die "socket: $!";
 	GAMEOVER=>4,
 	LEAVE=>5,
 	GAMEFULL=>6,
-	GAMESTART=>7,
+	SPOTFREE=>7,
 	ACK=>8,	
 	ERROR=>9,
 	
@@ -60,7 +60,7 @@ if( $#ARGV>2 )
 $MSG = pack('CCCC', $DATA1, $DATA2, $DATA3, $DATA4);
 
 print "Message: [".$DATA1."|".$DATA2."|".$DATA3."|".$DATA4."]\n";
-print "Message: ".$MSG."\n";
+#print "Message: ".$MSG."\n";
 
 # Send
 $ipaddr   = inet_aton($HOSTNAME);

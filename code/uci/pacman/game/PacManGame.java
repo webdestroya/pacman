@@ -33,19 +33,12 @@ public class PacManGame extends Ucigame {
 	public static String hostname = "127.0.0.1"; // used for network
 	public static int gameType = 1; // 1=single, 2 = multi
 
-
-	// TODO: REMOVE THIS WHEN DONE TESTING
 	public static void main(String[] args)
 	{
-		if( args.length>=1)
-		{
-			System.out.println("REQUESTING CLIENT");
-
-		}
-		
-		Ucigame.main(args);
+		String[] args2 = new String[1];
+		args2[0] = "code.uci.pacman.game.PacManGame";
+		Ucigame.main(args2);
 	}
-
 
 	/* Initialization */
 	public void setup() {
@@ -54,9 +47,6 @@ public class PacManGame extends Ucigame {
 		initializeWindow();
 		// starts the intro for the game
 		showIntroScreen();
-		// make the server or client connection
-		//setupServerOrClient();
-		startPacManServer();
 	}
 
 	private void initializeWindow() {
@@ -113,16 +103,9 @@ public class PacManGame extends Ucigame {
 		showScene(ScreenMode.SCORES);
 	}
 
+	// remove this
 	private void setupServerOrClient() {
 		// Make the server
-		if (PacManGame.multiplayerType == 1) {
-			try {
-				new Server().start();
-			} catch (Exception e) {
-			}
-		} else if (PacManGame.multiplayerType == 2) {
-			Client.setHost(hostname);
-		}
 	}
 	
 	private void startPacManServer()
@@ -131,11 +114,27 @@ public class PacManGame extends Ucigame {
 		{
 			new Server().start();
 		}
-		catch (Exception e)
+		catch (Exception e){}
+	}
+
+	private void startPacManClient()
+	{
+		try
 		{
-
+			new Client().start();
 		}
+		catch (Exception e){}
+		showScene(ScreenMode.MPWAITING);
+	}
 
+	public void drawMpwaiting() {
+		canvas.clear();
+		//canvas.background(0);
+		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
+		canvas.putText("WAITING FOR SERVER", 100, 300);
+		canvas.font(PacManGame.font, PacManGame.BOLD, 20, 255, 255, 255);
+		canvas.putText("PacMan is currently listening for open games", 75, 340);
+		//try{Thread.currentThread().sleep(10000);}catch(Exception e){}
 	}
 
 	private void generatePositions(boolean run) {
@@ -235,6 +234,7 @@ public class PacManGame extends Ucigame {
 		if (isShowingScene(ScreenMode.MENU)) {
 			PacManGame.gameType = 1;
 			System.out.println("single player click");
+			startPacManServer();
 			showGameScreen();
 		}
 	}
@@ -248,6 +248,8 @@ public class PacManGame extends Ucigame {
 		if (isShowingScene(ScreenMode.MENU)) {
 			PacManGame.gameType = 2;
 			System.out.println("multi playter click");
+			startPacManClient();
+			//showGameScreen();
 			// beginGame();
 		}
 	}

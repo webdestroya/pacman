@@ -10,5 +10,5 @@ package code.uci.pacman.game;
  *
  */
 public enum ScreenMode {
-   INTRO, MENU, GAME, SCORES, GAMEOVER
+   INTRO, MENU, GAME, SCORES, GAMEOVER, MPWAITING
 }
