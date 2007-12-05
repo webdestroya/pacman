@@ -298,7 +298,7 @@ public class Server extends Thread
 					{
 						case 0://blinky
 							gtype = GhostType.BLINKY;
-							GameState.getInstance().getGhosts().getObjectAt("Blinky").step(dir);
+							((RemoteGhost)GameState.getInstance().getGhosts().getObjectAt("Blinky")).setDirection(dir);
 							break;
 						
 						case 1://clyde
