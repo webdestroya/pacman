@@ -25,6 +25,11 @@ public abstract class Ghost extends ControllableObject implements AI {
 	private static final int GHOST_HEIGHT = 22;
 	private static final int GHOST_FRAMERATE = 5;
 	private static final int CAGE_POS = 250;
+
+	// MITCH
+	protected Direction lastDirection;
+	protected Direction curDirection;
+	protected boolean isBeingControlled = false;
 	
 	private boolean isPlayer;
 
@@ -49,6 +54,21 @@ public abstract class Ghost extends ControllableObject implements AI {
 	private int scoreValue;
 	private boolean scatter;
 	
+
+
+	/// MITCH
+	public void returnAI()
+	{
+		isBeingControlled = false;
+	}
+	public void setDirection(Direction dir)
+	{
+		isBeingControlled = true;
+		lastDirection = curDirection;
+		curDirection = dir;
+	}
+
+
 
 	/**
 	 * Tells the game controller that this ghost has been eaten.
