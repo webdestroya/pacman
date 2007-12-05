@@ -141,7 +141,33 @@ public abstract class Ghost extends ControllableObject implements AI {
 	/**
 	 * 
 	 */
-	public abstract Direction getMove();
+	//public abstract Direction getMove();
+	protected abstract Direction getAIMove();
+	/* 
+	 * He tries to get you by your relative position. 
+	 * He takes the fastest route to find you. I believe he 
+	 * tries to line up with you horizontally first, then vertically.
+	 */
+	public Direction getMove()
+	{
+		if(isBeingControlled)
+		{
+			int curX = this.x();
+			int curY = this.y();
+			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325))
+			{
+				this.position(this.x(), 205);
+				lastDirection = Direction.LEFT;
+				curDirection = Direction.UP;
+			}
+			return curDirection;
+		}
+		else
+		{
+			return getAIMove();
+		}
+	}
+
 
 	public boolean moveIsAllowed(Direction d)
 	{

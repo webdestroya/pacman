@@ -28,8 +28,8 @@ public class Clyde extends Ghost{
 	 * you; he will not turn away if you are in his path. If you stay 
 	 * in one area, he seems to have a set pattern.
 	 */
-	@Override
-	public Direction getMove() {
+	//@Override
+	protected Direction getAIMove() {
 		// as of now, this ghost just tries to get to you as fast as possible
 		// with some work, it could end up being very smart
 		// so for now this is just an example for one way of doing this

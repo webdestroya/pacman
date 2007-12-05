@@ -238,26 +238,19 @@ public class Server extends Thread
 						{
 							case 0://b
 								gtype = GhostType.BLINKY;
-								//Ghost gh = 
-								((Blinky)GameState.getInstance().getGhosts().getObjectAt("Blinky")).setDirection(Direction.UP);
-								/*int gx = gh.x();
-								int gy = gh.y();
-								GameState.getInstance().getGhosts().destroyAt("Blinky");
-								GameState.getInstance().getGhosts().addObject( "Blinky", new RemoteGhost(gx, gy, "blinky") );
-								*/
-								//remoteghost(x,y,name)
+								GameState.getInstance().getGhosts().getObjectAt("Blinky").setDirection(Direction.UP);
 								break;
 							case 1://c
-								//GhostController gc = GameState.getInstance().getGhosts();
 								gtype = GhostType.CLYDE;
+								GameState.getInstance().getGhosts().getObjectAt("Clyde").setDirection(Direction.UP);
 								break;
 							case 2://i
-								//GhostController gc = GameState.getInstance().getGhosts();
 								gtype = GhostType.INKY;
+								GameState.getInstance().getGhosts().getObjectAt("Inky").setDirection(Direction.UP);
 								break;
 							case 3://p
-								//GhostController gc = GameState.getInstance().getGhosts();
 								gtype = GhostType.PINKY;
+								GameState.getInstance().getGhosts().getObjectAt("Pinky").setDirection(Direction.UP);
 								break;
 						}
 
@@ -301,20 +294,22 @@ public class Server extends Thread
 					{
 						case 0://blinky
 							gtype = GhostType.BLINKY;
-							((Blinky)GameState.getInstance().getGhosts().getObjectAt("Blinky")).setDirection(dir);
-							//((RemoteGhost)GameState.getInstance().getGhosts().getObjectAt("Blinky")).step(dir);
+							GameState.getInstance().getGhosts().getObjectAt("Blinky").setDirection(dir);
 							break;
 						
 						case 1://clyde
 							gtype = GhostType.CLYDE;
+							GameState.getInstance().getGhosts().getObjectAt("Clyde").setDirection(dir);
 							break;
 
 						case 2://inky
 							gtype = GhostType.INKY;
+							GameState.getInstance().getGhosts().getObjectAt("Inky").setDirection(dir);
 							break;
 
 						case 3://pinky
 							gtype = GhostType.PINKY;
+							GameState.getInstance().getGhosts().getObjectAt("Pinky").setDirection(dir);
 							break;
 					}
 					System.out.println("Moving "+data2+" in dir "+data1);
@@ -336,15 +331,19 @@ public class Server extends Thread
 					switch( data1 )
 					{
 						case 0://b
+							GameState.getInstance().getGhosts().getObjectAt("Blinky").returnAI();
 							send(PType.LEAVE, GhostType.BLINKY);
 							break;
 						case 1://c
+							GameState.getInstance().getGhosts().getObjectAt("Clyde").returnAI();
 							send(PType.LEAVE, GhostType.CLYDE);
 							break;
 						case 2://i
+							GameState.getInstance().getGhosts().getObjectAt("Inky").returnAI();
 							send(PType.LEAVE, GhostType.INKY);
 							break;
 						case 3://p
+							GameState.getInstance().getGhosts().getObjectAt("Pinky").returnAI();
 							send(PType.LEAVE, GhostType.PINKY);
 							break;
 					}

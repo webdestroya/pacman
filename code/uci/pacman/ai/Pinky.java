@@ -32,7 +32,7 @@ public class Pinky extends Ghost{
 	 * hallway to turn into)
 	 */
 	@Override
-	public Direction getMove() {
+	protected Direction getAIMove() {
 		// as of now, this ghost just tries to get to you as fast as possible
 		// with some work, it could end up being very smart
 		// so for now this is just an example for one way of doing this

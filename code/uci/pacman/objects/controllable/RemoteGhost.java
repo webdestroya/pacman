@@ -42,7 +42,12 @@ public class RemoteGhost extends Ghost{
 		
 		return null;*/
 	}
-	
+
+	protected Direction getAIMove()
+	{
+		return Direction.UP;
+	}
+
 	/**
 	 * Sets the ghost in a direction.
 	 * @param d The direction the ghost will be set to move towards.

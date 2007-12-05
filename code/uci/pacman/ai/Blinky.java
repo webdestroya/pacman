@@ -10,10 +10,6 @@ import code.uci.pacman.objects.controllable.*;
  */
 public class Blinky extends Ghost{
 
-	private Direction lastDirection;
-	private Direction curDirection;
-	
-	private boolean isBeingControlled = false;
 	
 	private final static int SPEED = 7;
 
@@ -21,31 +17,11 @@ public class Blinky extends Ghost{
 		super("blinky.png", x, y, SPEED, isPlayer);
 	}
 
-	public void setDirection(Direction dir)
+	
+	
+
+	protected Direction getAIMove()
 	{
-		isBeingControlled = true;
-		curDirection = dir;
-	}
-
-	/* 
-	 * He tries to get you by your relative position. 
-	 * He takes the fastest route to find you. I believe he 
-	 * tries to line up with you horizontally first, then vertically.
-	 */
-	@Override
-	public Direction getMove() {
-		int curX = this.x();
-		int curY = this.y();
-		if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-			this.position(this.x(), 205);
-			lastDirection = Direction.LEFT;
-			curDirection = Direction.UP;
-		}
-		if(isBeingControlled)
-		{
-			return curDirection;
-		}
-
 		// as of now, this ghost just tries to get to you as fast as possible
 		// with some work, it could end up being very smart
 		// so for now this is just an example for one way of doing this
@@ -54,8 +30,8 @@ public class Blinky extends Ghost{
 		if (this.isScattered()) {
 			
 		} else {
-			//int curX = this.x();
-			//int curY = this.y();
+			int curX = this.x();
+			int curY = this.y();
 			// check to see if in center (just spawned)
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
 				this.position(this.x(), 205);
