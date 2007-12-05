@@ -299,6 +299,7 @@ public class Server extends Thread
 						case 0://blinky
 							gtype = GhostType.BLINKY;
 							((RemoteGhost)GameState.getInstance().getGhosts().getObjectAt("Blinky")).setDirection(dir);
+							((RemoteGhost)GameState.getInstance().getGhosts().getObjectAt("Blinky")).step(dir);
 							break;
 						
 						case 1://clyde
@@ -313,7 +314,7 @@ public class Server extends Thread
 							gtype = GhostType.PINKY;
 							break;
 					}
-					System.out.println();
+					System.out.println("Moving "+data2+" in dir "+data1);
 					
 					// notify all the clients
 					send(gtype, dir);
