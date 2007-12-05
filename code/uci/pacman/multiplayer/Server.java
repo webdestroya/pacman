@@ -1,6 +1,7 @@
 package code.uci.pacman.multiplayer;
 
 import code.uci.pacman.game.*;
+import code.uci.pacman.ai.*;
 import code.uci.pacman.controllers.*;
 import code.uci.pacman.objects.controllable.*;
 import java.io.*;
@@ -237,11 +238,13 @@ public class Server extends Thread
 						{
 							case 0://b
 								gtype = GhostType.BLINKY;
-								Ghost gh = GameState.getInstance().getGhosts().getObjectAt("Blinky");
-								int gx = gh.x();
+								//Ghost gh = 
+								((Blinky)GameState.getInstance().getGhosts().getObjectAt("Blinky")).setDirection(Direction.UP);
+								/*int gx = gh.x();
 								int gy = gh.y();
 								GameState.getInstance().getGhosts().destroyAt("Blinky");
 								GameState.getInstance().getGhosts().addObject( "Blinky", new RemoteGhost(gx, gy, "blinky") );
+								*/
 								//remoteghost(x,y,name)
 								break;
 							case 1://c
@@ -298,8 +301,8 @@ public class Server extends Thread
 					{
 						case 0://blinky
 							gtype = GhostType.BLINKY;
-							((RemoteGhost)GameState.getInstance().getGhosts().getObjectAt("Blinky")).setDirection(dir);
-							((RemoteGhost)GameState.getInstance().getGhosts().getObjectAt("Blinky")).step(dir);
+							((Blinky)GameState.getInstance().getGhosts().getObjectAt("Blinky")).setDirection(dir);
+							//((RemoteGhost)GameState.getInstance().getGhosts().getObjectAt("Blinky")).step(dir);
 							break;
 						
 						case 1://clyde

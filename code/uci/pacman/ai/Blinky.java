@@ -13,10 +13,18 @@ public class Blinky extends Ghost{
 	private Direction lastDirection;
 	private Direction curDirection;
 	
+	private boolean isBeingControlled = false;
+	
 	private final static int SPEED = 7;
 
 	public Blinky(int x, int y, boolean isPlayer) {
 		super("blinky.png", x, y, SPEED, isPlayer);
+	}
+
+	public void setDirection(Direction dir)
+	{
+		isBeingControlled = true;
+		curDirection = dir;
 	}
 
 	/* 
@@ -26,6 +34,12 @@ public class Blinky extends Ghost{
 	 */
 	@Override
 	public Direction getMove() {
+
+		if(isBeingControlled)
+		{
+			return curDirection;
+		}
+
 		// as of now, this ghost just tries to get to you as fast as possible
 		// with some work, it could end up being very smart
 		// so for now this is just an example for one way of doing this
