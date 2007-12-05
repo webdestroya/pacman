@@ -12,7 +12,7 @@ import code.uci.pacman.objects.controllable.Ghost;
  */
 public class RemoteGhost extends Ghost{
 
-	private Direction curDirection;
+	private Direction curDirection = null;
 	
 	private final static int SPEED = 5;
 	
@@ -32,14 +32,15 @@ public class RemoteGhost extends Ghost{
 	 */
 	@Override
 	public Direction getMove() {
-		if (this.isScattered()) {
+		return curDirection;
+		/*if (this.isScattered()) {
 		}
 		else
 		{
 		return curDirection;
 		}
 		
-		return null;
+		return null;*/
 	}
 	
 	/**
