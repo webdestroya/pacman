@@ -15,9 +15,9 @@ import ucigame.Sound;
 public class SoundController {
 	
 	//private static Sound ambient = makeSound("pacchomp.mp3");
-	private static Sound pellet = makeSound("fruiteat.mp3");
+	private static Sound pellet = makeSound("gs_chomp.mp3");
 	//private static Sound mainMenu = makeSound("menu.mp3");
-	private static Sound pill = makeSound("fruiteat.mp3");
+	private static Sound pill = makeSound("gs_chomp.mp3");
 	//private static Sound topScore = makeSound("scores.mp3");
 	
 	/**
