@@ -241,7 +241,7 @@ public class Server extends Thread
 								int gx = gh.x();
 								int gy = gh.y();
 								GameState.getInstance().getGhosts().destroyAt("Blinky");
-								GameState.getInstance().getGhosts().addObject( "Blinky", new RemoteGhost(gx, gy, "Blinky") );
+								GameState.getInstance().getGhosts().addObject( "Blinky", new RemoteGhost(gx, gy, "blinky") );
 								//remoteghost(x,y,name)
 								break;
 							case 1://c
