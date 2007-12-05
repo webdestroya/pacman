@@ -219,22 +219,25 @@ public class Server extends Thread
 
 				if( PType.JOIN.ordinal() == packetType )
 				{
-					if( Server.clients.contains(Server.localAddr) )
+					if( true)//Server.clients.contains(Server.localAddr) )
 					{
 						// find the next slot available
 						int localIndex = Server.clients.indexOf(Server.localAddr);
 						
 						// build the packet
-						bufOut[0] = new Integer( PType.GTYPE.ordinal() ).byteValue();
-						bufOut[1] = new Integer( localIndex  ).byteValue();
-						Server.clients.set( localIndex, address );
-						sendClientData( address, bufOut );
+						//bufOut[0] = new Integer( PType.GTYPE.ordinal() ).byteValue();
+						//bufOut[1] = new Integer( localIndex  ).byteValue();
+						//Server.clients.set( localIndex, address );
+						//sendClientData( address, bufOut );
 
+						// TODO: HACKS
+						Server.clients.set( data1, address );
+						
 						// get the ghost type
 						GhostType gtype = GhostType.BLINKY;
 						
 						// Update the server
-						switch(localIndex)
+						switch(data1)//localIndex)
 						{
 							case 0://b
 								gtype = GhostType.BLINKY;
