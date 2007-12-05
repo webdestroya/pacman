@@ -34,7 +34,11 @@ public class Blinky extends Ghost{
 	 */
 	@Override
 	public Direction getMove() {
-
+			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
+				this.position(this.x(), 205);
+				lastDirection = Direction.LEFT;
+				curDirection = Direction.UP;
+			}
 		if(isBeingControlled)
 		{
 			return curDirection;
