@@ -21,6 +21,8 @@ public class Client extends Thread
 	protected MulticastSocket socket = null;
 	private static boolean moreQuotes = true;
 	private static boolean isPlaying = false;
+	
+	protected final static String MCAST_ADDRESS = "230.0.0.1";
 
 	// This tells the client what type he is
 	private static GhostType ghostType = GhostType.BLINKY;
@@ -123,7 +125,7 @@ public class Client extends Thread
 		try
 		{
 			// get the multicast group
-			InetAddress group = InetAddress.getByName("230.0.0.1");
+			InetAddress group = InetAddress.getByName(MCAST_ADDRESS);
 			socket.joinGroup(group);
 
 			while (moreQuotes) 

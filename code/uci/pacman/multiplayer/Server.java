@@ -19,6 +19,8 @@ public class Server extends Thread
 {
 	private static final long serialVersionUID = 1L;
 	protected DatagramSocket socket = null;
+
+	protected final static String MCAST_ADDRESS = "230.0.0.1";
 	
 
 	// TODO: TODO TODO TODO TODO: These must be reset when the server changes levels, or weird
@@ -172,7 +174,7 @@ public class Server extends Thread
 		{
 			try
 			{
-				gsgroup = InetAddress.getByName("230.0.0.1");
+				gsgroup = InetAddress.getByName(Server.MCAST_ADDRESS);
 				gssocket = new MulticastSocket();
 			}
 			catch(Exception e){}
@@ -265,7 +267,7 @@ public class Server extends Thread
 		{
 			try
 			{
-				cgroup = InetAddress.getByName("230.0.0.1");
+				cgroup = InetAddress.getByName(MCAST_ADDRESS);
 				csocket = new MulticastSocket();
 			}
 			catch(Exception e){}
@@ -401,7 +403,7 @@ public class Server extends Thread
         super(name);
         socket = new DatagramSocket(4445);
 		Server.clients = new ClientMap();//new ArrayList<GhostType>();
-		Server.group = InetAddress.getByName("230.0.0.1");
+		Server.group = InetAddress.getByName(MCAST_ADDRESS);
 
 		packetHistory = new ArrayList<DatagramPacket>();
 
