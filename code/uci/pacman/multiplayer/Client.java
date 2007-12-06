@@ -310,7 +310,7 @@ public class Client extends Thread
 					{
 						// game ended
 						moreQuotes = false;
-						GameController.getInstance().getPacInstance().drawGameover();
+						GameController.getInstance().getPacInstance().showGameOverScreen();
 					}
 				}
 				else
