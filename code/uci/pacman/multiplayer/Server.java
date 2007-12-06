@@ -539,6 +539,7 @@ public class Server extends Thread
 		new OpenSlots().start();
 		
 		new Consistency().start();
+		new GameStats().start();
 
 		while (moreQuotes) 
 		{
