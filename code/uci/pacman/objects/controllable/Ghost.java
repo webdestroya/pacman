@@ -22,7 +22,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 
 	private static final int GHOST_WIDTH = 22;
 	private static final int GHOST_HEIGHT = 22;
-	private static final int GHOST_FRAMERATE = 5;
+	public static final int GHOST_FRAMERATE = 5;
 	private static final int CAGE_POS = 250;
 
 	// MITCH

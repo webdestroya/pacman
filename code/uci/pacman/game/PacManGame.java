@@ -214,6 +214,11 @@ public class PacManGame extends Ucigame {
 	public void startFruitTimer() {
 		startTimer("removeFruit", Fruit.SHOW_FRUIT_DURATION);
 	}
+	
+	public void pacManDeathTimer(){
+		stopTimer("pacManDeath");
+		control.pacManRevive();
+	}
 
 	public void removeFruitTimer() {
 		stopTimer("removeFruit");

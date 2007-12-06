@@ -30,6 +30,7 @@ public class GameController {
 
 	private static GameController gControl;
 	private static final Point PACMANSTART = new Point(290, 440);
+	private boolean performNextMove;
 
 	public static GameController getInstance() {
 		return gControl;
@@ -52,6 +53,7 @@ public class GameController {
 		GameState.setInstance(new GameState());
 		state = GameState.getInstance();
 		this.game = pacManGame;
+		performNextMove = true;
 	}
 
 	/**
@@ -119,10 +121,15 @@ public class GameController {
 	 * 
 	 */
 	public void nextMove() {
-		moveActors(); // moves the actors for tick
-		handleActorCollisions(); // handles the actors colliding
-		handleItemCollisions(); // handle item collisions
-		checkStageClear(); // handle stage being clear (loading next stage)
+		if (performNextMove) {
+			moveActors(); // moves the actors for tick
+			handleActorCollisions(); // handles the actors colliding
+			handleItemCollisions(); // handle item collisions
+			checkStageClear(); // handle stage being clear (loading next stage)
+		}
+		else{
+			state.getPacMan().motion(0, 0); 
+		}
 	}
 
 	/**
@@ -140,13 +147,23 @@ public class GameController {
 	public void pacManEaten(PacMan pacMan) {
 		SoundController.pacmanEaten();
 		if (state.getLives() > 0) { // if Pac-man has more lives
-			state.lifeLost();
-			state.getFruit().hide();
-			state.getPacMan().position(PACMANSTART);
-			state.getGhosts().respawn();
+			performNextMove = false;
+			game.startTimer("pacManDeath", 2000);
+			state.getPacMan().setFrames(game.getImage("images/final/pacman.png"), 43, 0); //TODO make a death animation
+
 		} else { // if Pac-man has died one too many times
 			game.showGameOverScreen();
 		}
+	}
+
+	public void pacManRevive() {
+		state.lifeLost();
+		state.getGhosts().respawn();
+		state.getFruit().hide();
+		state.getPacMan().position(PACMANSTART);
+		state.getPacMan().setFrames(game.getImage("images/final/pacman.png"), 0, 0, 22, 0, 43, 0, 64, 0);
+		state.getPacMan().step(Direction.RIGHT);
+		performNextMove = true;
 	}
 
 	/**
@@ -208,7 +225,8 @@ public class GameController {
 	 */
 	public void startGame() {
 		state.initialize();
-		// we need to wait 5 seconds for the intro music to stop playing like in real pacman.
+		// we need to wait 5 seconds for the intro music to stop playing like in
+		// real pacman.
 		SoundController.gameStarted();
 	}
 
