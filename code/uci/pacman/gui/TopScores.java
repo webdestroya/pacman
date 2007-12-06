@@ -1,6 +1,8 @@
 package code.uci.pacman.gui;
 import ucigame.*;
 import java.util.*;
+import java.io.File;
+import java.io.*;
 
 import code.uci.pacman.controllers.GameController;
 import code.uci.pacman.game.GameState;
@@ -28,6 +30,8 @@ public class TopScores{
 	private int scoreStartPosX = 400;
 	private int scoreStartPosY = 150;
 	private int spaceIncrement = 30;
+	File file;
+	Scanner scanner;
 	
 	/**
 	 * 
@@ -36,13 +40,26 @@ public class TopScores{
 	 */
 	public TopScores(){
 		// TODO Auto-generated constructor stub
+		try{
+			file = new File("scores.txt");
+			scanner = new Scanner(file);
+			while(scanner.hasNext()){
+				nameList.add(scanner.next());
+				scoreList.add(Integer.parseInt(scanner.next()));
+			}
+			scanner.close();
+		}
+		catch(Exception e){
+			System.err.println("No such file.");
+			for(int x = 0; x < numberOfScores; x++){
+				nameList.add("Name"+(x+1));
+				scoreList.add(10-x);
+			}
+		}
+		
 		backGround = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/scorespriteadjuster.png");
 		backGround.position(bgX, bgY);
 		backGround.font(PacManGame.font, PacManGame.BOLD, 24, 255, 255, 255);
-		for(int x = 0; x < numberOfScores; x++){
-			nameList.add("a");
-			scoreList.add(1);
-		}
 	}
 	
 	/**
