@@ -90,6 +90,10 @@ public abstract class Ghost extends ControllableObject implements AI {
 	public void scatter(){
 		scatter = true;
 		// TODO change sprite? yes
+		// hey dave for your change sprite. We imported the Ucigame framework code into the svn.
+		// we added a setFrames which takes the same arguments as addFrames.
+		// this removes all of the old frames and adds the new ones.
+		// ex. setFrames(getImage("scattered.png"), 0,0, 16,0);
 	}
 	
 	/**
