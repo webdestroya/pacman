@@ -214,7 +214,8 @@ public class Client extends Thread
 					else if( PType.LIVES.ordinal() == packetType )
 					{
 						// set lives count
-						GameState.getInstance().setLives( (buf[1]&0xFF) );
+						int lives = (buf[1]&0xFF);
+						GameState.getInstance().setLives( lives );
 					}
 					else if( PType.AFRUIT.ordinal() == packetType )
 					{
