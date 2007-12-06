@@ -288,11 +288,14 @@ public class PacManGame extends Ucigame {
 		}
 	}
 
-	public void onMousePressed() {
-		if (isShowingScene(ScreenMode.INTRO)) {
-			showMenuScreen();
-		}
-	}
+	// This kept messing up the Start Game button, since it would start the game before
+	// the button was pressed.   If you want to skip the intro, just press "s" or the ]
+	// spacebar to get to the menu
+	//public void onMousePressed() {
+		//if (isShowingScene(ScreenMode.INTRO)) {
+		//	showMenuScreen();
+		//}
+	//}
 
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
