@@ -259,8 +259,8 @@ public class Server extends Thread
 	// a single command
     
     /**
-     * Sends a command
-     * @param type the command to send out
+     * Sends a packet
+     * @param type of command to send out
      */
 	public static void send(PType type)
 	{
@@ -270,7 +270,7 @@ public class Server extends Thread
 	}
 
 	/**
-     * Sends a command
+     * send packet with ghost info and direction info
      * @param ghost the type of ghost
 	 * @param dir the direction its moving
      */
@@ -284,7 +284,7 @@ public class Server extends Thread
 	}
 
 	/**
-	 * Used for moving pacman
+	 * Send a direction to clients
 	 * @param dir the direction pacman is moving
 	 */
 	public static void send(Direction dir)
@@ -296,7 +296,7 @@ public class Server extends Thread
 	}
 	
 	/**
-	 * Sends a command
+	 * Sends a packet with corresponding ghost type
 	 * @param type the type of command to send
 	 * @param ghost the ghost to associate with
 	 */
