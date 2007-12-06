@@ -1,7 +1,7 @@
 package code.uci.pacman.gui;
 
 import ucigame.*;
-import java.util.*;
+import java.util.ArrayList;
 import code.uci.pacman.game.PacManGame;
 import code.uci.pacman.controllers.GameController;
 //import java.io.FileNotFoundException;
@@ -83,7 +83,7 @@ public class IntroPlayer{
 			}
 			if (drawCounter == 30)
 			{
-				menuButton.draw();				
+				menuButton.draw();		
 			}
 	}
 	
