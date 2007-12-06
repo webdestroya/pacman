@@ -253,7 +253,7 @@ public class PacManGame extends Ucigame {
 	public void onClickMultiPlay() {
 		if (isShowingScene(ScreenMode.MENU)) {
 			PacManGame.gameType = 2;
-			System.out.println("multi playter click");
+			System.out.println("multi player click");
 			startPacManClient();
 			//showGameScreen();
 			// beginGame();
