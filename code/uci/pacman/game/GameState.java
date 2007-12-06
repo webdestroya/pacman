@@ -112,6 +112,14 @@ public class GameState {
 	public int getScore() {
 		return score;
 	}
+	
+	/**
+	 * Set's the score for the game
+	 * @param sc pass the current score
+	 */
+	public void setScore(int sc){
+		score = sc;
+	}
 
 	/**
 	 * Removes a life from PacMan. Called from the controller when PacMan is

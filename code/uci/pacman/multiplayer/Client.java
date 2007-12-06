@@ -324,7 +324,8 @@ public class Client extends Thread
 					{
 						// receive a score update
 						int newScore = 100*( (int)(buf[1]&0x000000FF) ) + ( (int)(buf[2]&0x000000FF) );
-
+						GameState.getInstance().setScore(newScore);
+						
 						// TODO: update the score on the client machine
 
 					}
