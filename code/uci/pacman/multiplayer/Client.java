@@ -352,7 +352,7 @@ public class Client extends Thread
 						GameController.getInstance().getPacInstance().showGameOverScreen();
 					}
 				}
-				else
+				else if( !Client.isPlaying )
 				{
 					if( PType.SPOTFREE.ordinal() == packetType && !Client.isPlaying )
 					{
