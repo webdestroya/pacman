@@ -31,7 +31,8 @@ public class TopScores{
 	private int scoreStartPosX = 400;
 	private int scoreStartPosY = 150;
 	private int spaceIncrement = 30;
-	FileReader file;
+	FileReader inFile;
+	FileWriter outFile;
 	Scanner scanner;
 	
 	/**
@@ -54,14 +55,14 @@ public class TopScores{
 	private void readScores(){
 		try
 		{
-			file = new FileReader("code\\uci\\pacman\\gui\\scores.txt");
-			scanner = new Scanner(file);
+			inFile = new FileReader("code\\uci\\pacman\\gui\\scores.txt");
+			scanner = new Scanner(inFile);
 			while(scanner.hasNextLine())
 			{
 				nameList.add(scanner.next());
 				scoreList.add(Integer.parseInt(scanner.next()));
 			}
-			file.close();
+			inFile.close();
 		}
 		catch(IOException e)
 		{
@@ -76,7 +77,19 @@ public class TopScores{
 	}
 	
 	private void writeScores(){
-		
+		try
+		{
+			outFile = new FileWriter("code\\uci\\pacman\\gui\\scores.txt");
+			for(int x = 0; x < numberOfScores; x++){
+				outFile.write(nameList.get(x)+" ");
+				outFile.write(scoreList.get(x)+"\n");
+			}
+			outFile.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}			
 	}
 	
 	/**
