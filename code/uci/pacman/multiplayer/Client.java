@@ -52,7 +52,11 @@ public class Client extends Thread
 
 		}
 	}
-
+	
+	/**
+	 * Tells the game what ghost the player is currently playing as
+	 * @return GhostType
+	 */
 	public static GhostType getGhostType()
 	{
 		return ghostType;

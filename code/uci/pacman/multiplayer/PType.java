@@ -2,6 +2,7 @@ package code.uci.pacman.multiplayer;
 
 /**
  * This is the packet type, used only for networking
+ * @author Networking Team
  */
 public enum PType 
 { 

@@ -10,5 +10,11 @@ package code.uci.pacman.game;
  *
  */
 public enum ScreenMode {
-   INTRO, MENU, GAME, SCORES, GAMEOVER, MPWAITING, CREDITS
+	INTRO,			// Introduction vid sequence
+	MENU,			// main menu on the screen
+	GAME,			// the actual game
+	SCORES,			// top scores
+	GAMEOVER,		// game over
+	MPWAITING,		// multiplayer waiting to connect
+	CREDITS			// the game credits screen
 }

@@ -56,11 +56,20 @@ public abstract class Ghost extends ControllableObject implements AI {
 	
 
 
-	/// MITCH
+	/**
+	 * This returns control of the ghost back to the AI functions
+	 *
+	 */
 	public void returnAI()
 	{
 		isBeingControlled = false;
 	}
+
+	/**
+	 * This allows the direction of the ghost to be set, it automatically
+	 * sets the ghost as a playable object in the process
+	 * @param dir The direction of the ghost
+	 */
 	public void setDirection(Direction dir)
 	{
 		isBeingControlled = true;
@@ -157,7 +166,8 @@ public abstract class Ghost extends ControllableObject implements AI {
 	}
 
 	/**
-	 * 
+	 * This gets a move direction using the ghost's AI.
+	 * @return Direction
 	 */
 	protected abstract Direction getAIMove();
 	

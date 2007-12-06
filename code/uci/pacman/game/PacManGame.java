@@ -10,9 +10,9 @@ import ucigame.*;
 
 /**
  * 
- * The main game class for PacMan. This class extends from the UciGame class
- * which is part of the UciGame game framework. Thanks to Professor Frost for
- * making this great framework which made our lives easier. This is the class
+ * The main game class for PacMan, This class extends from the UciGame class
+ * which is part of the UciGame game framework, Thanks to Professor Frost for
+ * making this great framework which made our lives easier, This is the class
  * that should be run to play PacMan.
  * 
  * @author The Game Team
@@ -30,8 +30,11 @@ public class PacManGame extends Ucigame {
 	public static int multiplayerType = 1; // 1=server, 2=client
 	public static int gameType = 1; // 1=single, 2 = multi
 
-	// This was added to override the stupid UCI game thing that requires the param twice...
-	// this allows me to put the whole game into a JAR file and not have it bitch at me
+	/**
+	 * This was added to override the stupid UCI game thing that requires the param twice,
+	 * this allows me to put the whole game into a JAR file.
+	 * @param args the list of command line args
+	 */
 	public static void main(String[] args)
 	{
 		String[] args2 = new String[1];
@@ -39,7 +42,9 @@ public class PacManGame extends Ucigame {
 		Ucigame.main(args2);
 	}
 
-	/* Initialization */
+	/**
+	 * Initialization of the game
+	 */
 	public void setup() {
 		generatePositions(false);
 		// creates the window, sets the title, initialize
@@ -90,6 +95,11 @@ public class PacManGame extends Ucigame {
 		showScene(ScreenMode.MENU);
 	}
 
+	/**
+	 * This displays the screen of the game playing
+	 * It is used by the Client to start the game
+	 *
+	 */
 	public void showGameScreen() {
 		// stop menu theme
 		mainMenu.stopMenuTheme();
@@ -101,6 +111,9 @@ public class PacManGame extends Ucigame {
 		showScene(ScreenMode.GAME);
 	}
 
+	/**
+	 * Shows the top scores screen
+	 */
 	public void showScoresScreen() {
 		topScores = new TopScores();
 		//System.out.println("Showed scores screen");
@@ -108,12 +121,18 @@ public class PacManGame extends Ucigame {
 		showScene(ScreenMode.SCORES);
 	}
 	
+	/**
+	 * Shows the game over screen
+	 */
 	public void showGameOverScreen() {
 		SoundController.stopAllSounds();
 		canvas.background(0, 0, 0);		
 		showScene(ScreenMode.GAMEOVER);
 	}
 
+	/**
+	 * This is used to show the player that the client is waiting for servers to connect to
+	 */
 	private void showMpwaitingScreen()
 	{
 		mainMenu.stopMenuTheme();
@@ -141,6 +160,9 @@ public class PacManGame extends Ucigame {
 		showMpwaitingScreen();
 	}
 
+	/**
+	 * Draws the multiplayer waiting screen
+	 */
 	public void drawMpwaiting() {
 		canvas.clear();
 		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
@@ -208,25 +230,39 @@ public class PacManGame extends Ucigame {
 		//topScoreButton.draw();		
 	}
 
-	/* Timer Handling */
+	/** 
+	 * Timer Handling
+	 */
 	public void startFruitTimer() {
 		startTimer("removeFruit", Fruit.SHOW_FRUIT_DURATION);
 	}
 	
+	/**
+	 *
+	 */
 	public void pacManDeathTimer(){
 		stopTimer("pacManDeath");
 		control.pacManRevive();
 	}
 
+	/**
+	 *
+	 */
 	public void removeFruitTimer() {
 		stopTimer("removeFruit");
 		control.hideFruit();
 	}
 
+	/**
+	 *
+	 */
 	public void startScatterTimer() {
 		startTimer("unScatterGhosts", GhostController.SCATTERSECONDS);
 	}
 
+	/**
+	 * 
+	 */
 	public void unScatterGhostsTimer() {
 		stopTimer("unScatterGhosts");
 		control.unscatterGhosts();
@@ -287,7 +323,10 @@ public class PacManGame extends Ucigame {
 			// beginGame();
 		}
 	}
-	
+
+	/**
+	 * 
+	 */
 	public void onClickTopScoresMainMenu(){
 		if(isShowingScene(ScreenMode.SCORES))
 		{
@@ -320,6 +359,10 @@ public class PacManGame extends Ucigame {
 		}
 	}
 
+	/**
+	 *
+	 *
+	 */
 	public void onKeyPressIntro() {
 		if (keyboard.isDown(keyboard.S) && isShowingScene(ScreenMode.INTRO)) {
 			showMenuScreen();
@@ -339,6 +382,9 @@ public class PacManGame extends Ucigame {
 		//}
 	//}
 
+	/**
+	 *
+	 */
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
 		if( PacManGame.gameType == 1 )
@@ -399,6 +445,10 @@ public class PacManGame extends Ucigame {
 		
 	}
 
+	/**
+	 *
+	 *
+	 */
 	public void onKeyPressGameover() {
 		if (keyboard.isDown(keyboard.R) && isShowingScene(ScreenMode.GAMEOVER)) 
 		{
@@ -413,6 +463,9 @@ public class PacManGame extends Ucigame {
 		}
 	}
 
+	/**
+	 *
+	 */
 	public Sprite makeSpriteFromPath(String string) {
 		return makeSprite(getImage(string));
 	}

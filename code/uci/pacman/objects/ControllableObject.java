@@ -43,23 +43,7 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	 */
 	public abstract void eaten();
 
-	/**
-	 * Takes in a direction and sends the direction to the Client (for
-	 * multiplayer use).
-	 * 
-	 * @param dir
-	 *            the direction to send to the client
-	 */
-	public void sendStep(Direction dir) {
-		/*if (this instanceof code.uci.pacman.objects.controllable.PacMan) {
-			Client.send("PacMan", dir);
-		} else if (this instanceof code.uci.pacman.ai.Blinky) {
-			Client.send("Blinky", dir);
-		} else {
-			Client.send("Inky", dir);
-		}*/
-	}
-
+	
 	/**
 	 * this is called when you want to move an object (locally, remotely, AI)
 	 * this only sets the motion and does not do any collision detection. It
@@ -76,16 +60,12 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 
 		if (currentDirection == Direction.UP) {
 			motion(0, 0 - speed);
-			sendStep(d);
 		} else if (currentDirection == Direction.DOWN) {
 			motion(0, speed);
-			sendStep(d);
 		} else if (currentDirection == Direction.LEFT) {
 			motion(0 - speed, 0);
-			sendStep(d);
 		} else if (currentDirection == Direction.RIGHT) {
 			motion(speed, 0);
-			sendStep(d);
 		}
 	}
 

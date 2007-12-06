@@ -1,9 +1,6 @@
 package code.uci.pacman.controllers;
 
-import code.uci.pacman.ai.Blinky;
-import code.uci.pacman.ai.Clyde;
-import code.uci.pacman.ai.Inky;
-import code.uci.pacman.ai.Pinky;
+import code.uci.pacman.ai.*;
 import code.uci.pacman.controllers.utilities.ActorController;
 import code.uci.pacman.game.Direction;
 import code.uci.pacman.objects.controllable.Ghost;

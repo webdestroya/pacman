@@ -5,11 +5,11 @@ import java.io.IOException;
 
 /**
  * This class is responsible for generating item positions for
- * different game objects. For now, the only items it needs to generate
+ * different game objects, For now, the only items it needs to generate
  * are the locations for all the pill objects within the game
  * 
  * This class works by constructing rectangular blocks of items that 
- * contain a certain group of the item. For instance, the pill locations
+ * contain a certain group of the item, For instance, the pill locations
  * are specified by drawing vertical and horizontal rectangles by x, y and
  * then pills are filled inside these rectangles
  * 
@@ -35,10 +35,9 @@ public class ItemGenerator {
 
 	/**
 	 * This is the function that should generate the locations for all
-	 * the pills within a certain stage. This function is for generating
-	 * pills in the first stage.
-	 * 
-	 * There are both horizontal and vertical blocks of pills. To
+	 * the pills within a certain stage, This function is for generating
+	 * pills in the first stage,
+	 * There are both horizontal and vertical blocks of pills, To
 	 * easily determine coordinates, open up "images/final/level1.png" which
 	 * is the graphic that these coordinates and the game map is based on.
 	 * 

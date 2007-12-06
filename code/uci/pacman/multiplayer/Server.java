@@ -3,7 +3,6 @@ package code.uci.pacman.multiplayer;
 import code.uci.pacman.game.*;
 import code.uci.pacman.ai.*;
 import code.uci.pacman.controllers.*;
-import code.uci.pacman.controllers.*;
 import code.uci.pacman.objects.controllable.*;
 import java.io.*;
 import java.net.*;
@@ -69,7 +68,6 @@ public class Server extends Thread
 						spotsOpen = true;
 						gtype = GhostType.BLINKY;
 					}
-
 					
 					// be quiet if we dont have any slots open
 					if(spotsOpen)
@@ -107,7 +105,6 @@ public class Server extends Thread
 	{
 		private InetAddress cgroup;
 		private MulticastSocket csocket;
-
 
 		public Consistency()
 		{
@@ -147,7 +144,6 @@ public class Server extends Thread
 				byte[] yp = getInt(y);
 				buf[4] = yp[0];
 				buf[5] = yp[1];
-
 
 				// send the packet out
 				DatagramPacket packet = new DatagramPacket(buf, buf.length, cgroup, 4446 );
@@ -214,13 +210,11 @@ public class Server extends Thread
 					/// sleep
 					Thread.currentThread().sleep(100);
 				}
-
 			}
 			catch(Exception e)
 			{
 				e.printStackTrace();
 			}
-
 		}//run
 	}//CONSISTENCY /////////////////////
 
