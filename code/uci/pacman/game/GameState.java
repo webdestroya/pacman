@@ -191,7 +191,16 @@ public class GameState {
 	public Fruit getFruit() {
 		return bonusItem;
 	}
-
+	
+	/**
+	 * Sets the fruit.
+	 * @since REV2
+	 * @param fruit
+	 */
+	public void setFruit(Fruit fruit){
+		this.bonusItem = fruit;
+	}
+	
 	/**
 	 * 
 	 * Gets the instance of PacMan currently within the game world.

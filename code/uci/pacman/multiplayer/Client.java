@@ -2,6 +2,7 @@
 package code.uci.pacman.multiplayer;
 
 import code.uci.pacman.game.*;
+import code.uci.pacman.objects.stationary.Fruit;
 import code.uci.pacman.objects.stationary.Pill;
 import code.uci.pacman.objects.stationary.PowerPellet;
 import code.uci.pacman.controllers.*;
@@ -215,11 +216,19 @@ public class Client extends Thread
 					}
 					else if( PType.AFRUIT.ordinal() == packetType )
 					{
-						// get fruit
+						int initialScore = 0;
+						int x = 100*((int)(buf[1]&0xFF)) + ((int)(buf[2]&0xFF));
+						int y = 100*((int)(buf[3]&0xFF)) + ((int)(buf[4]&0xFF));
+						Fruit fruit = new Fruit(x,y,initialScore);
+						GameState.getInstance().setFruit(fruit);
+						GameState.getInstance().getFruit().draw();
 					}
 					else if( PType.DFRUIT.ordinal() == packetType )
 					{
-						// delete a fruit
+						//int x = 100*((int)(buf[1]&0xFF)) + ((int)(buf[2]&0xFF));
+						//int y = 100*((int)(buf[3]&0xFF)) + ((int)(buf[4]&0xFF));
+						GameState.getInstance().getFruit().hide();
+						
 					}
 					else if( PType.LEVEL.ordinal() == packetType )
 					{
