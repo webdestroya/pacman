@@ -136,14 +136,13 @@ public class Client extends Thread
 				buf = packet.getData();
 				
 				// update the server address
-				Client.address = packet.getAddress();
 
 				// get the packet type and data
 				int packetType = buf[0] & 0xFF;
 				
 				//System.out.println("PACKET("+packetType+")");//,"+data1+","+data2+","+data3+"): ");
 				
-				if( Client.isPlaying )
+				if( Client.isPlaying && packet.getAddress().equals(Client.address) )
 				{
 					if( PType.PPOS.ordinal() == packetType )
 					{
@@ -374,6 +373,9 @@ public class Client extends Thread
 								break;
 						}
 						Client.isPlaying = true;
+						
+						// Force the server address
+						Client.address = packet.getAddress();
 					
 						// notify the server we are joinging
 						joinGame();
