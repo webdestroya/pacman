@@ -141,8 +141,9 @@ public abstract class Ghost extends ControllableObject implements AI {
 	/**
 	 * 
 	 */
-	//public abstract Direction getMove();
 	protected abstract Direction getAIMove();
+	
+	
 	/* 
 	 * He tries to get you by your relative position. 
 	 * He takes the fastest route to find you. I believe he 
@@ -164,7 +165,13 @@ public abstract class Ghost extends ControllableObject implements AI {
 		}
 		else
 		{
-			return getAIMove();
+			// TODO: TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+			// MUST RESET THIS BACK TO GETAIMOVE()
+			//
+			// * DONT EDIT THIS FOR NOW, MITCH NEEDS IT FOR NETWORK DEVELOPMENT
+			//
+			return curDirection;
+			//return getAIMove();
 		}
 	}
 

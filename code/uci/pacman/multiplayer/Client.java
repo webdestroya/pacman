@@ -150,7 +150,10 @@ public class Client extends Thread
 				int data1 = buf[1] & 0x000000FF;
 				int data2 = buf[2] & 0x000000FF;
 				int data3 = buf[3] & 0x000000FF;
-
+				
+				//System.out.print("PACKET("+packetType+","+data1+","+data2+","+data3+"): ");
+				
+				
 				// listen for open slots, but only if we arent playing
 				if( PType.SPOTFREE.ordinal() == packetType && !Client.isPlaying )
 				{
@@ -171,7 +174,7 @@ public class Client extends Thread
 							break;
 					}
 					Client.isPlaying = true;
-					System.out.println("SPOTFREE GhostType Set: " + Client.ghostType.name() );
+					//System.out.println("SPOTFREE GhostType Set: " + Client.ghostType.name() );
 				
 					// notify the server we are joinging
 					joinGame();
@@ -185,12 +188,6 @@ public class Client extends Thread
 					GameState.getInstance().getGhosts().getObjectAt(capitalize(Client.ghostType.name())).setDirection(Direction.UP);
 				
 				
-				}
-				else if( PType.GAMEFULL.ordinal() == packetType )
-				{
-					// the game is full. tell the player to suck it.
-					System.out.println("Game Server is FULL. You cannot join.");
-					System.exit(0);
 				}
 				else if( PType.GMOVE.ordinal() == packetType )
 				{
@@ -306,6 +303,14 @@ public class Client extends Thread
 						// TODO: Process the drop
 					}
 				}
+				else if( PType.HEARTBEAT.ordinal() == packetType )
+				{
+					// heartbeat
+				}
+				else if( PType.SCORE.ordinal() == packetType )
+				{
+					// receive a score update
+				}
 				else if( PType.GAMEOVER.ordinal() == packetType )
 				{
 					// game ended
@@ -315,7 +320,6 @@ public class Client extends Thread
 				else
 				{
 					// some other junk packet (these are discarded as nobody cares about a client
-					//System.out.println("UNKNOWN");
 				}
 			}
 			socket.leaveGroup(group);

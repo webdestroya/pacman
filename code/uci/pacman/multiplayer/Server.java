@@ -9,23 +9,6 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-/// COMMAND ENUMS
-enum PType 
-{ 
-	JOIN,		// GHOST_TYPE			(duh - GHOST_TYPE tells the type joining)
-	GTYPE,		// GHOST_TYPE			(Tells the ghost what ghost he will be)
-	GMOVE, 		// DIR, GHOST_TYPE		(tells the direction and what ghost to move)
-	PMOVE, 		// DIR					( direction of pacman)
-	GAMEOVER, 	// 						(duh)
-	LEAVE, 		// GHOST_TYPE			(tells the server to drop the ghost)
-	GAMEFULL,	//						(tells a client that the game is full)
-	SPOTFREE	// GHOST_TYPE			(tells the clients listening what spots are free on the server)
-};
-
-// Server Errors
-enum ServErrors {
-	UNKNOWN_COM,	// unknown command
-};
 
 /**
  * Server is responsible for handling incoming client requests.
@@ -37,9 +20,10 @@ public class Server extends Thread
 	private static final long serialVersionUID = 1L;
 	protected DatagramSocket socket = null;
 
+	// Tells us who is playing on the server right now
 	protected static ArrayList<GhostType> clients;
-	private static int currentPlayers = 0;
-	private static InetAddress localAddr;
+
+
     protected boolean moreQuotes = true;
 
 	// this class just sends notifications that slots are open on the server
@@ -47,6 +31,15 @@ public class Server extends Thread
 	{
 		public void run()
 		{
+			// be lazy at the start
+			try
+			{
+				// for some reason, if the client connects too fast, the game explodes
+				Thread.currentThread().sleep(5000);
+			}
+			catch(Exception e){}
+
+			// start the notifications
 			while(true)
 			{
 				try
@@ -76,20 +69,27 @@ public class Server extends Thread
 					}
 
 					
+					// be quiet if we dont have any slots open
 					if(spotsOpen)
 					{
-						//System.out.println("SPOTFREE: " + gtype);
+						// build the packet
 						buf[0] = new Integer(PType.SPOTFREE.ordinal()).byteValue();
 						buf[1] = new Integer(gtype.ordinal()).byteValue();
 
-
+						// send the packet out
 						InetAddress group = InetAddress.getByName("230.0.0.1");
 						DatagramSocket socketSend = new MulticastSocket();
 						DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
 						socketSend.send(packet);
 						socketSend.close();
 
+						// sleep some
 						Thread.currentThread().sleep(5000);
+					}
+					else
+					{
+						// take longer naps when we are full
+						Thread.currentThread().sleep(10000);
 					}
 				}
 				catch(Exception e)
@@ -133,7 +133,7 @@ public class Server extends Thread
 	{
 		byte[] buf = new byte[4];
 		buf[0] = new Integer(type.ordinal()).byteValue();
-		Server.sendData(buf);
+		sendData(buf);
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class Server extends Thread
 		buf[0] = new Integer(PType.GMOVE.ordinal()).byteValue(); // TYPE
 		buf[1] = new Integer(dir.ordinal()).byteValue(); // DIRECTION
 		buf[2] = new Integer(ghost.ordinal()).byteValue(); // GHOST_TYPE
-		Server.sendData(buf);
+		sendData(buf);
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class Server extends Thread
 		byte[] buf = new byte[4];
 		buf[0] = new Integer(PType.PMOVE.ordinal()).byteValue();
 		buf[1] = new Integer(dir.ordinal()).byteValue();
-		Server.sendData(buf);
+		sendData(buf);
 	}
 	
 	/**
@@ -172,44 +172,31 @@ public class Server extends Thread
 		byte[] buf = new byte[4];
 		buf[0] = new Integer(type.ordinal()).byteValue();
 		buf[1] = new Integer(ghost.ordinal()).byteValue();
-		Server.sendData(buf);
+		sendData(buf);
 	}
 
 
 	private static void sendData(byte[] buf)
 	{
-		//for(int i=0; i < Server.clients.size(); i++)
-	//	{
-			Server.sendClientData(buf);
-	//	}
+		sendClientData(buf);
 	}
 
 	// sends raw data to a client
 	private static void sendClientData(byte[] buf)
 	{
-		//iif( !Server.localAddr.equals( addr ) )
-		//{
-			try
-			{
-				InetAddress group = InetAddress.getByName("230.0.0.1");
-				MulticastSocket socketSend = new MulticastSocket();
-				DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
-				socketSend.send(packet);
-				socketSend.close();
-			}
-			catch(Exception e)
-			{
-				// they failed out, so remove from player table
-				//Server.clients.remove(addr);
-			}
-		//}
+		try
+		{
+			InetAddress group = InetAddress.getByName("230.0.0.1");
+			MulticastSocket socketSend = new MulticastSocket();
+			DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
+			socketSend.send(packet);
+			socketSend.close();
+		}
+		catch(Exception e)
+		{
+
+		}
 	}
-	// just an alias
-	private static void sendClientData(int clientID, byte[] buf)
-	{
-		sendClientData(buf);
-	}
-	
 
 
 	private String capitalize(String s)
@@ -230,6 +217,7 @@ public class Server extends Thread
 	{
 		// should be while game is not over
 		new OpenSlots().start();
+
 		while (moreQuotes) 
 		{
 			try 
@@ -250,7 +238,7 @@ public class Server extends Thread
 				int data1 = buf[1] & 0x000000FF;
 				int data2 = buf[2] & 0x000000FF;
 				int data3 = buf[3] & 0x000000FF;
-				//System.out.print("PACKET ["+packet.getPort()+"] ("+packetType+","+data1+","+data2+","+data3+"): ");
+				//System.out.print("PACKET("+packetType+","+data1+","+data2+","+data3+"): ");
 
 				if( PType.JOIN.ordinal() == packetType )
 				{
@@ -276,14 +264,7 @@ public class Server extends Thread
 								break;
 						}
 
-						try
-						{
-							GameState.getInstance().getGhosts().getObjectAt(capitalize(gtype.toString()) ).setDirection(Direction.UP);
-						}
-						catch(NullPointerException t)
-						{
-							t.printStackTrace(System.out);
-						}
+						GameState.getInstance().getGhosts().getObjectAt(capitalize(gtype.toString()) ).setDirection(Direction.UP);
 
 						Server.clients.add(gtype);
 
@@ -291,8 +272,8 @@ public class Server extends Thread
 					else
 					{
 						// game is full
-						bufOut[0] = new Integer( PType.GAMEFULL.ordinal() ).byteValue();
-						sendClientData( bufOut );
+						//bufOut[0] = new Integer( PType.GAMEFULL.ordinal() ).byteValue();
+						//sendClientData( bufOut );
 					}
 				}
 				else if( PType.GMOVE.ordinal() == packetType )
@@ -340,7 +321,7 @@ public class Server extends Thread
 					}
 					//System.out.println("Moving "+data2+" in dir "+data1);
 					
-					GameState.getInstance().getGhosts().getObjectAt( gtype.name() ).setDirection(dir);
+					GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).setDirection(dir);
 
 					// notify all the clients
 					send(gtype, dir);
@@ -352,30 +333,29 @@ public class Server extends Thread
 				{
 					// a ghost is leaving
 
+					GhostType gtype = GhostType.BLINKY;
 					// find which ghost it is, and notify all the clients that they dropped
 					switch( data1 )
 					{
 						case 0://b
-							GameState.getInstance().getGhosts().getObjectAt("Blinky").returnAI();
-							Server.clients.remove(GhostType.BLINKY);
-							send(PType.LEAVE, GhostType.BLINKY);
+							gtype = GhostType.BLINKY;
 							break;
 						case 1://c
-							GameState.getInstance().getGhosts().getObjectAt("Clyde").returnAI();
-							Server.clients.remove(GhostType.CLYDE);
-							send(PType.LEAVE, GhostType.CLYDE);
+							gtype = GhostType.CLYDE;
 							break;
 						case 2://i
-							GameState.getInstance().getGhosts().getObjectAt("Inky").returnAI();
-							Server.clients.remove(GhostType.INKY);
-							send(PType.LEAVE, GhostType.INKY);
+							gtype = GhostType.INKY;
 							break;
 						case 3://p
-							GameState.getInstance().getGhosts().getObjectAt("Pinky").returnAI();
-							Server.clients.remove(GhostType.PINKY);
-							send(PType.LEAVE, GhostType.PINKY);
+							gtype = GhostType.PINKY;
 							break;
 					}
+
+					send(PType.LEAVE, gtype);
+					GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).returnAI();
+					Server.clients.remove( gtype );
+
+
 				}
 				else
 				{
@@ -385,10 +365,13 @@ public class Server extends Thread
 			}
 			catch (Exception e)
 			{
-				e.printStackTrace(System.out);
-				moreQuotes = false;
+				//e.printStackTrace(System.out);
+				//moreQuotes = false;
 			}
 		}
+
+		// TODO: when the socket fails out, we should make everyone use the AI again
+
 		//System.out.println("Server Shutdown");
 		socket.close();
     }//run

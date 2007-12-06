@@ -281,6 +281,17 @@ public class PacManGame extends Ucigame {
 	 */
 	public void onClickQuit() {
 		if (isShowingScene(ScreenMode.MENU)) {
+
+			if( PacManGame.gameType == 1 )
+			{
+				// server
+				Server.send(PType.GAMEOVER);
+			}
+			else
+			{
+				Client.send(PType.LEAVE);
+			}
+
 			System.out.println("quit click");
 			System.exit(0);
 			// beginGame();
@@ -312,18 +323,22 @@ public class PacManGame extends Ucigame {
 		{
 			if (keyboard.isDown(keyboard.UP, keyboard.W))
 			{
+				Server.send(Direction.UP);
 				control.setPacManDirection(Direction.UP);
 			}
 			else if (keyboard.isDown(keyboard.DOWN, keyboard.S))
 			{
+				Server.send(Direction.DOWN);
 				control.setPacManDirection(Direction.DOWN);
 			}
 			else if (keyboard.isDown(keyboard.LEFT, keyboard.A))
 			{
+				Server.send(Direction.LEFT);
 				control.setPacManDirection(Direction.LEFT);
 			}
 			else if (keyboard.isDown(keyboard.RIGHT, keyboard.D))
 			{
+				Server.send(Direction.RIGHT);
 				control.setPacManDirection(Direction.RIGHT);
 			}
 		}
@@ -334,18 +349,22 @@ public class PacManGame extends Ucigame {
 
 			if (keyboard.isDown(keyboard.UP, keyboard.W))
 			{
+				Client.send(Direction.UP);
 				GameState.getInstance().getGhosts().getObjectAt(gname).setDirection(Direction.UP);
 			}
 			else if (keyboard.isDown(keyboard.DOWN, keyboard.S))
 			{
+				Client.send(Direction.DOWN);
 				GameState.getInstance().getGhosts().getObjectAt(gname).setDirection(Direction.DOWN);
 			}
 			else if (keyboard.isDown(keyboard.LEFT, keyboard.A))
 			{
+				Client.send(Direction.LEFT);
 				GameState.getInstance().getGhosts().getObjectAt(gname).setDirection(Direction.LEFT);
 			}
 			else if (keyboard.isDown(keyboard.RIGHT, keyboard.D))
 			{
+				Client.send(Direction.RIGHT);
 				GameState.getInstance().getGhosts().getObjectAt(gname).setDirection(Direction.RIGHT);
 			}
 
