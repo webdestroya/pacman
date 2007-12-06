@@ -108,16 +108,8 @@ public class PacManGame extends Ucigame {
 	{
 		mainMenu.stopMenuTheme();
 		introPlayer.stopIntroTheme();
-		
 		canvas.background(0, 0, 0);
-
-		//scoreBoard = new ScoreBoard();
 		showScene(ScreenMode.MPWAITING);
-	}
-
-	// remove this
-	private void setupServerOrClient() {
-		// Make the server
 	}
 	
 	private void startPacManServer()
@@ -144,8 +136,7 @@ public class PacManGame extends Ucigame {
 		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
 		canvas.putText("WAITING FOR SERVER", 100, 300);
 		canvas.font(PacManGame.font, PacManGame.BOLD, 20, 255, 255, 255);
-		canvas.putText("PacMan is currently listening for open games", 75, 340);
-		//try{Thread.currentThread().sleep(10000);}catch(Exception e){}
+		canvas.putText("PacMan is currently listening for open games", 80, 340);
 	}
 
 	private void generatePositions(boolean run) {
