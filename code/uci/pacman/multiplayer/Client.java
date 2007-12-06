@@ -119,6 +119,7 @@ public class Client extends Thread
 		// should be while game is not over
 		try
 		{
+			// get the multicast group
 			InetAddress group = InetAddress.getByName("230.0.0.1");
 			socket.joinGroup(group);
 
@@ -147,7 +148,6 @@ public class Client extends Thread
 						int xpos = 100*( (int)(buf[1]&0x000000FF) ) + ( (int)(buf[2]&0x000000FF) );
 						int ypos = 100*( (int)(buf[3]&0x000000FF) ) + ( (int)(buf[4]&0x000000FF) );
 						GameState.getInstance().getPacMan().position( xpos, ypos );
-						//System.out.println("PPOS("+xpos+","+ypos+")");
 					}
 					else if( PType.GPOS.ordinal() == packetType )
 					{
@@ -176,7 +176,38 @@ public class Client extends Thread
 						
 						// update the position
 						GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).position( xpos, ypos);
-						//System.out.println("GPOS("+xpos+","+ypos+")");
+					}
+					else if( PType.PILLD.ordinal() == packetType )
+					{
+						// delete a pill
+					}
+					else if( PType.PILLA.ordinal() == packetType )
+					{
+						// add a pill
+					}
+					else if( PType.PPILLD.ordinal() == packetType )
+					{
+						// delete power pill
+					}
+					else if( PType.PPILLA.ordinal() == packetType )
+					{
+						// add powerpill
+					}
+					else if( PType.LIVES.ordinal() == packetType )
+					{
+						// set lives count
+					}
+					else if( PType.AFRUIT.ordinal() == packetType )
+					{
+						// get fruit
+					}
+					else if( PType.DFRUIT.ordinal() == packetType )
+					{
+						// delete a fruit
+					}
+					else if( PType.LEVEL.ordinal() == packetType )
+					{
+						// set current level
 					}
 					else if( PType.GMOVE.ordinal() == packetType )
 					{
@@ -185,7 +216,7 @@ public class Client extends Thread
 						Direction dir = Direction.UP;
 
 						// get direction
-						switch( (buf[1] & 0x000000FF ))
+						switch( (buf[1] & 0xFF ))
 						{
 							case 0://up
 								dir = Direction.UP;
@@ -202,7 +233,7 @@ public class Client extends Thread
 						}
 
 						// get the ghost
-						switch( (buf[2] & 0x000000FF ))
+						switch( (buf[2] & 0xFF ))
 						{
 							case 0://blinky
 								gtype = GhostType.BLINKY;
@@ -249,9 +280,6 @@ public class Client extends Thread
 
 						// set the direction
 						GameController.getInstance().setPacManDirection(dir);
-						
-
-
 					}
 					else if( PType.JOIN.ordinal() == packetType )
 					{
@@ -324,20 +352,16 @@ public class Client extends Thread
 								break;
 						}
 						Client.isPlaying = true;
-						//System.out.println("SPOTFREE GhostType Set: " + Client.ghostType.name() );
 					
 						// notify the server we are joinging
 						joinGame();
 
 						// setup the player or something, go hooray?
 						GameController.getInstance().startGame();
-						//GameController.getInstance().getPacInstance().showScene(ScreenMode.GAME);
 						GameController.getInstance().getPacInstance().showGameScreen();
 						
 						// set the ghosts direction
 						GameState.getInstance().getGhosts().getObjectAt(capitalize(Client.ghostType.name())).setDirection(Direction.UP);
-					
-					
 					}
 				}
 			}
