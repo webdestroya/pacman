@@ -190,7 +190,7 @@ public class Server extends Thread
 		{
 			try
 			{
-				gssocket.send(packet);
+				gssocket.send(pack);
 			}
 			catch(Exception e){}
 		}
@@ -440,7 +440,7 @@ public class Server extends Thread
 		buf[3] = yp[0];
 		buf[4] = yp[1];
 		
-		if( type.equals(PILLD) || type.equals(PPILLD) || type.equals(DFRUIT) )
+		if( type.equals(PType.PILLD) || type.equals(PType.PPILLD) || type.equals(PType.DFRUIT) )
 		{
 			sendData(buf,true);
 		}
