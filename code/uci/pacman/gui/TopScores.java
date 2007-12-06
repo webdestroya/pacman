@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import code.uci.pacman.controllers.GameController;
+import code.uci.pacman.controllers.SoundController;
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.game.PacManGame;
 
@@ -107,6 +108,10 @@ public class TopScores{
 	 * 
 	 */
 	public void draw(){
+		//turn off pellet, ghost, and ambient sound
+		SoundController.stopAllSounds();
+		
+		//put text on screen from arrayLists
 		for(int x = 0; x < numberOfScores; x++){
 			backGround.putText(nameList.get(x)+"", nameStartPosX, nameStartPosY + x*spaceIncrement);
 			backGround.putText(scoreList.get(x)+"", scoreStartPosX, scoreStartPosY + x*spaceIncrement);
