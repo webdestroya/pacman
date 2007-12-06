@@ -377,6 +377,8 @@ public class PacManGame extends Ucigame {
 			}
 
 		}
+		//these are now handled by onKeyPressGameover()
+		
 		//if (keyboard.isDown(keyboard.R) && isShowingScene(ScreenMode.GAMEOVER)) {
 		//	showGameScreen();
 		//}
