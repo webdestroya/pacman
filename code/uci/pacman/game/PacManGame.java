@@ -281,6 +281,10 @@ public class PacManGame extends Ucigame {
 			// beginGame();
 		}
 	}
+	
+	public void onClickTopScoresMainMenu(){
+		
+	}
 
 	/**
 	 * 
