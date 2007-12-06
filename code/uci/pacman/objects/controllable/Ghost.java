@@ -204,7 +204,8 @@ public abstract class Ghost extends ControllableObject implements AI {
 			}
 			else
 			{
-				return getAIMove();
+				return curDirection;
+				//return getAIMove();
 			}
 		}
 	}
