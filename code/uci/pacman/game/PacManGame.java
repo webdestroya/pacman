@@ -398,7 +398,7 @@ public class PacManGame extends Ucigame {
 		}
 		
 		else if (keyboard.isDown(keyboard.T) && isShowingScene(ScreenMode.GAMEOVER)) 
-	{
+		{
 			//System.out.println("Pressed T");
 		//	showScoresScreen();
 		}
