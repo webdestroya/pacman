@@ -100,6 +100,102 @@ public class Server extends Thread
 		}
 	}/// OPEN SLOTS/////////////
 
+	// this class just sends notifications that slots are open on the server
+	private class GameStats extends Thread 
+	{
+		private InetAddress gsgroup;
+		private MulticastSocket gssocket;
+
+		public GameStats()
+		{
+			try
+			{
+				gsgroup = InetAddress.getByName("230.0.0.1");
+				gssocket = new MulticastSocket();
+			}
+			catch(Exception e){}
+		}
+
+		private byte[] getInt(int d)
+		{
+			byte[] buf = new byte[2];
+			
+			int hund = (int) Math.floor(d/100.0);
+			buf[0] = new Integer( hund ).byteValue();
+			buf[1] = new Integer( (d) - (100*hund) ).byteValue();
+			return buf;
+		}
+
+		private void send(byte[] buf)
+		{
+			try
+			{
+				DatagramPacket packet = new DatagramPacket(buf, buf.length, gsgroup, 4446 );
+				gssocket.send(packet);
+			}
+			catch(Exception e)
+			{
+
+			}
+		}
+
+		public void run()
+		{
+			// be lazy at the start
+			try
+			{
+				// for some reason, if the client connects too fast, the game explodes
+				Thread.currentThread().sleep(5000);
+			}
+			catch(Exception e){}
+
+			// start the notifications
+			while(true)
+			{
+				try
+				{
+					if(Server.clients.size()>0)
+					{
+						// SEND SCORE
+						byte[] score = new byte[3];
+						score[0] = new Integer( PType.SCORE.ordinal() ).byteValue();
+						byte[] scoreVal = new byte[2];
+						scoreVal = getInt( GameState.getInstance().getScore() );
+						score[1] = scoreVal[0];
+						score[2] = scoreVal[1];
+						send(score);
+
+						// SEND LIVES
+						byte[] lives = new byte[2];
+						lives[0] = new Integer( PType.LIVES.ordinal() ).byteValue();
+						lives[1] = new Integer( GameState.getInstance().getLives() ).byteValue();
+						send(lives);
+
+						// SEND LEVEL
+						byte[] level = new byte[2];
+						level[0] = new Integer( PType.LIVES.ordinal() ).byteValue();
+						level[1] = new Integer( GameState.getInstance().getLevel() ).byteValue();
+						send(level);
+
+
+						// take longer naps when we are full
+						Thread.currentThread().sleep(1000);
+					}
+					else
+					{
+						// nobody is playing, wait longer
+						Thread.currentThread().sleep(6000);
+					}
+				}
+				catch(Exception e)
+				{
+					
+				}
+			}
+		}
+	}/// OPEN SLOTS/////////////
+
+
 	
 	private class Consistency extends Thread
 	{
@@ -113,10 +209,7 @@ public class Server extends Thread
 				cgroup = InetAddress.getByName("230.0.0.1");
 				csocket = new MulticastSocket();
 			}
-			catch(Exception e)
-			{
-
-			}
+			catch(Exception e){}
 		}
 
 		private byte[] getInt(int d)

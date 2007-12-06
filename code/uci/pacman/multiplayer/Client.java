@@ -196,6 +196,7 @@ public class Client extends Thread
 					else if( PType.LIVES.ordinal() == packetType )
 					{
 						// set lives count
+						GameState.getInstance().setLives( (buf[1]&0xFF) );
 					}
 					else if( PType.AFRUIT.ordinal() == packetType )
 					{
@@ -208,6 +209,8 @@ public class Client extends Thread
 					else if( PType.LEVEL.ordinal() == packetType )
 					{
 						// set current level
+						GameState.getInstance().setLevel( (buf[1]&0xFF) );
+						// TODO: we need to actually change the level, if it is not the current
 					}
 					else if( PType.GMOVE.ordinal() == packetType )
 					{
@@ -298,6 +301,7 @@ public class Client extends Thread
 							case 3:// pinky joined
 								break;
 						}
+						// TODO: add them for the client
 
 					}
 					else if( PType.LEAVE.ordinal() == packetType )
@@ -325,9 +329,6 @@ public class Client extends Thread
 						// receive a score update
 						int newScore = 100*( (int)(buf[1]&0x000000FF) ) + ( (int)(buf[2]&0x000000FF) );
 						GameState.getInstance().setScore(newScore);
-						
-						// TODO: update the score on the client machine
-
 					}
 					else if( PType.GAMEOVER.ordinal() == packetType )
 					{

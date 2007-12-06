@@ -116,6 +116,7 @@ public class GameState {
 	/**
 	 * Set's the score for the game
 	 * @param sc pass the current score
+	 * @since REV2
 	 */
 	public void setScore(int sc){
 		score = sc;
@@ -136,6 +137,16 @@ public class GameState {
 	 */
 	public int getLives() {
 		return lives;
+	}
+
+	/**
+	 * Sets the current life count on the client
+	 * @param lv the lives
+	 * @since REV2
+	 */
+	public void setLives(int lv)
+	{
+		lives = lv;
 	}
 
 	/**
@@ -216,5 +227,15 @@ public class GameState {
 	 */
 	public int getLevel() {
 		return level;
+	}
+
+	/**
+	 * Sets the current level
+	 * @param lvl the current level
+	 * @since REV2
+	 */
+	public void setLevel(int lvl)
+	{
+		level = lvl;
 	}
 }
