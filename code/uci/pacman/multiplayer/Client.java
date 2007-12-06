@@ -323,6 +323,10 @@ public class Client extends Thread
 					else if( PType.SCORE.ordinal() == packetType )
 					{
 						// receive a score update
+						int newScore = 100*( (int)(buf[1]&0x000000FF) ) + ( (int)(buf[2]&0x000000FF) );
+
+						// TODO: update the score on the client machine
+
 					}
 					else if( PType.GAMEOVER.ordinal() == packetType )
 					{
