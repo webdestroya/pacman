@@ -20,6 +20,8 @@ public class Server extends Thread
 	private static final long serialVersionUID = 1L;
 	protected DatagramSocket socket = null;
 
+	protected static InetAddress group;
+
 	// Tells us who is playing on the server right now
 	protected static ArrayList<GhostType> clients;
 
@@ -45,7 +47,7 @@ public class Server extends Thread
 				try
 				{
 					boolean spotsOpen = false;
-					byte[] buf = new byte[4];
+					byte[] buf = new byte[2];
 					GhostType gtype = GhostType.CLYDE;
 					if( !Server.clients.contains(GhostType.PINKY) )
 					{
@@ -77,9 +79,9 @@ public class Server extends Thread
 						buf[1] = new Integer(gtype.ordinal()).byteValue();
 
 						// send the packet out
-						InetAddress group = InetAddress.getByName("230.0.0.1");
+						//InetAddress group = InetAddress.getByName("230.0.0.1");
 						DatagramSocket socketSend = new MulticastSocket();
-						DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
+						DatagramPacket packet = new DatagramPacket(buf, buf.length, Server.group, 4446 );
 						socketSend.send(packet);
 						socketSend.close();
 
@@ -172,7 +174,6 @@ public class Server extends Thread
 				buf[4] = yp[1];
 
 				// send the packet out
-				group = InetAddress.getByName("230.0.0.1");
 				DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
 				socket.send(packet);
 			}
@@ -209,7 +210,7 @@ public class Server extends Thread
 					send( GhostType.PINKY, gbl.x(), gbl.y() );
 
 					/// sleep
-					Thread.currentThread().sleep(100);
+					Thread.currentThread().sleep(200);
 				}
 
 			}
@@ -254,6 +255,7 @@ public class Server extends Thread
         super(name);
         socket = new DatagramSocket(4445);
 		Server.clients = new ArrayList<GhostType>();
+		Server.group = InetAddress.getByName("230.0.0.1");
 		
         System.out.println("START SERVER");
     }
@@ -266,7 +268,7 @@ public class Server extends Thread
      */
 	public static void send(PType type)
 	{
-		byte[] buf = new byte[6];
+		byte[] buf = new byte[1];
 		buf[0] = new Integer(type.ordinal()).byteValue();
 		sendData(buf);
 	}
@@ -278,7 +280,7 @@ public class Server extends Thread
      */
 	public static void send(GhostType ghost, Direction dir)
 	{
-		byte[] buf = new byte[6];
+		byte[] buf = new byte[3];
 		buf[0] = new Integer(PType.GMOVE.ordinal()).byteValue(); // TYPE
 		buf[1] = new Integer(dir.ordinal()).byteValue(); // DIRECTION
 		buf[2] = new Integer(ghost.ordinal()).byteValue(); // GHOST_TYPE
@@ -291,7 +293,7 @@ public class Server extends Thread
 	 */
 	public static void send(Direction dir)
 	{
-		byte[] buf = new byte[6];
+		byte[] buf = new byte[2];
 		buf[0] = new Integer(PType.PMOVE.ordinal()).byteValue();
 		buf[1] = new Integer(dir.ordinal()).byteValue();
 		sendData(buf);
@@ -304,7 +306,7 @@ public class Server extends Thread
 	 */
 	public static void send(PType type, GhostType ghost)
 	{
-		byte[] buf = new byte[6];
+		byte[] buf = new byte[2];
 		buf[0] = new Integer(type.ordinal()).byteValue();
 		buf[1] = new Integer(ghost.ordinal()).byteValue();
 		sendData(buf);
@@ -321,7 +323,6 @@ public class Server extends Thread
 	{
 		try
 		{
-			InetAddress group = InetAddress.getByName("230.0.0.1");
 			MulticastSocket socketSend = new MulticastSocket();
 			DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
 			socketSend.send(packet);
@@ -359,8 +360,8 @@ public class Server extends Thread
 		{
 			try 
 			{
-				byte[] buf = new byte[6];
-				byte[] bufOut = new byte[6];
+				byte[] buf = new byte[3];
+				//byte[] bufOut = new byte[6];
 
 				// receive request
 				DatagramPacket packet = new DatagramPacket(buf, buf.length);

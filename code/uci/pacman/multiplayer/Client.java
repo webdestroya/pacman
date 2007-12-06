@@ -64,7 +64,7 @@ public class Client extends Thread
 	 */
 	public static void send(PType type)
 	{
-		byte[] buf = new byte[6];
+		byte[] buf = new byte[2];
 		buf[0] = new Integer( type.ordinal() ).byteValue();	
 		buf[1] = new Integer( ghostType.ordinal() ).byteValue();
 		sendData(buf);
@@ -78,7 +78,7 @@ public class Client extends Thread
 	 */
 	public static void send(Direction dir)
 	{
-		byte[] buf = new byte[6];
+		byte[] buf = new byte[3];
 		buf[0] = new Integer( PType.GMOVE.ordinal() ).byteValue();	
 		buf[1] = new Integer( dir.ordinal() ).byteValue();
 		buf[2] = new Integer( ghostType.ordinal() ).byteValue();
@@ -88,7 +88,7 @@ public class Client extends Thread
 	
 	private void joinGame()
 	{
-		byte[] buf = new byte[6];
+		byte[] buf = new byte[2];
 		buf[0] = new Integer( PType.JOIN.ordinal() ).byteValue();	
 		buf[1] = new Integer( Client.ghostType.ordinal() ).byteValue();
 		Client.sendData(buf);
@@ -146,10 +146,7 @@ public class Client extends Thread
 				Client.address = packet.getAddress();
 
 				// get the packet type and data
-				int packetType = buf[0] & 0x000000FF;
-				//int data1 = buf[1] & 0x000000FF;
-				//int data2 = buf[2] & 0x000000FF;
-				//int data3 = buf[3] & 0x000000FF;
+				int packetType = buf[0] & 0xFF;
 				
 				System.out.println("PACKET("+packetType+")");//,"+data1+","+data2+","+data3+"): ");
 				
@@ -166,7 +163,29 @@ public class Client extends Thread
 					{
 						int xpos = 100*( (int)(buf[2]&0x000000FF) ) + ( (int)(buf[3]&0x000000FF) );
 						int ypos = 100*( (int)(buf[4]&0x000000FF) ) + ( (int)(buf[5]&0x000000FF) );
+						
+						GhostType gtype = GhostType.BLINKY;
+						switch( (buf[1] & 0x000000FF ))
+						{
+							case 0://blinky
+								gtype = GhostType.BLINKY;
+								break;
+							
+							case 1://clyde
+								gtype = GhostType.CLYDE;
+								break;
 
+							case 2://inky
+								gtype = GhostType.INKY;
+								break;
+
+							case 3://pinky
+								gtype = GhostType.PINKY;
+								break;
+						}
+						
+						// update the position
+						GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).position( xpos, ypos);
 						System.out.println("GPOS("+xpos+","+ypos+")");
 					}
 					else if( PType.GMOVE.ordinal() == packetType )
@@ -282,10 +301,6 @@ public class Client extends Thread
 							// someone else is leaving
 							// TODO: Process the drop
 						}
-					}
-					else if( PType.HEARTBEAT.ordinal() == packetType )
-					{
-						// heartbeat
 					}
 					else if( PType.SCORE.ordinal() == packetType )
 					{
