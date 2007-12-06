@@ -64,7 +64,7 @@ public class Client extends Thread
 	 */
 	public static void send(PType type)
 	{
-		byte[] buf = new byte[4];
+		byte[] buf = new byte[6];
 		buf[0] = new Integer( type.ordinal() ).byteValue();	
 		buf[1] = new Integer( ghostType.ordinal() ).byteValue();
 		sendData(buf);
@@ -78,7 +78,7 @@ public class Client extends Thread
 	 */
 	public static void send(Direction dir)
 	{
-		byte[] buf = new byte[4];
+		byte[] buf = new byte[6];
 		buf[0] = new Integer( PType.GMOVE.ordinal() ).byteValue();	
 		buf[1] = new Integer( dir.ordinal() ).byteValue();
 		buf[2] = new Integer( ghostType.ordinal() ).byteValue();
@@ -88,7 +88,7 @@ public class Client extends Thread
 	
 	private void joinGame()
 	{
-		byte[] buf = new byte[4];
+		byte[] buf = new byte[6];
 		buf[0] = new Integer( PType.JOIN.ordinal() ).byteValue();	
 		buf[1] = new Integer( Client.ghostType.ordinal() ).byteValue();
 		Client.sendData(buf);
@@ -135,7 +135,7 @@ public class Client extends Thread
 			while (moreQuotes) 
 			{
 
-				byte[] buf = new byte[4];
+				byte[] buf = new byte[6];
 
 				// receive request
 				DatagramPacket packet = new DatagramPacket(buf, buf.length);
@@ -147,179 +147,193 @@ public class Client extends Thread
 
 				// get the packet type and data
 				int packetType = buf[0] & 0x000000FF;
-				int data1 = buf[1] & 0x000000FF;
-				int data2 = buf[2] & 0x000000FF;
-				int data3 = buf[3] & 0x000000FF;
+				//int data1 = buf[1] & 0x000000FF;
+				//int data2 = buf[2] & 0x000000FF;
+				//int data3 = buf[3] & 0x000000FF;
 				
-				//System.out.print("PACKET("+packetType+","+data1+","+data2+","+data3+"): ");
+				System.out.println("PACKET("+packetType+")");//,"+data1+","+data2+","+data3+"): ");
 				
-				
-				// listen for open slots, but only if we arent playing
-				if( PType.SPOTFREE.ordinal() == packetType && !Client.isPlaying )
+				if( Client.isPlaying )
 				{
-					// tells the player that a spot is open on the server
-					switch(data1)
+					if( PType.PPOS.ordinal() == packetType )
 					{
-						case 0://blinky
-							Client.ghostType = GhostType.BLINKY;
-							break;
-						case 1://clyde
-							Client.ghostType = GhostType.CLYDE;
-							break;
-						case 2://inky
-							Client.ghostType = GhostType.INKY;
-							break;
-						case 3://p
-							Client.ghostType = GhostType.PINKY;
-							break;
+						int xpos = 100*( (int)(buf[1]&0x000000FF) ) + ( (int)(buf[2]&0x000000FF) );
+						int ypos = 100*( (int)(buf[3]&0x000000FF) ) + ( (int)(buf[4]&0x000000FF) );
+						GameState.getInstance().getPacMan().position( xpos, ypos );
+						System.out.println("PPOS("+xpos+","+ypos+")");
 					}
-					Client.isPlaying = true;
-					//System.out.println("SPOTFREE GhostType Set: " + Client.ghostType.name() );
-				
-					// notify the server we are joinging
-					joinGame();
-
-					// setup the player or something, go hooray?
-					GameController.getInstance().startGame();
-					//GameController.getInstance().getPacInstance().showScene(ScreenMode.GAME);
-					GameController.getInstance().getPacInstance().showGameScreen();
-					
-					// set the ghosts direction
-					GameState.getInstance().getGhosts().getObjectAt(capitalize(Client.ghostType.name())).setDirection(Direction.UP);
-				
-				
-				}
-				else if( PType.GMOVE.ordinal() == packetType )
-				{
-					// another ghost moved. (We may or may not use this to also update the current player as consistency)
-					GhostType gtype = GhostType.BLINKY;
-					Direction dir = Direction.UP;
-
-					// get direction
-					switch(data1)
+					else if( PType.GPOS.ordinal() == packetType )
 					{
-						case 0://up
-							dir = Direction.UP;
-							break;
-						case 1://down
-							dir = Direction.DOWN;
-							break;
-						case 2://left
-							dir = Direction.LEFT;
-							break;
-						case 3://right
-							dir = Direction.RIGHT;
-							break;
+						int xpos = 100*( (int)(buf[2]&0x000000FF) ) + ( (int)(buf[3]&0x000000FF) );
+						int ypos = 100*( (int)(buf[4]&0x000000FF) ) + ( (int)(buf[5]&0x000000FF) );
+
+						System.out.println("GPOS("+xpos+","+ypos+")");
 					}
-
-					// get the ghost
-					switch(data2)
+					else if( PType.GMOVE.ordinal() == packetType )
 					{
-						case 0://blinky
-							gtype = GhostType.BLINKY;
-							break;
+						// another ghost moved. (We may or may not use this to also update the current player as consistency)
+						GhostType gtype = GhostType.BLINKY;
+						Direction dir = Direction.UP;
+
+						// get direction
+						switch( (buf[1] & 0x000000FF ))
+						{
+							case 0://up
+								dir = Direction.UP;
+								break;
+							case 1://down
+								dir = Direction.DOWN;
+								break;
+							case 2://left
+								dir = Direction.LEFT;
+								break;
+							case 3://right
+								dir = Direction.RIGHT;
+								break;
+						}
+
+						// get the ghost
+						switch( (buf[2] & 0x000000FF ))
+						{
+							case 0://blinky
+								gtype = GhostType.BLINKY;
+								break;
+							
+							case 1://clyde
+								gtype = GhostType.CLYDE;
+								break;
+
+							case 2://inky
+								gtype = GhostType.INKY;
+								break;
+
+							case 3://pinky
+								gtype = GhostType.PINKY;
+								break;
+						}
+
+						// move the ghost
+						GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).setDirection(dir);
+
+					}
+					else if( PType.PMOVE.ordinal() == packetType )
+					{
+						// pacman made a move
 						
-						case 1://clyde
-							gtype = GhostType.CLYDE;
-							break;
+						Direction dir = Direction.UP;
+						// what direction did he move?
+						switch( (buf[1] & 0x000000FF ))
+						{
+							case 0://up
+								dir = Direction.UP;
+								break;
+							case 1://down
+								dir = Direction.DOWN;
+								break;
+							case 2://left
+								dir = Direction.LEFT;
+								break;
+							case 3://right
+								dir = Direction.RIGHT;
+								break;
+						}
 
-						case 2://inky
-							gtype = GhostType.INKY;
-							break;
+						// set the direction
+						GameController.getInstance().setPacManDirection(dir);
+						
 
-						case 3://pinky
-							gtype = GhostType.PINKY;
-							break;
+
 					}
-
-					// move the ghost
-					GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).setDirection(dir);
-
-				}
-				else if( PType.PMOVE.ordinal() == packetType )
-				{
-					// pacman made a move
-					
-					Direction dir = Direction.UP;
-					// what direction did he move?
-					switch(data1)
+					else if( PType.JOIN.ordinal() == packetType )
 					{
-						case 0://up
-							dir = Direction.UP;
-							break;
-						case 1://down
-							dir = Direction.DOWN;
-							break;
-						case 2://left
-							dir = Direction.LEFT;
-							break;
-						case 3://right
-							dir = Direction.RIGHT;
-							break;
+						// notify us that another ghost has joined
+						// readd them to the board or something
+						
+						// what ghost just joined?
+						switch( (buf[1] & 0x000000FF ))
+						{
+							case 0://blinky joined
+								break;
+							case 1:// clyde joined
+								break;
+							case 2:// inky joined
+								break;
+							case 3:// pinky joined
+								break;
+						}
+
 					}
-
-					// set the direction
-					GameController.getInstance().setPacManDirection(dir);
-					
-
-
-				}
-				else if( PType.JOIN.ordinal() == packetType )
-				{
-					// notify us that another ghost has joined
-					// readd them to the board or something
-					
-					// what ghost just joined?
-					switch(data1)
+					else if( PType.LEAVE.ordinal() == packetType )
 					{
-						case 0://blinky joined
+						// notify that a ghost has left the game
+						// if the ghost type is the same as the client, then client drops out.
+
+						if( (buf[1]&0x000000FF)==Client.ghostType.ordinal() )
+						{
+							// the ghost leaving is the current player
+							moreQuotes = false;
+							
+							System.out.println("You were dropped from the server, or you just left.");
+							
 							break;
-						case 1:// clyde joined
-							break;
-						case 2:// inky joined
-							break;
-						case 3:// pinky joined
-							break;
+						}
+						else
+						{
+							// someone else is leaving
+							// TODO: Process the drop
+						}
 					}
-
-				}
-				else if( PType.LEAVE.ordinal() == packetType )
-				{
-					// notify that a ghost has left the game
-					// if the ghost type is the same as the client, then client drops out.
-
-					if( data1==Client.ghostType.ordinal() )
+					else if( PType.HEARTBEAT.ordinal() == packetType )
 					{
-						// the ghost leaving is the current player
+						// heartbeat
+					}
+					else if( PType.SCORE.ordinal() == packetType )
+					{
+						// receive a score update
+					}
+					else if( PType.GAMEOVER.ordinal() == packetType )
+					{
+						// game ended
 						moreQuotes = false;
-						
-						System.out.println("You were dropped from the server, or you just left.");
-						
-						break;
+						GameController.getInstance().getPacInstance().drawGameover();
 					}
-					else
-					{
-						// someone else is leaving
-						// TODO: Process the drop
-					}
-				}
-				else if( PType.HEARTBEAT.ordinal() == packetType )
-				{
-					// heartbeat
-				}
-				else if( PType.SCORE.ordinal() == packetType )
-				{
-					// receive a score update
-				}
-				else if( PType.GAMEOVER.ordinal() == packetType )
-				{
-					// game ended
-					moreQuotes = false;
-					GameController.getInstance().getPacInstance().drawGameover();
 				}
 				else
 				{
-					// some other junk packet (these are discarded as nobody cares about a client
+					if( PType.SPOTFREE.ordinal() == packetType && !Client.isPlaying )
+					{
+						// tells the player that a spot is open on the server
+						switch( (buf[1] & 0x000000FF ))
+						{
+							case 0://blinky
+								Client.ghostType = GhostType.BLINKY;
+								break;
+							case 1://clyde
+								Client.ghostType = GhostType.CLYDE;
+								break;
+							case 2://inky
+								Client.ghostType = GhostType.INKY;
+								break;
+							case 3://p
+								Client.ghostType = GhostType.PINKY;
+								break;
+						}
+						Client.isPlaying = true;
+						//System.out.println("SPOTFREE GhostType Set: " + Client.ghostType.name() );
+					
+						// notify the server we are joinging
+						joinGame();
+
+						// setup the player or something, go hooray?
+						GameController.getInstance().startGame();
+						//GameController.getInstance().getPacInstance().showScene(ScreenMode.GAME);
+						GameController.getInstance().getPacInstance().showGameScreen();
+						
+						// set the ghosts direction
+						GameState.getInstance().getGhosts().getObjectAt(capitalize(Client.ghostType.name())).setDirection(Direction.UP);
+					
+					
+					}
 				}
 			}
 			socket.leaveGroup(group);

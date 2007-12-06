@@ -98,7 +98,142 @@ public class Server extends Thread
 				}
 			}
 		}
-	}
+	}/// OPEN SLOTS/////////////
+
+	
+	private class Consistency extends Thread
+	{
+		private InetAddress group;
+		private MulticastSocket socket;
+
+
+		public Consistency()
+		{
+			try
+			{
+				group = InetAddress.getByName("230.0.0.1");
+				socket = new MulticastSocket();
+			}
+			catch(Exception e)
+			{
+
+			}
+		}
+
+		private byte[] getInt(int d)
+		{
+			byte[] buf = new byte[2];
+			
+			int hund = (int) Math.floor(d/100.0);
+			buf[0] = new Integer( hund ).byteValue();
+			buf[1] = new Integer( (d) - (100*hund) ).byteValue();
+			return buf;
+		}
+
+		private void send(GhostType gtype, int x, int y)
+		{
+			try
+			{
+				byte[] buf = new byte[6];
+				buf[0] = new Integer(PType.GPOS.ordinal()).byteValue();
+				buf[1] = new Integer(gtype.ordinal()).byteValue();
+
+				byte[] xp = getInt(x);
+				buf[2] = xp[0];
+				buf[3] = xp[1];
+			
+				byte[] yp = getInt(y);
+				buf[4] = yp[0];
+				buf[5] = yp[1];
+
+
+				// send the packet out
+				DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
+				socket.send(packet);
+			}
+			catch(Exception e)
+			{
+
+			}
+		}
+		private void send( int x, int y)
+		{
+			try
+			{
+				byte[] buf = new byte[6];
+				buf[0] = new Integer(PType.PPOS.ordinal()).byteValue();
+				
+				byte[] xp = getInt(x);
+				buf[1] = xp[0];
+				buf[2] = xp[1];
+			
+				byte[] yp = getInt(y);
+				buf[3] = yp[0];
+				buf[4] = yp[1];
+
+				// send the packet out
+				group = InetAddress.getByName("230.0.0.1");
+				DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
+				socket.send(packet);
+			}
+			catch(Exception e)
+			{
+
+			}
+		}
+
+		public void run()
+		{
+			try
+			{
+				while(true)
+				{
+					// pacman position
+					PacMan pm = GameState.getInstance().getPacMan();
+					send( pm.x(), pm.y() );
+
+					GhostController gc = GameState.getInstance().getGhosts();
+					
+					Ghost gbl;
+					
+					gbl = gc.getObjectAt("Blinky");
+					send( GhostType.BLINKY, gbl.x(), gbl.y() );
+					
+					gbl = gc.getObjectAt("Clyde");
+					send( GhostType.CLYDE, gbl.x(), gbl.y() );
+
+					gbl = gc.getObjectAt("Inky");
+					send( GhostType.INKY, gbl.x(), gbl.y() );
+
+					gbl = gc.getObjectAt("Pinky");
+					send( GhostType.PINKY, gbl.x(), gbl.y() );
+
+					/// sleep
+					Thread.currentThread().sleep(100);
+				}
+
+			}
+			catch(Exception e)
+			{
+
+			}
+
+		}//run
+	}//CONSISTENCY /////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    /**
     * Starts the Server.
@@ -131,7 +266,7 @@ public class Server extends Thread
      */
 	public static void send(PType type)
 	{
-		byte[] buf = new byte[4];
+		byte[] buf = new byte[6];
 		buf[0] = new Integer(type.ordinal()).byteValue();
 		sendData(buf);
 	}
@@ -143,7 +278,7 @@ public class Server extends Thread
      */
 	public static void send(GhostType ghost, Direction dir)
 	{
-		byte[] buf = new byte[4];
+		byte[] buf = new byte[6];
 		buf[0] = new Integer(PType.GMOVE.ordinal()).byteValue(); // TYPE
 		buf[1] = new Integer(dir.ordinal()).byteValue(); // DIRECTION
 		buf[2] = new Integer(ghost.ordinal()).byteValue(); // GHOST_TYPE
@@ -156,7 +291,7 @@ public class Server extends Thread
 	 */
 	public static void send(Direction dir)
 	{
-		byte[] buf = new byte[4];
+		byte[] buf = new byte[6];
 		buf[0] = new Integer(PType.PMOVE.ordinal()).byteValue();
 		buf[1] = new Integer(dir.ordinal()).byteValue();
 		sendData(buf);
@@ -169,7 +304,7 @@ public class Server extends Thread
 	 */
 	public static void send(PType type, GhostType ghost)
 	{
-		byte[] buf = new byte[4];
+		byte[] buf = new byte[6];
 		buf[0] = new Integer(type.ordinal()).byteValue();
 		buf[1] = new Integer(ghost.ordinal()).byteValue();
 		sendData(buf);
@@ -217,13 +352,15 @@ public class Server extends Thread
 	{
 		// should be while game is not over
 		new OpenSlots().start();
+		
+		new Consistency().start();
 
 		while (moreQuotes) 
 		{
 			try 
 			{
-				byte[] buf = new byte[4];
-				byte[] bufOut = new byte[4];
+				byte[] buf = new byte[6];
+				byte[] bufOut = new byte[6];
 
 				// receive request
 				DatagramPacket packet = new DatagramPacket(buf, buf.length);
@@ -235,12 +372,58 @@ public class Server extends Thread
 				
 				// get the packet type
 				int packetType = buf[0] & 0x000000FF;
-				int data1 = buf[1] & 0x000000FF;
-				int data2 = buf[2] & 0x000000FF;
-				int data3 = buf[3] & 0x000000FF;
-				//System.out.print("PACKET("+packetType+","+data1+","+data2+","+data3+"): ");
+				//System.out.print("PACKET("+packetType+","+(buf[1]&0x000000FF)+","+(buf[2]&0x000000FF)+","+(buf[3]&0x000000FF)+"): ");
 
-				if( PType.JOIN.ordinal() == packetType )
+				
+				if( PType.GMOVE.ordinal() == packetType )
+				{
+					// a ghost move
+					
+					GhostType gtype = GhostType.BLINKY;
+					Direction dir = Direction.UP;
+
+					// get direction
+					switch((buf[1]&0x000000FF))
+					{
+						case 0://up
+							dir = Direction.UP;
+							break;
+						case 1://down
+							dir = Direction.DOWN;
+							break;
+						case 2://left
+							dir = Direction.LEFT;
+							break;
+						case 3://right
+							dir = Direction.RIGHT;
+							break;
+					}
+
+					// get the ghost
+					switch((buf[2]&0x000000FF))
+					{
+						case 0://blinky
+							gtype = GhostType.BLINKY;
+							break;
+						
+						case 1://clyde
+							gtype = GhostType.CLYDE;
+							break;
+
+						case 2://inky
+							gtype = GhostType.INKY;
+							break;
+
+						case 3://pinky
+							gtype = GhostType.PINKY;
+							break;
+					}
+					GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).setDirection(dir);
+
+					// notify all the clients
+					send(gtype, dir);
+				}
+				else if( PType.JOIN.ordinal() == packetType )
 				{
 					if( Server.clients.size() < 4)
 					{
@@ -248,7 +431,7 @@ public class Server extends Thread
 						GhostType gtype = GhostType.BLINKY;
 						
 						// Update the server
-						switch(data1)
+						switch((buf[1]&0x000000FF))
 						{
 							case 0://b
 								gtype = GhostType.BLINKY;
@@ -269,65 +452,6 @@ public class Server extends Thread
 						Server.clients.add(gtype);
 
 					}
-					else
-					{
-						// game is full
-						//bufOut[0] = new Integer( PType.GAMEFULL.ordinal() ).byteValue();
-						//sendClientData( bufOut );
-					}
-				}
-				else if( PType.GMOVE.ordinal() == packetType )
-				{
-					// a ghost move
-					
-					GhostType gtype = GhostType.BLINKY;
-					Direction dir = Direction.UP;
-
-					// get direction
-					switch(data1)
-					{
-						case 0://up
-							dir = Direction.UP;
-							break;
-						case 1://down
-							dir = Direction.DOWN;
-							break;
-						case 2://left
-							dir = Direction.LEFT;
-							break;
-						case 3://right
-							dir = Direction.RIGHT;
-							break;
-					}
-
-					// get the ghost
-					switch(data2)
-					{
-						case 0://blinky
-							gtype = GhostType.BLINKY;
-							break;
-						
-						case 1://clyde
-							gtype = GhostType.CLYDE;
-							break;
-
-						case 2://inky
-							gtype = GhostType.INKY;
-							break;
-
-						case 3://pinky
-							gtype = GhostType.PINKY;
-							break;
-					}
-					//System.out.println("Moving "+data2+" in dir "+data1);
-					
-					GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).setDirection(dir);
-
-					// notify all the clients
-					send(gtype, dir);
-					
-
-
 				}
 				else if( PType.LEAVE.ordinal() == packetType )
 				{
@@ -335,7 +459,7 @@ public class Server extends Thread
 
 					GhostType gtype = GhostType.BLINKY;
 					// find which ghost it is, and notify all the clients that they dropped
-					switch( data1 )
+					switch( (buf[1]&0x000000FF) )
 					{
 						case 0://b
 							gtype = GhostType.BLINKY;

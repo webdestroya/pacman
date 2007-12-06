@@ -16,8 +16,8 @@ import code.uci.pacman.game.PacManGame;
  */
 public class TopScores{
 
-	private ArrayList<String> nameList = new ArrayList();
-	private ArrayList<Integer> scoreList = new ArrayList();
+	private ArrayList<String> nameList = new ArrayList<String>();
+	private ArrayList<Integer> scoreList = new ArrayList<Integer>();
 	private String name;
 	private int score;
 	private int addIndex;

@@ -14,6 +14,8 @@ public enum PType
 	SCORE,		//7 SCORE				(updates the clients with a score - not yet used)
 	SPOTFREE,	//8 GHOST_TYPE			(tells the clients listening what spots are free on the server)
 	NOTYET,		//9 ----not yet used---
+	GPOS,		//10 GHOST_TYPE XPOS YPOS	(used as a consistency to make sure everyone is in the right spot)
+	PPOS,		//11 XPOS YPOS				(used as consistency for pacman)
 };
 
 
