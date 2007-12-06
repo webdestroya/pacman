@@ -19,6 +19,11 @@ public class Server extends Thread
 {
 	private static final long serialVersionUID = 1L;
 	protected DatagramSocket socket = null;
+	
+
+	// TODO: TODO TODO TODO TODO: These must be reset when the server changes levels, or weird
+	// things will happen
+	private static ArrayList<DatagramPacket> packetHistory;
 
 	protected static InetAddress group;
 	class ClientMap
@@ -181,7 +186,14 @@ public class Server extends Thread
 			}
 			catch(Exception e){}
 		}
-
+		private void send(DatagramPacket pack)
+		{
+			try
+			{
+				gssocket.send(packet);
+			}
+			catch(Exception e){}
+		}
 		public void run()
 		{
 			// be lazy at the start
@@ -219,9 +231,12 @@ public class Server extends Thread
 						level[0] = new Integer( PType.LIVES.ordinal() ).byteValue();
 						level[1] = new Integer( GameState.getInstance().getLevel() ).byteValue();
 						send(level);
-						
-
-
+					
+						// PACKET HISTORY
+						for(int i=0;i<packetHistory.size();i++)
+						{
+							send(packetHistory.get(i));			
+						}
 						// take longer naps when we are full
 						Thread.currentThread().sleep(1000);
 					}
@@ -367,7 +382,6 @@ public class Server extends Thread
 
 
 
-
    /**
     * Starts the Server.
     * @throws IOException
@@ -389,6 +403,8 @@ public class Server extends Thread
 		Server.clients = new ClientMap();//new ArrayList<GhostType>();
 		Server.group = InetAddress.getByName("230.0.0.1");
 
+		packetHistory = new ArrayList<DatagramPacket>();
+
         System.out.println("START SERVER");
     }
 	
@@ -407,7 +423,9 @@ public class Server extends Thread
 	
 	/**
      * Sends a packet
-     * @param type of command to send out
+     * @param type of command to send out add/del for pill/pellets/fruit
+	 * @param x xcoord of the object
+	 * @param y ycoord of the object
      */
 	public static void send(PType type, int x, int y)
 	{
@@ -421,8 +439,15 @@ public class Server extends Thread
 		byte[] yp = getInt(y);
 		buf[3] = yp[0];
 		buf[4] = yp[1];
-
-		sendData(buf);
+		
+		if( type.equals(PILLD) || type.equals(PPILLD) || type.equals(DFRUIT) )
+		{
+			sendData(buf,true);
+		}
+		else
+		{
+			sendData(buf);
+		}
 	}
 
 	/**
@@ -467,16 +492,24 @@ public class Server extends Thread
 
 	private static void sendData(byte[] buf)
 	{
-		sendClientData(buf);
+		sendClientData(buf,false);
+	}
+	private static void sendData(byte[] buf, boolean save)
+	{
+		sendClientData(buf,save);
 	}
 
 	// sends raw data to a client
-	private static void sendClientData(byte[] buf)
+	private static void sendClientData(byte[] buf, boolean save)
 	{
 		try
 		{
 			MulticastSocket socketSend = new MulticastSocket();
 			DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
+			if(save)
+			{
+				packetHistory.add(packet);
+			}
 			socketSend.send(packet);
 			socketSend.close();
 		}
