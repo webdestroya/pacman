@@ -17,10 +17,13 @@ public class ScoreBoard{
 
 	private int remainingLives = 0;
 	private Sprite score;
+	private Sprite level;
 	private Sprite lives; 
 	private Fruit fruit;
 	private int scorePosX = 0;
 	private int scorePosY = 610;
+	private int levelPosX = 200;
+	private int levelPosY = 608;
 	private int livesPosX = 300;
 	private int livesPosY = 610;
 	private int lifePosX = 355;
@@ -45,6 +48,10 @@ public class ScoreBoard{
 		lives = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/lives.png");
 		lives.position(livesPosX, livesPosY);
 
+		//create levels sprite
+		level = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/levels_LVL.png");
+		level.position(levelPosX, levelPosY);
+		
 		//set remainLives
 		remainingLives = GameState.getInstance().getLives();
 		for(int x = 1; x <= remainingLives; x++){
@@ -68,6 +75,9 @@ public class ScoreBoard{
 		//add scores from GameState and draw score sprite onto canvas
 		score.putText(GameState.getInstance().getScore() + "", 120, 24);
 		score.draw();
+		
+		//add levels from GameState and draw levels on canvas
+		level.draw();
 		
 		//add lives from GameState and draw life sprite onto canvas
 		lives.draw();
