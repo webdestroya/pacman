@@ -177,7 +177,9 @@ public class Server extends Thread
 				gsgroup = InetAddress.getByName(Server.MCAST_ADDRESS);
 				gssocket = new MulticastSocket();
 			}
-			catch(Exception e){}
+			catch(Exception e){
+				e.printStackTrace();
+				}
 		}
 		private void send(byte[] buf)
 		{
@@ -231,6 +233,7 @@ public class Server extends Thread
 						byte[] lives = new byte[2];
 						lives[0] = new Integer( PType.LIVES.ordinal() ).byteValue();
 						lives[1] = new Integer( GameState.getInstance().getLives() ).byteValue();
+						System.out.println("LIVES: "+ GameState.getInstance().getLives() );
 						send(lives);
 
 						// SEND LEVEL
