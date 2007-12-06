@@ -1,6 +1,6 @@
 // Help.java
 
-package external.ucigame;
+package ucigame;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

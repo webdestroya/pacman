@@ -1,6 +1,6 @@
 // Sprite.java
 
-package external.ucigame;
+package ucigame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
