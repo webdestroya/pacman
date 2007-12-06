@@ -20,6 +20,7 @@ public class ScoreBoard{
 	private Sprite level;
 	private Sprite lives; 
 	private Fruit fruit;
+	private int levelCounter = 1; 
 	private int scorePosX = 10;
 	private int scorePosY = 610;
 	private int levelPosX = 235;
@@ -44,13 +45,14 @@ public class ScoreBoard{
 		score.position(scorePosX, scorePosY);
 		score.font(PacManGame.font, PacManGame.BOLD, 24, 255, 255, 255);
 		
+		//create levels sprite
+		level = GameController.getInstance().getPacInstance().makeSprite(GameController.getInstance().getPacInstance().getImage("images/final/levels_LVL.png", 255,0,0));
+		level.position(levelPosX, levelPosY);
+		level.font(PacManGame.font, PacManGame.BOLD, 26, 255, 255, 255);
+		
 		//create lives sprite
 		lives = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/lives.png");
 		lives.position(livesPosX, livesPosY);
-
-		//create levels sprite
-		level = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/levels_LVL.png");
-		level.position(levelPosX, levelPosY);
 		
 		//set remainLives
 		remainingLives = GameState.getInstance().getLives();
@@ -77,7 +79,15 @@ public class ScoreBoard{
 		score.draw();
 		
 		//add levels from GameState and draw levels on canvas
+		//set level counter
+
+		level.putText(levelCounter, 56, 27);
+
+		if (GameState.getInstance().stageHasBeenCleared()){
+			levelCounter ++; 
+		}
 		level.draw();
+		
 		
 		//add lives from GameState and draw life sprite onto canvas
 		lives.draw();
