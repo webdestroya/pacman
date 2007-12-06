@@ -24,7 +24,6 @@ public class Client extends Thread
 
 	/**
 	 * Starts a Client
-	 * @param host IP address or host name
 	 */
 	public Client()
 	{
@@ -37,22 +36,7 @@ public class Client extends Thread
 			// cant make a socket?
 		}
 	}
-	/**
-	 * Changes the host
-	 * @param host IP Address or Host Name
-	 */
-	public static void setHost(String host)
-	{
-		try
-		{
-			Client.address = InetAddress.getByName(host);
-		}
-		catch(Exception e)
-		{
-
-		}
-	}
-	
+		
 	/**
 	 * Tells the game what ghost the player is currently playing as
 	 * @return GhostType
