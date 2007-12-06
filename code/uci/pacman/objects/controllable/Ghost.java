@@ -5,8 +5,7 @@ import java.util.Random;
 
 import code.uci.pacman.ai.AI;
 import code.uci.pacman.controllers.WallController;
-import code.uci.pacman.game.Direction;
-import code.uci.pacman.game.GameState;
+import code.uci.pacman.game.*;
 import code.uci.pacman.objects.ControllableObject;
 
 
@@ -170,8 +169,14 @@ public abstract class Ghost extends ControllableObject implements AI {
 			//
 			// * DONT EDIT THIS FOR NOW, MITCH NEEDS IT FOR NETWORK DEVELOPMENT
 			//
-			return curDirection;
-			//return getAIMove();
+			if(PacManGame.gameType == 2)
+			{
+				return curDirection;
+			}
+			else
+			{
+				return getAIMove();
+			}
 		}
 	}
 

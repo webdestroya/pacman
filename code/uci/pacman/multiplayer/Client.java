@@ -148,7 +148,7 @@ public class Client extends Thread
 				// get the packet type and data
 				int packetType = buf[0] & 0xFF;
 				
-				System.out.println("PACKET("+packetType+")");//,"+data1+","+data2+","+data3+"): ");
+				//System.out.println("PACKET("+packetType+")");//,"+data1+","+data2+","+data3+"): ");
 				
 				if( Client.isPlaying )
 				{
@@ -157,7 +157,7 @@ public class Client extends Thread
 						int xpos = 100*( (int)(buf[1]&0x000000FF) ) + ( (int)(buf[2]&0x000000FF) );
 						int ypos = 100*( (int)(buf[3]&0x000000FF) ) + ( (int)(buf[4]&0x000000FF) );
 						GameState.getInstance().getPacMan().position( xpos, ypos );
-						System.out.println("PPOS("+xpos+","+ypos+")");
+						//System.out.println("PPOS("+xpos+","+ypos+")");
 					}
 					else if( PType.GPOS.ordinal() == packetType )
 					{
@@ -186,7 +186,7 @@ public class Client extends Thread
 						
 						// update the position
 						GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).position( xpos, ypos);
-						System.out.println("GPOS("+xpos+","+ypos+")");
+						//System.out.println("GPOS("+xpos+","+ypos+")");
 					}
 					else if( PType.GMOVE.ordinal() == packetType )
 					{

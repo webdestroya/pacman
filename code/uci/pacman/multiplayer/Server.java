@@ -105,16 +105,16 @@ public class Server extends Thread
 	
 	private class Consistency extends Thread
 	{
-		private InetAddress group;
-		private MulticastSocket socket;
+		private InetAddress cgroup;
+		private MulticastSocket csocket;
 
 
 		public Consistency()
 		{
 			try
 			{
-				group = InetAddress.getByName("230.0.0.1");
-				socket = new MulticastSocket();
+				cgroup = InetAddress.getByName("230.0.0.1");
+				csocket = new MulticastSocket();
 			}
 			catch(Exception e)
 			{
@@ -150,8 +150,8 @@ public class Server extends Thread
 
 
 				// send the packet out
-				DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
-				socket.send(packet);
+				DatagramPacket packet = new DatagramPacket(buf, buf.length, cgroup, 4446 );
+				csocket.send(packet);
 			}
 			catch(Exception e)
 			{
@@ -174,8 +174,8 @@ public class Server extends Thread
 				buf[4] = yp[1];
 
 				// send the packet out
-				DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
-				socket.send(packet);
+				DatagramPacket packet = new DatagramPacket(buf, buf.length, cgroup, 4446 );
+				csocket.send(packet);
 			}
 			catch(Exception e)
 			{
@@ -189,34 +189,36 @@ public class Server extends Thread
 			{
 				while(true)
 				{
-					// pacman position
-					PacMan pm = GameState.getInstance().getPacMan();
-					send( pm.x(), pm.y() );
+					if(Server.clients.size()>0)
+					{
+						// pacman position
+						PacMan pm = GameState.getInstance().getPacMan();
+						send( pm.x(), pm.y() );
 
-					GhostController gc = GameState.getInstance().getGhosts();
-					
-					Ghost gbl;
-					
-					gbl = gc.getObjectAt("Blinky");
-					send( GhostType.BLINKY, gbl.x(), gbl.y() );
-					
-					gbl = gc.getObjectAt("Clyde");
-					send( GhostType.CLYDE, gbl.x(), gbl.y() );
+						GhostController gc = GameState.getInstance().getGhosts();
+						
+						Ghost gbl;
+						
+						gbl = gc.getObjectAt("Blinky");
+						send( GhostType.BLINKY, gbl.x(), gbl.y() );
+						
+						gbl = gc.getObjectAt("Clyde");
+						send( GhostType.CLYDE, gbl.x(), gbl.y() );
 
-					gbl = gc.getObjectAt("Inky");
-					send( GhostType.INKY, gbl.x(), gbl.y() );
+						gbl = gc.getObjectAt("Inky");
+						send( GhostType.INKY, gbl.x(), gbl.y() );
 
-					gbl = gc.getObjectAt("Pinky");
-					send( GhostType.PINKY, gbl.x(), gbl.y() );
-
+						gbl = gc.getObjectAt("Pinky");
+						send( GhostType.PINKY, gbl.x(), gbl.y() );
+					}
 					/// sleep
-					Thread.currentThread().sleep(200);
+					Thread.currentThread().sleep(100);
 				}
 
 			}
 			catch(Exception e)
 			{
-
+				e.printStackTrace();
 			}
 
 		}//run
