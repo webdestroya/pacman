@@ -233,12 +233,11 @@ public class Server extends Thread
 						byte[] lives = new byte[2];
 						lives[0] = new Integer( PType.LIVES.ordinal() ).byteValue();
 						lives[1] = new Integer( GameState.getInstance().getLives() ).byteValue();
-						System.out.println("LIVES: "+ GameState.getInstance().getLives() );
 						send(lives);
 
 						// SEND LEVEL
 						byte[] level = new byte[2];
-						level[0] = new Integer( PType.LIVES.ordinal() ).byteValue();
+						level[0] = new Integer( PType.LEVEL.ordinal() ).byteValue();
 						level[1] = new Integer( GameState.getInstance().getLevel() ).byteValue();
 						send(level);
 					
