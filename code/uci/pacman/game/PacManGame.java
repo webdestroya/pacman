@@ -277,13 +277,18 @@ public class PacManGame extends Ucigame {
 	public void onClickTopScores() {
 		if (isShowingScene(ScreenMode.MENU) || isShowingScene(ScreenMode.GAMEOVER)) {
 			System.out.println("topScore click");
+			mainMenu.stopMenuTheme();
 			showScoresScreen();			
 			// beginGame();
 		}
 	}
 	
 	public void onClickTopScoresMainMenu(){
-		
+		/*
+		mainMenu = new MainMenu();
+		canvas.background(getImage("images/final/mainMenuBackGroundDim2.png"));
+		mainMenu.startMenuTheme();
+		showScene(ScreenMode.MENU);*/
 	}
 
 	/**
