@@ -8,6 +8,8 @@ import code.uci.pacman.controllers.WallController;
 import code.uci.pacman.game.*;
 import code.uci.pacman.objects.ControllableObject;
 
+import code.uci.pacman.multiplayer.*;
+
 
 /**
  * Represents a Ghost character that chases PacMan.  A Ghost can be controlled by human
@@ -97,6 +99,10 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public void scatter(){
 		scatter = true;
+		if( PacManGame.gameType==1)
+		{
+			Server.send(PType.DGHOST);
+		}
 		super.setAnimationMode("scatter"); //this will tell the ghost to switch to scatter mode animations
 		/* 
 		 * 
@@ -124,6 +130,11 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public void unScatter() {
 		scatter = false;
+		if( PacManGame.gameType==1)
+		{
+			Server.send(PType.AGHOST);
+		}
+
 		setAnimationMode("default"); //this will tell the ghost to switch back to his regular animations
 		//see above in scatter for explanation or just ask me --> nathan
 	}

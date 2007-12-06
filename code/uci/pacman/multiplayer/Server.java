@@ -32,11 +32,13 @@ public class Server extends Thread
 	{
 		private HashMap<GhostType, InetAddress> gt2ia;
 		private HashMap<InetAddress, GhostType> ia2gt;
+		private HashMap<InetAddress, Long> ia2t;
 
 		public ClientMap()
 		{
 			gt2ia = new HashMap<GhostType, InetAddress>();
 			ia2gt = new HashMap<InetAddress, GhostType>();
+			ia2t = new HashMap<InetAddress, Long>();
 		}
 		
 		public void add(InetAddress a, GhostType g)
@@ -62,6 +64,30 @@ public class Server extends Thread
 			ia2gt.remove( gt2ia.get(g) );
 			gt2ia.remove(g);
 		}
+		
+		public void heartbeat(InetAddress a)
+		{
+			ia2t.put(a, new Long(Calendar.getInstance().getTimeInMillis() ));
+		}
+
+		public void dropDead()
+		{
+			long now = Calendar.getInstance().getTimeInMillis();
+			
+			Set<Map.Entry<InetAddress,Long>> ts = ia2t.entrySet();
+
+			now = now + (30000);
+			for (Iterator<Map.Entry<InetAddress,Long>> i = ts.iterator(); i.hasNext(); )
+			{
+				Map.Entry<InetAddress,Long> ent = i.next();
+				if( now >= ( ent.getValue().longValue()+30000 ) )
+				{
+					System.out.println("CLIENT "+ent.getKey()+" IS DEAD");
+					drop(ent.getKey());
+				}
+			}
+		}
+
 
 		public boolean contains( InetAddress a)
 		{
@@ -594,26 +620,7 @@ public class Server extends Thread
 						}
 
 						// get the ghost
-						/*
-						switch((buf[2]&0x000000FF))
-						{
-							case 0://blinky
-								gtype = GhostType.BLINKY;
-								break;
-							
-							case 1://clyde
-								gtype = GhostType.CLYDE;
-								break;
-
-							case 2://inky
-								gtype = GhostType.INKY;
-								break;
-
-							case 3://pinky
-								gtype = GhostType.PINKY;
-								break;
-						}*/
-						
+												
 						GhostType gtype = clients.get(address);
 
 						GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).setDirection(dir);
@@ -624,7 +631,7 @@ public class Server extends Thread
 					else if( PType.HEARTBEAT.ordinal() == packetType )
 					{
 						// A client heartbeat, that way, we keep everyone updated.
-
+						
 
 					}
 					else if( PType.LEAVE.ordinal() == packetType )
@@ -633,27 +640,10 @@ public class Server extends Thread
 
 						GhostType gtype = clients.get(address);
 						// find which ghost it is, and notify all the clients that they dropped
-						/*
-						switch( (buf[1]&0x000000FF) )
-						{
-							case 0://b
-								gtype = GhostType.BLINKY;
-								break;
-							case 1://c
-								gtype = GhostType.CLYDE;
-								break;
-							case 2://i
-								gtype = GhostType.INKY;
-								break;
-							case 3://p
-								gtype = GhostType.PINKY;
-								break;
-						}*/
-
 						send(PType.LEAVE, gtype);
+						
+						// drop them from the client list
 						Server.clients.drop( gtype );
-
-
 					}
 					else
 					{

@@ -36,6 +36,9 @@ public enum PType
 
 	HEARTBEAT,	//GHOST			sends the server a heartbeat signal
 
+	DGHOST,		//				tells the server to show all ghosts as dead
+	AGHOST,		//				reset ghosts as alive
+
 };
 
 
