@@ -71,7 +71,7 @@ public class IntroPlayer{
 				{
 					String frameLocation = frames.get(drawCounter);
 					Sprite currentFrame =  GameController.getInstance().getPacInstance().makeSpriteFromPath(frameLocation);
-					Thread.sleep(1000);	//orig 1525
+					Thread.sleep(1525);	//orig 1525
 					currentFrame.draw();
 					drawCounter ++;
 				}
