@@ -69,7 +69,7 @@ public class SoundController {
 	
 	
 	/**
-	 * Begins a loop paying the appropriate ambient sound over and over again 
+	 * Begins a loop playing the appropriate ambient sound over and over again 
 	 * during the duration of the game.
 	 */
 	public static void startAmbient(){
