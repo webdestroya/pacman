@@ -17,6 +17,7 @@ import code.uci.pacman.game.PacManGame;
  */
 public class TopScores{
 
+	private Sprite topScoresMainMenu;
 	private ArrayList<String> nameList = new ArrayList<String>();
 	private ArrayList<Integer> scoreList = new ArrayList<Integer>();
 	private String name;
@@ -28,12 +29,14 @@ public class TopScores{
 	private int bgY = 0;
 	private int nameStartPosX = 175;
 	private int nameStartPosY = 150;
-	private int scoreStartPosX = 400;
+	private int scoreStartPosX = 375;
 	private int scoreStartPosY = 150;
 	private int spaceIncrement = 30;
 	FileReader inFile;
 	FileWriter outFile;
 	Scanner scanner;
+	private int menuButtonX = 175;
+	private int menuButtonY = 450;
 	
 	/**
 	 * 
@@ -42,6 +45,10 @@ public class TopScores{
 	 */
 	public TopScores(){
 		// TODO Auto-generated constructor stub
+		topScoresMainMenu = GameController.getInstance().getPacInstance().makeButton("TopScoresMainMenu",GameController.getInstance().getPacInstance().getImage("images/final/mainmenubutton.png"),
+                249, 76);
+		topScoresMainMenu.position(menuButtonX, menuButtonY);
+		
 		readScores();
 		backGround = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/scorespriteadjuster.png");
 		backGround.position(bgX, bgY);
@@ -105,6 +112,7 @@ public class TopScores{
 			backGround.putText(scoreList.get(x)+"", scoreStartPosX, scoreStartPosY + x*spaceIncrement);
 		}
 		backGround.draw();
+		topScoresMainMenu.draw();
 	}
 	
 	/**
