@@ -2,6 +2,8 @@
 package code.uci.pacman.multiplayer;
 
 import code.uci.pacman.game.*;
+import code.uci.pacman.objects.stationary.Pill;
+import code.uci.pacman.objects.stationary.PowerPellet;
 import code.uci.pacman.controllers.*;
 import java.io.*;
 import java.net.*;
@@ -179,19 +181,33 @@ public class Client extends Thread
 					}
 					else if( PType.PILLD.ordinal() == packetType )
 					{
-						// delete a pill
+						//destroy pill
+						int x = 100*((int)(buf[1]&0xFF)) + ((int)(buf[2]&0xFF));
+						int y = 100*((int)(buf[3]&0xFF)) + ((int)(buf[4]&0xFF));
+						Pill pill = new Pill(x,y);
+						GameState.getInstance().getPills().destroy(pill);
 					}
 					else if( PType.PILLA.ordinal() == packetType )
 					{
 						// add a pill
+						int x = 100*((int)(buf[1]&0xFF)) + ((int)(buf[2]&0xFF));
+						int y = 100*((int)(buf[3]&0xFF)) + ((int)(buf[4]&0xFF));
+						GameState.getInstance().getPills().addArtifact(x, y);
 					}
 					else if( PType.PPILLD.ordinal() == packetType )
 					{
 						// delete power pill
+						int x = 100*((int)(buf[1]&0xFF)) + ((int)(buf[2]&0xFF));
+						int y = 100*((int)(buf[3]&0xFF)) + ((int)(buf[4]&0xFF));
+						PowerPellet pellet = new PowerPellet(x,y);
+						GameState.getInstance().getPellets().destroy(pellet);
 					}
 					else if( PType.PPILLA.ordinal() == packetType )
 					{
 						// add powerpill
+						int x = 100*((int)(buf[1]&0xFF)) + ((int)(buf[2]&0xFF));
+						int y = 100*((int)(buf[3]&0xFF)) + ((int)(buf[4]&0xFF));
+						GameState.getInstance().getPellets().addArtifact(x, y);
 					}
 					else if( PType.LIVES.ordinal() == packetType )
 					{

@@ -59,8 +59,11 @@ public class PillController extends ArtifactController<Pill> {
 	}
 	
 	
-
-	protected void addArtifact(int x, int y) {
+	/**
+	 * 
+	 * @since REV2
+	 */
+	public void addArtifact(int x, int y) {
 		super.addObject(x, y, new Pill(x, y));
 		totalPills++;
 	}

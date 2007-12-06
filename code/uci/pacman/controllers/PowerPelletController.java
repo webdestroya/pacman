@@ -30,8 +30,10 @@ public class PowerPelletController extends ArtifactController<PowerPellet> {
 	public PowerPellet getCollidingPellet(PacMan pacMan) {
 		return super.getCollidedWith(pacMan);
 	}
-	
-	protected void addArtifact(int x, int y) {
+	/**
+	 *	@since REV2
+	 */
+	public void addArtifact(int x, int y) {
 		super.addObject(x, y, new PowerPellet(x,y));
 		
 	}
