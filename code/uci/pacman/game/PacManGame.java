@@ -235,7 +235,10 @@ public class PacManGame extends Ucigame {
 	 * Timer Handling
 	 */
 	public void startFruitTimer() {
-		startTimer("removeFruit", Fruit.SHOW_FRUIT_DURATION);
+		if( PacManGame.gameType == 1 )
+		{
+			startTimer("removeFruit", Fruit.SHOW_FRUIT_DURATION);
+		}
 	}
 	
 	/**
@@ -250,8 +253,11 @@ public class PacManGame extends Ucigame {
 	 *
 	 */
 	public void removeFruitTimer() {
-		stopTimer("removeFruit");
-		control.hideFruit();
+		if( PacManGame.gameType == 1 )
+		{
+			stopTimer("removeFruit");
+			control.hideFruit();
+		}
 	}
 
 	/**
