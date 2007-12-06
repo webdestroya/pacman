@@ -41,6 +41,16 @@ public class TopScores{
 	 */
 	public TopScores(){
 		// TODO Auto-generated constructor stub
+		readScores();
+		backGround = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/scorespriteadjuster.png");
+		backGround.position(bgX, bgY);
+		backGround.font(PacManGame.font, PacManGame.BOLD, 24, 255, 255, 255);
+		if(isTopList()){
+			addTopScore();
+		}
+	}
+	
+	private void readScores(){
 		try
 		{
 			file = new FileReader("code\\uci\\pacman\\gui\\scores.txt");
@@ -62,10 +72,6 @@ public class TopScores{
 			//	scoreList.add(10-x);
 			//}
 		}
-		
-		backGround = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/scorespriteadjuster.png");
-		backGround.position(bgX, bgY);
-		backGround.font(PacManGame.font, PacManGame.BOLD, 24, 255, 255, 255);
 	}
 	
 	/**
@@ -73,29 +79,12 @@ public class TopScores{
 	 * Displays the top score screen.
 	 * 
 	 */
-	
 	public void draw(){
-		if(!isTopList())
-		{
-			drawScores();
-		}
-		else{
-			//nameRequest();
-			//addTopScore();
-			drawScores();
-		}
-	}
-	
-	private void drawScores(){
 		for(int x = 0; x < numberOfScores; x++){
 			backGround.putText(nameList.get(x)+"", nameStartPosX, nameStartPosY + x*spaceIncrement);
 			backGround.putText(scoreList.get(x)+"", scoreStartPosX, scoreStartPosY + x*spaceIncrement);
 		}
 		backGround.draw();
-	}
-	
-	private void nameRequest(){
-		
 	}
 	
 	/**
@@ -110,8 +99,14 @@ public class TopScores{
 	 * 
 	 */
 	public boolean isTopList(){
-		score = GameState.getInstance().getScore();
-		//addIndex = ;
+		//score = GameState.getInstance().getScore();
+		score = 0;
+		for(int x = 0; x < numberOfScores; x++){
+			if(score >= scoreList.get(x)){
+				addIndex = x;
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -127,7 +122,14 @@ public class TopScores{
 	 * 
 	 */
 	public void addTopScore(){
-		// nameList.add(addIndex, name);
+		name = nameRequest();
+		nameList.add(addIndex, name);
+		nameList.remove(10);
 		scoreList.add(addIndex, score);
+		scoreList.remove(10);
+	}
+	
+	private String nameRequest(){
+		return "asdf";
 	}
 }
