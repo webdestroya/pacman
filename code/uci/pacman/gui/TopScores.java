@@ -47,6 +47,7 @@ public class TopScores{
 		backGround.font(PacManGame.font, PacManGame.BOLD, 24, 255, 255, 255);
 		if(isTopList()){
 			addTopScore();
+			writeScores();
 		}
 	}
 	
@@ -74,6 +75,10 @@ public class TopScores{
 		}
 	}
 	
+	private void writeScores(){
+		
+	}
+	
 	/**
 	 * 
 	 * Displays the top score screen.
@@ -99,8 +104,7 @@ public class TopScores{
 	 * 
 	 */
 	public boolean isTopList(){
-		//score = GameState.getInstance().getScore();
-		score = 0;
+		score = GameState.getInstance().getScore();
 		for(int x = 0; x < numberOfScores; x++){
 			if(score >= scoreList.get(x)){
 				addIndex = x;
