@@ -22,11 +22,11 @@ public class ScoreBoard{
 	private Fruit fruit;
 	private int scorePosX = 10;
 	private int scorePosY = 610;
-	private int levelPosX = 225;
+	private int levelPosX = 235;
 	private int levelPosY = 608;
-	private int livesPosX = 345;
+	private int livesPosX = 355;
 	private int livesPosY = 610;
-	private int lifePosX = 400;
+	private int lifePosX = 410;
 	private int lifePosY = 610;
 	private int lifePosAdj = 30;
 	private int fruitPosX = 550;
