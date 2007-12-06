@@ -20,13 +20,13 @@ public class ScoreBoard{
 	private Sprite level;
 	private Sprite lives; 
 	private Fruit fruit;
-	private int scorePosX = 0;
+	private int scorePosX = 10;
 	private int scorePosY = 610;
-	private int levelPosX = 200;
+	private int levelPosX = 225;
 	private int levelPosY = 608;
-	private int livesPosX = 300;
+	private int livesPosX = 345;
 	private int livesPosY = 610;
-	private int lifePosX = 355;
+	private int lifePosX = 400;
 	private int lifePosY = 610;
 	private int lifePosAdj = 30;
 	private int fruitPosX = 550;
@@ -73,7 +73,7 @@ public class ScoreBoard{
 		// to get all of the information use GameState.getInstance().getTheItemYouWant()
 		
 		//add scores from GameState and draw score sprite onto canvas
-		score.putText(GameState.getInstance().getScore() + "", 120, 24);
+		score.putText(GameState.getInstance().getScore() + "", 126, 24);
 		score.draw();
 		
 		//add levels from GameState and draw levels on canvas
