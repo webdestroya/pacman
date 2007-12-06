@@ -76,11 +76,11 @@ public class SoundController {
 		ambient.loop();
 	}
 	
-	//private static void stopAllSounds(){
-		//pellet.stop();
-		//pill.stop();
-		//ambient.stop();
-	//}
+	public static void stopAllSounds(){
+		pellet.stop();
+		pill.stop();
+		ambient.stop();
+	}
 	
 	private static Sound makeSound(String file){
 		return GameController.getInstance().getPacInstance().getSound("sounds/final/"+file);

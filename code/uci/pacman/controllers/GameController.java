@@ -145,7 +145,7 @@ public class GameController {
 			state.getPacMan().position(PACMANSTART);
 			state.getGhosts().respawn();
 		} else { // if Pac-man has died one too many times
-			game.showScene(ScreenMode.GAMEOVER);
+			game.showGameOverScreen();
 		}
 	}
 
