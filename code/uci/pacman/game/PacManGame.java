@@ -54,6 +54,7 @@ public class PacManGame extends Ucigame {
 	}
 
 	private void initializeWindow() {
+		super.rootImagePath = "images/final/";
 		// set global game control 
 		control = GameController.setInstance(this);
 		// set framerate
@@ -90,7 +91,7 @@ public class PacManGame extends Ucigame {
 		// initialize menu
 		mainMenu = new MainMenu();
 		// show menu
-		canvas.background(getImage("images/final/mainMenuBackGroundDim2.png"));
+		canvas.background(getImage("mainMenuBackGroundDim2.png"));
 		mainMenu.startMenuTheme();
 		showScene(ScreenMode.MENU);
 	}
@@ -117,7 +118,7 @@ public class PacManGame extends Ucigame {
 	public void showScoresScreen() {
 		topScores = new TopScores();
 		//System.out.println("Showed scores screen");
-		canvas.background(getImage( "images/final/topscores.png"));
+		canvas.background(getImage( "topscores.png"));
 		showScene(ScreenMode.SCORES);
 	}
 	
@@ -225,7 +226,7 @@ public class PacManGame extends Ucigame {
 		canvas.putText("GAME OVER", 200, 300);
 		canvas.font(PacManGame.font, PacManGame.BOLD, 20, 255, 255, 255);
 		canvas.putText("Press R to Try Again or T to see top scores", 100, 340);
-		//Sprite topScoreButton = makeButton("TopScores", getImage("images/final/topScoresButton.png"), 249, 76);
+		//Sprite topScoreButton = makeButton("TopScores", getImage("topScoresButton.png"), 249, 76);
 		//topScoreButton.position(150, 400);
 		//topScoreButton.draw();		
 	}

@@ -32,7 +32,7 @@ public class CreditsScreen{
 		creditsSound = GameController.getInstance().getPacInstance().getSound("sounds/final/CreditsTheme.mp3");
 		frames = new ArrayList<String>();
 		
-		playAgainButton = GameController.getInstance().getPacInstance().makeButton("PlayAgain",GameController.getInstance().getPacInstance().getImage("images/final/singleplayerButton.png"),
+		playAgainButton = GameController.getInstance().getPacInstance().makeButton("PlayAgain",GameController.getInstance().getPacInstance().getImage("singleplayerButton.png"),
                 249, 76);
 		playAgainButton.position(200, 450);
 		

@@ -45,12 +45,12 @@ public class TopScores{
 	 */
 	public TopScores(){
 		// TODO Auto-generated constructor stub
-		topScoresMainMenu = GameController.getInstance().getPacInstance().makeButton("TopScoresMainMenu",GameController.getInstance().getPacInstance().getImage("images/final/mainmenubutton.png"),
+		topScoresMainMenu = GameController.getInstance().getPacInstance().makeButton("TopScoresMainMenu",GameController.getInstance().getPacInstance().getImage("mainmenubutton.png"),
                 249, 76);
 		topScoresMainMenu.position(menuButtonX, menuButtonY);
 		
 		readScores();
-		backGround = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/scorespriteadjuster.png");
+		backGround = GameController.getInstance().getPacInstance().makeSpriteFromPath("scorespriteadjuster.png");
 		backGround.position(bgX, bgY);
 		backGround.font(PacManGame.font, PacManGame.BOLD, 24, 255, 255, 255);
 		if(isTopList()){

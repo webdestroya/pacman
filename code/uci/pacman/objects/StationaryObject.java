@@ -103,7 +103,6 @@ public abstract class StationaryObject extends Sprite {
 	 * @return the image that the path is pointing to.
 	 */
 	private static Image getImage(String stringPath){
-		String resources = "images/final/";
-		return GameController.getInstance().getPacInstance().getImage(resources+stringPath);
+		return GameController.getInstance().getPacInstance().getImage(stringPath);
 	}
 }

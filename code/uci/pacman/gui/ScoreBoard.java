@@ -40,23 +40,23 @@ public class ScoreBoard{
 	 */
 	public ScoreBoard() {
 		//create score sprite
-		score = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/score.png");
+		score = GameController.getInstance().getPacInstance().makeSpriteFromPath("score.png");
 		score.position(scorePosX, scorePosY);
 		score.font(PacManGame.font, PacManGame.BOLD, 24, 255, 255, 255);
 		
 		//create levels sprite
-		level = GameController.getInstance().getPacInstance().makeSprite(GameController.getInstance().getPacInstance().getImage("images/final/levels_LVL.png", 255,0,0));
+		level = GameController.getInstance().getPacInstance().makeSprite(GameController.getInstance().getPacInstance().getImage("levels_LVL.png", 255,0,0));
 		level.position(levelPosX, levelPosY);
 		level.font(PacManGame.font, PacManGame.BOLD, 26, 255, 255, 255);
 		
 		//create lives sprite
-		lives = GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/lives.png");
+		lives = GameController.getInstance().getPacInstance().makeSpriteFromPath("lives.png");
 		lives.position(livesPosX, livesPosY);
 		
 		//set remainLives
 		remainingLives = GameState.getInstance().getLives();
 		for(int x = 1; x <= remainingLives; x++){
-			lifeList.add(GameController.getInstance().getPacInstance().makeSpriteFromPath("images/final/life.png"));
+			lifeList.add(GameController.getInstance().getPacInstance().makeSpriteFromPath("life.png"));
 		}
 		
 		// set fruit

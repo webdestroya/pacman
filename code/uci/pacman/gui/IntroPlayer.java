@@ -33,7 +33,7 @@ public class IntroPlayer{
 		introSound = GameController.getInstance().getPacInstance().getSound("sounds/final/IntroTheme.mp3");
 		frames = new ArrayList<String>();
 		
-		menuButton = GameController.getInstance().getPacInstance().makeButton("MenuStart",GameController.getInstance().getPacInstance().getImage("images/final/startbutton.png"),
+		menuButton = GameController.getInstance().getPacInstance().makeButton("MenuStart",GameController.getInstance().getPacInstance().getImage("startbutton.png"),
                 249, 76);
 		menuButton.position(175, 450);
 		
@@ -49,7 +49,7 @@ public class IntroPlayer{
 				workingString += currentImage;
 			}
 			workingString += ".png";
-			frames.add("images/final/intro/" + workingString);
+			frames.add("intro/" + workingString);
 		}
 
 

@@ -85,6 +85,10 @@ public class Sprite
 		rotationDegrees = 0;
 		addOnceDeltaX = addOnceDeltaY = 0;
 	}
+	
+	public Sprite(String _imagePath) {
+		this(Ucigame.ucigameObject.getImage(_imagePath));
+	}
 
 	// Makes a tiled sprite.
 	// Note that the first dimension in tiledImages is the column (the x)
@@ -137,8 +141,12 @@ public class Sprite
 	 * are same as the sprite1's width and height.
 	 */
 
-	public void addFrame(Image _gameImage, int _x, int _y) {
-		addFrameToAnimation(getCurrentSpriteMode().getName(), _gameImage, _x, _y);
+	public void addFrame(Image imgObject, int _x, int _y) {
+		addFrameToAnimation(getCurrentSpriteMode().getName(), imgObject, _x, _y);
+	}
+	
+	public void addFrame(String imgPath, int _x, int _y) {
+		addFrame(ucigame.getImage(imgPath), _x, _y);
 	}
 
 	//Add frame to mode same width as other frames in that mode
@@ -185,10 +193,21 @@ public class Sprite
 	 * Adds frames to current mode (probably default)
 	 */
 	public void addFrames(Image _gameImage, int... _locations) {
-		addFramesToAnimation(getCurrentSpriteMode().getName(), getCurrentSpriteMode().getWidth(), 
+		addFramesForAnimation(getCurrentSpriteMode().getName(), getCurrentSpriteMode().getWidth(), 
 				getCurrentSpriteMode().getHeight(), 
 				_gameImage, _locations);
 	}
+	
+	/**
+	 * This method is a variant of addFrame() which allows multiple frames
+	 * from one Image object to be added to sprite1 with one method call.
+	 * 
+	 * Adds frames to current mode (probably default)
+	 */
+	public void addFrames(String _gameImagePathPath, int... _locations) {
+		addFrames(ucigame.getImage(_gameImagePathPath), _locations);
+	}
+	
 
 	//clears the current sprite mode and sets it to this
 	public void replaceFrames(Image _gameImage, int... _locations) {
@@ -203,7 +222,7 @@ public class Sprite
 	 * 
 	 * Adds frames to current mode (probably default)
 	 */
-	public void addFramesToAnimation(String mode, int frameWidth, int frameHeight, Image _modeImage, int... _locations) {
+	public void addFramesForAnimation(String mode, int frameWidth, int frameHeight, Image _modeImage, int... _locations) {
 		//TODO nathan - document
 		if (_locations.length % 2 != 0) {
 			Ucigame.logError("addFrames() does not have an even number of x and y's.");
@@ -226,7 +245,7 @@ public class Sprite
 	 * Adds frames to current mode (probably default)
 	 * uses default frames width and height
 	 */
-	public void addFramesToAnimation(String mode, Image _modeImage, int... _locations) {
+	public void addFramesForAnimation(String mode, Image _modeImage, int... _locations) {
 		//TODO nathan - document
 		if (_locations.length % 2 != 0) {
 			Ucigame.logError("addFrames() does not have an even number of x and y's.");
@@ -236,6 +255,14 @@ public class Sprite
 		for (int p = 0; p < _locations.length; p += 2)
 			addFrameToAnimation(mode, _modeImage, _locations[p], _locations[p + 1]);
 
+	}
+	
+	public void addFramesForAnimation(String mode, int width, int height, String imagePath, int... locations) {
+		addFramesForAnimation(mode, width, height, ucigame.getImage(imagePath), locations);
+	}
+	
+	public void addFramesForAnimation(String mode, String imagePath, int... locations) {
+		addFramesForAnimation(mode, getCurrentSize().x, getCurrentSize().y, ucigame.getImage(imagePath), locations);
 	}
 
 	//switches to a defined framemode

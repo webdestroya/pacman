@@ -20,7 +20,7 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	public ControllableObject(String imgPath, int[] frames, int width, int height, int framerate, int x, int y) {
 		super(width, height);
 		position(x, y);
-		addFrames(getImage(imgPath), frames);
+		addFrames(imgPath, frames);
 		framerate(framerate);
 		control = GameController.getInstance();
 	}
@@ -90,14 +90,6 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 		super.position(p.x, p.y);
 	}
 	
-	
-	public void addAnimationMode(String mode, int width, int height, String imagePath, int... locations) {
-		super.addFramesToAnimation(mode, width, height, getImage(imagePath), locations);
-	}
-	
-	public void addAnimationMode(String mode, String imagePath, int... locations) {
-		super.addFramesToAnimation(mode, super.getCurrentSize().x, super.getCurrentSize().y, getImage(imagePath), locations);
-	}
 
 	/**
 	 * This method is used to change the sprite, depending on the parameter that
@@ -117,15 +109,5 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	 * @return true if the move is allowed.
 	 */
 	public abstract boolean moveIsAllowed(Direction d);
-
-	/**
-	 * @param stringPath
-	 *            the name for the image of the sprite.
-	 * @return the sprite image.
-	 */
-	private static Image getImage(String stringPath) {
-		String resources = "images/final/";
-		return GameController.getInstance().getPacInstance().getImage(resources + stringPath);
-	}
 
 }

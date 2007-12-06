@@ -25,6 +25,7 @@ public abstract class Ucigame
 {
 	private static String VERSION = "2007.11.13";
 	static Ucigame gameObject = null;  			 // only used when not an applet
+	protected static String rootImagePath = ""; //root path for images
 	private static Object lock1 = new Object();  // for synchronization
 	private static Object lock2 = new Object();  // for synchronization
 	private static Object lock3 = new Object();  // for synchronization  of keysThatAreDown
@@ -447,6 +448,7 @@ public abstract class Ucigame
 	 */
 	public final Image getImage(String _filename)  // dangerous having same name as Applet.getImage()?
 	{
+		_filename = rootImagePath + _filename;
 		java.awt.Image i;
 		if (isApplet)
 			i = getImage(getCodeBase(), _filename);
