@@ -2,7 +2,7 @@ package ucigame;
 
 import java.util.Vector;
 
-public class SpriteImageMode
+public class SpriteAnimationMode
 {
 	private Vector<Image> images;
 	private String name;
@@ -10,7 +10,7 @@ public class SpriteImageMode
 	private int height;
 	private int width;
 
-	public SpriteImageMode(String _name) {
+	public SpriteAnimationMode(String _name) {
 		images = new Vector<Image>();
 		name = _name;
 		this.currFrame = 0;
@@ -18,7 +18,7 @@ public class SpriteImageMode
 		this.width = -1;
 	}
 	
-	public SpriteImageMode(String _name, int width, int height) {
+	public SpriteAnimationMode(String _name, int width, int height) {
 		images = new Vector<Image>();
 		name = _name;
 		this.currFrame = 0;

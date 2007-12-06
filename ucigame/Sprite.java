@@ -39,7 +39,7 @@ public class Sprite
 	private Ucigame ucigame;
 
 	//TODO Nathan - changed add comments
-	private SpriteImagesHandler spriteImages;
+	private SpriteAnimationController spriteImages;
 
 	private Image[][] tiledImages = null;
 	private Vector<int[][]> transparencyBuffer = null;
@@ -73,7 +73,7 @@ public class Sprite
 	 * creating sprites with a single image.
 	 */
 	public Sprite(Image _image) {
-		spriteImages = new SpriteImagesHandler();
+		spriteImages = new SpriteAnimationController();
 		if (_image == null || _image.width() < 1 || _image.height() < 1) {
 			Ucigame.logError("in Sprite constructor: image is invalid.");
 		}
@@ -117,7 +117,7 @@ public class Sprite
 	 */
 	// Likely to have multiple animated images.
 	public Sprite(int _w, int _h) {
-		spriteImages = new SpriteImagesHandler();
+		spriteImages = new SpriteAnimationController();
 		if (_w < 1 || _w > 2000 || _h < 1 || _h > 2000) {
 			Ucigame.logError("in Sprite constructor, the width or height is invalid");
 		}
@@ -143,7 +143,7 @@ public class Sprite
 
 	//Add frame to mode same width as other frames in that mode
 	public void addFrameToAnimation(String mode, Image _gameImage, int _x, int _y) {
-		SpriteImageMode spriteMode = spriteImages.addNewMode(mode);
+		SpriteAnimationMode spriteMode = spriteImages.addNewMode(mode);
 		int height = spriteMode.getHeight();
 		int width = spriteMode.getWidth();
 		if (height == -1 || width == -1) { //if no dimensions on frame
@@ -210,7 +210,7 @@ public class Sprite
 			return;
 		}
 		
-		SpriteImageMode spriteMode = spriteImages.addNewMode(mode); 
+		SpriteAnimationMode spriteMode = spriteImages.addNewMode(mode); 
 		spriteMode.setWidth(frameWidth);
 		spriteMode.setHeight(frameHeight);
 		
@@ -242,8 +242,9 @@ public class Sprite
 	public void setAnimationMode(String mode) {
 		//TODO nathan - document
 		//TODO nathan - add error handling
-
-		spriteImages.switchToMode(mode);
+		if (spriteImages.hasMode(mode)) {
+			spriteImages.switchToMode(mode);
+		}
 	}
 
 	//switches to the default frame mode
@@ -251,7 +252,7 @@ public class Sprite
 		//TODO nathan - document
 		//TODO nathan - add error handling
 
-		spriteImages.switchToMode(SpriteImagesHandler.DEFAULT_MODE);
+		spriteImages.switchToMode(SpriteAnimationController.DEFAULT_MODE);
 	}
 
 	/**
@@ -475,7 +476,7 @@ public class Sprite
 		return new Point(getCurrentSpriteMode().getWidth(), getCurrentSpriteMode().getHeight());
 	}
 
-	private SpriteImageMode getCurrentSpriteMode() {
+	private SpriteAnimationMode getCurrentSpriteMode() {
 		return spriteImages.getCurrentMode();
 	}
 
