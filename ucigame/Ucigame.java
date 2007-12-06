@@ -10,10 +10,8 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.util.*;
-import java.util.concurrent.*;
 import java.applet.*;
 import java.lang.reflect.Method;
-import java.net.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -49,7 +47,7 @@ public abstract class Ucigame
 		try {
 			// see www.javageeks.com/Papers/ClassForName/ClassForName.pdf
 			// for info on the next line
-			Class classDefinition = Class.forName(className, true,
+			Class<?> classDefinition = Class.forName(className, true,
 									ClassLoader.getSystemClassLoader());
 			object = classDefinition.newInstance();
 			if (object instanceof Ucigame)
@@ -131,6 +129,7 @@ public abstract class Ucigame
 		//System.err.println("applet.start() is done");
 	}
 
+	@SuppressWarnings("unused")
 	private boolean workerIsDone;
 
 	final public void stop()
@@ -233,7 +232,7 @@ public abstract class Ucigame
 
 	private int delayTime = 0;		// means no refreshing
 	private int fps = 0;
-	private Font fontFPS;
+	//private Font fontFPS;
 
 	private javax.swing.Timer fpsTimer = null;
 	private int frames = 0;
@@ -508,7 +507,7 @@ public abstract class Ucigame
 			if (!isApplet)
 			{
 				try {
-					FileInputStream fis = new FileInputStream(_filename);
+					new FileInputStream(_filename);
 				}
 				catch (FileNotFoundException fnf)
 				{
@@ -932,7 +931,7 @@ public abstract class Ucigame
 		mouseChangeY = mouseY - mousePrevY;
 		mousePrevX = mouseX;
 		mousePrevY = mouseY;
-		if (e.getButton() != e.NOBUTTON)	// I'm getting NOBUTTON with drag,
+		if (e.getButton() != MouseEvent.NOBUTTON)	// I'm getting NOBUTTON with drag,
 			mouseButton = e.getButton();	// so leave mouseButton from Pressed.
 		mouseIsAltDown = e.isAltDown();
 		mouseIsControlDown = e.isControlDown();
@@ -1051,9 +1050,9 @@ public abstract class Ucigame
 			{
 				Sprite s = spritesFromBottomToTopList.get(i);
 				if ( mouseX >= s.currX &&
-					 mouseX <  (s.currX + s.width) &&
+					 mouseX <  (s.currX + s.getCurrentSize().x) &&
 					 mouseY >= s.currY &&
-					 mouseY <  (s.currY + s.height)
+					 mouseY <  (s.currY + s.getCurrentSize().y)
 				   )
 				{
 					mouseSprite = s;
@@ -1091,14 +1090,14 @@ public abstract class Ucigame
 		shiftPressed = e.isShiftDown();
 		ctrlPressed  = e.isControlDown();
 		altPressed   = e.isAltDown();
-		if (lastKeyPressed == e.VK_ESCAPE)
+		if (lastKeyPressed == KeyEvent.VK_ESCAPE)
 		{
 			if (shiftPressed)
 				suspended = !suspended;
 			else
 				playing = false;
 		}
-		else if (suspended && lastKeyPressed == e.VK_F1)
+		else if (suspended && lastKeyPressed == KeyEvent.VK_F1)
 		{
 			suspended = false;
 			oneStep = true;
@@ -1219,6 +1218,7 @@ public abstract class Ucigame
 		JOptionPane.showMessageDialog(null, _s, "Ucigame error", JOptionPane.ERROR_MESSAGE);
 	}
 
+	@SuppressWarnings("unused")
 	private Graphics2D getOffG() { return offG; }
 
 	ActionListener fpsChecker = new ActionListener() {

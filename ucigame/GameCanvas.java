@@ -15,6 +15,10 @@ import java.util.HashMap;
 class GameCanvas extends JComponent   // maybe should be JPanel
                  implements FocusListener
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -210505118730338434L;
 	private Ucigame ucigame;
 
 	/**

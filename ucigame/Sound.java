@@ -135,11 +135,11 @@ class MP3PlayerThread extends Thread {
 			inputStream.close();
 			p.close();
 		} catch (FileNotFoundException fnf) {
-			ucigame.logError("getSound(" + filename + ") failed [3a].");
+			Ucigame.logError("getSound(" + filename + ") failed [3a].");
 		} catch (JavaLayerException e) {
-			ucigame.logError("Internal error #N2 on sound file " + filename);
+			Ucigame.logError("Internal error #N2 on sound file " + filename);
 		} catch (IOException e) {
-			ucigame.logError("Internal error #B7 on sound file " + filename);
+			Ucigame.logError("Internal error #B7 on sound file " + filename);
 		}
 	}
 

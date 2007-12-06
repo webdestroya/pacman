@@ -57,7 +57,7 @@ public class Image
 			ucigame.offG.drawImage(buffImage, _Tx, null);
 		}
 		else
-			ucigame.logError("UImage.draw() used outside of draw()");
+			Ucigame.logError("UImage.draw() used outside of draw()");
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class Image
 		if (0 <= _c && _c <= 255)
 			transparent(_c, _c, _c);
 		else
-			ucigame.logError("Image.transparent(" + _c + ") called, " +
+			Ucigame.logError("Image.transparent(" + _c + ") called, " +
 							 "value is invalid.");
 	}
 

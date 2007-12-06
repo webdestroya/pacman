@@ -107,7 +107,7 @@ public class Keyboard
 	{
 		if (_keys.length == 0)
 		{
-			ucigame.logError("isDown() does not have any keys specified.");
+			Ucigame.logError("isDown() does not have any keys specified.");
 			return false;
 		}
 		for (int k : _keys)

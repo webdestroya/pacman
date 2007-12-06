@@ -2,7 +2,6 @@ package ucigame;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Graphics;
 
 /**
  * The canvas object on which the game is drawn.
@@ -71,7 +70,7 @@ public class Canvas1
 			if (ucigame.offG != null)
 				ucigame.offG.setColor(new Color(_c, _c, _c));
 			else
-				ucigame.logError("canvas.color(" + _c + ") used outside of draw()");
+				Ucigame.logError("canvas.color(" + _c + ") used outside of draw()");
 	}
 
 	/**
@@ -85,7 +84,7 @@ public class Canvas1
 			if (ucigame.offG != null)
 				ucigame.offG.setColor(new Color(_r, _g, _b));
 			else
-				ucigame.logError("canvas.color(" + _r + ", " + _g + ", " + _b + ") used outside of draw()");
+				Ucigame.logError("canvas.color(" + _r + ", " + _g + ", " + _b + ") used outside of draw()");
 	}
 
 	/**
@@ -108,7 +107,7 @@ public class Canvas1
 			}
 		}
 		else
-			ucigame.logError("canvas.clear() used outside of draw()");
+			Ucigame.logError("canvas.clear() used outside of draw()");
 	}
 
 
@@ -126,7 +125,7 @@ public class Canvas1
 			ucigame.offG.drawLine(ucigame.r(_x1), ucigame.r(_y1),
 								ucigame.r(_x2), ucigame.r(_y2));
 		else
-			ucigame.logError("canvas.line(" + _x1 + ", " + _y1 + ", " + _x2 + ", " + _y2 +
+			Ucigame.logError("canvas.line(" + _x1 + ", " + _y1 + ", " + _x2 + ", " + _y2 +
 					 ") used outside of draw()");
 	}
 
@@ -143,7 +142,7 @@ public class Canvas1
 		if (ucigame.offG != null)
 			ucigame.offG.drawOval(_x1, _y1, _w, _h);
 		else
-			ucigame.logError("canvas.oval(" + _x1 + ", " + _y1 + ", " + _w + ", " + _h +
+			Ucigame.logError("canvas.oval(" + _x1 + ", " + _y1 + ", " + _w + ", " + _h +
 					 ") used outside of draw()");
 	}
 
@@ -158,12 +157,12 @@ public class Canvas1
 	 */
 	public void oval(int _x1, int _y1, int _w, int _h, int _option)
 	{
-		if (_option != ucigame.FILL)
-			ucigame.logError("canvas.oval used with last parameter not FILL");
+		if (_option != Ucigame.FILL)
+			Ucigame.logError("canvas.oval used with last parameter not FILL");
 		else if (ucigame.offG != null)
 			ucigame.offG.fillOval(_x1, _y1, _w, _h);
 		else
-			ucigame.logError("canvas.oval(" + _x1 + ", " + _y1 + ", " + _w + ", " + _h +
+			Ucigame.logError("canvas.oval(" + _x1 + ", " + _y1 + ", " + _w + ", " + _h +
 					 ", FILL) used outside of draw()");
 	}
 
@@ -172,13 +171,13 @@ public class Canvas1
 	 */
 	public void font(String _name, int _style, int _size)
 	{
-		if (_style == ucigame.BOLD || _style == ucigame.PLAIN ||
-			_style == ucigame.ITALIC ||	_style == ucigame.BOLDITALIC)
+		if (_style == Ucigame.BOLD || _style == Ucigame.PLAIN ||
+			_style == Ucigame.ITALIC ||	_style == Ucigame.BOLDITALIC)
 			;
 		else
 		{
-			ucigame.logError("Invalid style parameter in canvas.font()");
-			_style = ucigame.PLAIN;
+			Ucigame.logError("Invalid style parameter in canvas.font()");
+			_style = Ucigame.PLAIN;
 		}
 		ucigame.windowFont = new Font(_name, _style, _size);
 		//System.out.println("Font: " + spriteFont);
@@ -186,7 +185,7 @@ public class Canvas1
 			ucigame.windowFont.getFontName().equalsIgnoreCase(_name))
 			;
 		else
-			ucigame.logWarning("Could not create font with name " + _name +
+			Ucigame.logWarning("Could not create font with name " + _name +
 					". Using font " + ucigame.windowFont.getFontName() + " instead.");
 
 	}
@@ -215,7 +214,7 @@ public class Canvas1
 	{
 		if (ucigame.offG == null)
 		{
-			ucigame.logError("canvas.putText(" + _string + "," + _x + ", " + _y +
+			Ucigame.logError("canvas.putText(" + _string + "," + _x + ", " + _y +
 					 ") used outside of draw()");
 			return;
 		}
