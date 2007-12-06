@@ -6,7 +6,6 @@ import java.util.Collection;
 import code.uci.pacman.game.Direction;
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.game.PacManGame;
-import code.uci.pacman.game.ScreenMode;
 import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
 import code.uci.pacman.objects.stationary.*;
@@ -149,8 +148,8 @@ public class GameController {
 		if (state.getLives() > 0) { // if Pac-man has more lives
 			performNextMove = false;
 			game.startTimer("pacManDeath", 2000);
-			state.getPacMan().setFrames(game.getImage("images/final/pacman.png"), 43, 0); //TODO make a death animation
-
+			//SEE PACMAN for where the modes are set
+			state.getPacMan().setAnimationMode("death"); //set pacman to "death" frame mode
 		} else { // if Pac-man has died one too many times
 			game.showGameOverScreen();
 		}
@@ -161,7 +160,7 @@ public class GameController {
 		state.getGhosts().respawn();
 		state.getFruit().hide();
 		state.getPacMan().position(PACMANSTART);
-		state.getPacMan().setFrames(game.getImage("images/final/pacman.png"), 0, 0, 22, 0, 43, 0, 64, 0);
+		state.getPacMan().setAnimationMode("default"); //restores PacMan to default animations
 		state.getPacMan().step(Direction.RIGHT);
 		performNextMove = true;
 	}
@@ -225,7 +224,8 @@ public class GameController {
 	 */
 	public void startGame() {
 		state.initialize();
-		// we need to wait 5 seconds for the intro music to stop playing like in
+	    
+		// TODO we need to wait 5 seconds for the intro music to stop playing like in
 		// real pacman.
 		SoundController.gameStarted();
 	}

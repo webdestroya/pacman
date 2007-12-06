@@ -43,6 +43,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public Ghost(String imgPath, int x, int y, int speed, boolean isPlayer) {
 		super(imgPath, new int[] {0,0}, GHOST_WIDTH, GHOST_HEIGHT, GHOST_FRAMERATE, x, y);
+		super.addAnimationMode("scatter", "ghost_scatter.png", 0, 0); //TODO put in real scatter animation and frames
 		super.speed = speed;
 		this.isPlayer = isPlayer;
 	}
@@ -67,8 +68,6 @@ public abstract class Ghost extends ControllableObject implements AI {
 		curDirection = dir;
 	}
 
-
-
 	/**
 	 * Tells the game controller that this ghost has been eaten.
 	 */
@@ -89,11 +88,26 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public void scatter(){
 		scatter = true;
-		// TODO change sprite? yes
-		// hey dave for your change sprite. We imported the Ucigame framework code into the svn.
-		// we added a setFrames which takes the same arguments as addFrames.
-		// this removes all of the old frames and adds the new ones.
-		// ex. setFrames(getImage("scattered.png"), 0,0, 16,0);
+		super.setAnimationMode("scatter"); //this will tell the ghost to switch to scatter mode animations
+		/* 
+		 * 
+		NOTE: Me and Thomas added got Ucigame source code and then I added some useful new functions
+		now each sprite can have multiple "modes" of animation. Sprites can now have their 
+		default animation mode just like before with a set of frames. Now though, you can add
+		alternate animation modes with different frames as well.
+		
+		A ghost has "default" mode which is for his attacking frames and 
+		"scatter" animation mode which shows a different set of animations for scatter. 
+		Sprites can switch back and forth easily using the command above. 
+		Look in the constructor for where I set the mode for scatter
+		
+		Also NOTE this doesn't require any API changes because I am simply
+		modifying Ucigame of which we are free to modify since its not part
+		of our application directly
+		
+		If you have any question, or problems ask me - Nathan
+		
+		*/
 	}
 	
 	/**
@@ -101,7 +115,8 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public void unScatter() {
 		scatter = false;
-		// TODO change sprite? yes
+		setAnimationMode("default"); //this will tell the ghost to switch back to his regular animations
+		//see above in scatter for explanation or just ask me --> nathan
 	}
 	
 	/***

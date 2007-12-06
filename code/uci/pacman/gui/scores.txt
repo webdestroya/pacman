@@ -5,6 +5,6 @@ Player4 7000
 Player5 6000
 Player6 5000
 Player7 4000
+you 3980
 Player8 3000
 Player9 2000
-Player10 1000

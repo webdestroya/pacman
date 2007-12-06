@@ -30,6 +30,7 @@ public class PacMan extends ControllableObject {
 	 */
 	public PacMan(int x, int y) {
 		super(pacImagePath, new int[] {0,0,22,0,43,0,64,0}, PACWIDTH, PACHEIGHT, PACFRAMERATE, x, y);
+		super.addAnimationMode("death", "pacman.png", 43, 0); //TODO add death animation frames
 		super.speed = PACSPEED;
 		angle = 0;
 	}

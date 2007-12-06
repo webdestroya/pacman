@@ -8,8 +8,6 @@ import code.uci.pacman.objects.stationary.*;
 import code.uci.pacman.multiplayer.*;
 import ucigame.*;
 
-import java.util.*;
-
 /**
  * 
  * The main game class for PacMan. This class extends from the UciGame class
@@ -393,17 +391,11 @@ public class PacManGame extends Ucigame {
 			}
 
 		}
-		//these are now handled by onKeyPressGameover()
-		
-		//if (keyboard.isDown(keyboard.R) && isShowingScene(ScreenMode.GAMEOVER)) {
-		//	showGameScreen();
-		//}
-		
-		//if (keyboard.isDown(keyboard.T) && isShowingScene(ScreenMode.GAMEOVER)) 
-		//{
-			//System.out.println("Pressed T");
-		//	showScoresScreen();
-		//}
+
+		//TODO i like being able to restart during the game for testing REMOVE this later
+		if (keyboard.isDown(keyboard.R) && isShowingScene(ScreenMode.GAME)) {
+			showGameScreen();
+		}
 		
 	}
 

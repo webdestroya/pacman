@@ -1,9 +1,6 @@
 package code.uci.pacman.objects;
 
 import java.awt.Point;
-import java.util.Collection;
-
-import code.uci.pacman.multiplayer.*;
 import code.uci.pacman.controllers.*;
 import code.uci.pacman.game.Direction;
 import ucigame.*;
@@ -111,6 +108,15 @@ public abstract class ControllableObject extends Sprite implements Eatable {
 	 */
 	public void position(Point p) {
 		super.position(p.x, p.y);
+	}
+	
+	
+	public void addAnimationMode(String mode, int width, int height, String imagePath, int... locations) {
+		super.addFramesToAnimation(mode, width, height, getImage(imagePath), locations);
+	}
+	
+	public void addAnimationMode(String mode, String imagePath, int... locations) {
+		super.addFramesToAnimation(mode, super.getCurrentSize().x, super.getCurrentSize().y, getImage(imagePath), locations);
 	}
 
 	/**
