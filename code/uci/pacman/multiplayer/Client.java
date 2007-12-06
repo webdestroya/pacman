@@ -234,18 +234,18 @@ public class Client extends Thread
 						//int x = 100*((int)(buf[1]&0xFF)) + ((int)(buf[2]&0xFF));
 						//int y = 100*((int)(buf[3]&0xFF)) + ((int)(buf[4]&0xFF));
 						GameState.getInstance().getFruit().hide();
-						
 					}
-					else if( PType.LEVEL.ordinal() == packetType )
+					/*else if( PType.LEVEL.ordinal() == packetType )
 					{
 						// set current level
 						GameState.getInstance().setLevel( (buf[1]&0xFF) );
 						// TODO: we need to actually change the level, if it is not the current
-					}
+					}*/
 					else if(PType.DGHOST.ordinal() == packetType )
 					{
 						Collection<Ghost> c = GameState.getInstance().getGhosts().getObjects();
-						for(Ghost g : c){
+						for(Ghost g : c)
+						{
 							g.scatter();
 						}
 						
@@ -253,7 +253,8 @@ public class Client extends Thread
 					else if(PType.AGHOST.ordinal()== packetType )
 					{
 						Collection<Ghost> c = GameState.getInstance().getGhosts().getObjects();
-						for(Ghost g : c){
+						for(Ghost g : c)
+						{
 							g.unScatter();
 						}
 					}
