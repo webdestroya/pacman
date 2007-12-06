@@ -186,7 +186,10 @@ public class Server extends Thread
 				DatagramPacket packet = new DatagramPacket(buf, buf.length, gsgroup, 4446 );
 				gssocket.send(packet);
 			}
-			catch(Exception e){}
+			catch(Exception e){
+				
+					e.printStackFrame();	
+				}
 		}
 		private void send(DatagramPacket pack)
 		{
@@ -194,7 +197,9 @@ public class Server extends Thread
 			{
 				gssocket.send(pack);
 			}
-			catch(Exception e){}
+			catch(Exception e){
+					e.printStackFrame();	
+				}
 		}
 		public void run()
 		{
@@ -250,7 +255,7 @@ public class Server extends Thread
 				}
 				catch(Exception e)
 				{
-					
+					e.printStackFrame();	
 				}
 			}
 		}
