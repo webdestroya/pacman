@@ -71,7 +71,7 @@ public class PacManGame extends Ucigame {
 		}
 		catch(InterruptedException e)
 		{
-			System.out.println("Intro thread interuppted before start!");
+			System.out.println("Intro thread interrupted before start!");
 			e.printStackTrace();
 		}
 	}
