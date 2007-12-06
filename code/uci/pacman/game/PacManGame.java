@@ -108,6 +108,11 @@ public class PacManGame extends Ucigame {
 		canvas.background(getImage("images/final/topscores.png"));
 		showScene(ScreenMode.SCORES);
 	}
+	
+	public void showGameOverScreen() {
+		canvas.background(0, 0, 0);		
+		showScene(ScreenMode.GAMEOVER);
+	}
 
 	private void showMpwaitingScreen()
 	{
@@ -197,7 +202,10 @@ public class PacManGame extends Ucigame {
 		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
 		canvas.putText("GAME OVER", 200, 300);
 		canvas.font(PacManGame.font, PacManGame.BOLD, 20, 255, 255, 255);
-		canvas.putText("Press R to Try Again", 210, 340);
+		canvas.putText("Press R to Try Again or L to see high scores", 100, 340);
+		//Sprite topScoreButton = makeButton("TopScores", getImage("images/final/topScoresButton.png"), 249, 76);
+		//topScoreButton.position(150, 400);
+		//topScoreButton.draw();		
 	}
 
 	/* Timer Handling */
@@ -267,7 +275,7 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	public void onClickTopScores() {
-		if (isShowingScene(ScreenMode.MENU)) {
+		if (isShowingScene(ScreenMode.MENU) || isShowingScene(ScreenMode.GAMEOVER)) {
 			System.out.println("topScore click");
 			showScoresScreen();			
 			// beginGame();
@@ -375,9 +383,16 @@ public class PacManGame extends Ucigame {
 	}
 
 	public void onKeyPressGameOver() {
-		if (keyboard.isDown(keyboard.R)) {
+		if (keyboard.isDown(keyboard.R)) 
+		{
 			showGameScreen();
 		}
+		
+		//else if (keyboard.isDown(keyboard.P)) 
+		//{
+		//	System.out.println("Pressed P");
+		//	showScoresScreen();
+		//}
 	}
 
 	public Sprite makeSpriteFromPath(String string) {
