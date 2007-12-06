@@ -157,7 +157,7 @@ public class TopScores{
 	}
 	
 	private String nameRequest(){
-		return "";
+		return "you";
 		//return new Scanner(System.in).next();
 	}
 }
