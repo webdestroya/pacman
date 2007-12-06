@@ -20,7 +20,6 @@ public class ScoreBoard{
 	private Sprite level;
 	private Sprite lives; 
 	private Fruit fruit;
-	private int levelCounter = 1; 
 	private int scorePosX = 10;
 	private int scorePosY = 610;
 	private int levelPosX = 235;
@@ -81,11 +80,7 @@ public class ScoreBoard{
 		//add levels from GameState and draw levels on canvas
 		//set level counter
 
-		level.putText(levelCounter, 56, 27);
-
-		if (GameState.getInstance().stageHasBeenCleared()){
-			levelCounter ++; 
-		}
+		level.putText(GameState.getInstance().getLevel(), 56, 27);
 		level.draw();
 		
 		
