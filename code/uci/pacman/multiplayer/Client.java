@@ -2,12 +2,14 @@
 package code.uci.pacman.multiplayer;
 
 import code.uci.pacman.game.*;
+import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.stationary.Fruit;
 import code.uci.pacman.objects.stationary.Pill;
 import code.uci.pacman.objects.stationary.PowerPellet;
 import code.uci.pacman.controllers.*;
 import java.io.*;
 import java.net.*;
+import java.util.Collection;
 
 
 /**
@@ -239,6 +241,21 @@ public class Client extends Thread
 						// set current level
 						GameState.getInstance().setLevel( (buf[1]&0xFF) );
 						// TODO: we need to actually change the level, if it is not the current
+					}
+					else if(PType.DGHOST.ordinal() == packetType )
+					{
+						Collection<Ghost> c = GameState.getInstance().getGhosts().getObjects();
+						for(Ghost g : c){
+							g.scatter();
+						}
+						
+					}
+					else if(PType.AGHOST.ordinal()== packetType )
+					{
+						Collection<Ghost> c = GameState.getInstance().getGhosts().getObjects();
+						for(Ghost g : c){
+							g.unScatter();
+						}
 					}
 					else if( PType.GMOVE.ordinal() == packetType )
 					{
