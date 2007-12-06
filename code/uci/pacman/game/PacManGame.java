@@ -51,9 +51,13 @@ public class PacManGame extends Ucigame {
 	}
 
 	private void initializeWindow() {
+		// set global game control 
 		control = GameController.setInstance(this);
+		// set framerate
 		this.framerate(20);
+		// set window size
 		window.size(600, 650);
+		// set window title
 		window.title("Pac Man Fever");
 	}
 
