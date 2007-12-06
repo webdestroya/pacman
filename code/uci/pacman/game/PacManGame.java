@@ -30,9 +30,10 @@ public class PacManGame extends Ucigame {
 	private ScreenMode currentScene; // stores the current scene displayed
 	public static String font = "Dialog.bold";
 	public static int multiplayerType = 1; // 1=server, 2=client
-	public static String hostname = "127.0.0.1"; // used for network
 	public static int gameType = 1; // 1=single, 2 = multi
 
+	// This was added to override the stupid UCI game thing that requires the param twice...
+	// this allows me to put the whole game into a JAR file and not have it bitch at me
 	public static void main(String[] args)
 	{
 		String[] args2 = new String[1];
@@ -87,7 +88,7 @@ public class PacManGame extends Ucigame {
 		showScene(ScreenMode.MENU);
 	}
 
-	private void showGameScreen() {
+	public void showGameScreen() {
 		// stop menu theme
 		mainMenu.stopMenuTheme();
 		introPlayer.stopIntroTheme();
@@ -101,6 +102,17 @@ public class PacManGame extends Ucigame {
 	public void showScoresScreen() {
 		topScores = new TopScores();
 		showScene(ScreenMode.SCORES);
+	}
+
+	private void showMpwaitingScreen()
+	{
+		mainMenu.stopMenuTheme();
+		introPlayer.stopIntroTheme();
+		
+		canvas.background(0, 0, 0);
+
+		//scoreBoard = new ScoreBoard();
+		showScene(ScreenMode.MPWAITING);
 	}
 
 	// remove this
@@ -124,12 +136,11 @@ public class PacManGame extends Ucigame {
 			new Client().start();
 		}
 		catch (Exception e){}
-		showScene(ScreenMode.MPWAITING);
+		showMpwaitingScreen();
 	}
 
 	public void drawMpwaiting() {
 		canvas.clear();
-		//canvas.background(0);
 		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
 		canvas.putText("WAITING FOR SERVER", 100, 300);
 		canvas.font(PacManGame.font, PacManGame.BOLD, 20, 255, 255, 255);
@@ -300,15 +311,48 @@ public class PacManGame extends Ucigame {
 
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
-		if (keyboard.isDown(keyboard.UP, keyboard.W))
-			control.setPacManDirection(Direction.UP);
-		if (keyboard.isDown(keyboard.DOWN, keyboard.S))
-			control.setPacManDirection(Direction.DOWN);
-		if (keyboard.isDown(keyboard.LEFT, keyboard.A))
-			control.setPacManDirection(Direction.LEFT);
-		if (keyboard.isDown(keyboard.RIGHT, keyboard.D))
-			control.setPacManDirection(Direction.RIGHT);
+		if( PacManGame.gameType == 1 )
+		{
+			if (keyboard.isDown(keyboard.UP, keyboard.W))
+			{
+				control.setPacManDirection(Direction.UP);
+			}
+			else if (keyboard.isDown(keyboard.DOWN, keyboard.S))
+			{
+				control.setPacManDirection(Direction.DOWN);
+			}
+			else if (keyboard.isDown(keyboard.LEFT, keyboard.A))
+			{
+				control.setPacManDirection(Direction.LEFT);
+			}
+			else if (keyboard.isDown(keyboard.RIGHT, keyboard.D))
+			{
+				control.setPacManDirection(Direction.RIGHT);
+			}
+		}
+		else
+		{
+			// FOR MUTLIPLAYER
+			String gname = capitalize(Client.getGhostType().name());
 
+			if (keyboard.isDown(keyboard.UP, keyboard.W))
+			{
+				GameState.getInstance().getGhosts().getObjectAt(gname).setDirection(Direction.UP);
+			}
+			else if (keyboard.isDown(keyboard.DOWN, keyboard.S))
+			{
+				GameState.getInstance().getGhosts().getObjectAt(gname).setDirection(Direction.DOWN);
+			}
+			else if (keyboard.isDown(keyboard.LEFT, keyboard.A))
+			{
+				GameState.getInstance().getGhosts().getObjectAt(gname).setDirection(Direction.LEFT);
+			}
+			else if (keyboard.isDown(keyboard.RIGHT, keyboard.D))
+			{
+				GameState.getInstance().getGhosts().getObjectAt(gname).setDirection(Direction.RIGHT);
+			}
+
+		}
 		if (keyboard.isDown(keyboard.R)) {
 			showGameScreen();
 		}

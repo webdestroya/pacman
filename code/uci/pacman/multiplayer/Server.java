@@ -3,6 +3,7 @@ package code.uci.pacman.multiplayer;
 import code.uci.pacman.game.*;
 import code.uci.pacman.ai.*;
 import code.uci.pacman.controllers.*;
+import code.uci.pacman.controllers.*;
 import code.uci.pacman.objects.controllable.*;
 import java.io.*;
 import java.net.*;
@@ -20,9 +21,6 @@ enum PType
 	GAMEFULL,	//						(tells a client that the game is full)
 	SPOTFREE	// GHOST_TYPE			(tells the clients listening what spots are free on the server)
 };
-
-// The ghost type
-enum GhostType { BLINKY,CLYDE,INKY,PINKY };
 
 // Server Errors
 enum ServErrors {
@@ -45,7 +43,7 @@ public class Server extends Thread
     protected boolean moreQuotes = true;
 
 	// this class just sends notifications that slots are open on the server
-	private class OpenSlots implements Runnable
+	private class OpenSlots extends Thread 
 	{
 		public void run()
 		{
@@ -55,11 +53,11 @@ public class Server extends Thread
 				{
 					boolean spotsOpen = false;
 					byte[] buf = new byte[4];
-					GhostType gtype = GhostType.BLINKY;
-					if( !Server.clients.contains(GhostType.BLINKY) )
+					GhostType gtype = GhostType.CLYDE;
+					if( !Server.clients.contains(GhostType.PINKY) )
 					{
 						spotsOpen = true;
-						gtype = GhostType.BLINKY;
+						gtype = GhostType.PINKY;
 					}
 					else if( !Server.clients.contains(GhostType.CLYDE) )
 					{
@@ -71,15 +69,16 @@ public class Server extends Thread
 						spotsOpen = true;
 						gtype = GhostType.INKY;
 					}
-					else if( !Server.clients.contains(GhostType.PINKY) )
+					else if( !Server.clients.contains(GhostType.BLINKY) )
 					{
 						spotsOpen = true;
-						gtype = GhostType.PINKY;
+						gtype = GhostType.BLINKY;
 					}
 
 					
 					if(spotsOpen)
 					{
+						//System.out.println("SPOTFREE: " + gtype);
 						buf[0] = new Integer(PType.SPOTFREE.ordinal()).byteValue();
 						buf[1] = new Integer(gtype.ordinal()).byteValue();
 
@@ -120,7 +119,7 @@ public class Server extends Thread
         super(name);
         socket = new DatagramSocket(4445);
 		Server.clients = new ArrayList<GhostType>();
-
+		
         System.out.println("START SERVER");
     }
 	
@@ -211,12 +210,26 @@ public class Server extends Thread
 		sendClientData(buf);
 	}
 	
+
+
+	private String capitalize(String s)
+	{
+		if (s.length() == 0)
+			return s;
+		return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+	}
+
+
+
+
+
 	/**
 	 * runs the server
 	 */
     public void run()
 	{
 		// should be while game is not over
+		new OpenSlots().start();
 		while (moreQuotes) 
 		{
 			try 
@@ -251,22 +264,27 @@ public class Server extends Thread
 						{
 							case 0://b
 								gtype = GhostType.BLINKY;
-								GameState.getInstance().getGhosts().getObjectAt("Blinky").setDirection(Direction.UP);
 								break;
 							case 1://c
 								gtype = GhostType.CLYDE;
-								GameState.getInstance().getGhosts().getObjectAt("Clyde").setDirection(Direction.UP);
 								break;
 							case 2://i
 								gtype = GhostType.INKY;
-								GameState.getInstance().getGhosts().getObjectAt("Inky").setDirection(Direction.UP);
 								break;
 							case 3://p
 								gtype = GhostType.PINKY;
-								GameState.getInstance().getGhosts().getObjectAt("Pinky").setDirection(Direction.UP);
 								break;
 						}
-						
+
+						try
+						{
+							GameState.getInstance().getGhosts().getObjectAt(capitalize(gtype.toString()) ).setDirection(Direction.UP);
+						}
+						catch(NullPointerException t)
+						{
+							t.printStackTrace(System.out);
+						}
+
 						Server.clients.add(gtype);
 
 					}
@@ -306,26 +324,24 @@ public class Server extends Thread
 					{
 						case 0://blinky
 							gtype = GhostType.BLINKY;
-							GameState.getInstance().getGhosts().getObjectAt("Blinky").setDirection(dir);
 							break;
 						
 						case 1://clyde
 							gtype = GhostType.CLYDE;
-							GameState.getInstance().getGhosts().getObjectAt("Clyde").setDirection(dir);
 							break;
 
 						case 2://inky
 							gtype = GhostType.INKY;
-							GameState.getInstance().getGhosts().getObjectAt("Inky").setDirection(dir);
 							break;
 
 						case 3://pinky
 							gtype = GhostType.PINKY;
-							GameState.getInstance().getGhosts().getObjectAt("Pinky").setDirection(dir);
 							break;
 					}
 					//System.out.println("Moving "+data2+" in dir "+data1);
 					
+					GameState.getInstance().getGhosts().getObjectAt( gtype.name() ).setDirection(dir);
+
 					// notify all the clients
 					send(gtype, dir);
 					
@@ -367,13 +383,13 @@ public class Server extends Thread
 					//sendError(address,ServErrors.UNKNOWN_COM);
 				}
 			}
-			catch (IOException e)
+			catch (Exception e)
 			{
-				e.printStackTrace();
+				e.printStackTrace(System.out);
 				moreQuotes = false;
 			}
 		}
-		System.out.println("Server Shutdown");
+		//System.out.println("Server Shutdown");
 		socket.close();
     }//run
 

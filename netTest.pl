@@ -13,8 +13,6 @@ socket(SOCKET, PF_INET, SOCK_DGRAM, getprotobyname("udp")) or die "socket: $!";
 	LEAVE=>5,
 	GAMEFULL=>6,
 	SPOTFREE=>7,
-	ACK=>8,	
-	ERROR=>9,
 	
 	# The ghosts
 	BLINKY=>'0',
@@ -66,17 +64,5 @@ print "Message: [".$DATA1."|".$DATA2."|".$DATA3."|".$DATA4."]\n";
 $ipaddr   = inet_aton($HOSTNAME);
 $portaddr = sockaddr_in($PORTNO, $ipaddr);
 send(SOCKET, $MSG, 0, $portaddr) == length($MSG) or die "cannot send to $HOSTNAME($PORTNO): $!";
-
-# Receive
-#$portaddr = recv(SOCKET, $MSG, 64, 0) or die "recv: $!";
-#($portno, $ipaddr) = sockaddr_in($portaddr);
-#$host = gethostbyaddr($ipaddr, AF_INET);
-
-#print "recv";
-
-# Unpack
-#($var1,$var2,$var3,$var4) = unpack('CCCC', $MSG);
-#print "Receive: [".$MSG."]\n";
-#print "Receive: ".$var1.",".$var2.",".$var3.",".$var4."\n";
 
 

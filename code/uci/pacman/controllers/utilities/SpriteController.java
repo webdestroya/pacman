@@ -1,7 +1,6 @@
 package code.uci.pacman.controllers.utilities;
 
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
 import code.uci.pacman.game.GameState;
 
@@ -80,4 +79,9 @@ public abstract class SpriteController<T, S extends Sprite> {
 	public Collection<S> getObjects() {
 		return hash.values();
 	}
+	
+	public Set<T> REMOVEgetObjects() {
+		return hash.keySet();
+	}
+
 }

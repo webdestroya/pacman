@@ -27,7 +27,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	private static final int CAGE_POS = 250;
 
 	// MITCH
-	protected Direction lastDirection;
+	protected Direction lastDirection = Direction.LEFT;
 	protected Direction curDirection;
 	protected boolean isBeingControlled = false;
 	
