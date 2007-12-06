@@ -1,6 +1,6 @@
 // Keyboard.java
 
-package ucigame;
+package external.ucigame;
 
 import java.awt.event.KeyEvent;
 

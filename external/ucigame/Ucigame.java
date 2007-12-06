@@ -1,6 +1,6 @@
 // Ucigame.java
 
-package ucigame;
+package external.ucigame;
 
 // don't use the 1.6 SwingWorker for 1.5 compatibility.
 // This SwingWorker is a 1.6 backport from https://swingworker.dev.java.net/

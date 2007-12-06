@@ -1,4 +1,4 @@
-package ucigame;
+package external.ucigame;
 
 import java.awt.Font;
 import java.awt.Color;

@@ -1,6 +1,6 @@
 // Mouse.java
 
-package ucigame;
+package external.ucigame;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

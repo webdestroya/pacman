@@ -1,6 +1,6 @@
 // GameCanvas.java
 
-package ucigame;
+package external.ucigame;
 
 import java.awt.Graphics;
 import java.awt.event.*;

@@ -1,6 +1,6 @@
 // Sound.java
 
-package ucigame;
+package external.ucigame;
 
 import java.applet.AudioClip;
 import javazoom.jl.decoder.JavaLayerException;
