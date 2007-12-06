@@ -188,7 +188,7 @@ public class Server extends Thread
 			}
 			catch(Exception e){
 				
-					e.printStackFrame();	
+					e.printStackTrace();	
 				}
 		}
 		private void send(DatagramPacket pack)
@@ -198,7 +198,7 @@ public class Server extends Thread
 				gssocket.send(pack);
 			}
 			catch(Exception e){
-					e.printStackFrame();	
+					e.printStackTrace();	
 				}
 		}
 		public void run()
@@ -255,7 +255,7 @@ public class Server extends Thread
 				}
 				catch(Exception e)
 				{
-					e.printStackFrame();	
+					e.printStackTrace();	
 				}
 			}
 		}
