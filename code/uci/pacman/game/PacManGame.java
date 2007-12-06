@@ -105,6 +105,7 @@ public class PacManGame extends Ucigame {
 
 	public void showScoresScreen() {
 		topScores = new TopScores();
+		canvas.background(getImage("images\\final\\topscores.png"));
 		showScene(ScreenMode.SCORES);
 	}
 
@@ -268,6 +269,7 @@ public class PacManGame extends Ucigame {
 	public void onClickTopScores() {
 		if (isShowingScene(ScreenMode.MENU)) {
 			System.out.println("topScore click");
+			showScoresScreen();			
 			// beginGame();
 		}
 	}
