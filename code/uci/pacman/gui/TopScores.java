@@ -104,7 +104,8 @@ public class TopScores{
 	 * 
 	 */
 	public boolean isTopList(){
-		score = GameState.getInstance().getScore();
+		//score = GameState.getInstance().getScore();
+		score = 5;
 		for(int x = 0; x < numberOfScores; x++){
 			if(score >= scoreList.get(x)){
 				addIndex = x;
@@ -134,6 +135,6 @@ public class TopScores{
 	}
 	
 	private String nameRequest(){
-		return "asdf";
+		return new Scanner(System.in).next();
 	}
 }
