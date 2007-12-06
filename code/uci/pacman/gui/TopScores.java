@@ -154,6 +154,7 @@ public class TopScores{
 		nameList.remove(10);
 		scoreList.add(addIndex, score);
 		scoreList.remove(10);
+		GameState.getInstance().addToScore(score*-1);
 	}
 	
 	private String nameRequest(){
