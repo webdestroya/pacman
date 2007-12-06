@@ -37,9 +37,11 @@ public class Client extends Thread
 		}
 	}
 		
+
+
 	/**
-	 * Tells the game what ghost the player is currently playing as
-	 * @return GhostType
+	 * Returns the type of ghost that was set for this client.
+	 * @return type of ghost
 	 */
 	public static GhostType getGhostType()
 	{
@@ -61,7 +63,7 @@ public class Client extends Thread
 	
 
 	/**
-	 * Sends a packet to the Server;
+	 * Sends a packet with a direction in it to the Server;
 	 * @param dir the direction the ghost is moving
 	 */
 	public static void send(Direction dir)
