@@ -33,7 +33,8 @@ public enum PType
 	PPILLD,		//XPOS,YPOS		deletes a power pill
 
 	LEVEL,		//LEVEL			sets the current level
-	
+
+	HEARTBEAT,	//GHOST			sends the server a heartbeat signal
 
 };
 

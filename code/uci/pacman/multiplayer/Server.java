@@ -4,6 +4,7 @@ import code.uci.pacman.game.*;
 import code.uci.pacman.ai.*;
 import code.uci.pacman.controllers.*;
 import code.uci.pacman.objects.controllable.*;
+import code.uci.pacman.objects.stationary.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -20,10 +21,66 @@ public class Server extends Thread
 	protected DatagramSocket socket = null;
 
 	protected static InetAddress group;
+	class ClientMap
+	{
+		private HashMap<GhostType, InetAddress> gt2ia;
+		private HashMap<InetAddress, GhostType> ia2gt;
 
-	// Tells us who is playing on the server right now
-	protected static ArrayList<GhostType> clients;
+		public ClientMap()
+		{
+			gt2ia = new HashMap<GhostType, InetAddress>();
+			ia2gt = new HashMap<InetAddress, GhostType>();
+		}
+		
+		public void add(InetAddress a, GhostType g)
+		{
+			gt2ia.put(g,a);
+			ia2gt.put(a,g);
+		}
+		public void add(GhostType g, InetAddress a)
+		{
+			gt2ia.put(g,a);
+			ia2gt.put(a,g);
+		}
 
+		public void drop(InetAddress a)
+		{
+			GameState.getInstance().getGhosts().getObjectAt( capitalize(ia2gt.get(a).name()) ).returnAI();
+			gt2ia.remove( ia2gt.get(a) );
+			ia2gt.remove(a);
+		}
+		public void drop(GhostType g)
+		{
+			GameState.getInstance().getGhosts().getObjectAt( capitalize(g.name()) ).returnAI();
+			ia2gt.remove( gt2ia.get(g) );
+			gt2ia.remove(g);
+		}
+
+		public boolean contains( InetAddress a)
+		{
+			return ia2gt.containsKey(a);
+		}
+		public boolean contains( GhostType g)
+		{
+			return gt2ia.containsKey(g);
+		}
+		
+		public GhostType get(InetAddress a)
+		{
+			return ia2gt.get(a);
+		}
+		public InetAddress get(GhostType g)
+		{
+			return gt2ia.get(g);
+		}
+
+		public int size()
+		{
+			return gt2ia.size();
+		}
+	}//CLIENTMAP////////////////////////
+	
+	private static ClientMap clients;
 
     protected boolean moreQuotes = true;
 
@@ -115,17 +172,6 @@ public class Server extends Thread
 			}
 			catch(Exception e){}
 		}
-
-		private byte[] getInt(int d)
-		{
-			byte[] buf = new byte[2];
-			
-			int hund = (int) Math.floor(d/100.0);
-			buf[0] = new Integer( hund ).byteValue();
-			buf[1] = new Integer( (d) - (100*hund) ).byteValue();
-			return buf;
-		}
-
 		private void send(byte[] buf)
 		{
 			try
@@ -133,10 +179,7 @@ public class Server extends Thread
 				DatagramPacket packet = new DatagramPacket(buf, buf.length, gsgroup, 4446 );
 				gssocket.send(packet);
 			}
-			catch(Exception e)
-			{
-
-			}
+			catch(Exception e){}
 		}
 
 		public void run()
@@ -160,7 +203,7 @@ public class Server extends Thread
 						byte[] score = new byte[3];
 						score[0] = new Integer( PType.SCORE.ordinal() ).byteValue();
 						byte[] scoreVal = new byte[2];
-						scoreVal = getInt( GameState.getInstance().getScore() );
+						scoreVal = Server.getInt( GameState.getInstance().getScore() );
 						score[1] = scoreVal[0];
 						score[2] = scoreVal[1];
 						send(score);
@@ -176,6 +219,7 @@ public class Server extends Thread
 						level[0] = new Integer( PType.LIVES.ordinal() ).byteValue();
 						level[1] = new Integer( GameState.getInstance().getLevel() ).byteValue();
 						send(level);
+						
 
 
 						// take longer naps when we are full
@@ -212,16 +256,6 @@ public class Server extends Thread
 			catch(Exception e){}
 		}
 
-		private byte[] getInt(int d)
-		{
-			byte[] buf = new byte[2];
-			
-			int hund = (int) Math.floor(d/100.0);
-			buf[0] = new Integer( hund ).byteValue();
-			buf[1] = new Integer( (d) - (100*hund) ).byteValue();
-			return buf;
-		}
-
 		private void send(GhostType gtype, int x, int y)
 		{
 			try
@@ -230,11 +264,11 @@ public class Server extends Thread
 				buf[0] = new Integer(PType.GPOS.ordinal()).byteValue();
 				buf[1] = new Integer(gtype.ordinal()).byteValue();
 
-				byte[] xp = getInt(x);
+				byte[] xp = Server.getInt(x);
 				buf[2] = xp[0];
 				buf[3] = xp[1];
 			
-				byte[] yp = getInt(y);
+				byte[] yp = Server.getInt(y);
 				buf[4] = yp[0];
 				buf[5] = yp[1];
 
@@ -254,11 +288,11 @@ public class Server extends Thread
 				byte[] buf = new byte[6];
 				buf[0] = new Integer(PType.PPOS.ordinal()).byteValue();
 				
-				byte[] xp = getInt(x);
+				byte[] xp = Server.getInt(x);
 				buf[1] = xp[0];
 				buf[2] = xp[1];
 			
-				byte[] yp = getInt(y);
+				byte[] yp = Server.getInt(y);
 				buf[3] = yp[0];
 				buf[4] = yp[1];
 
@@ -319,6 +353,15 @@ public class Server extends Thread
 
 
 
+	protected static byte[] getInt(int d)
+	{
+		byte[] buf = new byte[2];
+		
+		int hund = (int) Math.floor(d/100.0);
+		buf[0] = new Integer( hund ).byteValue();
+		buf[1] = new Integer( (d) - (100*hund) ).byteValue();
+		return buf;
+	}
 
 
 
@@ -343,9 +386,9 @@ public class Server extends Thread
     {
         super(name);
         socket = new DatagramSocket(4445);
-		Server.clients = new ArrayList<GhostType>();
+		Server.clients = new ClientMap();//new ArrayList<GhostType>();
 		Server.group = InetAddress.getByName("230.0.0.1");
-		
+
         System.out.println("START SERVER");
     }
 	
@@ -359,6 +402,26 @@ public class Server extends Thread
 	{
 		byte[] buf = new byte[1];
 		buf[0] = new Integer(type.ordinal()).byteValue();
+		sendData(buf);
+	}
+	
+	/**
+     * Sends a packet
+     * @param type of command to send out
+     */
+	public static void send(PType type, int x, int y)
+	{
+		byte[] buf = new byte[5];
+		buf[0] = new Integer(type.ordinal()).byteValue();
+		
+		byte[] xp = getInt(x);
+		buf[1] = xp[0];
+		buf[2] = xp[1];
+	
+		byte[] yp = getInt(y);
+		buf[3] = yp[0];
+		buf[4] = yp[1];
+
 		sendData(buf);
 	}
 
@@ -432,9 +495,6 @@ public class Server extends Thread
 	}
 
 
-
-
-
 	/**
 	 * runs the server
 	 */
@@ -464,64 +524,74 @@ public class Server extends Thread
 				int packetType = buf[0] & 0x000000FF;
 				//System.out.print("PACKET("+packetType+","+(buf[1]&0x000000FF)+","+(buf[2]&0x000000FF)+","+(buf[3]&0x000000FF)+"): ");
 
-				
-				if( PType.GMOVE.ordinal() == packetType )
-				{
-					// a ghost move
-					
-					GhostType gtype = GhostType.BLINKY;
-					Direction dir = Direction.UP;
-
-					// get direction
-					switch((buf[1]&0x000000FF))
+				// this makes sure that they are actually playing
+				if( Server.clients.contains(address) )
+				{									
+					if( PType.GMOVE.ordinal() == packetType )
 					{
-						case 0://up
-							dir = Direction.UP;
-							break;
-						case 1://down
-							dir = Direction.DOWN;
-							break;
-						case 2://left
-							dir = Direction.LEFT;
-							break;
-						case 3://right
-							dir = Direction.RIGHT;
-							break;
-					}
-
-					// get the ghost
-					switch((buf[2]&0x000000FF))
-					{
-						case 0://blinky
-							gtype = GhostType.BLINKY;
-							break;
+						// a ghost move
 						
-						case 1://clyde
-							gtype = GhostType.CLYDE;
-							break;
+						Direction dir = Direction.UP;
 
-						case 2://inky
-							gtype = GhostType.INKY;
-							break;
-
-						case 3://pinky
-							gtype = GhostType.PINKY;
-							break;
-					}
-					GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).setDirection(dir);
-
-					// notify all the clients
-					send(gtype, dir);
-				}
-				else if( PType.JOIN.ordinal() == packetType )
-				{
-					if( Server.clients.size() < 4)
-					{
-						// get the ghost type
-						GhostType gtype = GhostType.BLINKY;
-						
-						// Update the server
+						// get direction
 						switch((buf[1]&0x000000FF))
+						{
+							case 0://up
+								dir = Direction.UP;
+								break;
+							case 1://down
+								dir = Direction.DOWN;
+								break;
+							case 2://left
+								dir = Direction.LEFT;
+								break;
+							case 3://right
+								dir = Direction.RIGHT;
+								break;
+						}
+
+						// get the ghost
+						/*
+						switch((buf[2]&0x000000FF))
+						{
+							case 0://blinky
+								gtype = GhostType.BLINKY;
+								break;
+							
+							case 1://clyde
+								gtype = GhostType.CLYDE;
+								break;
+
+							case 2://inky
+								gtype = GhostType.INKY;
+								break;
+
+							case 3://pinky
+								gtype = GhostType.PINKY;
+								break;
+						}*/
+						
+						GhostType gtype = clients.get(address);
+
+						GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).setDirection(dir);
+
+						// notify all the clients
+						send(gtype, dir);
+					}
+					else if( PType.HEARTBEAT.ordinal() == packetType )
+					{
+						// A client heartbeat, that way, we keep everyone updated.
+
+
+					}
+					else if( PType.LEAVE.ordinal() == packetType )
+					{
+						// a ghost is leaving
+
+						GhostType gtype = clients.get(address);
+						// find which ghost it is, and notify all the clients that they dropped
+						/*
+						switch( (buf[1]&0x000000FF) )
 						{
 							case 0://b
 								gtype = GhostType.BLINKY;
@@ -535,47 +605,59 @@ public class Server extends Thread
 							case 3://p
 								gtype = GhostType.PINKY;
 								break;
-						}
+						}*/
 
-						GameState.getInstance().getGhosts().getObjectAt(capitalize(gtype.toString()) ).setDirection(Direction.UP);
+						send(PType.LEAVE, gtype);
+						Server.clients.drop( gtype );
 
-						Server.clients.add(gtype);
 
 					}
-				}
-				else if( PType.LEAVE.ordinal() == packetType )
-				{
-					// a ghost is leaving
-
-					GhostType gtype = GhostType.BLINKY;
-					// find which ghost it is, and notify all the clients that they dropped
-					switch( (buf[1]&0x000000FF) )
+					else
 					{
-						case 0://b
-							gtype = GhostType.BLINKY;
-							break;
-						case 1://c
-							gtype = GhostType.CLYDE;
-							break;
-						case 2://i
-							gtype = GhostType.INKY;
-							break;
-						case 3://p
-							gtype = GhostType.PINKY;
-							break;
+						// some other junk packet
+						//sendError(address,ServErrors.UNKNOWN_COM);
 					}
-
-					send(PType.LEAVE, gtype);
-					GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).returnAI();
-					Server.clients.remove( gtype );
-
-
-				}
+				}//is client
 				else
 				{
-					// some other junk packet
-					//sendError(address,ServErrors.UNKNOWN_COM);
-				}
+					// they are not playing, so all they can do is join
+					if( PType.JOIN.ordinal() == packetType )
+					{
+						if( Server.clients.size() < 4)
+						{
+							// get the ghost type
+							GhostType gtype = GhostType.BLINKY;
+							
+							// Update the server
+							switch((buf[1]&0x000000FF))
+							{
+								case 0://b
+									gtype = GhostType.BLINKY;
+									break;
+								case 1://c
+									gtype = GhostType.CLYDE;
+									break;
+								case 2://i
+									gtype = GhostType.INKY;
+									break;
+								case 3://p
+									gtype = GhostType.PINKY;
+									break;
+							}
+							// add to client database
+							Server.clients.add( gtype, address );
+							
+							// place them in game
+							GameState.getInstance().getGhosts().getObjectAt(capitalize(gtype.name()) ).setDirection(Direction.UP);
+
+						}
+					}//join
+					else
+					{
+						// wtf? just ignore them
+					}
+
+				}// not a client
 			}
 			catch (Exception e)
 			{
@@ -588,9 +670,10 @@ public class Server extends Thread
 
 		//System.out.println("Server Shutdown");
 		socket.close();
-    }//run
-
-	
-	
-	
+    }//run	
 }
+
+
+
+
+
