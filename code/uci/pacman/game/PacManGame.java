@@ -105,6 +105,7 @@ public class PacManGame extends Ucigame {
 
 	public void showScoresScreen() {
 		topScores = new TopScores();
+		System.out.println("Showed scores screen");
 		canvas.background(getImage( "images/final/topscores.png"));
 		showScene(ScreenMode.SCORES);
 	}
@@ -409,7 +410,8 @@ public class PacManGame extends Ucigame {
 		else if (keyboard.isDown(keyboard.T) && isShowingScene(ScreenMode.GAMEOVER)) 
 		{
 			//System.out.println("Pressed T");
-		//	showScoresScreen();
+			showScoresScreen();
+			//showMenuScreen();
 		}
 	}
 
