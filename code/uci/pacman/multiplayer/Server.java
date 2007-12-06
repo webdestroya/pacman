@@ -167,12 +167,15 @@ public class Server extends Thread
 						buf[1] = new Integer(gtype.ordinal()).byteValue();
 
 						// send the packet out
-						//InetAddress group = InetAddress.getByName("230.0.0.1");
 						DatagramSocket socketSend = new MulticastSocket();
 						DatagramPacket packet = new DatagramPacket(buf, buf.length, Server.group, 4446 );
 						socketSend.send(packet);
 						socketSend.close();
 
+
+						// DROP DEAD HEARTBEAT CLIENTS
+						Server.clients.dropDead();
+						
 						// sleep some
 						Thread.currentThread().sleep(5000);
 					}
@@ -631,8 +634,8 @@ public class Server extends Thread
 					else if( PType.HEARTBEAT.ordinal() == packetType )
 					{
 						// A client heartbeat, that way, we keep everyone updated.
+						Server.clients.heartbeat(address);
 						
-
 					}
 					else if( PType.LEAVE.ordinal() == packetType )
 					{

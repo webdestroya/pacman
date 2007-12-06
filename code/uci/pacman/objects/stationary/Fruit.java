@@ -2,6 +2,7 @@ package code.uci.pacman.objects.stationary;
 
 import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
+import code.uci.pacman.game.*;
 import code.uci.pacman.multiplayer.*;
 
 /**
@@ -50,7 +51,10 @@ public class Fruit extends StationaryObject implements Eatable {
 	 */
 	public void showWithTimer() {
 		control.getPacInstance().startFruitTimer();
-		Server.send(PType.AFRUIT, x(), y() );
+		if( PacManGame.gameType == 1)
+		{
+			Server.send(PType.AFRUIT, x(), y() );
+		}
 		super.show();
 	}
 
@@ -61,7 +65,10 @@ public class Fruit extends StationaryObject implements Eatable {
 	public void eaten() {
 		fruitEaten++;
 		score += 100; // increase score when eaten
-		Server.send( PType.DFRUIT, x(), y() );
+		if(PacManGame.gameType==1)
+		{
+			Server.send( PType.DFRUIT, x(), y() );
+		}
 		control.fruitEaten(this);
 	}
 
