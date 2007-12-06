@@ -184,8 +184,8 @@ public class Client extends Thread
 						//destroy pill
 						int x = 100*((int)(buf[1]&0xFF)) + ((int)(buf[2]&0xFF));
 						int y = 100*((int)(buf[3]&0xFF)) + ((int)(buf[4]&0xFF));
-						Pill pill = new Pill(x,y);
-						GameState.getInstance().getPills().destroy(pill);
+						//Pill pill = new Pill(x,y);
+						GameState.getInstance().getPills().destroy(x,y);//pill);
 					}
 					else if( PType.PILLA.ordinal() == packetType )
 					{
@@ -199,8 +199,8 @@ public class Client extends Thread
 						// delete power pill
 						int x = 100*((int)(buf[1]&0xFF)) + ((int)(buf[2]&0xFF));
 						int y = 100*((int)(buf[3]&0xFF)) + ((int)(buf[4]&0xFF));
-						PowerPellet pellet = new PowerPellet(x,y);
-						GameState.getInstance().getPellets().destroy(pellet);
+						//PowerPellet pellet = new PowerPellet(x,y);
+						GameState.getInstance().getPellets().destroy(x, y);//pellet);
 					}
 					else if( PType.PPILLA.ordinal() == packetType )
 					{

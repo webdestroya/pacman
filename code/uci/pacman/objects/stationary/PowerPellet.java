@@ -3,6 +3,10 @@ package code.uci.pacman.objects.stationary;
 import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
 
+import code.uci.pacman.game.PacManGame;
+import code.uci.pacman.multiplayer.*;
+
+
 /**
  * 
  * Power Pellets are the larger pellets (only 4 on board)
@@ -22,6 +26,11 @@ public class PowerPellet extends StationaryObject implements Eatable {
 	 */
 	public PowerPellet(int x, int y) {
 		super(PELLET_IMAGE_PATH, x, y);
+		if( PacManGame.gameType==1)
+		{
+			Server.send( PType.PPILLA, x(), y() );
+		}
+
 	}
 	/**
 	 * the point value of this object
@@ -33,6 +42,11 @@ public class PowerPellet extends StationaryObject implements Eatable {
 	 * Tells the game controller that it's been eaten
 	 */
 	public void eaten() {
+		if( PacManGame.gameType==1)
+		{
+			Server.send( PType.PPILLD, x(), y() );
+		}
+
 		control.pelletEaten(this);
 	}
 

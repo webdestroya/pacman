@@ -66,6 +66,16 @@ public abstract class ArtifactController<A extends StationaryObject> extends Spr
 	}
 
 	/**
+	 * Destroys an artifact
+	 * @since REV2
+	 */
+	public void destroy( int x, int y)
+	{
+		Point artifactLoc = new Point(x, y );
+		super.destroyAt(artifactLoc);
+	}
+
+	/**
 	 * Gets the sprite that collided with the specified object
 	 * 
 	 * @param c the object to check against
