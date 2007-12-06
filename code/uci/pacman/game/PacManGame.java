@@ -289,7 +289,7 @@ public class PacManGame extends Ucigame {
 	}
 
 	// This kept messing up the Start Game button, since it would start the game before
-	// the button was pressed.   If you want to skip the intro, just press "s" or the ]
+	// the button was pressed.   If you want to skip the intro, just press "s" or the 
 	// spacebar to get to the menu.  If you still want to click to get to the menu, 
 	// click the area where the start game button would be
 	//public void onMousePressed() {
