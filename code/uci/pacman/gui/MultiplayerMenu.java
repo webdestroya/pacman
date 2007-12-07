@@ -16,7 +16,7 @@ public class MultiplayerMenu{
 	private int canvasWidth = 600;
 	private int canvasHeight = 650;
 	private Sound multiTheme;
-	private int buttonStartHeight = 120;
+	private int buttonStartHeight = 228;
 	private int buttonHeight = 83;
 	
 	/**
@@ -28,15 +28,15 @@ public class MultiplayerMenu{
 		
 		//make host pac-man button
 		hostPacMan = GameController.getInstance().getPacInstance().makeButton("PacManPlayer",GameController.getInstance().getPacInstance().getImage("pacbutton.png"),
-                249, 76);
+                281, 750);
 		//set pac-man button position
-		hostPacMan.position(canvasWidth/2 - hostPacMan.width()/2, buttonStartHeight);
+		hostPacMan.position(canvasWidth/2 - (hostPacMan.width() + 7), buttonStartHeight);
 		
 		//make join ghost button
 		joinGhost = GameController.getInstance().getPacInstance().makeButton("GhostPlayer",GameController.getInstance().getPacInstance().getImage("ghostbutton.png"),
-                249, 76);
+                281, 750);
 		//set ghost button position
-		joinGhost.position(canvasWidth/2 - joinGhost.width()/2,	buttonStartHeight + buttonHeight);
+		joinGhost.position(canvasWidth/2 + 7,	buttonStartHeight);
 	}
 
 	/**
@@ -45,6 +45,7 @@ public class MultiplayerMenu{
 	 * 
 	 */
 	public void draw(){
-		
+		hostPacMan.draw();
+		joinGhost.draw();
 	}
 }
