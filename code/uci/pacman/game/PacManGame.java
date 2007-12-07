@@ -462,8 +462,17 @@ public class PacManGame extends Ucigame {
 	}
 	
 	public void onKeyPressScores(){
-		if(isShowingScene(ScreenMode.SCORES)){
-			topScores.addToName(keyboard.getKeyChar());
+		if(isShowingScene(ScreenMode.SCORES))
+		{
+			try
+			{
+				topScores.addToName(keyboard.getKeyChar());
+				Thread.sleep(100);
+			}
+			catch(InterruptedException e)
+			{
+				System.err.println("Typing Name into Top Scores thread interrupted!");
+			}
 		}
 	}
 
