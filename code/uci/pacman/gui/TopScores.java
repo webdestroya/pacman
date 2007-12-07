@@ -89,11 +89,8 @@ public class TopScores{
 	}
 	
 	public void writeScores(){
-		
 		try
 		{
-			if(addIndex != -1 && name == "")
-				nameList.set(addIndex, "Unknown");
 			outFile = new FileWriter("code\\uci\\pacman\\gui\\scores.txt");
 			for(int x = 0; x < numberOfScores; x++){
 				outFile.write(nameList.get(x)+" ");
@@ -159,19 +156,23 @@ public class TopScores{
 	 * 
 	 */
 	public void addTopScore(){
-		name = "Type your name!";
+		name = "Unknown";
 		nameList.add(addIndex, name);
 		nameList.remove(10);
 		scoreList.add(addIndex, score);
 		scoreList.remove(10);
+		writeScores();
+		name = "Type your name!";
+		nameList.set(addIndex, name);
 		name = "";
 		GameState.getInstance().addToScore(score*-1);
 	}
 		
 	public void addToName(String nextChar){
-		if(addIndex != -1 && name.length()<= 10){
+		if(addIndex != -1 && name.length()< 10){
 			name = name + nextChar;
 			nameList.set(addIndex, name);
+			writeScores();
 		}
 	}
 	
