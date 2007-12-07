@@ -39,24 +39,27 @@ public class Blinky extends Ghost{
 					return curDirection;
 			}
 			//if going horizontal and there is no junction, continue on path
-			else if ((curDirection == Direction.LEFT) || (curDirection == Direction.RIGHT))
+			else 
 			{
 				if ((!this.moveIsAllowed(Direction.UP)) && (!this.moveIsAllowed(Direction.DOWN)))
 					return curDirection;
 			}
-			else {
-				//If there is a junction, the PacMan can choose to either turn in an open 
-				//perpendicular direction, or it can continue along it's current direction.
-				Random rand = new Random();
-				Direction[] availableChoices = availableScatterDirections();
-				int choice = rand.nextInt(availableChoices.length);
-				if (availableChoices[choice] == curDirection)
-					return curDirection;
-				else{
-					lastDirection = curDirection;
-					curDirection = availableChoices[choice];
-					return curDirection;
-				}
+			
+			//If control continues here, no return was called.
+			//Therefore, it is at a junction.
+			
+			//If there is a junction, the PacMan can choose to either turn in an open 
+			//perpendicular direction, or it can continue along it's current direction.
+			Random rand = new Random();
+			Direction[] availableChoices = availableScatterDirections();
+			int choice = rand.nextInt(availableChoices.length);
+			
+			if (availableChoices[choice] == curDirection)
+				return curDirection;
+			else{
+				lastDirection = curDirection;
+				curDirection = availableChoices[choice];
+				return curDirection;
 			}
 		} else {
 			int curX = this.x();
@@ -113,7 +116,7 @@ public class Blinky extends Ghost{
 			return curDirection;
 		}
 		
-		return null;
+		//return null; //unreachable code
 	}
 	
 	private Direction[] availableScatterDirections() {
@@ -148,7 +151,7 @@ public class Blinky extends Ghost{
 		for (int index = 0; index < indexOfToBeRemoved; index++)
 			newAvailable[index] = available[index];
 		for (int index = indexOfToBeRemoved; index < newAvailable.length; index++)
-			newAvailable[index] = available[index - 1];
+			newAvailable[index] = available[index + 1];
 		
 	    return newAvailable;
 	}
