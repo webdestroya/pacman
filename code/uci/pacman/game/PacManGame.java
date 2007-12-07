@@ -383,7 +383,7 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	public void onClickTopScores() {
-		if (isShowingScene(ScreenMode.MENU) || isShowingScene(ScreenMode.GAMEOVER)) {
+		if (isShowingScene(ScreenMode.MENU)) {
 			System.out.println("topScore click");
 			//mainMenu.stopMenuTheme();
 			showScoresScreen();			
