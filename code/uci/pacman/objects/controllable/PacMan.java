@@ -11,7 +11,7 @@ import code.uci.pacman.objects.ControllableObject;
  * pellets and power pellets.  PacMan can be eaten by
  * ghosts.  If he eats a power pellet, PacMan can eat
  * ghosts within a short window of time.
- * @author Team Objects/AI
+ * @author Team Objects/AI 
  *
  */
 public class PacMan extends ControllableObject {
