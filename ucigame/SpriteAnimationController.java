@@ -15,7 +15,7 @@ public class SpriteAnimationController
     }
     
     //adds a new mode to the sprite
-    public SpriteAnimationMode addNewMode(String mode) {
+    public SpriteAnimationMode addNewMode(String mode) { 
     	return getOrAddMode(mode);
     }
     

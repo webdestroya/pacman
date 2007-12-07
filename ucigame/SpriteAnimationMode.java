@@ -18,7 +18,7 @@ public class SpriteAnimationMode
 		this.width = -1;
 	}
 	
-	public SpriteAnimationMode(String _name, int width, int height) {
+	public SpriteAnimationMode(String _name, int width, int height) { 
 		images = new Vector<Image>();
 		name = _name;
 		this.currFrame = 0;

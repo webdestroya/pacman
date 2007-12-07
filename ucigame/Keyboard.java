@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
  */
 public class Keyboard
 {
-	private Ucigame ucigame;
+	private Ucigame ucigame; 
 	public final int LEFT  		= KeyEvent.VK_LEFT;
 	public final int RIGHT 		= KeyEvent.VK_RIGHT;
 	public final int UP    		= KeyEvent.VK_UP;

@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
 public final class Mouse
 {
 	public final int CROSSHAIR = Cursor.CROSSHAIR_CURSOR;
-	public final int DEFAULT   = Cursor.DEFAULT_CURSOR;
+	public final int DEFAULT   = Cursor.DEFAULT_CURSOR; 
 	public final int HAND      = Cursor.HAND_CURSOR;
 	public final int MOVE      = Cursor.MOVE_CURSOR;
 	public final int TEXT      = Cursor.TEXT_CURSOR;

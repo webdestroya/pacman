@@ -26,7 +26,7 @@ public class Image
 	 */
 	Image(java.awt.Image _i, Ucigame _u)
 	{
-		ucigame = _u;
+		ucigame = _u; 
 		buffImage = toBufferedImage(_i);
 		iwidth = buffImage.getWidth(ucigame);
 		iheight = buffImage.getHeight(ucigame);

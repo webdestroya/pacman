@@ -22,7 +22,7 @@ import java.net.URL;
 public interface Sound
 {
 	/**
-	 * Plays the sound once, from beginning to end.
+	 * Plays the sound once, from beginning to end. 
 	 *
 	 */
 	public void play();

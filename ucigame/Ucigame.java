@@ -24,7 +24,7 @@ public abstract class Ucigame
 	           FocusListener
 {
 	private static String VERSION = "2007.11.13";
-	static Ucigame gameObject = null;  			 // only used when not an applet
+	static Ucigame gameObject = null;  			 // only used when not an applet 
 	protected static String rootImagePath = ""; //root path for images
 	private static Object lock1 = new Object();  // for synchronization
 	private static Object lock2 = new Object();  // for synchronization

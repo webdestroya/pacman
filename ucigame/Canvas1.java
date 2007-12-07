@@ -4,7 +4,7 @@ import java.awt.Font;
 import java.awt.Color;
 
 /**
- * The canvas object on which the game is drawn.
+ * The canvas object on which the game is drawn. 
  */
 public class Canvas1
 {

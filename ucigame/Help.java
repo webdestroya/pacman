@@ -18,7 +18,7 @@ public class Help
 							System.getProperty("user.dir"));
 
 		String sep = System.getProperty("path.separator");    // ; or :
-		String slash = System.getProperty("file.separator");  //   / or \
+		String slash = System.getProperty("file.separator");  //   / or \ 
 
 		String[] ext = System.getProperty("java.ext.dirs").split(sep);
 		String[] classpath = System.getProperty("java.class.path").split(sep);

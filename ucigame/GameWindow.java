@@ -14,7 +14,7 @@ public class GameWindow
 	/*
 		Sets the width and height of the internal area of the window.
 		The actual window will be slightly wider and higher to account
-		for the frame and title bar.
+		for the frame and title bar. 
 	*/
 	int clientWidth, clientHeight;
 	String title;

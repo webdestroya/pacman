@@ -21,7 +21,7 @@ import java.awt.geom.AffineTransform;
 public class Sprite
 {
 
-	class PinnedSprite // inner class
+	class PinnedSprite // inner class 
 	{
 		Sprite sprite;
 

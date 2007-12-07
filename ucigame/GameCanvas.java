@@ -12,7 +12,7 @@ import java.util.HashMap;
  *
  * @author Dan Frost
  */
-class GameCanvas extends JComponent   // maybe should be JPanel
+class GameCanvas extends JComponent   // maybe should be JPanel 
                  implements FocusListener
 {
 	/**
