@@ -39,6 +39,7 @@ public class TopScores{
 	Scanner scanner;
 	private int menuButtonX = 175;
 	private int menuButtonY = 450;
+	private Sound topScoresTheme;
 	
 	/**
 	 * 
@@ -47,6 +48,7 @@ public class TopScores{
 	 */
 	public TopScores(){
 		// TODO Auto-generated constructor stub
+		topScoresTheme = GameController.getInstance().getPacInstance().getSound("sounds/final/TopScores.mp3");
 		topScoresMainMenu = GameController.getInstance().getPacInstance().makeButton("TopScoresMainMenu",GameController.getInstance().getPacInstance().getImage("mainmenubutton.png"),
                 249, 76);
 		topScoresMainMenu.position(menuButtonX, menuButtonY);
@@ -163,5 +165,20 @@ public class TopScores{
 	private String nameRequest(){
 		return "you";
 		//return new Scanner(System.in).next();
+	}
+	
+	public void startTopScoresTheme()
+	{
+		topScoresTheme.loop();		
+	}
+	
+	/**
+	 *	 
+	 * Stops the main theme
+	 *  
+	 */
+	public void stopTopScoresTheme()
+	{
+		topScoresTheme.stop();
 	}
 }
