@@ -455,8 +455,58 @@ public class PacManGame extends Ucigame {
 	
 	public void onKeyPressScores(){
 		if(isShowingScene(ScreenMode.SCORES)){
+			if(keyboard.isDown(keyboard.A))
+				topScores.addToName("A");
+			if(keyboard.isDown(keyboard.B))
+				topScores.addToName("B");
+			if(keyboard.isDown(keyboard.C))
+				topScores.addToName("C");
+			if(keyboard.isDown(keyboard.D))
+				topScores.addToName("D");
+			if(keyboard.isDown(keyboard.E))
+				topScores.addToName("E");
+			if(keyboard.isDown(keyboard.F))
+				topScores.addToName("F");
+			if(keyboard.isDown(keyboard.G))
+				topScores.addToName("G");
+			if(keyboard.isDown(keyboard.H))
+				topScores.addToName("H");
+			if(keyboard.isDown(keyboard.I))
+				topScores.addToName("I");
+			if(keyboard.isDown(keyboard.J))
+				topScores.addToName("J");
+			if(keyboard.isDown(keyboard.K))
+				topScores.addToName("K");
+			if(keyboard.isDown(keyboard.L))
+				topScores.addToName("L");
+			if(keyboard.isDown(keyboard.M))
+				topScores.addToName("M");
+			if(keyboard.isDown(keyboard.N))
+				topScores.addToName("N");
+			if(keyboard.isDown(keyboard.O))
+				topScores.addToName("O");
+			if(keyboard.isDown(keyboard.P))
+				topScores.addToName("P");
+			if(keyboard.isDown(keyboard.Q))
+				topScores.addToName("Q");
+			if(keyboard.isDown(keyboard.R))
+				topScores.addToName("R");
 			if(keyboard.isDown(keyboard.S))
 				topScores.addToName("S");
+			if(keyboard.isDown(keyboard.T))
+				topScores.addToName("T");
+			if(keyboard.isDown(keyboard.U))
+				topScores.addToName("U");
+			if(keyboard.isDown(keyboard.V))
+				topScores.addToName("V");
+			if(keyboard.isDown(keyboard.W))
+				topScores.addToName("W");
+			if(keyboard.isDown(keyboard.X))
+				topScores.addToName("X");
+			if(keyboard.isDown(keyboard.Y))
+				topScores.addToName("Y");
+			if(keyboard.isDown(keyboard.Z))
+				topScores.addToName("Z");
 		}
 	}
 
