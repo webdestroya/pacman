@@ -17,6 +17,6 @@ public enum ScreenMode {
 	SCORES,			// top scores
 	GAMEOVER,		// game over
 	MPWAITING,		// multiplayer waiting to connect
-	CREDITS,			// the game credits screen
+	CREDITS			// the game credits screen
 	
 }
