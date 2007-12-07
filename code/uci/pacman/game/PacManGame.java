@@ -118,7 +118,7 @@ public class PacManGame extends Ucigame {
 	 */
 	private void showMultiGameScreen() {
 		// stop menu theme
-		mainMenu.stopMenuTheme();
+		//mainMenu.stopMenuTheme();
 		// initialize multi-player
 		multiMenu = new MultiplayerMenu();
 		// set multi-player background
