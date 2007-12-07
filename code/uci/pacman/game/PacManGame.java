@@ -395,7 +395,7 @@ public class PacManGame extends Ucigame {
 	 * 
 	 */
 	public void onClickTopScoresMainMenu(){
-		if(isShowingScene(ScreenMode.SCORES))
+		if(isShowingScene(ScreenMode.SCORES) || isShowingScene(ScreenMode.MULTIGAME))
 		{
 			mainMenu.stopMenuTheme();
 			showMenuScreen();
