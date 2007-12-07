@@ -16,7 +16,7 @@ public class MultiplayerMenu{
 	private int canvasWidth = 600;
 	private int canvasHeight = 650;
 	private Sound multiTheme;
-	private int buttonStartHeight = 229;
+	private int buttonStartHeight = 228;
 	
 	
 	/**
