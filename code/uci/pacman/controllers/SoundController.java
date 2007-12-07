@@ -16,15 +16,13 @@ public class SoundController {
 	
 	private static Sound ambient = makeSound("gs_siren_soft2.mp3");
 	private static Sound pellet = makeSound("gs_chomp.mp3");
-	//private static Sound mainMenu = makeSound("menu.mp3");
 	private static Sound pill = makeSound("gs_chomp.mp3");
 	private static Sound fruit = makeSound("gs_eatfruit.mp3");
 	private static Sound ghost = makeSound("gs_eatghost.mp3");
 	private static Sound pacman = makeSound("gs_pacmandies.mp3");
 	private static Sound start = makeSound("gs_start.mp3");
 	private static Sound fever = makeSound("fever_clip.mp3");
-	//private static Sound topScore = makeSound("scores.mp3");
-
+	
 	
 	/**
 	 * Plays the appropriate sound for a pellet being eaten, once and then stops.

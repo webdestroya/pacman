@@ -146,7 +146,9 @@ public class PacManGame extends Ucigame {
 	 * Shows the game over screen
 	 */
 	public void showGameOverScreen() {
-		canvas.background(0, 0, 0);		
+		boolean f = true;
+		canvas.background(0, 0, 0);
+		//stop all gameplay sounds
 		SoundController.stopAllSounds();
 		showScene(ScreenMode.GAMEOVER);
 	}
@@ -249,7 +251,7 @@ public class PacManGame extends Ucigame {
 	 * Draws the "Game Over" scene
 	 */
 	public void drawGameover() {
-		SoundController.stopAllSounds();
+		//draw gameover screen
 		canvas.clear();
 		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
 		canvas.putText("GAME OVER", 180, 300);
