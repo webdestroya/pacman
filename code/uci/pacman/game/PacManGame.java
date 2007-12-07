@@ -24,6 +24,7 @@ public class PacManGame extends Ucigame {
 	private ScoreBoard scoreBoard;
 	private TopScores topScores;
 	private MainMenu mainMenu;
+	private MultiplayerMenu multiMenu;
 	private IntroPlayer introPlayer; // for playing the intro
 	private ScreenMode currentScene; // stores the current scene displayed
 	public static String font = "Dialog.bold";
@@ -112,6 +113,24 @@ public class PacManGame extends Ucigame {
 		showScene(ScreenMode.GAME);
 	}
 
+	/**
+	 * Shows the multi player screen
+	 */
+	private void showMultiGameScreen() {
+		// stop menu theme
+		mainMenu.stopMenuTheme();
+		// initialize multi-player
+		multiMenu = new MultiplayerMenu();
+		// set multi-player background
+		canvas.background(getImage("multiplayermenu.png"));
+		//ODO: add multiplyer theme music here
+		//****
+		//multiMenu.startMultiPlayerTheme();
+		//***
+		//set scene to multi-player game
+		showScene(ScreenMode.MULTIGAME);
+	}
+	
 	/**
 	 * Shows the top scores screen
 	 */
@@ -220,6 +239,14 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
+	 * Draws the multi-player menu
+	 */
+	public void drawMultigame() {
+		canvas.clear();
+		multiMenu.draw();
+	}
+	
+	/**
 	 * Draws the "Game Over" scene
 	 */
 	public void drawGameover() {
@@ -244,7 +271,7 @@ public class PacManGame extends Ucigame {
 	}
 	
 	/**
-	 *
+	 * Pac-Man death timer
 	 */
 	public void pacManDeathTimer(){
 		stopTimer("pacManDeath");
@@ -252,7 +279,7 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
-	 *
+	 * Stops Fruit timer
 	 */
 	public void removeFruitTimer() {
 		if( PacManGame.gameType == 1 )
@@ -263,14 +290,14 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
-	 *
+	 * Starts ghost scatter timer
 	 */
 	public void startScatterTimer() {
 		startTimer("unScatterGhosts", GhostController.SCATTERSECONDS);
 	}
 
 	/**
-	 * 
+	 * Stops ghost scatter timer
 	 */
 	public void unScatterGhostsTimer() {
 		stopTimer("unScatterGhosts");
@@ -306,16 +333,47 @@ public class PacManGame extends Ucigame {
 
 	/**
 	 * 
-	 * goes to the multiplayer menu.
+	 * goes to the multi-player menu.
 	 * 
 	 */
 	public void onClickMultiPlay() {
 		if (isShowingScene(ScreenMode.MENU)) {
-			PacManGame.gameType = 2;
-			System.out.println("multi player click");
-			startPacManClient();
+			System.out.println("load multiplayer screen..");
+			showMultiGameScreen();
+			//	PacManGame.gameType = 2;
+		//	System.out.println("multi player click");
+		//	startPacManClient();
+			//******
 			//showGameScreen();
 			// beginGame();
+			//******
+		}
+	}
+	
+	/**
+	 * 
+	 * Host Pac-Man in multi-player game.
+	 * 
+	 */
+	public void onClickPacManPlayer() {
+		if (isShowingScene(ScreenMode.MULTIGAME)){
+			PacManGame.gameType = 1;
+			System.out.println("pac-man player game");
+			startPacManServer();
+			showGameScreen();
+		}
+	}
+	
+	/**
+	 * 
+	 * joins ghost to multi-player game.
+	 * 
+	 */
+	public void onClickGhostPlayer() {
+		if (isShowingScene(ScreenMode.MULTIGAME)){
+			PacManGame.gameType = 2;
+			System.out.println("ghost player game");
+			startPacManClient();
 		}
 	}
 
