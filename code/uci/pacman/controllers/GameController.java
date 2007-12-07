@@ -151,6 +151,7 @@ public class GameController {
 			//SEE PACMAN for where the modes are set
 			state.getPacMan().setAnimationMode("death"); //set pacman to "death" frame mode
 		} else { // if Pac-man has died one too many times
+			SoundController.stopAllSounds(); //stop the sounds          
 			game.showGameOverScreen();
 		}
 	}
@@ -160,7 +161,7 @@ public class GameController {
 		state.getGhosts().respawn();
 		state.getFruit().hide();
 		state.getPacMan().position(PACMANSTART);
-		state.getPacMan().setAnimationMode("chomp"); //restores PacMan to default animations
+		state.getPacMan().setAnimationMode("chomp"); //restores PacMan to chomp animations
 		state.getPacMan().step(Direction.RIGHT);
 		performNextMove = true;
 	};
@@ -226,13 +227,14 @@ public class GameController {
 	 */
 	public void startGame() {
 		state.initialize();
-		game.startInitialWaitTimer(); //begins play after 5 seconds.
-		SoundController.gameStarted();
+		game.startInitialWaitTimer(); //calls initialWaitOver after 5 seconds.
+		SoundController.gameStarted(); //plays start game song
 	}
 	
 	public void initialWaitOver(){
-		performNextMove = true;
+		SoundController.startAmbient(); //start ambient noises
 		state.getPacMan().setAnimationMode("chomp");
+		performNextMove = true;
 	}
 
 	/**
@@ -264,7 +266,8 @@ public class GameController {
 		if (state.stageHasBeenCleared()) {
 			state.nextStage();
 			if (state.getLevel() <= 3) {
-				state.setupLevel();
+				state.setupLevel(); //reinitializes the objects
+				state.getPacMan().setAnimationMode("chomp"); //needed to make pacman chomp
 			} else {
 				game.showScoresScreen();
 			}

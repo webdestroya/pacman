@@ -89,6 +89,11 @@ public class SoundController {
 		pellet.stop();
 		pill.stop();
 		ambient.stop();
+		fever.stop();
+		fruit.stop();
+		ghost.stop();
+		pacman.stop();
+		start.stop();
 	}
 	
 	private static Sound makeSound(String file){

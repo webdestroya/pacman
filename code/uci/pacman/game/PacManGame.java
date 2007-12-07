@@ -146,7 +146,6 @@ public class PacManGame extends Ucigame {
 	 * Shows the game over screen
 	 */
 	public void showGameOverScreen() {
-		SoundController.stopAllSounds();
 		canvas.background(0, 0, 0);		
 		showScene(ScreenMode.GAMEOVER);
 	}
