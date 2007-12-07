@@ -57,7 +57,10 @@ public abstract class SpriteController<T, S extends Sprite> {
 	 * @param key the key for the sprite to remove.
 	 */
 	protected void destroyAt(T key) {
-		hash.remove(key);
+		if( hash.containsKey(key) )
+		{
+			hash.remove(key);
+		}
 	}
 	
 	
@@ -66,7 +69,8 @@ public abstract class SpriteController<T, S extends Sprite> {
 	 * other draw methods or the main draw method for game within PacManGame.
 	 */
 	public void drawObjects() {
-		for (Sprite s : this.getObjects()) {
+		for (Sprite s : this.getObjects())
+		{
 			s.draw();
 		}
 	}

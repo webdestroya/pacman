@@ -266,12 +266,12 @@ public class Server extends Thread
 						lives[1] = new Integer( GameState.getInstance().getLives() ).byteValue();
 						send(lives);
 
-						// SEND LEVEL
-						byte[] level = new byte[2];
+						// SEND LEVEL (TEMPORARYILY DISABLED BECAUSE WE DONT NEED IT THAT MUCH)
+						/*byte[] level = new byte[2];
 						level[0] = new Integer( PType.LEVEL.ordinal() ).byteValue();
 						level[1] = new Integer( GameState.getInstance().getLevel() ).byteValue();
 						send(level);
-					
+						*/
 						// PACKET HISTORY
 						for(int i=0;i<packetHistory.size();i++)
 						{
@@ -295,7 +295,7 @@ public class Server extends Thread
 	}/// OPEN SLOTS/////////////
 
 
-	
+	//////////////////////////////////////// CONSISTENCY CHECKER////////////////////////////////	
 	private class Consistency extends Thread
 	{
 		private InetAddress cgroup;
@@ -373,6 +373,7 @@ public class Server extends Thread
 						PacMan pm = GameState.getInstance().getPacMan();
 						send( pm.x(), pm.y() );
 
+						// make sure that the ghosts are all in the right spot
 						GhostController gc = GameState.getInstance().getGhosts();
 						
 						Ghost gbl;
@@ -390,7 +391,7 @@ public class Server extends Thread
 						send( GhostType.PINKY, gbl.x(), gbl.y() );
 					}
 					/// sleep
-					Thread.currentThread().sleep(100);
+					Thread.currentThread().sleep(99);
 				}
 			}
 			catch(Exception e)
@@ -480,6 +481,7 @@ public class Server extends Thread
 		buf[3] = yp[0];
 		buf[4] = yp[1];
 		
+		// we only want to save the packets that delete stuff (Pills/pellets/fruit)
 		if( type.equals(PType.PILLD) || type.equals(PType.PPILLD) || type.equals(PType.DFRUIT) )
 		{
 			sendData(buf,true);
@@ -546,6 +548,8 @@ public class Server extends Thread
 		{
 			MulticastSocket socketSend = new MulticastSocket();
 			DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446 );
+
+			// do we want to record this packet to the history?
 			if(save)
 			{
 				packetHistory.add(packet);
@@ -576,7 +580,10 @@ public class Server extends Thread
 		// should be while game is not over
 		new OpenSlots().start();
 		
+		// MAJOR! This makes sure everything is consistent - pacman/ghosts/pills/pellets...
 		new Consistency().start();
+
+		// Upkeep of stats (Score,level,lives)...
 		new GameStats().start();
 
 		while (moreQuotes) 
@@ -653,7 +660,6 @@ public class Server extends Thread
 					else
 					{
 						// some other junk packet
-						//sendError(address,ServErrors.UNKNOWN_COM);
 					}
 				}//is client
 				else
