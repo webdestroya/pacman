@@ -138,6 +138,7 @@ public class PacManGame extends Ucigame {
 		mainMenu.stopMenuTheme();
 		SoundController.stopAllSounds();
 		canvas.background(getImage( "topscores.png"));
+		topScores.startTopScoresTheme();
 		showScene(ScreenMode.SCORES);
 	}
 	
@@ -398,6 +399,7 @@ public class PacManGame extends Ucigame {
 		if(isShowingScene(ScreenMode.SCORES))
 		{
 			mainMenu.stopMenuTheme();
+			topScores.stopTopScoresTheme();
 			showMenuScreen();
 		}
 	}//multiMenu.hideButtons();
