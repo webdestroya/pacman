@@ -158,7 +158,6 @@ public class TopScores{
 	 */
 	public void addTopScore(){
 		name = "Type your name!";
-		//name = nameRequest();
 		nameList.add(addIndex, name);
 		nameList.remove(10);
 		scoreList.add(addIndex, score);
@@ -166,12 +165,7 @@ public class TopScores{
 		name = "";
 		GameState.getInstance().addToScore(score*-1);
 	}
-	
-	private String nameRequest(){
-		return "you";
-		//return new Scanner(System.in).next();
-	}
-	
+		
 	public void addToName(String nextChar){
 		if(addIndex != -1){
 			name = name + nextChar;
