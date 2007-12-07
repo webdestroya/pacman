@@ -176,6 +176,7 @@ public class Image
 	 * @return the boolean to indicate transparent pixels
 	 */
 	// This method returns true if the specified image has transparent pixels
+	@SuppressWarnings("unused")
 	private boolean hasAlpha(java.awt.Image _image) {
 		// If buffered image, the color model is readily available
 		if (_image instanceof BufferedImage) {
