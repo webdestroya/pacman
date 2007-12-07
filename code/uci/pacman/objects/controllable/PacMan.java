@@ -29,7 +29,8 @@ public class PacMan extends ControllableObject {
 	 * @param y The initial y coordinate of PacMan.
 	 */
 	public PacMan(int x, int y) {
-		super(pacImagePath, new int[] {0,0,22,0,43,0,64,0}, PACWIDTH, PACHEIGHT, PACFRAMERATE, x, y);
+		super(pacImagePath, new int[] {0,0}, PACWIDTH, PACHEIGHT, PACFRAMERATE, x, y);
+		super.addFramesForAnimation("chomp", "pacman.png", 0,0,22,0,43,0,64,0);
 		super.addFramesForAnimation("death", "pacman.png", 43, 0); //TODO add death animation frames
 		super.speed = PACSPEED;
 		angle = 0;

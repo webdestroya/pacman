@@ -85,6 +85,7 @@ public class GhostController extends ActorController<String, Ghost> {
 	 * 
 	 */
 	public void respawn() {
+		unscatter();
 		getObjectAt("Blinky").position(250, 250);
 		getObjectAt("Pinky").position(275, 250);
 		getObjectAt("Inky").position(300, 250);

@@ -69,6 +69,63 @@ public class Keyboard
 	{
 		ucigame = _u;
 	}
+	
+	public String getKeyChar(){
+		if(isDown(A))
+			return "A";
+		else if(isDown(B))
+			return "B";
+		else if(isDown(C))
+			return "C";
+		else if(isDown(D))
+			return "D";
+		else if(isDown(E))
+			return "E";
+		else if(isDown(F))
+			return "F";
+		else if(isDown(G))
+			return "G";
+		else if(isDown(H))
+			return "H";
+		else if(isDown(I))
+			return "I";
+		else if(isDown(J))
+			return "J";
+		else if(isDown(K))
+			return "K";
+		else if(isDown(L))
+			return "L";
+		else if(isDown(M))
+			return "M";
+		else if(isDown(N))
+			return "N";
+		else if(isDown(O))
+			return "O";
+		else if(isDown(P))
+			return "P";
+		else if(isDown(Q))
+			return "Q";
+		else if(isDown(R))
+			return "R";
+		else if(isDown(S))
+			return "S";
+		else if(isDown(T))
+			return "T";
+		else if(isDown(U))
+			return "U";
+		else if(isDown(V))
+			return "V";
+		else if(isDown(W))
+			return "W";
+		else if(isDown(X))
+			return "X";
+		else if(isDown(Y))
+			return "Y";
+		else if(isDown(Z))
+			return "Z";
+		else
+			return "";
+	}
 
 	/**
 	 * Returns the value of the most recently pressed keyboard key.  Note that the

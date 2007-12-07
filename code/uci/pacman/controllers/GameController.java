@@ -30,6 +30,7 @@ public class GameController {
 	private static GameController gControl;
 	private static final Point PACMANSTART = new Point(290, 440);
 	private boolean performNextMove;
+	private int numberOfEatenGhostsInScatter;
 
 	public static GameController getInstance() {
 		return gControl;
@@ -52,7 +53,7 @@ public class GameController {
 		GameState.setInstance(new GameState());
 		state = GameState.getInstance();
 		this.game = pacManGame;
-		performNextMove = true;
+		performNextMove = false;
 	}
 
 	/**
@@ -93,10 +94,10 @@ public class GameController {
 	 * 
 	 */
 	public void ghostEaten(Ghost ghost) {
+		numberOfEatenGhostsInScatter++;
 		SoundController.ghostEaten();
 		ghost.respawnInCage(); // restart in cage
-		state.addToScore(ghost.getValue());
-		// TODO make ghosts worth more if you eat them in the same round
+		state.addToScore(ghost.getValue()*numberOfEatenGhostsInScatter);
 	}
 
 	/**
@@ -176,6 +177,7 @@ public class GameController {
 	 * 
 	 */
 	public void pelletEaten(PowerPellet powerPellet) {
+		numberOfEatenGhostsInScatter = 0;
 		state.addToScore(PowerPellet.SCOREVALUE);
 		state.getPellets().destroy(powerPellet);
 		state.getGhosts().scatter();
@@ -224,10 +226,13 @@ public class GameController {
 	 */
 	public void startGame() {
 		state.initialize();
-	    
-		// TODO we need to wait 5 seconds for the intro music to stop playing like in
-		// real pacman.
+		game.startInitialWaitTimer(); //begins play after 5 seconds.
 		SoundController.gameStarted();
+	}
+	
+	public void initialWaitOver(){
+		performNextMove = true;
+		state.getPacMan().setAnimationMode("chomp");
 	}
 
 	/**
