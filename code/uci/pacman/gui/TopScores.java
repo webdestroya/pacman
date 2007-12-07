@@ -133,8 +133,8 @@ public class TopScores{
 	 * 
 	 */
 	public boolean isTopList(){
-		score = 7000;
-		//score = GameState.getInstance().getScore();
+		//score = 7000;
+		score = GameState.getInstance().getScore();
 		for(int x = 0; x < numberOfScores; x++){
 			if(score >= scoreList.get(x)){
 				addIndex = x;
