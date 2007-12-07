@@ -10,6 +10,10 @@ import java.net.*;
 import java.util.*;
 
 
+/// COMMAND ENUMS(wrapping list)
+
+
+
 /**
  * Server is responsible for handling incoming client requests.
  * @author Networking Team
@@ -455,7 +459,7 @@ public class Server extends Thread
      * Sends a packet
      * @param type of command to send out
      */
-	public static void send(PType type)
+	public static void send(PType type)//PType = packet enum thing
 	{
 		byte[] buf = new byte[1];
 		buf[0] = new Integer(type.ordinal()).byteValue();

@@ -2,6 +2,7 @@
 package code.uci.pacman.multiplayer;
 
 import code.uci.pacman.game.*;
+
 import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.stationary.Fruit;
 import code.uci.pacman.objects.stationary.Pill;
