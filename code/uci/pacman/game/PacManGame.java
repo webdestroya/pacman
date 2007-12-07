@@ -453,6 +453,13 @@ public class PacManGame extends Ucigame {
 			showMenuScreen();
 		}
 	}
+	
+	public void onKeyPressScores(){
+		if(isShowingScene(ScreenMode.SCORES)){
+			if(keyboard.isDown(keyboard.S))
+				topScores.addToName("S");
+		}
+	}
 
 	// This kept messing up the Start Game button, since it would start the game before
 	// the button was pressed.   If you want to skip the intro, just press and hold "s" or the 
