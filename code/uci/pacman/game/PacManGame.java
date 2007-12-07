@@ -133,8 +133,8 @@ public class PacManGame extends Ucigame {
 	 * Shows the top scores screen
 	 */
 	public void showScoresScreen() {
+		// initialize top scores
 		topScores = new TopScores();
-		//System.out.println("Showed scores screen");
 		mainMenu.stopMenuTheme();
 		SoundController.stopAllSounds();
 		canvas.background(getImage( "topscores.png"));
@@ -181,7 +181,7 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
-	 * Draws the multiplayer waiting screen
+	 * Draws the Multi-player waiting screen
 	 */
 	public void drawMpwaiting() {
 		canvas.clear();
@@ -237,7 +237,7 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
-	 * Draws the multi-player menu
+	 * Draws the Multi-player menu
 	 */
 	public void drawMultigame() {
 		canvas.clear();
