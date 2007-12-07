@@ -48,6 +48,8 @@ public class TopScores{
 	 */
 	public TopScores(){
 		// TODO Auto-generated constructor stub
+		addIndex = -1;
+		name = "";
 		topScoresTheme = GameController.getInstance().getPacInstance().getSound("sounds/final/TopScores.mp3");
 		topScoresMainMenu = GameController.getInstance().getPacInstance().makeButton("TopScoresMainMenu",GameController.getInstance().getPacInstance().getImage("mainmenubutton.png"),
                 249, 76);
@@ -87,6 +89,7 @@ public class TopScores{
 	}
 	
 	public void writeScores(){
+		
 		try
 		{
 			outFile = new FileWriter("code\\uci\\pacman\\gui\\scores.txt");
@@ -154,17 +157,26 @@ public class TopScores{
 	 * 
 	 */
 	public void addTopScore(){
-		name = nameRequest();
+		name = "Type your name!";
+		//name = nameRequest();
 		nameList.add(addIndex, name);
 		nameList.remove(10);
 		scoreList.add(addIndex, score);
 		scoreList.remove(10);
+		name = "";
 		GameState.getInstance().addToScore(score*-1);
 	}
 	
 	private String nameRequest(){
 		return "you";
 		//return new Scanner(System.in).next();
+	}
+	
+	public void addToName(String nextChar){
+		if(addIndex != -1){
+			name = name + nextChar;
+			nameList.set(addIndex, name);
+		}
 	}
 	
 	public void startTopScoresTheme()
