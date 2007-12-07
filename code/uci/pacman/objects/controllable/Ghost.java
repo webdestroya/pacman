@@ -107,11 +107,6 @@ public abstract class Ghost extends ControllableObject implements AI {
 		}
 		super.setAnimationMode("scatter"); //this will tell the ghost to switch to scatter mode animations
 		/* 
-		 * 
-		NOTE: Me and Thomas added got Ucigame source code and then I added some useful new functions
-		now each sprite can have multiple "modes" of animation. Sprites can now have their 
-		default animation mode just like before with a set of frames. Now though, you can add
-		alternate animation modes with different frames as well.
 		
 		A ghost has "default" mode which is for his attacking frames and 
 		"scatter" animation mode which shows a different set of animations for scatter. 
