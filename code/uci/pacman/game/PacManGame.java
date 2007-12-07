@@ -65,7 +65,7 @@ public class PacManGame extends Ucigame {
 		// set window title
 		window.title("Pac Man Fever");
 	}
-
+	
 	private void showIntroScreen() {
 		// initialize screens
 		introPlayer = new IntroPlayer();
@@ -117,16 +117,14 @@ public class PacManGame extends Ucigame {
 	 * Shows the multi player screen
 	 */
 	private void showMultiGameScreen() {
-		// stop menu theme
-		//mainMenu.stopMenuTheme();
 		// initialize multi-player
 		multiMenu = new MultiplayerMenu();
 		// set multi-player background
 		canvas.background(getImage("multiplayermenu.png"));
-		//ODO: add multiplyer theme music here
-		//****
-		//multiMenu.startMultiPlayerTheme();
-		//***
+			//ODO: add multiplyer theme music here
+			//****
+			//multiMenu.startMultiPlayerTheme();
+			//***
 		//set scene to multi-player game
 		showScene(ScreenMode.MULTIGAME);
 	}
