@@ -118,6 +118,8 @@ public class PacManGame extends Ucigame {
 	public void showScoresScreen() {
 		topScores = new TopScores();
 		//System.out.println("Showed scores screen");
+		MainMenu.stopMenuTheme();
+		SoundController.stopAllSounds();
 		canvas.background(getImage( "topscores.png"));
 		showScene(ScreenMode.SCORES);
 	}

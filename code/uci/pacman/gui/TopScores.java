@@ -110,10 +110,10 @@ public class TopScores{
 	 */
 	public void draw(){
 		//turn off pellet, ghost, and ambient sound
-		SoundController.stopAllSounds();
+		//SoundController.stopAllSounds();
 		
 		//stop MainMenu music
-		MainMenu.stopMenuTheme();
+		//MainMenu.stopMenuTheme();
 		
 		//put text on screen from arrayLists
 		for(int x = 0; x < numberOfScores; x++){
