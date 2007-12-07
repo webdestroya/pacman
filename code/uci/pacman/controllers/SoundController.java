@@ -58,6 +58,7 @@ public class SoundController {
 	 * Not in the javadocs. but do we need to take in account for the other sounds? i think we forgot some here like this one.
 	 */
 	public static void pacmanEaten(){
+		feverSwitch(false); //stop fever
 		pacman.play();
 	}
 	
