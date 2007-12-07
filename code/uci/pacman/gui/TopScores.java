@@ -92,6 +92,8 @@ public class TopScores{
 		
 		try
 		{
+			if(addIndex != -1 && name == "")
+				nameList.set(addIndex, "Unknown");
 			outFile = new FileWriter("code\\uci\\pacman\\gui\\scores.txt");
 			for(int x = 0; x < numberOfScores; x++){
 				outFile.write(nameList.get(x)+" ");
@@ -167,7 +169,7 @@ public class TopScores{
 	}
 		
 	public void addToName(String nextChar){
-		if(addIndex != -1){
+		if(addIndex != -1 && name.length()<= 10){
 			name = name + nextChar;
 			nameList.set(addIndex, name);
 		}
