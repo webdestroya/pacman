@@ -114,7 +114,7 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
-	 * Shows the multi player screen
+	 * Shows the Multi-player screen
 	 */
 	private void showMultiGameScreen() {
 		// initialize multi-player
@@ -357,7 +357,7 @@ public class PacManGame extends Ucigame {
 	
 	/**
 	 * 
-	 * joins ghost to multi-player game.
+	 * Joins ghost to multi-player game.
 	 * 
 	 */
 	public void onClickGhostPlayer() {
@@ -384,19 +384,31 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
-	 * returns back to MainMenu from Top Scores or Multiplayer
+	 * returns back to MainMenu from Top Scores
 	 */
 	public void onClickTopScoresMainMenu(){
-		if(isShowingScene(ScreenMode.SCORES) || isShowingScene(ScreenMode.MULTIGAME))
+		if(isShowingScene(ScreenMode.SCORES))
 		{
 			mainMenu.stopMenuTheme();
+			showMenuScreen();
+		}
+	}//multiMenu.hideButtons();
+	
+	/**
+	 * Returns player back to MainMenu from Multi-player
+	 */
+	public void onClickMultiPlayerBackToMainMenu(){
+		if(isShowingScene(ScreenMode.MULTIGAME))
+		{
+			mainMenu.stopMenuTheme();
+			multiMenu.hideMultiPlayerMenuButtons();
 			showMenuScreen();
 		}
 	}
 
 	/**
 	 * 
-	 * writes out the high scores, then quits the game.
+	 * Writes out the high scores, then quits the game.
 	 * 
 	 */
 	public void onClickQuit() {
