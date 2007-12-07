@@ -37,6 +37,12 @@ public class MultiplayerMenu{
                 281, 250);
 		//set ghost button position
 		joinGhost.position(canvasWidth/2 + 7,	buttonStartHeight + 1);
+		
+		//make MainMenu button
+		backToMainMenu = GameController.getInstance().getPacInstance().makeButton("TopScoresMainMenu",GameController.getInstance().getPacInstance().getImage("mainmenubutton.png"),
+                249, 76);
+		backToMainMenu.position(canvasWidth/2 - backToMainMenu.width()/2, canvasHeight - backToMainMenu.width()/2);
+		
 	}
 
 	/**
@@ -47,5 +53,6 @@ public class MultiplayerMenu{
 	public void draw(){
 		hostPacMan.draw();
 		joinGhost.draw();
+		backToMainMenu.draw();
 	}
 }
