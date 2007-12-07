@@ -42,6 +42,7 @@ public class Fruit extends StationaryObject implements Eatable {
 	 */
 	private static String randomFruitPath() {
 		String randomFruitPath = "cherry.png";
+		//TODO Make this a random fruit selection
 		return randomFruitPath;
 	}
 
