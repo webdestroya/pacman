@@ -249,9 +249,10 @@ public class PacManGame extends Ucigame {
 	 * Draws the "Game Over" scene
 	 */
 	public void drawGameover() {
+		SoundController.stopAllSounds();
 		canvas.clear();
 		canvas.font(PacManGame.font, PacManGame.BOLD, 40, 255, 255, 255);
-		canvas.putText("GAME OVER", 200, 300);
+		canvas.putText("GAME OVER", 180, 300);
 		canvas.font(PacManGame.font, PacManGame.BOLD, 20, 255, 255, 255);
 		canvas.putText("Press R to Try Again or T to see top scores", 100, 340);
 		//Sprite topScoreButton = makeButton("TopScores", getImage("topScoresButton.png"), 249, 76);
