@@ -30,7 +30,8 @@ public abstract class Ghost extends ControllableObject implements AI {
 	// MITCH
 	protected Direction lastDirection = Direction.LEFT;
 	protected Direction curDirection;
-	protected boolean isBeingControlled = false;
+	//isPlayer means the same thing...
+	//protected boolean isBeingControlled = false;
 	
 	private boolean isPlayer;
 
@@ -64,7 +65,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public void returnAI()
 	{
-		isBeingControlled = false;
+		isPlayer = false;
 	}
 
 	/**
@@ -74,7 +75,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public void setDirection(Direction dir)
 	{
-		isBeingControlled = true;
+		isPlayer = true;
 		lastDirection = curDirection;
 		curDirection = dir;
 	}
@@ -190,7 +191,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public Direction getMove()
 	{
-		if(isBeingControlled)
+		if(isPlayer)
 		{
 			int curX = this.x();
 			int curY = this.y();
