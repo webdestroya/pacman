@@ -28,13 +28,13 @@ public class MultiplayerMenu{
 		
 		//make host pac-man button
 		hostPacMan = GameController.getInstance().getPacInstance().makeButton("PacManPlayer",GameController.getInstance().getPacInstance().getImage("pacbutton.png"),
-                281, 750);
+                281, 250);
 		//set pac-man button position
 		hostPacMan.position(canvasWidth/2 - (hostPacMan.width() + 7), buttonStartHeight);
 		
 		//make join ghost button
 		joinGhost = GameController.getInstance().getPacInstance().makeButton("GhostPlayer",GameController.getInstance().getPacInstance().getImage("ghostbutton.png"),
-                281, 750);
+                281, 250);
 		//set ghost button position
 		joinGhost.position(canvasWidth/2 + 7,	buttonStartHeight);
 	}
