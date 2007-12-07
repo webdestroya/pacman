@@ -2,6 +2,7 @@ package code.uci.pacman.ai;
 
 import code.uci.pacman.game.*;
 import code.uci.pacman.objects.controllable.*;
+import java.util.Random;
 
 /**
  * This class contains the AI for the red ghost, Blinky.
@@ -27,8 +28,36 @@ public class Blinky extends Ghost{
 		// so for now this is just an example for one way of doing this
 		
 		// first check to see if in scatter mode
+		// In Scatter Mode, the ghost moves along until it comes to a junction.
+		// From here, it can continue on it's path or it can turn.  This is done
+		// randomly.  They never go backwards.
 		if (this.isScattered()) {
-			
+			//if going vertical and there is no junction, continue on path
+			if ((curDirection == Direction.UP) || (curDirection == Direction.DOWN))
+			{
+				if ((!this.moveIsAllowed(Direction.LEFT)) && (!this.moveIsAllowed(Direction.RIGHT)))
+					return curDirection;
+			}
+			//if going horizontal and there is no junction, continue on path
+			else if ((curDirection == Direction.LEFT) || (curDirection == Direction.RIGHT))
+			{
+				if ((!this.moveIsAllowed(Direction.UP)) && (!this.moveIsAllowed(Direction.DOWN)))
+					return curDirection;
+			}
+			else {
+				//If there is a junction, the PacMan can choose to either turn in an open 
+				//perpendicular direction, or it can continue along it's current direction.
+				Random rand = new Random();
+				Direction[] availableChoices = availableScatterDirections();
+				int choice = rand.nextInt(availableChoices.length);
+				if (availableChoices[choice] == curDirection)
+					return curDirection;
+				else{
+					lastDirection = curDirection;
+					curDirection = availableChoices[choice];
+					return curDirection;
+				}
+			}
 		} else {
 			int curX = this.x();
 			int curY = this.y();
@@ -85,6 +114,53 @@ public class Blinky extends Ghost{
 		}
 		
 		return null;
+	}
+	
+	private Direction[] availableScatterDirections() {
+		Direction[] available = new Direction[4];
+		available[0] = Direction.UP;
+		available[1] = Direction.DOWN;
+		available[2] = Direction.LEFT;
+		available[3] = Direction.RIGHT;
+		
+		//Remove blocked paths from choices.
+		for (Direction d: available)
+			if (!this.moveIsAllowed(d))
+				removeAvailableDirection(available, d);
+		//Remove going backwards as a choice.
+		removeAvailableDirection(available, oppositeDirection(curDirection));
+		
+		
+		return available;
+	}
+	
+	private Direction[] removeAvailableDirection(Direction[] available, Direction toBeRemoved) {
+		//Find the direction that should be removed.
+		int indexOfToBeRemoved = -1;
+		for (int index = 0; index < available.length; index++)
+			if (available[index] == toBeRemoved)
+				indexOfToBeRemoved = index;
+		//If it's already not there, just return the array as given.
+		if (indexOfToBeRemoved == -1)
+			return available;
+		//Otherwise, remove the array
+		Direction[] newAvailable = new Direction[available.length - 1];
+		for (int index = 0; index < indexOfToBeRemoved; index++)
+			newAvailable[index] = available[index];
+		for (int index = indexOfToBeRemoved; index < newAvailable.length; index++)
+			newAvailable[index] = available[index - 1];
+		
+	    return newAvailable;
+	}
+	
+	private Direction oppositeDirection(Direction d) {
+		if (d == Direction.UP)
+			return Direction.DOWN;
+		if (d == Direction.DOWN)
+			return Direction.UP;
+		if (d == Direction.RIGHT)
+			return Direction.LEFT;
+		return Direction.RIGHT;
 	}
 
 }
