@@ -26,7 +26,7 @@ public class Client extends Thread
 	
 	protected final static String MCAST_ADDRESS = "230.0.0.1";
 
-	class Heartbeat
+	class Heartbeat extends Thread
 	{
 		public void run()
 		{
