@@ -72,6 +72,7 @@ public class Server extends Thread
 
 		public void dropDead()
 		{
+			System.out.println("SEARCHING FOR DEAD CLIENTS");
 			long now = Calendar.getInstance().getTimeInMillis();
 			
 			Set<Map.Entry<InetAddress,Long>> ts = ia2t.entrySet();
@@ -80,6 +81,7 @@ public class Server extends Thread
 			for (Iterator<Map.Entry<InetAddress,Long>> i = ts.iterator(); i.hasNext(); )
 			{
 				Map.Entry<InetAddress,Long> ent = i.next();
+				System.out.println("\tL:"+(ent.getValue()+30000)+"|N:"+now);
 				if( now >= ( ent.getValue().longValue()+30000 ) )
 				{
 					System.out.println("CLIENT "+ent.getKey()+" IS DEAD");
@@ -113,7 +115,7 @@ public class Server extends Thread
 		}
 	}//CLIENTMAP////////////////////////
 	
-	private static ClientMap clients;
+	protected static ClientMap clients;
 
     protected boolean moreQuotes = true;
 
