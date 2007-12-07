@@ -291,11 +291,11 @@ public class PacManGame extends Ucigame {
 	 * Starts ghost scatter timer
 	 */
 	public void startScatterTimer() {
-		startTimer("unScatterGhosts", GhostController.SCATTERSECONDS);
+		restartTimer("unScatterGhosts", GhostController.SCATTERSECONDS);
 	}
 	
 	public void startInitialWaitTimer(){
-		startTimer("initialWait", 5000);
+		restartTimer("initialWait", 5000);
 	}
 	
 	public void initialWaitTimer(){

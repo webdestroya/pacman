@@ -52,7 +52,6 @@ public class GameController {
 		GameState.setInstance(new GameState());
 		state = GameState.getInstance();
 		this.game = pacManGame;
-		performNextMove = false;
 	}
 
 	/**
@@ -147,7 +146,7 @@ public class GameController {
 		SoundController.pacmanEaten();
 		if (state.getLives() > 0) { // if Pac-man has more lives
 			performNextMove = false;
-			game.startTimer("pacManDeath", 2000);
+			game.restartTimer("pacManDeath", 2000);
 			//SEE PACMAN for where the modes are set
 			state.getPacMan().setAnimationMode("death"); //set pacman to "death" frame mode
 		} else { // if Pac-man has died one too many times
@@ -227,6 +226,7 @@ public class GameController {
 	 */
 	public void startGame() {
 		state.initialize();
+		performNextMove = false;
 		game.startInitialWaitTimer(); //calls initialWaitOver after 5 seconds.
 		SoundController.gameStarted(); //plays start game song
 	}

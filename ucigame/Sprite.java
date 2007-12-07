@@ -1350,6 +1350,12 @@ public class Sprite
 		int ppCollisionCount = 0;
 
 		//loop through the overlapped area to see if there is any pixel collision
+		if (this.transparencyBuffer.size() <= getCurrentFrame() || 
+				_sprite.transparencyBuffer.size() <= _sprite.getCurrentFrame()) {
+			System.err.println("Sprite Problem: Pixel Perfect Collision Failed 1");
+			return ppCollisionCount; //stop right now
+		}
+		
 		int[][] thisSprite = this.transparencyBuffer.get(getCurrentFrame());
 		int[][] otherSprite = _sprite.transparencyBuffer.get(_sprite.getCurrentFrame());
 
@@ -1372,6 +1378,10 @@ public class Sprite
 					
 					}	
 					
+				}
+				else
+				{
+					System.err.println("Sprite Problem: Pixel Perfect Collision Failed 2");
 				}
 			}
 

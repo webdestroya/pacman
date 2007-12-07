@@ -795,6 +795,7 @@ public abstract class Ucigame
 
 	public final void startTimer(String _name, double _millisBetween)
 	{
+		//start again
 		if (_millisBetween < 1)
 		{
 			logError("Invalid second parameter in startTimer(" + _name +
@@ -840,6 +841,34 @@ public abstract class Ucigame
 		}
 		logError("No timer found with name " + _name);
 		return;
+	}
+	
+	public void restartTimer(String _name, double d) {
+		//stop if already going
+		if (doesTimerExist(_name)) {
+			stopTimer(_name);
+		}
+		startTimer(_name, d);
+	}
+	
+	private boolean doesTimerExist(String _name) {
+		for (Timer t : timers)
+		{
+			Method m = t.timerMethod;
+			if (m.getName().equals(_name + "Timer"))
+			{
+				return true;
+			}
+		}
+		for (Timer t : timers2)   // just in case a startTimer and stopTimer call are
+		{                         // made closely together
+			Method m = t.timerMethod;
+			if (m.getName().equals(_name + "Timer"))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public final void print(String x)  { System.out.print(x); }
