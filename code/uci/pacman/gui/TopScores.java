@@ -109,12 +109,6 @@ public class TopScores{
 	 * 
 	 */
 	public void draw(){
-		//turn off pellet, ghost, and ambient sound
-		//SoundController.stopAllSounds();
-		
-		//stop MainMenu music
-		//MainMenu.stopMenuTheme();
-		
 		//put text on screen from arrayLists
 		for(int x = 0; x < numberOfScores; x++){
 			backGround.putText(nameList.get(x)+"", nameStartPosX, nameStartPosY + x*spaceIncrement);
