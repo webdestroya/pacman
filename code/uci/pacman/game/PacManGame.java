@@ -134,9 +134,9 @@ public class PacManGame extends Ucigame {
 	 */
 	public void showScoresScreen() {
 		// initialize top scores
-		topScores = new TopScores();
-		mainMenu.stopMenuTheme();
 		SoundController.stopAllSounds();
+		topScores = new TopScores();
+		mainMenu.stopMenuTheme();		
 		canvas.background(getImage( "topscores.png"));
 		topScores.startTopScoresTheme();
 		showScene(ScreenMode.SCORES);
@@ -147,6 +147,7 @@ public class PacManGame extends Ucigame {
 	 */
 	public void showGameOverScreen() {
 		canvas.background(0, 0, 0);		
+		SoundController.stopAllSounds();
 		showScene(ScreenMode.GAMEOVER);
 	}
 
