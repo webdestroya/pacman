@@ -41,7 +41,7 @@ public class Client extends Thread
 				{
 					socksend.send(hbpack);
 				}
-				socksend.close();
+				//socksend.close();
 			}
 			catch(Exception e)
 			{
