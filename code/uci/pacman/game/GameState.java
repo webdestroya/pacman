@@ -66,7 +66,8 @@ public class GameState {
 		pellets = new PowerPelletController();
 		ghosts = new GhostController();
 		bonusItem = new Fruit(300, 330, 100);
-		SoundController.startAmbient();
+		SoundController.feverSwitch(false); //stop fever song
+		SoundController.startAmbient(); //start ambient noise
 	}
 
 	/**
