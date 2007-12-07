@@ -44,7 +44,6 @@ public class GameController {
 	// Static Singleton Methods
 
 	private GameState state;
-
 	private PacManGame game;
 
 	// Instance Methods
@@ -161,10 +160,10 @@ public class GameController {
 		state.getGhosts().respawn();
 		state.getFruit().hide();
 		state.getPacMan().position(PACMANSTART);
-		state.getPacMan().setAnimationMode("default"); //restores PacMan to default animations
+		state.getPacMan().setAnimationMode("chomp"); //restores PacMan to default animations
 		state.getPacMan().step(Direction.RIGHT);
 		performNextMove = true;
-	}
+	};
 
 	/**
 	 * Handles the event of a pellet being eaten on screen by PacMan. This
@@ -183,6 +182,7 @@ public class GameController {
 		state.getGhosts().scatter();
 		game.startScatterTimer();
 		SoundController.pelletEaten();
+		SoundController.feverSwitch(true);
 	}
 
 	/**
@@ -242,6 +242,7 @@ public class GameController {
 	 * 
 	 */
 	public void unscatterGhosts() {
+		SoundController.feverSwitch(false); //turns off fever
 		state.getGhosts().unscatter();
 	}
 

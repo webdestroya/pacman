@@ -22,7 +22,9 @@ public class SoundController {
 	private static Sound ghost = makeSound("gs_eatghost.mp3");
 	private static Sound pacman = makeSound("gs_pacmandies.mp3");
 	private static Sound start = makeSound("gs_start.mp3");
+	private static Sound fever = makeSound("fever_clip.mp3");
 	//private static Sound topScore = makeSound("scores.mp3");
+
 	
 	/**
 	 * Plays the appropriate sound for a pellet being eaten, once and then stops.
@@ -66,7 +68,13 @@ public class SoundController {
 		start.play();
 	}
 	
-	
+	/**
+	 * Not in the javadocs. but do we need to take in account for the other sounds? i think we forgot some here like this one.
+	 */
+	public static void feverSwitch(boolean play){
+		if (play) { stopAllSounds(); fever.play(); } 
+		else { fever.stop(); startAmbient(); }
+	}
 	
 	/**
 	 * Begins a loop playing the appropriate ambient sound over and over again 
