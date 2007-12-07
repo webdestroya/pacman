@@ -17,7 +17,7 @@ public class MainMenu{
 	private Sprite quit;
 	private int canvasWidth = 600;
 	private int canvasHeight = 650;
-	private Sound menuTheme;
+	private static Sound menuTheme;
 	private int buttonStartHeight = 120;
 	private int buttonHeight = 83;
 	
@@ -71,7 +71,7 @@ public class MainMenu{
 	 * Plays the main theme in a loop until stopMenuTheme is called
 	 * 
 	 */
-	public void startMenuTheme()
+	public static void startMenuTheme()
 	{
 		menuTheme.loop();		
 	}
@@ -81,7 +81,7 @@ public class MainMenu{
 	 * Stops the main theme
 	 *  
 	 */
-	public void stopMenuTheme()
+	public static void stopMenuTheme()
 	{
 		menuTheme.stop();
 	}
