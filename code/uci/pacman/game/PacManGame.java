@@ -377,6 +377,7 @@ public class PacManGame extends Ucigame {
 		}
 	}
 
+	
 	/**
 	 * 
 	 * shows top scores screen.
@@ -392,7 +393,7 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
-	 * 
+	 * returns back to MainMenu from Top Scores or Multiplayer
 	 */
 	public void onClickTopScoresMainMenu(){
 		if(isShowingScene(ScreenMode.SCORES) || isShowingScene(ScreenMode.MULTIGAME))
