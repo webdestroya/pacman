@@ -217,7 +217,6 @@ public class Client extends Thread
 					{
 						// set lives count
 						int lives = (buf[1]&0xFF);
-						System.out.println("RLIVES: "+lives);
 						GameState.getInstance().setLives( lives );
 					}
 					else if( PType.AFRUIT.ordinal() == packetType )
