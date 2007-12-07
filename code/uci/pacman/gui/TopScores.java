@@ -59,11 +59,10 @@ public class TopScores{
 		backGround.font(PacManGame.font, PacManGame.BOLD, 24, 255, 255, 255);
 		if(isTopList()){
 			addTopScore();
-			writeScores();
 		}
 	}
 	
-	private void readScores(){
+	public void readScores(){
 		try
 		{
 			inFile = new FileReader("code\\uci\\pacman\\gui\\scores.txt");
@@ -87,7 +86,7 @@ public class TopScores{
 		}
 	}
 	
-	private void writeScores(){
+	public void writeScores(){
 		try
 		{
 			outFile = new FileWriter("code\\uci\\pacman\\gui\\scores.txt");
@@ -132,7 +131,8 @@ public class TopScores{
 	 * 
 	 */
 	public boolean isTopList(){
-		score = GameState.getInstance().getScore();
+		score = 5500;
+		//score = GameState.getInstance().getScore();
 		for(int x = 0; x < numberOfScores; x++){
 			if(score >= scoreList.get(x)){
 				addIndex = x;
