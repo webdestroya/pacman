@@ -67,13 +67,13 @@ public class Server extends Thread
 		
 		public void heartbeat(InetAddress a)
 		{
-			ia2t.put(a, new Long(Calendar.getInstance().getTimeInMillis() ));
+			ia2t.put(a, new Long(System.currentTimeMillis() ));
 		}
 
 		public void dropDead()
 		{
 			System.out.println("SEARCHING FOR DEAD CLIENTS");
-			long now = Calendar.getInstance().getTimeInMillis();
+			long now = System.currentTimeMillis();
 			
 			Set<Map.Entry<InetAddress,Long>> ts = ia2t.entrySet();
 
