@@ -110,6 +110,7 @@ public class TopScores{
 		}
 		catch(IOException e)
 		{
+			System.err.println("Output scores.txt does not exist!");
 			e.printStackTrace();
 		}			
 	}
