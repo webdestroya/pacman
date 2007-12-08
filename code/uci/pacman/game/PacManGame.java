@@ -91,7 +91,7 @@ public class PacManGame extends Ucigame {
 	private void showCreditsScreen() {
 		topScores.stopTopScoresTheme();
 		creditsScreen = new CreditsScreen();
-		canvas.background(getImage("credits/creditsbackground.png"));
+		canvas.background(getImage("credits/creditsbackground.png"));		
 		creditsScreen.playCreditsTheme();
 		showScene(ScreenMode.CREDITS);		
 	}
