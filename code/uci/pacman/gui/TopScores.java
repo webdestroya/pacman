@@ -177,6 +177,11 @@ public class TopScores{
 		GameState.getInstance().addToScore(score*-1);
 	}
 		
+	/**
+	 *	 
+	 * Allows the user to type in their name when they get a top score.
+	 *  
+	 */
 	public void addToName(String nextChar){
 		if(addIndex != -1 && name.length()< 10){
 			name = name + nextChar;
@@ -185,6 +190,11 @@ public class TopScores{
 		}
 	}
 	
+	/**
+	 *	 
+	 * Allows the user to backspace and remove the last letter they typed
+	 *  
+	 */
 	public void removeFromName()
 	{
 		if(addIndex != -1 && name.length() > 0){
@@ -194,6 +204,11 @@ public class TopScores{
 		}
 	}
 	
+	/**
+	 *	 
+	 * Starts the top scores theme
+	 *  
+	 */	
 	public void startTopScoresTheme()
 	{
 		topScoresTheme.loop();		
@@ -201,7 +216,7 @@ public class TopScores{
 	
 	/**
 	 *	 
-	 * Stops the main theme
+	 * Stops the top scores theme
 	 *  
 	 */
 	public void stopTopScoresTheme()
