@@ -99,7 +99,7 @@ public class TopScores{
 			outFile = new FileWriter("scores.txt");
 			for(int x = 0; x < numberOfScores; x++)
 			{
-				if(nameList.get(x).equals(""))
+				if(nameList.get(x).equals("") || nameList.get(x).equals("<Enter Name!>"))
 				{
 					outFile.write("PLAYER ");
 				}
