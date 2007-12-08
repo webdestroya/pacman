@@ -133,8 +133,8 @@ public class TopScores{
 	 * 
 	 */
 	public boolean isTopList(){
-		//score = 7000;
-		score = GameState.getInstance().getScore();
+		score = 7000;
+		//score = GameState.getInstance().getScore();
 		for(int x = 0; x < numberOfScores; x++){
 			if(score >= scoreList.get(x)){
 				addIndex = x;
@@ -162,7 +162,7 @@ public class TopScores{
 		scoreList.add(addIndex, score);
 		scoreList.remove(10);
 		writeScores();
-		name = "<Type your name!>";
+		name = "<Enter Name!>";
 		nameList.set(addIndex, name);
 		name = "";
 		GameState.getInstance().addToScore(score*-1);
@@ -171,6 +171,15 @@ public class TopScores{
 	public void addToName(String nextChar){
 		if(addIndex != -1 && name.length()< 10){
 			name = name + nextChar;
+			nameList.set(addIndex, name);
+			writeScores();
+		}
+	}
+	
+	public void removeFromName()
+	{
+		if(addIndex != -1 && name.length() > 0){
+			name = name.substring(0, name.length() - 1);
 			nameList.set(addIndex, name);
 			writeScores();
 		}
