@@ -92,8 +92,16 @@ public class TopScores{
 		try
 		{
 			outFile = new FileWriter("code\\uci\\pacman\\gui\\scores.txt");
-			for(int x = 0; x < numberOfScores; x++){
-				outFile.write(nameList.get(x)+" ");
+			for(int x = 0; x < numberOfScores; x++)
+			{
+				if(nameList.get(x).equals(""))
+				{
+					outFile.write("PLAYER ");
+				}
+				else
+				{
+					outFile.write(nameList.get(x)+" ");
+				}
 				outFile.write(scoreList.get(x)+"");
 				if(x!=9)
 					outFile.write("\n");
@@ -133,8 +141,8 @@ public class TopScores{
 	 * 
 	 */
 	public boolean isTopList(){
-		score = 7000;
-		//score = GameState.getInstance().getScore();
+		//score = 7000;
+		score = GameState.getInstance().getScore();
 		for(int x = 0; x < numberOfScores; x++){
 			if(score >= scoreList.get(x)){
 				addIndex = x;
@@ -156,7 +164,7 @@ public class TopScores{
 	 * 
 	 */
 	public void addTopScore(){
-		name = "Unknown";
+		name = "PLAYER";
 		nameList.add(addIndex, name);
 		nameList.remove(10);
 		scoreList.add(addIndex, score);
