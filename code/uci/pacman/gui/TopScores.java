@@ -58,7 +58,7 @@ public class TopScores{
 		
 		creditsButton = GameController.getInstance().getPacInstance().makeButton("CreditsFromTopScores",GameController.getInstance().getPacInstance().getImage("creditsButton.png"),
                 249, 76);
-		creditsButton.position(menuButtonX, menuButtonY + 76);
+		creditsButton.position(menuButtonX, menuButtonY + 80);
 		
 		readScores();
 		backGround = GameController.getInstance().getPacInstance().makeSpriteFromPath("scorespriteadjuster.png");
