@@ -188,14 +188,9 @@ public class TopScores{
 	 * 
 	 */
 	public void addTopScore(){
-		try
-		{
-			name = System.getProperty("user.name");
-		}
-		catch(Exception e)
-		{
-			name = "PLAYER";
-		}
+		// we can't use getProperty(user.name) because if the user's name has a space in it, 
+		// readScores() can't read it properly later
+		name = "PLAYER";
 		nameList.add(addIndex, name);
 		nameList.remove(10);
 		scoreList.add(addIndex, score);
