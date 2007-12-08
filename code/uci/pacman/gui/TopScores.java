@@ -69,7 +69,8 @@ public class TopScores{
 		}
 	}
 	
-	public void readScores(){
+	// Was switched to private.  If top scores starts glitching out, make this public again
+	private void readScores(){
 		try
 		{
 			inFile = new FileReader("scores.txt");
@@ -93,6 +94,11 @@ public class TopScores{
 		}
 	}
 	
+	/**
+	 *	 
+	 * Writes out the current top scores and names to scores.txt
+	 *  
+	 */
 	public void writeScores(){
 		try
 		{
@@ -228,6 +234,11 @@ public class TopScores{
 		}
 	}
 	
+	/**
+	 *	 
+	 * Hides the top scores and buttons on the Top Scores screen
+	 *  
+	 */
 	public void hideButtonsAndScores()
 	{
 		topScoresMainMenu.hide();
