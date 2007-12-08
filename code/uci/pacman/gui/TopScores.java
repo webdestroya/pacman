@@ -56,7 +56,7 @@ public class TopScores{
                 249, 76);
 		topScoresMainMenu.position(menuButtonX, menuButtonY);
 		
-		creditsButton = GameController.getInstance().getPacInstance().makeButton("CreditsFromTopScores",GameController.getInstance().getPacInstance().getImage("creditsButton.png"),
+		creditsButton = GameController.getInstance().getPacInstance().makeButton("CreditsFromTopScores",GameController.getInstance().getPacInstance().getImage("creditsbutton.png"),
                 249, 76);
 		creditsButton.position(menuButtonX, menuButtonY + 80);
 		
