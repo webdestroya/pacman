@@ -162,7 +162,7 @@ public class TopScores{
 		scoreList.add(addIndex, score);
 		scoreList.remove(10);
 		writeScores();
-		name = "Type your name!";
+		name = "<Type your name!>";
 		nameList.set(addIndex, name);
 		name = "";
 		GameState.getInstance().addToScore(score*-1);
