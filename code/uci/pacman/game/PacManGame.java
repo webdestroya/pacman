@@ -26,6 +26,7 @@ public class PacManGame extends Ucigame {
 	private MainMenu mainMenu;
 	private MultiplayerMenu multiMenu;
 	private IntroPlayer introPlayer; // for playing the intro
+	private CreditsScreen creditsScreen;
 	private ScreenMode currentScene; // stores the current scene displayed
 	public static String font = "Dialog.bold";
 	public static int multiplayerType = 1; // 1=server, 2=client
@@ -86,6 +87,15 @@ public class PacManGame extends Ucigame {
 			e.printStackTrace();
 		}
 	}
+	
+	private void showCreditsScreen() {
+		topScores.stopTopScoresTheme();
+		creditsScreen = new CreditsScreen();
+		canvas.background(getImage("credits/creditsbackground.png"));
+		creditsScreen.playCreditsTheme();
+		showScene(ScreenMode.CREDITS);		
+	}
+	
 
 	private void showMenuScreen() {
 		// stop intro theme
@@ -212,6 +222,11 @@ public class PacManGame extends Ucigame {
 	 */
 	public void drawIntro() {		
 		introPlayer.draw();
+	}
+	
+	public void drawCredits() {
+		canvas.clear();
+		creditsScreen.draw();
 	}
 
 	/**
@@ -408,6 +423,25 @@ public class PacManGame extends Ucigame {
 			showMenuScreen();
 		}
 	}//multiMenu.hideButtons();
+	
+	public void onClickCreditsFromTopScores(){
+		if(isShowingScene(ScreenMode.SCORES))
+		{
+			mainMenu.stopMenuTheme();
+			topScores.stopTopScoresTheme();
+			showCreditsScreen();
+		}
+	}
+
+	public void onClickBackToMainFromCredits(){
+		if(isShowingScene(ScreenMode.CREDITS))
+		{
+			mainMenu.stopMenuTheme();
+			creditsScreen.stopCreditsTheme();			
+			showMenuScreen();
+		}
+	}
+	
 	
 	/**
 	 * Returns player back to MainMenu from Multi-player

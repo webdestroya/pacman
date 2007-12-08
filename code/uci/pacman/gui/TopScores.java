@@ -20,6 +20,7 @@ import code.uci.pacman.game.PacManGame;
 public class TopScores{
 
 	private Sprite topScoresMainMenu;
+	private Sprite creditsButton;
 	private ArrayList<String> nameList = new ArrayList<String>();
 	private ArrayList<Integer> scoreList = new ArrayList<Integer>();
 	private String name;
@@ -54,6 +55,10 @@ public class TopScores{
 		topScoresMainMenu = GameController.getInstance().getPacInstance().makeButton("TopScoresMainMenu",GameController.getInstance().getPacInstance().getImage("mainmenubutton.png"),
                 249, 76);
 		topScoresMainMenu.position(menuButtonX, menuButtonY);
+		
+		creditsButton = GameController.getInstance().getPacInstance().makeButton("CreditsFromTopScores",GameController.getInstance().getPacInstance().getImage("creditsButton.png"),
+                249, 76);
+		creditsButton.position(menuButtonX, menuButtonY + 76);
 		
 		readScores();
 		backGround = GameController.getInstance().getPacInstance().makeSpriteFromPath("scorespriteadjuster.png");
@@ -135,6 +140,7 @@ public class TopScores{
 		}
 		backGround.draw();
 		topScoresMainMenu.draw();
+		creditsButton.draw();
 	}
 	
 	/**
@@ -220,6 +226,13 @@ public class TopScores{
 			nameList.set(addIndex, name);
 			writeScores();
 		}
+	}
+	
+	public void hideButtonsAndScores()
+	{
+		topScoresMainMenu.hide();
+		creditsButton.hide();
+		backGround.hide();
 	}
 	
 	/**

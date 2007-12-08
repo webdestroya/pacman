@@ -17,7 +17,7 @@ public class CreditsScreen{
 	private ArrayList<String> frames;
 	private Sound creditsSound;
 	private int drawCounter;
-	private Sprite playAgainButton; 
+	private Sprite backToMainButton; 
 	private Sprite quitButton;
 		
 	// The constructor creates the ArrayList containing the filenames of 
@@ -32,11 +32,11 @@ public class CreditsScreen{
 		creditsSound = GameController.getInstance().getPacInstance().getSound("sounds/final/CreditsTheme.mp3");
 		frames = new ArrayList<String>();
 		
-		playAgainButton = GameController.getInstance().getPacInstance().makeButton("PlayAgain",GameController.getInstance().getPacInstance().getImage("singleplayerButton.png"),
+		backToMainButton = GameController.getInstance().getPacInstance().makeButton("BackToMainFromCredits",GameController.getInstance().getPacInstance().getImage("mainmenubutton.png"),
                 249, 76);
-		playAgainButton.position(200, 450);
+		backToMainButton.position(195, 450);
 		
-		for (int currentImage = 1; currentImage <= 30; currentImage++)
+		for (int currentImage = 1; currentImage <= 16; currentImage++)
 		{
 			String workingString = "0";
 			if (currentImage < 10)
@@ -48,10 +48,8 @@ public class CreditsScreen{
 				workingString += currentImage;
 			}
 			workingString += ".png";
-			frames.add("images/final/intro/" + workingString);
-		}
-
-
+			frames.add("credits/" + workingString);
+		}		
 	}
 	
 	/**
@@ -60,14 +58,14 @@ public class CreditsScreen{
 	 * 
 	 */
 	public void draw(){
-			if (drawCounter < 30)
+			if (drawCounter < 17)
 			{
 				try
 				{
 					String frameLocation = frames.get(drawCounter);
 					Sprite currentFrame =  GameController.getInstance().getPacInstance().makeSpriteFromPath(frameLocation);
-					Thread.sleep(1525);	//orig 1525
 					currentFrame.draw();
+					Thread.sleep(4000);	//orig 1525					
 					drawCounter ++;
 				}
 				catch (InterruptedException e)
@@ -76,9 +74,9 @@ public class CreditsScreen{
 					e.printStackTrace();
 				}
 			}
-			if (drawCounter == 30)
-			{
-				playAgainButton.draw();				
+			if (drawCounter == 17)
+			{				
+				backToMainButton.draw();				
 			}
 	}
 	
