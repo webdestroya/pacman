@@ -86,7 +86,12 @@ public class CreditsScreen{
 				canClear = false;				
 			}
 	}
-	
+
+	/**
+	 * 
+	 * Used to check if drawCredits() in PacManGame can clear the canvas before drawing
+	 * 
+	 */
 	public boolean canClear()
 	{
 		return canClear;
