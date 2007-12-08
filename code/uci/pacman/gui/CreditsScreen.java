@@ -58,14 +58,14 @@ public class CreditsScreen{
 	 * 
 	 */
 	public void draw(){
-			if (drawCounter <= 16)
+			if (drawCounter < 16)
 			{
 				try
 				{
 					String frameLocation = frames.get(drawCounter);
 					Sprite currentFrame =  GameController.getInstance().getPacInstance().makeSpriteFromPath(frameLocation);
 					currentFrame.draw();
-					Thread.sleep(4000);	//orig 1525					
+					Thread.sleep(4500);	//orig 4000					
 					drawCounter ++;
 				}
 				catch (InterruptedException e)
@@ -74,8 +74,10 @@ public class CreditsScreen{
 					e.printStackTrace();
 				}
 			}
-			if (drawCounter == 17)
+			if (drawCounter == 16)
 			{				
+				Sprite finalFrame = GameController.getInstance().getPacInstance().makeSpriteFromPath(frames.get(15));
+				finalFrame.draw();
 				backToMainButton.draw();				
 			}
 	}
