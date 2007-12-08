@@ -58,7 +58,7 @@ public class CreditsScreen{
 	 * 
 	 */
 	public void draw(){
-			if (drawCounter < 17)
+			if (drawCounter <= 16)
 			{
 				try
 				{
