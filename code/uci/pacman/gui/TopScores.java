@@ -67,7 +67,7 @@ public class TopScores{
 	public void readScores(){
 		try
 		{
-			inFile = new FileReader("code\\uci\\pacman\\gui\\scores.txt");
+			inFile = new FileReader("scores.txt");
 			scanner = new Scanner(inFile);
 			while(scanner.hasNextLine())
 			{
@@ -91,7 +91,7 @@ public class TopScores{
 	public void writeScores(){
 		try
 		{
-			outFile = new FileWriter("code\\uci\\pacman\\gui\\scores.txt");
+			outFile = new FileWriter("scores.txt");
 			for(int x = 0; x < numberOfScores; x++)
 			{
 				if(nameList.get(x).equals(""))
@@ -122,9 +122,16 @@ public class TopScores{
 	 */
 	public void draw(){
 		//put text on screen from arrayLists
-		for(int x = 0; x < numberOfScores; x++){
-			backGround.putText(nameList.get(x)+"", nameStartPosX, nameStartPosY + x*spaceIncrement);
-			backGround.putText(scoreList.get(x)+"", scoreStartPosX, scoreStartPosY + x*spaceIncrement);
+		
+		
+
+		for(int x = 0; x < numberOfScores; x++)
+		{
+			if( scoreList.size() > x )
+			{
+				backGround.putText(nameList.get(x)+"", nameStartPosX, nameStartPosY + x*spaceIncrement);
+				backGround.putText(scoreList.get(x)+"", scoreStartPosX, scoreStartPosY + x*spaceIncrement);
+			}
 		}
 		backGround.draw();
 		topScoresMainMenu.draw();
@@ -144,8 +151,12 @@ public class TopScores{
 	public boolean isTopList(){
 		//score = 7000;
 		score = GameState.getInstance().getScore();
-		for(int x = 0; x < numberOfScores; x++){
-			if(score >= scoreList.get(x)){
+
+		//for(int x = 0; x < numberOfScores; x++)
+		for(int x = 0; x < scoreList.size(); x++)
+		{
+			if(score >= scoreList.get(x))
+			{
 				addIndex = x;
 				return true;
 			}
@@ -165,7 +176,14 @@ public class TopScores{
 	 * 
 	 */
 	public void addTopScore(){
-		name = "PLAYER";
+		try
+		{
+			name = System.getProperty("user.name");
+		}
+		catch(Exception e)
+		{
+			name = "PLAYER";
+		}
 		nameList.add(addIndex, name);
 		nameList.remove(10);
 		scoreList.add(addIndex, score);

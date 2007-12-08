@@ -1,6 +1,8 @@
 #!/bin/bash
 
 echo -n > files.txt
+find ucigame/ -type f -iname '*.java' >> files.txt
+
 find code/uci/pacman/ai/ -type f -iname '*.java' >> files.txt
 find code/uci/pacman/controllers/ -type f -iname '*.java' >> files.txt
 find code/uci/pacman/game/ -type f -iname '*.java' >> files.txt

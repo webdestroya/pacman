@@ -40,6 +40,7 @@ public class PacManGame extends Ucigame {
 	{
 		String[] args2 = new String[1];
 		args2[0] = "code.uci.pacman.game.PacManGame";
+		System.out.println("Current User: " + System.getProperty("user.name") );
 		Ucigame.main(args2);
 	}
 

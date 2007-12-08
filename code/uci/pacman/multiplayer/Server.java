@@ -76,7 +76,7 @@ public class Server extends Thread
 
 		public void dropDead()
 		{
-			System.out.println("SEARCHING FOR DEAD CLIENTS");
+			//System.out.println("SEARCHING FOR DEAD CLIENTS");
 			long now = System.currentTimeMillis();
 			
 			Set<Map.Entry<InetAddress,Long>> ts = ia2t.entrySet();
@@ -85,10 +85,10 @@ public class Server extends Thread
 			for (Iterator<Map.Entry<InetAddress,Long>> i = ts.iterator(); i.hasNext(); )
 			{
 				Map.Entry<InetAddress,Long> ent = i.next();
-				System.out.println("\tL:"+(ent.getValue()+30000)+"|N:"+now);
+				//System.out.println("\tL:"+(ent.getValue()+30000)+"|N:"+now);
 				if( now >= ( ent.getValue().longValue()+30000 ) )
 				{
-					System.out.println("CLIENT "+ent.getKey()+" IS DEAD");
+					//System.out.println("CLIENT "+ent.getKey()+" IS DEAD");
 					drop(ent.getKey());
 				}
 			}
@@ -178,9 +178,6 @@ public class Server extends Thread
 						socketSend.send(packet);
 						socketSend.close();
 
-
-						// DROP DEAD HEARTBEAT CLIENTS
-						Server.clients.dropDead();
 						
 						// sleep some
 						Thread.currentThread().sleep(5000);
@@ -189,6 +186,11 @@ public class Server extends Thread
 					{
 						// take longer naps when we are full
 						Thread.currentThread().sleep(10000);
+					}
+
+					if( Server.clients.size() > 0 )
+					{
+						Server.clients.dropDead();
 					}
 				}
 				catch(Exception e)
