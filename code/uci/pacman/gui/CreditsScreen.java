@@ -19,6 +19,7 @@ public class CreditsScreen{
 	private int drawCounter;
 	private Sprite backToMainButton; 
 	private Sprite quitButton;
+	private boolean canClear;
 		
 	// The constructor creates the ArrayList containing the filenames of 
 	// each image in the opening.
@@ -29,12 +30,13 @@ public class CreditsScreen{
 	 */
 	public CreditsScreen() {
 		drawCounter = 1;
+		canClear = true;
 		creditsSound = GameController.getInstance().getPacInstance().getSound("sounds/final/CreditsTheme.mp3");
 		frames = new ArrayList<String>();
 		
 		backToMainButton = GameController.getInstance().getPacInstance().makeButton("BackToMainFromCredits",GameController.getInstance().getPacInstance().getImage("mainmenubutton.png"),
                 249, 76);
-		backToMainButton.position(195, 450);
+		backToMainButton.position(300, 42);
 		
 		for (int currentImage = 1; currentImage <= 16; currentImage++)
 		{
@@ -49,12 +51,14 @@ public class CreditsScreen{
 			}
 			workingString += ".png";
 			frames.add("credits/" + workingString);
-		}		
+		}
+		
+		//frames.add("credits/001.png");
 	}
 	
 	/**
 	 * 
-	 * Draws the frames for the credits graphics, adds the buttons to play again or quit
+	 * Draws the frames for the credits graphics, adds the button to go to main menu
 	 * 
 	 */
 	public void draw(){
@@ -64,22 +68,28 @@ public class CreditsScreen{
 				{
 					String frameLocation = frames.get(drawCounter);
 					Sprite currentFrame =  GameController.getInstance().getPacInstance().makeSpriteFromPath(frameLocation);
+					Thread.sleep(4500);	//orig 4000
 					currentFrame.draw();
-					Thread.sleep(4500);	//orig 4000					
 					drawCounter ++;
 				}
 				catch (InterruptedException e)
 				{
-					System.out.println("Intro Thread was Interrupted!");
+					System.out.println("Credits Thread was Interrupted!");
 					e.printStackTrace();
 				}
 			}
 			if (drawCounter == 16)
 			{				
-				Sprite finalFrame = GameController.getInstance().getPacInstance().makeSpriteFromPath(frames.get(15));
+				Sprite finalFrame = GameController.getInstance().getPacInstance().makeSpriteFromPath(frames.get(15));				
 				finalFrame.draw();
-				backToMainButton.draw();				
+				backToMainButton.draw();
+				canClear = false;				
 			}
+	}
+	
+	public boolean canClear()
+	{
+		return canClear;
 	}
 	
 	/**
