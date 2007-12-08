@@ -462,7 +462,14 @@ public class PacManGame extends Ucigame {
 		{
 			try
 			{
-				topScores.addToName(keyboard.getKeyChar());
+				if(keyboard.isDown(keyboard.BACKSPACE))
+				{
+					topScores.removeFromName();
+				}
+				else
+				{
+					topScores.addToName(keyboard.getKeyChar());
+				}
 				Thread.sleep(100);
 			}
 			catch(InterruptedException e)
