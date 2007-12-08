@@ -384,7 +384,7 @@ public class PacManGame extends Ucigame {
 	
 	/**
 	 * 
-	 * shows top scores screen.
+	 * Shows top scores screen from MainMenu.
 	 * 
 	 */
 	public void onClickTopScores() {
@@ -422,7 +422,7 @@ public class PacManGame extends Ucigame {
 
 	/**
 	 * 
-	 * Writes out the high scores, then quits the game.
+	 * Quits the game.
 	 * 
 	 */
 	public void onClickQuit() {
@@ -445,7 +445,7 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
-	 *
+	 * Allows the user to skip the intro by holding down "S" or the Spacebar 
 	 *
 	 */
 	public void onKeyPressIntro() {
@@ -457,6 +457,11 @@ public class PacManGame extends Ucigame {
 		}
 	}
 	
+	/**
+	 *	 
+	 * Keyboard listener that allows the user to type their name on the high scores screen.
+	 *  
+	 */
 	public void onKeyPressScores(){
 		if(isShowingScene(ScreenMode.SCORES))
 		{
@@ -490,7 +495,7 @@ public class PacManGame extends Ucigame {
 	//}
 
 	/**
-	 *
+	 * 
 	 */
 	public void onKeyPressGame() {
 		// // Arrow keys and WASD keys move the paddle
@@ -553,8 +558,8 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
-	 *
-	 *
+	 * Keyboard listener.  If the player presses R, restarts the game.
+	 * If the player presses T, goes to top scores screen.
 	 */
 	public void onKeyPressGameover() {
 		if (keyboard.isDown(keyboard.R) && isShowingScene(ScreenMode.GAMEOVER)) 
@@ -571,10 +576,12 @@ public class PacManGame extends Ucigame {
 	}
 
 	/**
-	 *
+	 * @param filename
+	 * Makes a Sprite object from the image file specified by the filename passed in
+	 * @return Sprite
 	 */
-	public Sprite makeSpriteFromPath(String string) {
-		return makeSprite(getImage(string));
+	public Sprite makeSpriteFromPath(String filename) {
+		return makeSprite(getImage(filename));
 	}
 
 	/**
