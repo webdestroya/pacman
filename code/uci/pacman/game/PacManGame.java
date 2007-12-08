@@ -225,7 +225,10 @@ public class PacManGame extends Ucigame {
 	}
 	
 	public void drawCredits() {
-		canvas.clear();
+		if(creditsScreen.canClear())
+		{
+			canvas.clear();
+		}
 		creditsScreen.draw();
 	}
 
