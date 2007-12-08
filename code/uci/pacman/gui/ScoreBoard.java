@@ -74,7 +74,7 @@ public class ScoreBoard{
 		//to get all of the information use GameState.getInstance().getTheItemYouWant()
 		
 		//add scores from GameState and draw score sprite onto canvas
-		score.putText(GameState.getInstance().getScore() + "", 126, 24);
+		score.putText(GameState.getInstance().getScore() + "", 110, 24);
 		score.draw();
 		
 		//add levels from GameState and draw levels on canvas
