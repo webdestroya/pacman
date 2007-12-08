@@ -429,6 +429,7 @@ public class PacManGame extends Ucigame {
 		{
 			mainMenu.stopMenuTheme();
 			topScores.stopTopScoresTheme();
+			topScores.hideButtonsAndScores();
 			showCreditsScreen();
 		}
 	}
