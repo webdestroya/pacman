@@ -350,14 +350,6 @@ public class PacManGame extends Ucigame {
 	public void onClickMultiPlay() {
 		if (isShowingScene(ScreenMode.MENU)) {
 			System.out.println("load multiplayer screen..");
-			//try
-			//{
-			//	Thread.sleep(500);
-			//}
-			//catch(InterruptedException e)
-			//{
-			//	System.err.println("Multiplayer button interrupt!");				
-			//}
 			showMultiGameScreen();
 		}
 	}
