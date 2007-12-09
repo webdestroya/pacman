@@ -28,17 +28,17 @@ public class Blinky extends Ghost{
 		// so for now this is just an example for one way of doing this
 		
 		// first check to see if in scatter mode
-		// In Scatter Mode, the ghost moves along until it comes to a junction.
+		// In Scatter Mode, the ghost moves along until it comes to an intersection.
 		// From here, it can continue on it's path or it can turn.  This is done
 		// randomly.  They never go backwards.
 		if (this.isScattered()) {
-			//if going vertical and there is no junction, continue on path
+			//if going vertical and there is no intersection, continue on path
 			if ((curDirection == Direction.UP) || (curDirection == Direction.DOWN))
 			{
 				if ((!this.moveIsAllowed(Direction.LEFT)) && (!this.moveIsAllowed(Direction.RIGHT)))
 					return curDirection;
 			}
-			//if going horizontal and there is no junction, continue on path
+			//if going horizontal and there is no intersection, continue on path
 			else 
 			{
 				if ((!this.moveIsAllowed(Direction.UP)) && (!this.moveIsAllowed(Direction.DOWN)))
@@ -46,9 +46,9 @@ public class Blinky extends Ghost{
 			}
 			
 			//If control continues here, no return was called.
-			//Therefore, it is at a junction.
+			//Therefore, it is at an intersection.
 			
-			//If there is a junction, the PacMan can choose to either turn in an open 
+			//If there is an intersection, the PacMan can choose to either turn in an open 
 			//perpendicular direction, or it can continue along it's current direction.
 			Random rand = new Random();
 			Direction[] availableChoices = availableScatterDirections();
