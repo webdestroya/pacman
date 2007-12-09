@@ -31,6 +31,8 @@ public class PacManGame extends Ucigame {
 	public static String font = "Dialog.bold";
 	public static int multiplayerType = 1; // 1=server, 2=client
 	public static int gameType = 1; // 1=single, 2 = multi
+	
+	private static boolean quickStart = true; // Skip the intro - use while developing.
 
 	/**
 	 * This was added to override the stupid UCI game thing that requires the param twice,
@@ -79,7 +81,10 @@ public class PacManGame extends Ucigame {
 			canvas.background(0, 0, 0);
 			Thread.sleep(3000);
 			showScene(ScreenMode.INTRO);
-			introPlayer.playIntroTheme();
+			if(!quickStart)
+				introPlayer.playIntroTheme();
+			else	
+				showMenuScreen();
 		}
 		catch(InterruptedException e)
 		{
