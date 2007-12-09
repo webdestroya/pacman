@@ -73,13 +73,13 @@ public class SoundController {
 	public static void feverSwitch(boolean play){
 		if (play) 
 		{ 
-			//stopAllSounds(); 
+			//stopAllSounds(); // see Google Docs as to why this was changed. 
 			fever.play();
 		} 
 		else 
 		{ 
 			fever.stop();
-			//startAmbient(); 
+			//startAmbient(); // see Google Docs as to why this was changed.
 		}
 	}
 	
