@@ -71,8 +71,16 @@ public class SoundController {
 	 * Not in the javadocs. but do we need to take in account for the other sounds? i think we forgot some here like this one.
 	 */
 	public static void feverSwitch(boolean play){
-		if (play) { stopAllSounds(); fever.play(); } 
-		else { fever.stop(); startAmbient(); }
+		if (play) 
+		{ 
+			//stopAllSounds(); 
+			fever.play();
+		} 
+		else 
+		{ 
+			fever.stop();
+			//startAmbient(); 
+		}
 	}
 	
 	/**
