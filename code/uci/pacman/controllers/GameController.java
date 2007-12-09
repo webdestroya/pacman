@@ -143,14 +143,18 @@ public class GameController {
 	 * 
 	 */
 	public void pacManEaten(PacMan pacMan) {
+		//the game is not supposed to play ambient sound during the game death
+		//I put this in so that the sound would stop when Pac Man dies
+		//I put the call to start ambient again in pacManRevive()
+		SoundController.stopAllSounds(); // stops the sounds
 		SoundController.pacmanEaten();
 		if (state.getLives() > 0) { // if Pac-man has more lives
-			performNextMove = false;
+			performNextMove = false;			 
 			game.restartTimer("pacManDeath", 2000);
 			//SEE PACMAN for where the modes are set
 			state.getPacMan().setAnimationMode("death"); //set pacman to "death" frame mode
 		} else { // if Pac-man has died one too many times
-			SoundController.stopAllSounds(); //stop the sounds          
+			//SoundController.stopAllSounds(); //stop the sounds          
 			game.showGameOverScreen();
 		}
 	}
@@ -162,6 +166,7 @@ public class GameController {
 		state.getPacMan().position(PACMANSTART);
 		state.getPacMan().setAnimationMode("chomp"); //restores PacMan to chomp animations
 		state.getPacMan().step(Direction.RIGHT);
+		SoundController.startAmbient(); // starts the ambient noise again
 		performNextMove = true;
 	};
 
