@@ -277,9 +277,11 @@ public class GameController {
 	private void checkStageClear() {
 		if (state.stageHasBeenCleared()) {
 			state.nextStage();
+			SoundController.stopAllSounds();
 			if (state.getLevel() <= 3) {
 				state.setupLevel(); //reinitializes the objects
 				state.getPacMan().setAnimationMode("chomp"); //needed to make pacman chomp
+				SoundController.startAmbient(); // starts ambient again after stage cleared
 			} else {
 				game.showScoresScreen();
 			}
