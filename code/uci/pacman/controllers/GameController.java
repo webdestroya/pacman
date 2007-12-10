@@ -31,6 +31,7 @@ public class GameController {
 	private static final Point PACMANSTART = new Point(290, 440);
 	private boolean performNextMove;
 	private int numberOfEatenGhostsInScatter;
+	private boolean scatterMode;
 
 	public static GameController getInstance() {
 		return gControl;
@@ -52,6 +53,7 @@ public class GameController {
 		GameState.setInstance(new GameState());
 		state = GameState.getInstance();
 		this.game = pacManGame;
+		scatterMode = false;
 	}
 
 	/**
@@ -182,10 +184,12 @@ public class GameController {
 	 */
 	public void pelletEaten(PowerPellet powerPellet) {
 		numberOfEatenGhostsInScatter = 0;
+		scatterMode = true;
 		state.addToScore(PowerPellet.SCOREVALUE);
 		state.getPellets().destroy(powerPellet);
 		state.getGhosts().scatter();
 		game.startScatterTimer();
+		SoundController.stopAllSounds();
 		SoundController.pelletEaten();
 		SoundController.feverSwitch(true);
 	}
@@ -203,7 +207,8 @@ public class GameController {
 	public void pillEaten(Pill pill) {
 		state.addToScore(Pill.SCOREVALUE);
 		state.getPills().destroy(pill);
-		SoundController.pillEaten();
+		if(!scatterMode)
+			SoundController.pillEaten();
 	}
 
 	/**
@@ -250,7 +255,9 @@ public class GameController {
 	 */
 	public void unscatterGhosts() {
 		SoundController.feverSwitch(false); //turns off fever
+		SoundController.startAmbient();
 		state.getGhosts().unscatter();
+		scatterMode = false;
 	}
 
 	/**
