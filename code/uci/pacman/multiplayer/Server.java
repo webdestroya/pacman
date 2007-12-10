@@ -49,11 +49,13 @@ public class Server extends Thread
 		{
 			gt2ia.put(g,a);
 			ia2gt.put(a,g);
+			heartbeat(a);
 		}
 		public void add(GhostType g, InetAddress a)
 		{
 			gt2ia.put(g,a);
 			ia2gt.put(a,g);
+			heartbeat(a);
 		}
 
 		public void drop(InetAddress a)
@@ -185,11 +187,12 @@ public class Server extends Thread
 						// take longer naps when we are full
 						Thread.currentThread().sleep(10000);
 					}
-
+					/*
 					if( Server.clients.size() > 0 )
 					{
 						Server.clients.dropDead();
 					}
+					*/
 				}
 				catch(Exception e)
 				{
@@ -369,6 +372,8 @@ public class Server extends Thread
 		{
 			try
 			{
+				Thread.currentThread().sleep(5000);
+
 				while(true)
 				{
 					if(Server.clients.size()>0)
@@ -644,12 +649,12 @@ public class Server extends Thread
 						// notify all the clients
 						send(gtype, dir);
 					}
-					else if( PType.HEARTBEAT.ordinal() == packetType )
+					/*else if( PType.HEARTBEAT.ordinal() == packetType )
 					{
 						// A client heartbeat, that way, we keep everyone updated.
 						Server.clients.heartbeat(address);
 						
-					}
+					}*/
 					else if( PType.LEAVE.ordinal() == packetType )
 					{
 						// a ghost is leaving

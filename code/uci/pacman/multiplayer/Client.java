@@ -442,7 +442,7 @@ public class Client extends Thread
 						GameController.getInstance().getPacInstance().showGameScreen();
 						
 						// Ah sir, should we start his heart again? DAMMIT SIMMONS! YES DO IT
-						new Heartbeat().start();
+						//new Heartbeat().start();
 
 						// set the ghosts direction
 						GameState.getInstance().getGhosts().getObjectAt(capitalize(Client.ghostType.name())).setDirection(Direction.UP);
