@@ -30,7 +30,7 @@ public class PacManGame extends Ucigame {
 	private ScreenMode currentScene; // stores the current scene displayed
 	public static String font = "Dialog.bold";
 	public static int multiplayerType = 1; // 1=server, 2=client
-	public static int gameType = 1; // 1=single, 2 = multi
+	public static int gameType = 0; // 1=single, 2 = multi
 	
 	private static boolean quickStart = false; // Skip the intro - use while developing.
 
@@ -359,9 +359,9 @@ public class PacManGame extends Ucigame {
 	 */
 	public void onClickSinglePlay() {
 		if (isShowingScene(ScreenMode.MENU)) {
-			PacManGame.gameType = 1;
+			PacManGame.gameType = 0;
 			System.out.println("single player click");
-			startPacManServer();
+			//startPacManServer();
 			showGameScreen();
 		}
 	}
@@ -478,7 +478,7 @@ public class PacManGame extends Ucigame {
 				// server
 				Server.send(PType.GAMEOVER);
 			}
-			else
+			else if(PacManGame.gameType==2)
 			{
 				Client.send(PType.LEAVE);
 			}
@@ -567,7 +567,7 @@ public class PacManGame extends Ucigame {
 				control.setPacManDirection(Direction.RIGHT);
 			}
 		}
-		else
+		else if(PacManGame.gameType==2)
 		{
 			// FOR MUTLIPLAYER
 			String gname = capitalize(Client.getGhostType().name());
@@ -594,7 +594,25 @@ public class PacManGame extends Ucigame {
 			}
 
 		}
-
+		else
+		{
+			if (keyboard.isDown(keyboard.UP, keyboard.W))
+			{
+				control.setPacManDirection(Direction.UP);
+			}
+			else if (keyboard.isDown(keyboard.DOWN, keyboard.S))
+			{
+				control.setPacManDirection(Direction.DOWN);
+			}
+			else if (keyboard.isDown(keyboard.LEFT, keyboard.A))
+			{
+				control.setPacManDirection(Direction.LEFT);
+			}
+			else if (keyboard.isDown(keyboard.RIGHT, keyboard.D))
+			{
+				control.setPacManDirection(Direction.RIGHT);
+			}
+		}
 		//TODO i like being able to restart during the game for testing REMOVE this later
 		if (keyboard.isDown(keyboard.R) && isShowingScene(ScreenMode.GAME)) {
 			showGameScreen();
