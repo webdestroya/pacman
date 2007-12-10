@@ -41,6 +41,7 @@ public class Client extends Thread
 				while(true)
 				{
 					socksend.send(hbpack);
+					Thread.currentThread().sleep(10000);
 				}
 				//socksend.close();
 			}
@@ -149,6 +150,7 @@ public class Client extends Thread
 	public void run()
 	{
 		// should be while game is not over
+
 		try
 		{
 			// get the multicast group

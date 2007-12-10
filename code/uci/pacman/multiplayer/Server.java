@@ -76,7 +76,6 @@ public class Server extends Thread
 
 		public void dropDead()
 		{
-			//System.out.println("SEARCHING FOR DEAD CLIENTS");
 			long now = System.currentTimeMillis();
 			
 			Set<Map.Entry<InetAddress,Long>> ts = ia2t.entrySet();
@@ -85,10 +84,9 @@ public class Server extends Thread
 			for (Iterator<Map.Entry<InetAddress,Long>> i = ts.iterator(); i.hasNext(); )
 			{
 				Map.Entry<InetAddress,Long> ent = i.next();
-				//System.out.println("\tL:"+(ent.getValue()+30000)+"|N:"+now);
 				if( now >= ( ent.getValue().longValue()+30000 ) )
 				{
-					//System.out.println("CLIENT "+ent.getKey()+" IS DEAD");
+					System.out.println("CLIENT "+ent.getKey()+" IS DEAD");
 					drop(ent.getKey());
 				}
 			}
@@ -447,7 +445,7 @@ public class Server extends Thread
     {
         super(name);
         socket = new DatagramSocket(4445);
-		Server.clients = new ClientMap();//new ArrayList<GhostType>();
+		Server.clients = new ClientMap();
 		Server.group = InetAddress.getByName(MCAST_ADDRESS);
 
 		packetHistory = new ArrayList<DatagramPacket>();
