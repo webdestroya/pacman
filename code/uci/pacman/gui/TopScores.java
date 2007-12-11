@@ -69,8 +69,13 @@ public class TopScores{
 		}
 	}
 	
-	// Was switched to private.  If top scores starts glitching out, make this public again
-	private void readScores(){
+	// Was switched back to public so we wouldn't mess up the API
+	/**
+	 *	 
+	 * Reads in the top scores from scores.txt
+	 *  
+	 */
+	public void readScores(){
 		try
 		{
 			inFile = new FileReader("scores.txt");
