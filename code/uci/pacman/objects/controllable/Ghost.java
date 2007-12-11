@@ -27,11 +27,8 @@ public abstract class Ghost extends ControllableObject implements AI {
 	public static final int GHOST_FRAMERATE = 5;
 	private static final int CAGE_POS = 250;
 
-	// MITCH
 	protected Direction lastDirection = Direction.LEFT;
 	protected Direction curDirection;
-	//isPlayer means the same thing...
-	//protected boolean isBeingControlled = false;
 	
 	protected boolean isPlayer = false;
 
@@ -49,7 +46,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 		super.addFramesForAnimation("scatter", "ghost_scatter.png", 0, 0); //TODO put in real scatter animation and frames
 		super.speed = speed;
 		scoreValue = 200;
-
+		// DO NOT SET isPlayer anywhere in this constructor
 	}
 
 	/**

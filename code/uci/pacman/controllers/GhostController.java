@@ -71,11 +71,9 @@ public class GhostController extends ActorController<String, Ghost> {
 	public void moveAIGhosts() {
 		for (Ghost g : getObjects()) {
 			// DO NOT DO if( !g.isPlayer) - you will mess up the game
-			//if (!g.isPlayer()) {
-				Direction nextMove = g.getMove();
-				g.step(nextMove);
-				g.move();
-			//}
+			Direction nextMove = g.getMove();
+			g.step(nextMove);
+			g.move();
 		}
 	}
 

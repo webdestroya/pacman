@@ -596,6 +596,7 @@ public class PacManGame extends Ucigame {
 		}
 		else
 		{
+			// this is for single player, do not send any keystrokes to the server
 			if (keyboard.isDown(keyboard.UP, keyboard.W))
 			{
 				control.setPacManDirection(Direction.UP);
