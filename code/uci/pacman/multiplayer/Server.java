@@ -10,10 +10,6 @@ import java.net.*;
 import java.util.*;
 
 
-/// COMMAND ENUMS(wrapping list)
-
-
-
 /**
  * Server is responsible for handling incoming client requests.
  * @author Networking Team
@@ -661,6 +657,8 @@ public class Server extends Thread
 									gtype = GhostType.PINKY;
 									break;
 							}
+							
+							System.out.println("Player "+gtype.name()+" joined from "+address.getHostAddress() );
 
 							// add to client database
 							Server.clients.add( gtype, address );
