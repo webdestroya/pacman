@@ -97,49 +97,50 @@ public class WallController extends SpriteController<Point, Wall> {
 	/* Private Methods */
 	
 	private void makeWalls1() {
-		addWall(2, 0, 8, 600);// left
-		addWall(0, 0, 600, 8);// top
-		addWall(0, 580, 600, 8);// bottom
-		addWall(592, 0, 8, 600);// right
-
-		addWall(TOP_CAGEPOS_X, TOP_CAGEPOS_Y, 157, 10); // top of the cage
-		addWall(222, 245, 157, 75); // rest of the cage
-
-		addWall(0, 177, 118, 195);
-		addWall(46, 46, 72, 38);
-		addWall(157, 46, 95, 38);
-		addWall(288, 7, 25, 77);
-		addWall(354, 46, 90, 38);
-		addWall(485, 46, 70, 38);
-		addWall(46, 122, 72, 21);
-		addWall(157, 122, 27, 133);
-		addWall(174, 180, 73, 20);
-		addWall(220, 122, 159, 21);
-		addWall(287, 136, 29, 64);
-		addWall(354, 180, 73, 20);
-		addWall(417, 122, 27, 135);
-		addWall(485, 122, 70, 20);
-		addWall(485, 178, 114, 194);
-
-		addWall(157, 295, 27, 77);
-		addWall(417, 295, 27, 77);
-		addWall(222, 354, 157, 18);
-		addWall(284, 367, 30, 61);
-		addWall(157, 409, 90, 19);
-		addWall(352, 411, 92, 17);
-		addWall(47, 526, 200, 18);
-		addWall(157, 469, 27, 60);
-		addWall(222, 469, 157, 17);
-		addWall(285, 481, 30, 63);
-		addWall(353, 526, 200, 18);
-		addWall(417, 469, 27, 60);
-		addWall(48, 409, 70, 20);
-		addWall(89, 426, 29, 60);
-		addWall(485, 427, 29, 59);
-		addWall(485, 411, 68, 20);
-		addWall(3, 466, 53, 20);
-		addWall(549, 466, 45, 20);
-
+	
+		addWall(0,0,18,596);
+		addWall(18,0,582,17);
+		addWall(18,17,266,1);
+		addWall(284,17,33,71);
+		addWall(317,17,283,1);
+		addWall(581,18,19,578);
+		addWall(45,47,73,39);
+		addWall(154,49,96,39);
+		addWall(350,49,97,39);
+		addWall(481,49,74,39);
+		addWall(46,124,72,23);
+		addWall(154,124,31,136);
+		addWall(220,124,160,23);
+		addWall(414,124,33,136);
+		addWall(481,124,73,23);
+		addWall(284,147,33,56);
+		addWall(481,176,100,205);
+		addWall(18,178,100,203);
+		addWall(185,181,65,22);
+		addWall(350,181,64,22);
+		addWall(220,239,160,10);
+		addWall(220,249,11,75);
+		addWall(370,249,10,59);
+		addWall(154,294,31,87);
+		addWall(414,294,33,87);
+		addWall(231,308,149,16);
+		addWall(220,353,160,28);
+		addWall(284,381,33,53);
+		addWall(45,411,73,23);
+		addWall(154,411,96,23);
+		addWall(350,411,97,23);
+		addWall(481,411,30,79);
+		addWall(511,411,44,23);
+		addWall(88,434,30,56);
+		addWall(18,467,38,23);
+		addWall(154,467,31,57);
+		addWall(220,467,160,23);
+		addWall(414,467,33,57);
+		addWall(544,467,37,23);
+		addWall(284,490,33,58);
+		addWall(45,524,205,24);
+		addWall(350,524,205,24);
+		addWall(18,574,563,22);
 	}
 
 	private void addWall(int x, int y, int width, int height) {
