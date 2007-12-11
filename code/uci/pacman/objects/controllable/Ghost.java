@@ -33,7 +33,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	//isPlayer means the same thing...
 	//protected boolean isBeingControlled = false;
 	
-	private boolean isPlayer;
+	protected boolean isPlayer = false;
 
 	/**
 	 * Constructs a ghost with a sprite, initial position, speed, and a boolean denoting if it
@@ -44,12 +44,12 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 * @param speed the speed at which the ghost moves
 	 * @param isPlayer true if the ghost is controlled by a human; false if it's controlled by AI
 	 */
-	public Ghost(String imgPath, int x, int y, int speed, boolean isPlayer) {
+	public Ghost(String imgPath, int x, int y, int speed, boolean ip) {
 		super(imgPath, new int[] {0,0}, GHOST_WIDTH, GHOST_HEIGHT, GHOST_FRAMERATE, x, y);
 		super.addFramesForAnimation("scatter", "ghost_scatter.png", 0, 0); //TODO put in real scatter animation and frames
 		super.speed = speed;
 		scoreValue = 200;
-		this.isPlayer = isPlayer;
+
 	}
 
 	/**
@@ -201,19 +201,14 @@ public abstract class Ghost extends ControllableObject implements AI {
 		}
 		else
 		{
-			// TODO: TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-			// MUST RESET THIS BACK TO GETAIMOVE()
-			//
-			// * DONT EDIT THIS FOR NOW, MITCH NEEDS IT FOR NETWORK DEVELOPMENT
-			//
 			if(PacManGame.gameType == 2)
 			{
 				return curDirection;
 			}
 			else
 			{
-				//return curDirection;
-				return getAIMove();
+				return curDirection;
+				//return getAIMove();
 			}
 		}
 	}

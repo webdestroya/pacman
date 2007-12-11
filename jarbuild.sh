@@ -12,9 +12,9 @@ find code/uci/pacman/gui/ -type f -iname '*.class' >> files.txt
 find code/uci/pacman/objects/ -type f -iname '*.class' >> files.txt
 find code/uci/pacman/multiplayer/ -type f -iname '*.class' >> files.txt
 
-find javazoom/ -type f -iname '*.class' >> files.txt
-find org/ -type f -iname '*.class' >> files.txt
-find ucigame/ -type f -iname '*.class' >> files.txt
+#find javazoom/ -type f -iname '*.class' >> files.txt
+#find org/ -type f -iname '*.class' >> files.txt
+#find ucigame/ -type f -iname '*.class' >> files.txt
 
 jar cmf0 Manifest.txt pacman.jar @files.txt images sounds levels
 

@@ -36,26 +36,22 @@ public class Server extends Thread
 	{
 		private HashMap<GhostType, InetAddress> gt2ia;
 		private HashMap<InetAddress, GhostType> ia2gt;
-		private HashMap<InetAddress, Long> ia2t;
 
 		public ClientMap()
 		{
 			gt2ia = new HashMap<GhostType, InetAddress>();
 			ia2gt = new HashMap<InetAddress, GhostType>();
-			ia2t = new HashMap<InetAddress, Long>();
 		}
 		
 		public void add(InetAddress a, GhostType g)
 		{
 			gt2ia.put(g,a);
 			ia2gt.put(a,g);
-			heartbeat(a);
 		}
 		public void add(GhostType g, InetAddress a)
 		{
 			gt2ia.put(g,a);
 			ia2gt.put(a,g);
-			heartbeat(a);
 		}
 
 		public void drop(InetAddress a)
@@ -70,31 +66,7 @@ public class Server extends Thread
 			ia2gt.remove( gt2ia.get(g) );
 			gt2ia.remove(g);
 		}
-		
-		public void heartbeat(InetAddress a)
-		{
-			ia2t.put(a, new Long(System.currentTimeMillis() ));
-		}
-
-		public void dropDead()
-		{
-			long now = System.currentTimeMillis();
-			
-			Set<Map.Entry<InetAddress,Long>> ts = ia2t.entrySet();
-
-			now = now + (30000);
-			for (Iterator<Map.Entry<InetAddress,Long>> i = ts.iterator(); i.hasNext(); )
-			{
-				Map.Entry<InetAddress,Long> ent = i.next();
-				if( now >= ( ent.getValue().longValue()+30000 ) )
-				{
-					System.out.println("CLIENT "+ent.getKey()+" IS DEAD");
-					drop(ent.getKey());
-				}
-			}
-		}
-
-
+	
 		public boolean contains( InetAddress a)
 		{
 			return ia2gt.containsKey(a);
@@ -168,6 +140,7 @@ public class Server extends Thread
 					// be quiet if we dont have any slots open
 					if(spotsOpen)
 					{
+						System.out.println("OPEN SLOT: "+gtype.name());
 						// build the packet
 						buf[0] = new Integer(PType.SPOTFREE.ordinal()).byteValue();
 						buf[1] = new Integer(gtype.ordinal()).byteValue();
@@ -187,15 +160,10 @@ public class Server extends Thread
 						// take longer naps when we are full
 						Thread.currentThread().sleep(10000);
 					}
-					/*
-					if( Server.clients.size() > 0 )
-					{
-						Server.clients.dropDead();
-					}
-					*/
 				}
 				catch(Exception e)
 				{
+			e.printStackTrace();
 					
 				}
 			}
@@ -340,6 +308,7 @@ public class Server extends Thread
 			}
 			catch(Exception e)
 			{
+			e.printStackTrace();
 
 			}
 		}
@@ -364,6 +333,7 @@ public class Server extends Thread
 			}
 			catch(Exception e)
 			{
+			e.printStackTrace();
 
 			}
 		}
@@ -568,7 +538,7 @@ public class Server extends Thread
 		}
 		catch(Exception e)
 		{
-
+			e.printStackTrace();
 		}
 	}
 
@@ -616,7 +586,8 @@ public class Server extends Thread
 
 				// this makes sure that they are actually playing
 				if( Server.clients.contains(address) )
-				{									
+				{
+					//System.out.println("PACKET FROM "+address.getHostAddress());
 					if( PType.GMOVE.ordinal() == packetType )
 					{
 						// a ghost move
@@ -642,24 +613,19 @@ public class Server extends Thread
 
 						// get the ghost
 												
-						GhostType gtype = clients.get(address);
+						GhostType gtype = Server.clients.get(address);
 
+						System.out.println("GMOVE "+dir.name()+" FROM "+gtype.name());
 						GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).setDirection(dir);
 
 						// notify all the clients
 						send(gtype, dir);
 					}
-					/*else if( PType.HEARTBEAT.ordinal() == packetType )
-					{
-						// A client heartbeat, that way, we keep everyone updated.
-						Server.clients.heartbeat(address);
-						
-					}*/
 					else if( PType.LEAVE.ordinal() == packetType )
 					{
 						// a ghost is leaving
 
-						GhostType gtype = clients.get(address);
+						GhostType gtype = Server.clients.get(address);
 						// find which ghost it is, and notify all the clients that they dropped
 						send(PType.LEAVE, gtype);
 						
@@ -697,6 +663,9 @@ public class Server extends Thread
 									gtype = GhostType.PINKY;
 									break;
 							}
+
+							System.out.println(gtype.name() + " JOIN FROM "+address.getHostAddress());
+
 							// add to client database
 							Server.clients.add( gtype, address );
 							
@@ -714,7 +683,7 @@ public class Server extends Thread
 			}
 			catch (Exception e)
 			{
-				//e.printStackTrace(System.out);
+				e.printStackTrace();
 				//moreQuotes = false;
 			}
 		}

@@ -27,31 +27,6 @@ public class Client extends Thread
 	
 	protected final static String MCAST_ADDRESS = "230.0.0.1";
 
-	class Heartbeat extends Thread
-	{
-		public void run()
-		{
-			try
-			{
-				DatagramSocket socksend = new DatagramSocket();
-				byte[] buf = new byte[1];
-				buf[0] = new Integer( PType.HEARTBEAT.ordinal() ).byteValue();
-				DatagramPacket hbpack = new DatagramPacket( buf, buf.length, Client.address, 4445);
-
-				while(true)
-				{
-					socksend.send(hbpack);
-					Thread.currentThread().sleep(10000);
-				}
-				//socksend.close();
-			}
-			catch(Exception e)
-			{
-
-			}
-		}
-	}
-
 	// This tells the client what type he is
 	private static GhostType ghostType = GhostType.BLINKY;
 
@@ -434,6 +409,8 @@ public class Client extends Thread
 						// Force the server address
 						Client.address = packet.getAddress();
 					
+						System.out.println("JOINING "+Client.address.getHostAddress()+" as "+Client.ghostType.name() );
+
 						// notify the server we are joinging
 						joinGame();
 
@@ -441,9 +418,6 @@ public class Client extends Thread
 						GameController.getInstance().startGame();
 						GameController.getInstance().getPacInstance().showGameScreen();
 						
-						// Ah sir, should we start his heart again? DAMMIT SIMMONS! YES DO IT
-						//new Heartbeat().start();
-
 						// set the ghosts direction
 						GameState.getInstance().getGhosts().getObjectAt(capitalize(Client.ghostType.name())).setDirection(Direction.UP);
 					}

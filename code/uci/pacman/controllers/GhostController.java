@@ -70,11 +70,12 @@ public class GhostController extends ActorController<String, Ghost> {
 	 */
 	public void moveAIGhosts() {
 		for (Ghost g : getObjects()) {
-			if (!g.isPlayer()) {
+			// DO NOT DO if( !g.isPlayer) - you will mess up the game
+			//if (!g.isPlayer()) {
 				Direction nextMove = g.getMove();
 				g.step(nextMove);
 				g.move();
-			}
+			//}
 		}
 	}
 
