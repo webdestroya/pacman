@@ -18,7 +18,7 @@ public class Clyde extends Ghost{
 	private final static int SPEED = 4;
 	
 	public Clyde(int x, int y, boolean isPlayer) {
-		super("final images 22x22\\clyde\\clyde 22x44.png", x, y, SPEED, isPlayer);
+		super("pac-man ghost images\\clydeFINAL.png", x, y, SPEED, isPlayer);
 	}
 
 	/* (non-Javadoc)
