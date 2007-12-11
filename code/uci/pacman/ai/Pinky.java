@@ -18,7 +18,7 @@ public class Pinky extends Ghost{
 	private final static int SPEED = 6;
 	
 	public Pinky(int x, int y, boolean isPlayer) {
-		super("pinky.png", x, y, SPEED, isPlayer);
+		super("final images 22x22\\pinky\\pinky 22x44.png", x, y, SPEED, isPlayer);
 	}
 
 	/* (non-Javadoc)

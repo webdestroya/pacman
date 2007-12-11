@@ -15,7 +15,7 @@ public class Blinky extends Ghost{
 	private final static int SPEED = 7;
 
 	public Blinky(int x, int y, boolean isPlayer) {
-		super("blinky.png", x, y, SPEED, isPlayer);
+		super("final images 22x22\\blinky\\blinky 22x44.png", x, y, SPEED, isPlayer);
 	}
 
 	
