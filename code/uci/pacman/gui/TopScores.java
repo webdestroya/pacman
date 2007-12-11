@@ -154,18 +154,19 @@ public class TopScores{
 		creditsButton.draw();
 	}
 	
-	/**
-	 * 
-	 * 
-	 * Retrieves player's score from GameState,
-	 * and checks it against scoreList to see if it qualifies
-	 * to be on the top score list.
-	 * 
-	 * Returns true if score qualifies to be on the list,
-	 * false otherwise.
-	 * 
-	 */
-	public boolean isTopList(){
+//	/**
+//	 * 
+//	 * 
+//	 * Retrieves player's score from GameState,
+//	 * and checks it against scoreList to see if it qualifies
+//	 * to be on the top score list.
+//	 * 
+//	 * Returns true if score qualifies to be on the list,
+//	 * false otherwise.
+//	 * 
+//	 */
+// Made private cause no one needs to call it, and so it won't change the API
+	private boolean isTopList(){
 		//score = 7000;
 		score = GameState.getInstance().getScore();
 
