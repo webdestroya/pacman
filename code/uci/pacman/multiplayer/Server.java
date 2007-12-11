@@ -140,7 +140,6 @@ public class Server extends Thread
 					// be quiet if we dont have any slots open
 					if(spotsOpen)
 					{
-						System.out.println("OPEN SLOT: "+gtype.name());
 						// build the packet
 						buf[0] = new Integer(PType.SPOTFREE.ordinal()).byteValue();
 						buf[1] = new Integer(gtype.ordinal()).byteValue();
@@ -615,7 +614,6 @@ public class Server extends Thread
 												
 						GhostType gtype = Server.clients.get(address);
 
-						System.out.println("GMOVE "+dir.name()+" FROM "+gtype.name());
 						GameState.getInstance().getGhosts().getObjectAt( capitalize(gtype.name()) ).setDirection(dir);
 
 						// notify all the clients
@@ -663,8 +661,6 @@ public class Server extends Thread
 									gtype = GhostType.PINKY;
 									break;
 							}
-
-							System.out.println(gtype.name() + " JOIN FROM "+address.getHostAddress());
 
 							// add to client database
 							Server.clients.add( gtype, address );

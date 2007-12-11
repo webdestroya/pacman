@@ -409,7 +409,6 @@ public class Client extends Thread
 						// Force the server address
 						Client.address = packet.getAddress();
 					
-						System.out.println("JOINING "+Client.address.getHostAddress()+" as "+Client.ghostType.name() );
 
 						// notify the server we are joinging
 						joinGame();
