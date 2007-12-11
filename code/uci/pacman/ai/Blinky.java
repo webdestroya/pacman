@@ -13,6 +13,8 @@ public class Blinky extends Ghost{
 
 	
 	private final static int SPEED = 7;
+	private boolean newScatter = true;
+	private int targetScatterX = 0, targetScatterY = 0;
 
 	public Blinky(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images/blinkyFINAL.png", x, y, SPEED, isPlayer);
@@ -38,18 +40,21 @@ public class Blinky extends Ghost{
 		} else {
 			int targetX = 250, targetY = 350;
 			if(this.isScattered()){
-				if (curX <= 300)
-					targetX = 575;
-				else
-					targetX = 75;
-				if (curY <= 300)
-					targetY = 575;
-				else
-					targetY = 25;
+				if(newScatter)
+				{
+					Random rand = new Random();
+					targetScatterX = rand.nextBoolean() ? 600 : 0;
+					targetScatterY = rand.nextBoolean() ? 600 : 0;
+					newScatter = false;
+				}
+				targetX = targetScatterX;
+				targetY = targetScatterY;
+				System.out.println(targetX + ", " + targetY);
 			} else {
 				PacMan pm = GameState.getInstance().getPacMan();
 				targetX = pm.x();
 				targetY = pm.y();
+				newScatter = true;
 			}			
 			
 			int horizontalDifference = curX - targetX;
