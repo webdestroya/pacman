@@ -406,11 +406,11 @@ public class Client extends Thread
 						}
 						Client.isPlaying = true;
 						
-						System.out.println("Joining game on "+Client.address.getHostAddress()+", playing as "+Client.ghostType.name() );
 
 						// Force the server address
 						Client.address = packet.getAddress();
 					
+						System.out.println("Joining game on "+Client.address.getHostAddress()+", playing as "+Client.ghostType.name() );
 
 						// notify the server we are joinging
 						joinGame();
