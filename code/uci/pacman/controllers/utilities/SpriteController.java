@@ -1,6 +1,7 @@
 package code.uci.pacman.controllers.utilities;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 import code.uci.pacman.game.GameState;
 
@@ -25,10 +26,12 @@ import ucigame.Sprite;
 public abstract class SpriteController<T, S extends Sprite> {
 	private static final long serialVersionUID = 1L;
 	protected static GameState state = GameState.getInstance(); 
-	private HashMap<T, S> hash;
+	//private HashMap<T, S> hash;
+	private ConcurrentHashMap<T, S> hash;
 
 	public SpriteController() {
-       hash = new HashMap<T, S>();
+       //hash = new HashMap<T, S>();
+       hash = new ConcurrentHashMap<T, S>();
 	}
 	
 	/**
