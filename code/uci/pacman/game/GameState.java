@@ -3,6 +3,7 @@ package code.uci.pacman.game;
 import code.uci.pacman.controllers.*;
 import code.uci.pacman.objects.controllable.*;
 import code.uci.pacman.objects.stationary.*;
+import java.awt.Point;
 
 /**
  * 
@@ -31,6 +32,11 @@ public class GameState {
 	private Fruit bonusItem;
 	private int score;
 	private int level;
+	
+	// Set the starting points of PacMan for each level.
+	private static final Point lev1_start = new Point(290,440);
+	private static final Point lev2_start = new Point(290,445);
+	private static final Point lev3_start = new Point(290,445);
 
 	public static GameState getInstance() {
 		return gameInstance;
@@ -60,13 +66,25 @@ public class GameState {
 	 * This is called at the beginning of the game and on each subsequent level.
 	 */
 	public void setupLevel() {
-		pacMan = new PacMan(290, 440);
+		pacMan = getPacManForLevel(level);
 		pills = new PillController();
 		walls = new WallController();
 		pellets = new PowerPelletController();
 		ghosts = new GhostController();
 		bonusItem = new Fruit(300, 330, 100);
 		SoundController.stopAllSounds(); //stop all sound
+	}
+	
+	private PacMan getPacManForLevel(int l)
+	{
+		if(l == 1)
+			return new PacMan(lev1_start.x, lev1_start.y);
+		else if(l == 2)
+			return new PacMan(lev2_start.x, lev2_start.y);
+		else if(l == 3)
+			return new PacMan(lev3_start.x, lev3_start.y);
+		else
+			return new PacMan(290,440);
 	}
 
 	/**
