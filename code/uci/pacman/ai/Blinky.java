@@ -13,7 +13,7 @@ import java.util.Random;
 public class Blinky extends Ghost{
 
 	private int countdownTimer = 8;
-	private boolean directionUP = false;
+	private boolean directionUP = true;
 	private final static int SPEED = 7;
 
 
