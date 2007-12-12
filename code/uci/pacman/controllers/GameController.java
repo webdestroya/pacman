@@ -28,7 +28,6 @@ import code.uci.pacman.objects.stationary.*;
 public class GameController {
 
 	private static GameController gControl;
-	private static final Point PACMANSTART = new Point(290, 440);
 	private boolean performNextMove;
 	private int numberOfEatenGhostsInScatter;
 	private boolean scatterMode;
@@ -167,7 +166,7 @@ public class GameController {
 		state.lifeLost();
 		state.getGhosts().respawn();
 		state.getFruit().hide();
-		state.getPacMan().position(PACMANSTART);
+		state.getPacMan().position(GameState.getInstance().getPacManStartPosForLevel(GameState.getInstance().getLevel()));
 		state.getPacMan().framerate(15);  
 		state.getPacMan().setAnimationMode("chomp", true); //restores PacMan to chomp animations
 		state.getPacMan().step(Direction.RIGHT);

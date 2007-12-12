@@ -75,16 +75,21 @@ public class GameState {
 		SoundController.stopAllSounds(); //stop all sound
 	}
 	
-	private PacMan getPacManForLevel(int l)
+	public Point getPacManStartPosForLevel(int l)
 	{
 		if(l == 1)
-			return new PacMan(lev1_start.x, lev1_start.y);
+			return lev1_start;
 		else if(l == 2)
-			return new PacMan(lev2_start.x, lev2_start.y);
+			return lev2_start;
 		else if(l == 3)
-			return new PacMan(lev3_start.x, lev3_start.y);
+			return lev3_start;
 		else
-			return new PacMan(290,440);
+			return lev1_start;
+	}
+	
+	private PacMan getPacManForLevel(int l)
+	{
+		return new PacMan((int)getPacManStartPosForLevel(l).getX(),(int)getPacManStartPosForLevel(l).getY());
 	}
 
 	/**
