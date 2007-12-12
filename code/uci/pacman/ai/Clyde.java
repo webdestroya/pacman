@@ -23,7 +23,7 @@ public class Clyde extends Ghost{
 	private int minDistance = 100;
 
 	public Clyde(int x, int y, boolean isPlayer) {
-		super("pac-man ghost images\\clydeFINAL.png", x, y, SPEED, isPlayer);
+		super("pac-man ghost images/clydeFINAL.png", x, y, SPEED, isPlayer);
 	}
 
 	/** 

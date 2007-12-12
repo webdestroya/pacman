@@ -21,7 +21,7 @@ public class Inky extends Ghost{
 	private int deathTimer = 40;
 
 	public Inky(int x, int y, boolean isPlayer) {
-		super("pac-man ghost images\\inkyFINAL.png", x, y, SPEED, isPlayer);
+		super("pac-man ghost images/inkyFINAL.png", x, y, SPEED, isPlayer);
 	}
 
 	/**
