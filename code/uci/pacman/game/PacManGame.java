@@ -29,8 +29,8 @@ public class PacManGame extends Ucigame {
 	private CreditsScreen creditsScreen;
 	private ScreenMode currentScene; // stores the current scene displayed
 	public static String font = "Dialog.bold";
-	public static int multiplayerType = 1; // 1=server, 2=client
-	public static int gameType = 0; // 1=single, 2 = multi
+	public static int multiplayerType = 1; //never used.  All done through gameType // 1=server, 2=client 
+	public static int gameType = 0; // 1=single, 2 = multi, or 1=pacman, 2=ghost
 	
 	private static boolean quickStart = false; // Skip the intro - use while developing.
 
