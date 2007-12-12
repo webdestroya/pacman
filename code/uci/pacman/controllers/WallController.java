@@ -22,16 +22,21 @@ import code.uci.pacman.objects.stationary.*;
 public class WallController extends SpriteController<Point, Wall> {
 	private static int TOP_CAGEPOS_X = 222;
 	private static int TOP_CAGEPOS_Y = 235;
+	
+	private int curLevel = 1;
 
 	public WallController() {
 		switch (GameState.getInstance().getLevel()) {
 		case 1:
+			curLevel = 1;
 			makeWalls1();
 			break;
 		case 2:
-			makeWalls1();
+			curLevel = 2;
+			makeWalls2();
 			break;
 		case 3:
+			curLevel = 3;
 			makeWalls1();
 			break;
 		}
@@ -142,8 +147,70 @@ public class WallController extends SpriteController<Point, Wall> {
 		addWall(350,524,205,24);
 		addWall(18,574,563,22);
 	}
+	
+	private void makeWalls2()
+	{
+		addWall(0,0,24,603);
+		addWall(24,0,548,11);
+		addWall(572,0,28,603);
+		addWall(225,11,29,58);
+		addWall(342,11,29,58);
+		addWall(53,40,28,58);
+		addWall(81,40,116,29);
+		addWall(399,40,116,29);
+		addWall(515,40,28,58);
+		addWall(283,42,30,84);
+		addWall(109,98,30,57);
+		addWall(168,98,29,57);
+		addWall(197,98,57,28);
+		addWall(342,98,57,28);
+		addWall(399,98,29,57);
+		addWall(457,98,30,57);
+		addWall(24,125,85,30);
+		addWall(487,125,85,30);
+		addWall(225,155,146,29);
+		addWall(53,184,28,86);
+		addWall(109,184,88,28);
+		addWall(399,184,88,28);
+		addWall(515,184,28,86);
+		addWall(225,212,146,30);
+		addWall(81,242,58,28);
+		addWall(168,242,29,86);
+		addWall(225,242,29,86);
+		addWall(342,242,29,86);
+		addWall(399,242,29,86);
+		addWall(457,242,58,28);
+		addWall(112,299,56,29);
+		addWall(254,299,88,29);
+		addWall(428,299,56,29);
+		addWall(515,299,28,87);
+		addWall(53,300,28,86);
+		addWall(81,357,58,29);
+		addWall(168,357,29,86);
+		addWall(197,357,57,29);
+		addWall(283,357,30,58);
+		addWall(342,357,86,29);
+		addWall(457,357,58,29);
+		addWall(399,386,29,57);
+		addWall(24,412,57,31);
+		addWall(109,412,30,60);
+		addWall(457,412,30,89);
+		addWall(515,412,57,31);
+		addWall(229,415,138,28);
+		addWall(53,472,86,29);
+		addWall(168,472,29,115);
+		addWall(197,472,57,29);
+		addWall(283,472,30,58);
+		addWall(342,472,57,29);
+		addWall(399,472,29,115);
+		addWall(487,472,56,29);
+		addWall(53,530,86,28);
+		addWall(229,530,138,28);
+		addWall(457,530,86,28);
+		addWall(24,587,548,16);
+	}
 
 	private void addWall(int x, int y, int width, int height) {
-		super.addObject(new Point(x, y), new Wall(x, y, width, height));
+		super.addObject(new Point(x, y), new Wall(curLevel,x, y, width, height));
 	}
 }
