@@ -137,10 +137,7 @@ public class PacManGame extends Ucigame {
 		multiMenu = new MultiplayerMenu();
 		// set multi-player background
 		canvas.background(getImage("multiplayermenu.png"));
-			//ODO: add multiplyer theme music here
-			//****
-			//multiMenu.startMultiPlayerTheme();
-			//***
+		// We aren't using a multiplayer menu theme, just letting the main menu theme carry over.
 		//set scene to multi-player game
 		showScene(ScreenMode.MULTIGAME);
 	}
