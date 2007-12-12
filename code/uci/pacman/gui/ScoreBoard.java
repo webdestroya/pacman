@@ -91,6 +91,8 @@ public class ScoreBoard{
 		}
 		
 		//add fruit to the scoreBoard.
+		String fruitImagePath = GameState.getInstance().getFruit().getGraphicPath();
+		fruit = new Fruit(fruitImagePath, fruitPosX, fruitPosY, 0);
 		fruit.draw();
 	}
 }
