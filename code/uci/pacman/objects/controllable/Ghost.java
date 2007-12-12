@@ -32,6 +32,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	protected Direction curDirection;
 	
 	protected boolean isPlayer = false;
+	
 
 	/**
 	 * Constructs a ghost with a sprite, initial position, speed, and a boolean denoting if it
@@ -212,16 +213,19 @@ public abstract class Ghost extends ControllableObject implements AI {
 	}
 
 
-	public boolean moveIsAllowed(Direction d)
-	{
+	public boolean moveIsAllowed(Direction d) 
+	{			
+		int hCheck = 13;
+		int wCheck = 10;
+	
 		WallController walls = GameState.getInstance().getWalls();
-		if(d == Direction.UP && walls.willCollideAtPos(this,0,1))
+		if (d == Direction.UP && walls.willCollideAtPos(this, 0, -hCheck))
 			return true;
-		if(d == Direction.DOWN && walls.willCollideAtPos(this,0,1))
+		if (d == Direction.DOWN && walls.willCollideAtPos(this, 0, wCheck + this.height()))
 			return true;
-		if(d == Direction.LEFT && walls.willCollideAtPos(this,-1,0))
+		if (d == Direction.LEFT && walls.willCollideAtPos(this, -hCheck, 0))
 			return true;
-		if(d == Direction.RIGHT && walls.willCollideAtPos(this,1,0))
+		if (d == Direction.RIGHT && walls.willCollideAtPos(this, wCheck + this.width(), 0))
 			return true;
 		else
 			return false;
