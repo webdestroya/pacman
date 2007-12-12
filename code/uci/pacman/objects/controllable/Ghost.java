@@ -7,6 +7,7 @@ import code.uci.pacman.ai.AI;
 import code.uci.pacman.controllers.WallController;
 import code.uci.pacman.game.*;
 import code.uci.pacman.objects.ControllableObject;
+import java.awt.Point;
 
 import code.uci.pacman.multiplayer.*;
 
@@ -224,6 +225,14 @@ public abstract class Ghost extends ControllableObject implements AI {
 			return true;
 		else
 			return false;
+	}
+	
+	public Point getInitialOutOfCagePos()
+	{
+		if(GameState.getInstance().getLevel() == 1)
+			return new Point(this.x(),205);
+		else
+			return new Point(this.x(),185);
 	}
 
 }

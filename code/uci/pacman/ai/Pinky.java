@@ -44,7 +44,7 @@ public class Pinky extends Ghost{
 		int curY = this.y();
 		// check to see if in center (just spawned)
 		if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-			this.position(this.x(), 205);
+			this.position(getInitialOutOfCagePos());
 			lastDirection = Direction.LEFT;
 			curDirection = Direction.UP;
 		} else {
