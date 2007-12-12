@@ -16,6 +16,7 @@ public class Blinky extends Ghost{
 	private boolean directionUP = true;
 	private final static int SPEED = 7;
 	private int mod = 7;
+	private int deathTimer = 40;
 
 	public Blinky(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images/blinkyFINAL2.png", x, y, SPEED, isPlayer);
@@ -50,7 +51,7 @@ public class Blinky extends Ghost{
 			}
 		} else {
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				countdownTimer = 30;
+				countdownTimer = deathTimer;
 			}
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;

@@ -18,6 +18,7 @@ public class Inky extends Ghost{
 	private boolean directionUP = true;
 	private final static int SPEED = 5;
 	private int mod = 7;
+	private int deathTimer = 40;
 
 	public Inky(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images\\inkyFINAL.png", x, y, SPEED, isPlayer);
@@ -56,7 +57,7 @@ public class Inky extends Ghost{
 			}
 		} else {
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				countdownTimer = 30;
+				countdownTimer = deathTimer;
 			}
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;

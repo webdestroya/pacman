@@ -16,6 +16,7 @@ public class Pinky extends Ghost{
 	private int countdownTimer = 150;
 	private boolean directionUP = false;
 	private int mod = 7;
+	private int deathTimer = 40;
 
 	private final static int SPEED = 6;
 
@@ -60,7 +61,7 @@ public class Pinky extends Ghost{
 			}
 		} else {
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				countdownTimer = 30;
+				countdownTimer = deathTimer;
 			}
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;
