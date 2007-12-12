@@ -17,6 +17,7 @@ public class Inky extends Ghost{
 	private int countdownTimer = 100;
 	private boolean directionUP = true;
 	private final static int SPEED = 5;
+	private int mod = 7;
 
 	public Inky(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images\\inkyFINAL.png", x, y, SPEED, isPlayer);
@@ -40,7 +41,7 @@ public class Inky extends Ghost{
 		int curY = this.y();
 		// check to see if in center (just spawned)
 		if(countdownTimer > 0){
-			if(countdownTimer%7==0){
+			if(countdownTimer%mod==0){
 				if(directionUP){
 					curDirection = Direction.UP;
 				}

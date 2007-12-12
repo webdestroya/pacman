@@ -17,6 +17,7 @@ public class Clyde extends Ghost{
 	private int countdownTimer = 50;
 	private boolean directionUP = false;
 	private final static int SPEED = 4;
+	private int mod = 7;
 
 	public Clyde(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images\\clydeFINAL.png", x, y, SPEED, isPlayer);
@@ -40,7 +41,7 @@ public class Clyde extends Ghost{
 		int curX = this.x();
 		int curY = this.y();
 		if(countdownTimer > 0){
-			if(countdownTimer%7==0){
+			if(countdownTimer%mod==0){
 				if(directionUP){
 					curDirection = Direction.UP;
 				}

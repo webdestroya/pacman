@@ -15,10 +15,10 @@ public class Blinky extends Ghost{
 	private int countdownTimer = 8;
 	private boolean directionUP = true;
 	private final static int SPEED = 7;
-
+	private int mod = 7;
 
 	public Blinky(int x, int y, boolean isPlayer) {
-		super("pac-man ghost images/blinkyFINAL.png", x, y, SPEED, isPlayer);
+		super("pac-man ghost images/blinkyFINAL2.png", x, y, SPEED, isPlayer);
 	}
 
 	
@@ -35,7 +35,7 @@ public class Blinky extends Ghost{
 		int curY = this.y();
 		// check to see if in center (just spawned)
 		if(countdownTimer > 0){
-			if(countdownTimer%7==0){
+			if(countdownTimer%mod==0){
 				if(directionUP){
 					curDirection = Direction.UP;
 				}

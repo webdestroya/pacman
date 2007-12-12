@@ -15,7 +15,7 @@ import code.uci.pacman.objects.controllable.PacMan;
 public class Pinky extends Ghost{
 	private int countdownTimer = 150;
 	private boolean directionUP = false;
-
+	private int mod = 7;
 
 	private final static int SPEED = 6;
 
@@ -45,7 +45,7 @@ public class Pinky extends Ghost{
 		// check to see if in center (just spawned)
 
 		if(countdownTimer > 0){
-			if(countdownTimer%7==0){
+			if(countdownTimer%mod==0){
 				if(directionUP){
 					curDirection = Direction.UP;
 				}
