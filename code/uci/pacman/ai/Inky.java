@@ -14,9 +14,10 @@ import code.uci.pacman.objects.controllable.PacMan;
  */
 public class Inky extends Ghost{
 
-
+	private int countdownTimer = 100;
+	private boolean directionUP = true;
 	private final static int SPEED = 5;
-	
+
 	public Inky(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images\\inkyFINAL.png", x, y, SPEED, isPlayer);
 	}
@@ -33,15 +34,25 @@ public class Inky extends Ghost{
 		// as of now, this ghost just tries to get to you as fast as possible
 		// with some work, it could end up being very smart
 		// so for now this is just an example for one way of doing this
-		
-		
+
+
 		int curX = this.x();
 		int curY = this.y();
 		// check to see if in center (just spawned)
-		if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-			this.position(getInitialOutOfCagePos());
-			lastDirection = Direction.LEFT;
-			curDirection = Direction.UP;
+		if(countdownTimer > 0){
+			if(countdownTimer%7==0){
+				if(directionUP){
+					curDirection = Direction.UP;
+				}
+				else{
+					curDirection = Direction.DOWN;
+				}
+				directionUP = !directionUP;
+			}
+			countdownTimer --;
+			if(countdownTimer == 0){
+				this.position(getInitialOutOfCagePos());
+			}
 		} else {
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;
@@ -49,11 +60,11 @@ public class Inky extends Ghost{
 				targetX = 600 - pm.x();
 				targetY = 650 - pm.y();
 			} else {
-				
+
 				targetX = pm.x();
 				targetY = pm.y();
 			}			
-			
+
 			int horizontalDifference = curX - targetX;
 			int verticalDifference = curY - targetY;
 			Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
@@ -95,7 +106,7 @@ public class Inky extends Ghost{
 		}
 		lastDirection = curDirection;
 		return curDirection;
-		
+
 	}
 
 }

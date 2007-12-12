@@ -14,6 +14,8 @@ import code.uci.pacman.objects.controllable.PacMan;
  */
 public class Clyde extends Ghost{
 
+	private int countdownTimer = 50;
+	private boolean directionUP = false;
 	private final static int SPEED = 4;
 	
 	public Clyde(int x, int y, boolean isPlayer) {
@@ -37,11 +39,20 @@ public class Clyde extends Ghost{
 		
 		int curX = this.x();
 		int curY = this.y();
-		// check to see if in center (just spawned)
-		if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-			this.position(getInitialOutOfCagePos());
-			lastDirection = Direction.LEFT;
-			curDirection = Direction.UP;
+		if(countdownTimer > 0){
+			if(countdownTimer%7==0){
+				if(directionUP){
+					curDirection = Direction.UP;
+				}
+				else{
+					curDirection = Direction.DOWN;
+				}
+				directionUP = !directionUP;
+			}
+			countdownTimer --;
+			if(countdownTimer == 0){
+				this.position(getInitialOutOfCagePos());
+			}
 		} else {
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;
