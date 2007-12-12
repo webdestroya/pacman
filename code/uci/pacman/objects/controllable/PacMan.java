@@ -97,12 +97,6 @@ public class PacMan extends ControllableObject {
 		int hCheck = 13;
 		int wCheck = 10;
 		
-		if(GameState.getInstance().getLevel() > 1)
-		{
-			hCheck = 8;
-			wCheck = 5;
-		}
-		
 		WallController walls = GameState.getInstance().getWalls();
 		if (d == Direction.UP && walls.willCollideAtPos(this, 0, -hCheck))
 			return true;
