@@ -15,7 +15,7 @@ import code.uci.pacman.objects.controllable.PacMan;
 public class Pinky extends Ghost{
 	private int countdownTimer = 150;
 	private boolean directionUP = false;
-	private int targetScatterX = 0, targetScatterY = 0;
+
 
 	private final static int SPEED = 6;
 
@@ -60,7 +60,7 @@ public class Pinky extends Ghost{
 			}
 		} else {
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				this.position(getInitialOutOfCagePos());
+				countdownTimer = 30;
 			}
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;
@@ -70,7 +70,7 @@ public class Pinky extends Ghost{
 			} else {
 				targetX = pm.x();
 				targetY = pm.y();
-			}			
+			}
 
 			int horizontalDifference = curX - targetX;
 			int verticalDifference = curY - targetY;

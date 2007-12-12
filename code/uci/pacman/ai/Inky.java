@@ -55,7 +55,7 @@ public class Inky extends Ghost{
 			}
 		} else {
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				this.position(getInitialOutOfCagePos());
+				countdownTimer = 30;
 			}
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;

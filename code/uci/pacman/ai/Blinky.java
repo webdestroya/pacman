@@ -2,6 +2,7 @@ package code.uci.pacman.ai;
 
 import code.uci.pacman.game.*;
 import code.uci.pacman.objects.controllable.*;
+
 import java.util.Random;
 
 /**
@@ -11,10 +12,10 @@ import java.util.Random;
  */
 public class Blinky extends Ghost{
 
-	
+	private int countdownTimer = 150;
+	private boolean directionUP = false;
 	private final static int SPEED = 7;
-	private boolean newScatter = true;
-	private int targetScatterX = 0, targetScatterY = 0;
+
 
 	public Blinky(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images/blinkyFINAL.png", x, y, SPEED, isPlayer);
@@ -33,28 +34,33 @@ public class Blinky extends Ghost{
 		int curX = this.x();
 		int curY = this.y();
 		// check to see if in center (just spawned)
-		if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-			this.position(getInitialOutOfCagePos());
-			lastDirection = Direction.LEFT;
-			curDirection = Direction.UP;
+		if(countdownTimer > 0){
+			if(countdownTimer%7==0){
+				if(directionUP){
+					curDirection = Direction.UP;
+				}
+				else{
+					curDirection = Direction.DOWN;
+				}
+				directionUP = !directionUP;
+			}
+			countdownTimer --;
+			if(countdownTimer == 0){
+				this.position(getInitialOutOfCagePos());
+			}
 		} else {
+			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
+				countdownTimer = 30;
+			}
+			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;
 			if(this.isScattered()){
-				if(newScatter)
-				{
-					Random rand = new Random();
-					targetScatterX = rand.nextBoolean() ? 600 : 0;
-					targetScatterY = rand.nextBoolean() ? 600 : 0;
-					newScatter = false;
-				}
-				targetX = targetScatterX;
-				targetY = targetScatterY;
+				targetX = 600 - pm.x();
+				targetY = 600 - pm.y();
 			} else {
-				PacMan pm = GameState.getInstance().getPacMan();
 				targetX = pm.x();
 				targetY = pm.y();
-				newScatter = true;
-			}			
+			}
 			
 			int horizontalDifference = curX - targetX;
 			int verticalDifference = curY - targetY;
