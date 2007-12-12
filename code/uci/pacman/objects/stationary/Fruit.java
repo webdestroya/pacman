@@ -1,5 +1,8 @@
 package code.uci.pacman.objects.stationary;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import code.uci.pacman.objects.Eatable;
 import code.uci.pacman.objects.StationaryObject;
 import code.uci.pacman.game.*;
@@ -41,9 +44,12 @@ public class Fruit extends StationaryObject implements Eatable {
 	 * @return a random fruit to be associated with the current level
 	 */
 	private static String randomFruitPath() {
-		String randomFruitPath = "cherry.png";
-		//TODO Make this a random fruit selection
-		return randomFruitPath;
+		ArrayList<String> fruits = new ArrayList<String>();
+		fruits.add("cherry.png");
+		fruits.add("lemon.png");
+		fruits.add("peach.png");
+		Random r = new Random();
+		return fruits.get(r.nextInt(fruits.size()));
 	}
 
 	/**

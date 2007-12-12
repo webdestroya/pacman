@@ -301,7 +301,8 @@ public class PacManGame extends Ucigame {
 	 */
 	public void pacManDeathTimer(){
 		stopTimer("pacManDeath");
-		control.pacManRevive();
+		if(isShowingScene(ScreenMode.GAME))
+			control.pacManRevive();
 	}
 
 	/**
@@ -328,7 +329,8 @@ public class PacManGame extends Ucigame {
 	
 	public void initialWaitTimer(){
 		stopTimer("initialWait");
-		control.initialWaitOver();
+		if(isShowingScene(ScreenMode.GAME))
+			control.initialWaitOver();
 	}
 
 	/**
@@ -336,7 +338,8 @@ public class PacManGame extends Ucigame {
 	 */
 	public void unScatterGhostsTimer() {
 		stopTimer("unScatterGhosts");
-		control.unscatterGhosts();
+		if(isShowingScene(ScreenMode.GAME))
+			control.unscatterGhosts();
 	}
 
 	/* Event Input Handling */

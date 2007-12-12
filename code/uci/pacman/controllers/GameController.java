@@ -154,7 +154,9 @@ public class GameController {
 			performNextMove = false;			 
 			game.restartTimer("pacManDeath", 2000);
 			//SEE PACMAN for where the modes are set
-			state.getPacMan().setAnimationMode("death"); //set pacman to "death" frame mode
+			state.getPacMan().framerate(4);
+			state.getPacMan().setAnimationMode("death", true); //set pacman to "death" frame mode
+			
 		} else { // if Pac-man has died one too many times
 			//SoundController.stopAllSounds(); //stop the sounds          
 			game.showGameOverScreen();
@@ -166,7 +168,8 @@ public class GameController {
 		state.getGhosts().respawn();
 		state.getFruit().hide();
 		state.getPacMan().position(PACMANSTART);
-		state.getPacMan().setAnimationMode("chomp"); //restores PacMan to chomp animations
+		state.getPacMan().framerate(15);  
+		state.getPacMan().setAnimationMode("chomp", true); //restores PacMan to chomp animations
 		state.getPacMan().step(Direction.RIGHT);
 		SoundController.startAmbient(); // starts the ambient noise again
 		performNextMove = true;

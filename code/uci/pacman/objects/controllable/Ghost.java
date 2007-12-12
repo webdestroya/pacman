@@ -43,7 +43,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 */
 	public Ghost(String imgPath, int x, int y, int speed, boolean ip) {
 		super(imgPath, new int[] {0,0}, GHOST_WIDTH, GHOST_HEIGHT, GHOST_FRAMERATE, x, y);
-		super.addFramesForAnimation("scatter", "ghost_scatter.png", 0, 0); //TODO put in real scatter animation and frames
+		super.addFramesForAnimation("scatter", "ghost_scatter.png", 0, 0, 22,0);
 		super.speed = speed;
 		scoreValue = 200;
 		// DO NOT SET isPlayer anywhere in this constructor

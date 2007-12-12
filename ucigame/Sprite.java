@@ -266,12 +266,23 @@ public class Sprite
 	}
 
 	//switches to a defined framemode
-	public void setAnimationMode(String mode) {
+	public void setAnimationMode(String mode, boolean resetToInitial) {
 		//TODO nathan - document
 		//TODO nathan - add error handling
 		if (spriteImages.hasMode(mode)) {
 			spriteImages.switchToMode(mode);
+			if(resetToInitial)
+				getCurrentSpriteMode().setCurrFrame(0); //reset to first sprite
 		}
+	}
+	
+	//switches to a defined framemode
+	public void setAnimationMode(String mode) {
+		setAnimationMode(mode, false);
+	}
+	
+	public String getAnimationMode(){
+		return getCurrentSpriteMode().getName();
 	}
 
 	//switches to the default frame mode
