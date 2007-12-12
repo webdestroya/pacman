@@ -1,5 +1,7 @@
 package code.uci.pacman.ai;
 
+import java.util.Random;
+
 import code.uci.pacman.game.Direction;
 import code.uci.pacman.game.GameState;
 import code.uci.pacman.objects.controllable.Ghost;
@@ -14,6 +16,7 @@ public class Clyde extends Ghost{
 
 	private Direction lastDirection;
 	private Direction curDirection;
+	private int targetScatterX = 0, targetScatterY = 0;
 	
 	private final static int SPEED = 4;
 	
@@ -34,23 +37,29 @@ public class Clyde extends Ghost{
 		// with some work, it could end up being very smart
 		// so for now this is just an example for one way of doing this
 		
-		// first check to see if in scatter mode
-		if (this.isScattered()) {
-			
+		int curX = this.x();
+		int curY = this.y();
+		// check to see if in center (just spawned)
+		if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
+			this.position(this.x(), 205);
+			lastDirection = Direction.LEFT;
+			curDirection = Direction.UP;
 		} else {
-			int curX = this.x();
-			int curY = this.y();
-			// check to see if in center (just spawned)
-			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				this.position(this.x(), 205);
-				lastDirection = Direction.LEFT;
-				curDirection = Direction.UP;
+			PacMan pm = GameState.getInstance().getPacMan();
+			int targetX = 250, targetY = 350;
+			// first check to see if in scatter mode
+			if(this.isScattered()){
+					targetX = pm.x();
+					targetY = pm.y();
+				targetX = targetScatterX;
+				targetY = targetScatterY;
 			} else {
-				PacMan pm = GameState.getInstance().getPacMan();
-				int pmX = pm.x();
-				int pmY = pm.y();
-				int horizontalDifference = curX - pmX;
-				int verticalDifference = curY - pmY;
+				targetX = pm.x();
+				targetY = pm.y();
+			}			
+				
+				int horizontalDifference = curX - targetX;
+				int verticalDifference = curY - targetY;
 				Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
 				Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
 				boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
@@ -90,9 +99,7 @@ public class Clyde extends Ghost{
 			}
 			lastDirection = curDirection;
 			return curDirection;
-		}
-		
-		return null;
+
 	}
 
 }
