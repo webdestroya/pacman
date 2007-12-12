@@ -17,7 +17,7 @@ public class Clyde extends Ghost{
 	private int countdownTimer = 50;
 	private boolean directionUP = false;
 	private final static int SPEED = 4;
-	
+
 	public Clyde(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images\\clydeFINAL.png", x, y, SPEED, isPlayer);
 	}
@@ -35,8 +35,8 @@ public class Clyde extends Ghost{
 		// as of now, this ghost just tries to get to you as fast as possible
 		// with some work, it could end up being very smart
 		// so for now this is just an example for one way of doing this
-		
-		
+
+
 		int curX = this.x();
 		int curY = this.y();
 		if(countdownTimer > 0){
@@ -54,6 +54,9 @@ public class Clyde extends Ghost{
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {
+			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
+				this.position(getInitialOutOfCagePos());
+			}
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;
 			if(this.isScattered()){
@@ -63,7 +66,7 @@ public class Clyde extends Ghost{
 				targetX = pm.x();
 				targetY = pm.y();
 			}			
-			
+
 			int horizontalDifference = curX - targetX;
 			int verticalDifference = curY - targetY;
 			Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
@@ -105,7 +108,7 @@ public class Clyde extends Ghost{
 		}
 		lastDirection = curDirection;
 		return curDirection;
-		
+
 	}
 
 }

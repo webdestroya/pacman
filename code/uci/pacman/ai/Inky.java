@@ -54,6 +54,9 @@ public class Inky extends Ghost{
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {
+			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
+				this.position(getInitialOutOfCagePos());
+			}
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;
 			if(this.isScattered()){
