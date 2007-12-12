@@ -25,7 +25,7 @@ public class Pinky extends Ghost{
 		super("pac-man ghost images\\pinkyFINAL.png", x, y, SPEED, isPlayer);
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see code.uci.pacman.AI.AI#getMove()
 	 * He wants to move in the same direction as you, but only 
 	 * when he's close enough to you. In other words, he tries 
@@ -35,19 +35,16 @@ public class Pinky extends Ghost{
 	 * in front of you he will turn away (provided there is a 
 	 * hallway to turn into)
 	 */
-	@Override
+
 	protected Direction getAIMove()
 	{
-		// as of now, this ghost just tries to get to you as fast as possible
-		// with some work, it could end up being very smart
-		// so for now this is just an example for one way of doing this
 
 		int curX = this.x();
 		int curY = this.y();
-		// check to see if in center (just spawned)
+		
 		PacMan pacman = GameState.getInstance().getPacMan();
 		Direction pacDirection = Direction.LEFT;
-
+		// check to see if the game just started
 		if(countdownTimer > 0){
 			if(countdownTimer%mod==0){
 				if(directionUP){
@@ -63,6 +60,7 @@ public class Pinky extends Ghost{
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {
+			// check to see if in center (just spawned)
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
 				countdownTimer = deathTimer;
 			}

@@ -25,6 +25,11 @@ public class Blinky extends Ghost{
 	
 	
 
+	/**
+	 * @see code.uci.pacman.objects.controllable.Ghost#getAIMove()
+	 * He tries to get you by your relative position.
+	 * He takes the fastest route to find you. 
+	 */
 	protected Direction getAIMove()
 	{
 		// as of now, this ghost just tries to get to you as fast as possible
@@ -63,15 +68,25 @@ public class Blinky extends Ghost{
 				targetY = pm.y();
 			}
 			
-			int horizontalDifference = curX - targetX;
-			int verticalDifference = curY - targetY;
-			Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
-			Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
-			boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
-			if (verticalMoreImportant)
-				curDirection = preferredVertical;
-			else
-				curDirection = preferredHorizontal;
+			curDirection = tryMove(curX, curY, targetX, targetY);
+		}
+		lastDirection = curDirection;
+		return curDirection;
+
+	}
+	
+	private Direction tryMove(int curX, int curY, int targetX, int targetY){
+		int horizontalDifference = curX - targetX;
+		int verticalDifference = curY - targetY;
+		Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
+		Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
+		boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
+		if (verticalMoreImportant)
+			curDirection = preferredVertical;
+		else
+			curDirection = preferredHorizontal;
+		
+		if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
 			if (!this.moveIsAllowed(curDirection)) {
 				if (verticalMoreImportant) {
 					if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
@@ -102,9 +117,7 @@ public class Blinky extends Ghost{
 				}
 			}
 		}
-		lastDirection = curDirection;
 		return curDirection;
-		
 	}
 	
 	

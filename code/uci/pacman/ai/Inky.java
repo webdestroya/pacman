@@ -24,13 +24,13 @@ public class Inky extends Ghost{
 		super("pac-man ghost images\\inkyFINAL.png", x, y, SPEED, isPlayer);
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see code.uci.pacman.AI.AI#getMove()
 	 * He's the tough one. The only thing I've been able to figure 
 	 * out about him is that he seems to be able to take on the 
 	 * personality of any of the other three at a given point in time.
 	 */
-	@Override
+	
 	protected Direction getAIMove()
 	{
 		// as of now, this ghost just tries to get to you as fast as possible
@@ -70,15 +70,25 @@ public class Inky extends Ghost{
 				targetY = pm.y();
 			}			
 
-			int horizontalDifference = curX - targetX;
-			int verticalDifference = curY - targetY;
-			Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
-			Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
-			boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
-			if (verticalMoreImportant)
-				curDirection = preferredVertical;
-			else
-				curDirection = preferredHorizontal;
+			curDirection = tryMove(curX, curY, targetX, targetY);
+		}
+		lastDirection = curDirection;
+		return curDirection;
+
+	}
+	
+	private Direction tryMove(int curX, int curY, int targetX, int targetY){
+		int horizontalDifference = curX - targetX;
+		int verticalDifference = curY - targetY;
+		Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
+		Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
+		boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
+		if (verticalMoreImportant)
+			curDirection = preferredVertical;
+		else
+			curDirection = preferredHorizontal;
+		
+		if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
 			if (!this.moveIsAllowed(curDirection)) {
 				if (verticalMoreImportant) {
 					if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
@@ -109,9 +119,7 @@ public class Inky extends Ghost{
 				}
 			}
 		}
-		lastDirection = curDirection;
 		return curDirection;
-
 	}
 
 }

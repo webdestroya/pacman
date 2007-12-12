@@ -24,14 +24,14 @@ public class Clyde extends Ghost{
 		super("pac-man ghost images\\clydeFINAL.png", x, y, SPEED, isPlayer);
 	}
 
-	/* (non-Javadoc)
+	/** 
 	 * @see code.uci.pacman.AI.AI#getMove()
 	 * He seems to want to be in the same general area as you, 
 	 * but doesn't seem to directly chase you. Don't let this fool 
 	 * you; he will not turn away if you are in his path. If you stay 
 	 * in one area, he seems to have a set pattern.
 	 */
-	//@Override
+
 	protected Direction getAIMove()
 	{
 		// as of now, this ghost just tries to get to you as fast as possible
@@ -69,15 +69,25 @@ public class Clyde extends Ghost{
 				targetY = pm.y();
 			}			
 
-			int horizontalDifference = curX - targetX;
-			int verticalDifference = curY - targetY;
-			Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
-			Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
-			boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
-			if (verticalMoreImportant)
-				curDirection = preferredVertical;
-			else
-				curDirection = preferredHorizontal;
+			curDirection = tryMove(curX, curY, targetX, targetY);
+		}
+		lastDirection = curDirection;
+		return curDirection;
+
+	}
+	
+	private Direction tryMove(int curX, int curY, int targetX, int targetY){
+		int horizontalDifference = curX - targetX;
+		int verticalDifference = curY - targetY;
+		Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
+		Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
+		boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
+		if (verticalMoreImportant)
+			curDirection = preferredVertical;
+		else
+			curDirection = preferredHorizontal;
+		
+		if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
 			if (!this.moveIsAllowed(curDirection)) {
 				if (verticalMoreImportant) {
 					if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
@@ -108,9 +118,13 @@ public class Clyde extends Ghost{
 				}
 			}
 		}
-		lastDirection = curDirection;
 		return curDirection;
-
+	}
+	
+	private double getDistanceToPacman(int Gx, int Gy, int Px, int Py){
+		double distance = 0;
+		distance = Math.sqrt(Math.pow((Px - Gx), 2) + Math.pow((Py - Gy), 2));
+		return distance;
 	}
 
 }
