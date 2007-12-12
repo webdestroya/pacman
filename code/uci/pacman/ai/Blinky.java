@@ -49,7 +49,6 @@ public class Blinky extends Ghost{
 				}
 				targetX = targetScatterX;
 				targetY = targetScatterY;
-				System.out.println(targetX + ", " + targetY);
 			} else {
 				PacMan pm = GameState.getInstance().getPacMan();
 				targetX = pm.x();
