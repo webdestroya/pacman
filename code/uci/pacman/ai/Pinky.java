@@ -66,19 +66,24 @@ public class Pinky extends Ghost{
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;
 			if(this.isScattered()){
-				targetX = 600 - pm.x();
-				targetY = 600 - pm.y();
+				targetX = 558 - pm.x();
+				targetY = 551 - pm.y();
 			} else {
 				targetX = pm.x();
 				targetY = pm.y();
 			}
+			// if pinky is within a set distance from pacman
 			if(getDistanceToPacman(curX, curY, targetX, targetY) < minDistance){
+				// it tries to go the same direction as pacman
 				try{
 					curDirection = getPacmanDirection(pm.xspeed(), pm.yspeed());
 				}
+				// just incase something goes wrong, it sets the direction as the last direction
 				catch(NullPointerException NPE){
 					curDirection = lastDirection;
 				}
+				// and if it can't go that direction, it'll just move according to the standard
+				// ai and try to eat pacman
 				if(!this.moveIsAllowed(curDirection)){
 					tryMove(curX, curY, targetX, targetY);
 				}
@@ -102,40 +107,37 @@ public class Pinky extends Ghost{
 			curDirection = preferredVertical;
 		else
 			curDirection = preferredHorizontal;
-		
-		if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
-			if (!this.moveIsAllowed(curDirection)) {
-				if (verticalMoreImportant) {
-					if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
-						curDirection = lastDirection;
-						if (!this.moveIsAllowed(curDirection))
-							curDirection = curDirection == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-					} else {
-						curDirection = preferredHorizontal;
-						if (!this.moveIsAllowed(curDirection)) {
-							curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-							if (!this.moveIsAllowed(curDirection))
-								curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-						}
-					}
+		if (!this.moveIsAllowed(curDirection)) {
+			if (verticalMoreImportant) {
+				if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
+					curDirection = lastDirection;
+					if (!this.moveIsAllowed(curDirection))
+						curDirection = curDirection == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
 				} else {
-					if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
-						curDirection = lastDirection;
+					curDirection = preferredHorizontal;
+					if (!this.moveIsAllowed(curDirection)) {
+						curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
 						if (!this.moveIsAllowed(curDirection))
-							curDirection = curDirection == Direction.UP ? Direction.DOWN : Direction.UP;
-					} else {
-						curDirection = preferredVertical;
-						if (!this.moveIsAllowed(curDirection)) {
 							curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-							if (!this.moveIsAllowed(curDirection))
-								curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-						}
+					}
+				}
+			} else {
+				if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
+					curDirection = lastDirection;
+					if (!this.moveIsAllowed(curDirection))
+						curDirection = curDirection == Direction.UP ? Direction.DOWN : Direction.UP;
+				} else {
+					curDirection = preferredVertical;
+					if (!this.moveIsAllowed(curDirection)) {
+						curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
+						if (!this.moveIsAllowed(curDirection))
+							curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
 					}
 				}
 			}
 		}
 	}
-
+	
 	private double getDistanceToPacman(int Gx, int Gy, int Px, int Py){
 		double distance = 0;
 		distance = Math.sqrt(Math.pow((Px - Gx), 2) + Math.pow((Py - Gy), 2));

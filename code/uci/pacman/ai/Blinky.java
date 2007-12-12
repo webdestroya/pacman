@@ -61,8 +61,8 @@ public class Blinky extends Ghost{
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;
 			if(this.isScattered()){
-				targetX = 600 - pm.x();
-				targetY = 600 - pm.y();
+				targetX = 558 - pm.x();
+				targetY = 551 - pm.y();
 			} else {
 				targetX = pm.x();
 				targetY = pm.y();
@@ -75,6 +75,7 @@ public class Blinky extends Ghost{
 		return curDirection;
 
 	}
+	
 	private void tryMove(int curX, int curY, int targetX, int targetY){
 		int horizontalDifference = curX - targetX;
 		int verticalDifference = curY - targetY;

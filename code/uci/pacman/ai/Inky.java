@@ -63,8 +63,8 @@ public class Inky extends Ghost{
 			PacMan pm = GameState.getInstance().getPacMan();
 			int targetX = 250, targetY = 350;
 			if(this.isScattered()){
-				targetX = 600 - pm.x();
-				targetY = 650 - pm.y();
+				targetX = 558 - pm.x();
+				targetY = 551 - pm.y();
 			} else {
 
 				targetX = pm.x();
