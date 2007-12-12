@@ -42,8 +42,6 @@ public class Pinky extends Ghost{
 		int curX = this.x();
 		int curY = this.y();
 		
-		PacMan pacman = GameState.getInstance().getPacMan();
-		Direction pacDirection = Direction.LEFT;
 		// check to see if the game just started
 		if(countdownTimer > 0){
 			if(countdownTimer%mod==0){
@@ -57,6 +55,7 @@ public class Pinky extends Ghost{
 			}
 			countdownTimer --;
 			if(countdownTimer == 0){
+				lastDirection = Direction.LEFT;
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {
@@ -75,17 +74,17 @@ public class Pinky extends Ghost{
 			}
 			if(getDistanceToPacman(curX, curY, targetX, targetY) < minDistance){
 				try{
-					curDirection = getPacmanDirection(pacman.xspeed(), pacman.yspeed());
+					curDirection = getPacmanDirection(pm.xspeed(), pm.yspeed());
 				}
 				catch(NullPointerException NPE){
 					curDirection = lastDirection;
 				}
 				if(!this.moveIsAllowed(curDirection)){
-					curDirection = tryMove(curX, curY, targetX, targetY);
+					tryMove(curX, curY, targetX, targetY);
 				}
 			}
 			else{
-				curDirection = tryMove(curX, curY, targetX, targetY);
+				tryMove(curX, curY, targetX, targetY);
 			}
 
 		}
@@ -93,7 +92,7 @@ public class Pinky extends Ghost{
 		return curDirection;
 	}
 	
-	private Direction tryMove(int curX, int curY, int targetX, int targetY){
+	private void tryMove(int curX, int curY, int targetX, int targetY){
 		int horizontalDifference = curX - targetX;
 		int verticalDifference = curY - targetY;
 		Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
@@ -135,7 +134,6 @@ public class Pinky extends Ghost{
 				}
 			}
 		}
-		return curDirection;
 	}
 
 	private double getDistanceToPacman(int Gx, int Gy, int Px, int Py){

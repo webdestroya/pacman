@@ -22,8 +22,8 @@ public class Blinky extends Ghost{
 		super("pac-man ghost images/blinkyFINAL.png", x, y, SPEED, isPlayer);
 	}
 
-	
-	
+
+
 
 	/**
 	 * @see code.uci.pacman.objects.controllable.Ghost#getAIMove()
@@ -35,8 +35,8 @@ public class Blinky extends Ghost{
 		// as of now, this ghost just tries to get to you as fast as possible
 		// with some work, it could end up being very smart
 		// so for now this is just an example for one way of doing this
-		
-		
+
+
 		int curX = this.x();
 		int curY = this.y();
 		// check to see if in center (just spawned)
@@ -67,15 +67,15 @@ public class Blinky extends Ghost{
 				targetX = pm.x();
 				targetY = pm.y();
 			}
-			
-			curDirection = tryMove(curX, curY, targetX, targetY);
+
+			tryMove(curX, curY, targetX, targetY);
+
 		}
 		lastDirection = curDirection;
 		return curDirection;
 
 	}
-	
-	private Direction tryMove(int curX, int curY, int targetX, int targetY){
+	private void tryMove(int curX, int curY, int targetX, int targetY){
 		int horizontalDifference = curX - targetX;
 		int verticalDifference = curY - targetY;
 		Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
@@ -85,41 +85,35 @@ public class Blinky extends Ghost{
 			curDirection = preferredVertical;
 		else
 			curDirection = preferredHorizontal;
-		
-		if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
-			if (!this.moveIsAllowed(curDirection)) {
-				if (verticalMoreImportant) {
-					if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
-						curDirection = lastDirection;
-						if (!this.moveIsAllowed(curDirection))
-							curDirection = curDirection == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-					} else {
-						curDirection = preferredHorizontal;
-						if (!this.moveIsAllowed(curDirection)) {
-							curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-							if (!this.moveIsAllowed(curDirection))
-								curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-						}
-					}
+		if (!this.moveIsAllowed(curDirection)) {
+			if (verticalMoreImportant) {
+				if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
+					curDirection = lastDirection;
+					if (!this.moveIsAllowed(curDirection))
+						curDirection = curDirection == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
 				} else {
-					if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
-						curDirection = lastDirection;
+					curDirection = preferredHorizontal;
+					if (!this.moveIsAllowed(curDirection)) {
+						curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
 						if (!this.moveIsAllowed(curDirection))
-							curDirection = curDirection == Direction.UP ? Direction.DOWN : Direction.UP;
-					} else {
-						curDirection = preferredVertical;
-						if (!this.moveIsAllowed(curDirection)) {
 							curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-							if (!this.moveIsAllowed(curDirection))
-								curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-						}
+					}
+				}
+			} else {
+				if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
+					curDirection = lastDirection;
+					if (!this.moveIsAllowed(curDirection))
+						curDirection = curDirection == Direction.UP ? Direction.DOWN : Direction.UP;
+				} else {
+					curDirection = preferredVertical;
+					if (!this.moveIsAllowed(curDirection)) {
+						curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
+						if (!this.moveIsAllowed(curDirection))
+							curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
 					}
 				}
 			}
 		}
-		return curDirection;
 	}
-	
-	
 
 }
