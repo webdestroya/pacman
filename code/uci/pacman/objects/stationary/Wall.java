@@ -17,9 +17,10 @@ public class Wall extends StationaryObject {
 	 * overlays the wall with the correct level image
 	 * 
 	 */
-	public Wall(int x, int y, int width, int height) {
+	public Wall(int l, int x, int y, int width, int height) {
 		super(width, height);
-		super.addFrame("level1.png", x, y);
+		String level = "level" + l + ".png";
+		super.addFrame(level, x, y);
 		super.position(x, y);
 	}
 
