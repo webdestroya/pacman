@@ -66,6 +66,7 @@ public class Pinky extends Ghost{
 		return curDirection;
 
 	}
+	
 	private Direction randomDirection(){
 		Random rand = new Random();
 		int num = rand.nextInt(3);
