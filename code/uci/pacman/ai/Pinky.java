@@ -17,6 +17,7 @@ public class Pinky extends Ghost{
 	private boolean directionUP = false;
 	private int mod = 7;
 	private int deathTimer = 40;
+	private int minDistance = 100;
 
 	private final static int SPEED = 6;
 
@@ -44,6 +45,8 @@ public class Pinky extends Ghost{
 		int curX = this.x();
 		int curY = this.y();
 		// check to see if in center (just spawned)
+		PacMan pacman = GameState.getInstance().getPacMan();
+		Direction pacDirection = Direction.LEFT;
 
 		if(countdownTimer > 0){
 			if(countdownTimer%mod==0){
@@ -72,68 +75,100 @@ public class Pinky extends Ghost{
 				targetX = pm.x();
 				targetY = pm.y();
 			}
+			if(getDistanceToPacman(curX, curY, targetX, targetY) < minDistance){
+				try{
+					curDirection = getPacmanDirection(pacman.xspeed(), pacman.yspeed());
+				}
+				catch(NullPointerException NPE){
+					curDirection = lastDirection;
+				}
+				if(!this.moveIsAllowed(curDirection)){
+					curDirection = tryMove(curX, curY, targetX, targetY);
+				}
+			}
+			else{
+				curDirection = tryMove(curX, curY, targetX, targetY);
+			}
 
-			int horizontalDifference = curX - targetX;
-			int verticalDifference = curY - targetY;
-			Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
-			Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
-			boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
-			if (verticalMoreImportant)
-				curDirection = preferredVertical;
-			else
-				curDirection = preferredHorizontal;
-			if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
-				if (!this.moveIsAllowed(curDirection)) {
-					if (verticalMoreImportant) {
-						if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
-							curDirection = lastDirection;
-							if (!this.moveIsAllowed(curDirection))
-								curDirection = curDirection == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-						} else {
-							curDirection = preferredHorizontal;
-							if (!this.moveIsAllowed(curDirection)) {
-								curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-								if (!this.moveIsAllowed(curDirection))
-									curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-							}
-						}
+		}
+		lastDirection = curDirection;
+		return curDirection;
+	}
+	
+	private Direction tryMove(int curX, int curY, int targetX, int targetY){
+		int horizontalDifference = curX - targetX;
+		int verticalDifference = curY - targetY;
+		Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
+		Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
+		boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
+		if (verticalMoreImportant)
+			curDirection = preferredVertical;
+		else
+			curDirection = preferredHorizontal;
+		
+		if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
+			if (!this.moveIsAllowed(curDirection)) {
+				if (verticalMoreImportant) {
+					if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
+						curDirection = lastDirection;
+						if (!this.moveIsAllowed(curDirection))
+							curDirection = curDirection == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
 					} else {
-						if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
-							curDirection = lastDirection;
+						curDirection = preferredHorizontal;
+						if (!this.moveIsAllowed(curDirection)) {
+							curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
 							if (!this.moveIsAllowed(curDirection))
-								curDirection = curDirection == Direction.UP ? Direction.DOWN : Direction.UP;
-						} else {
-							curDirection = preferredVertical;
-							if (!this.moveIsAllowed(curDirection)) {
 								curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-								if (!this.moveIsAllowed(curDirection))
-									curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-							}
+						}
+					}
+				} else {
+					if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
+						curDirection = lastDirection;
+						if (!this.moveIsAllowed(curDirection))
+							curDirection = curDirection == Direction.UP ? Direction.DOWN : Direction.UP;
+					} else {
+						curDirection = preferredVertical;
+						if (!this.moveIsAllowed(curDirection)) {
+							curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
+							if (!this.moveIsAllowed(curDirection))
+								curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
 						}
 					}
 				}
 			}
 		}
-		lastDirection = curDirection;
 		return curDirection;
-
 	}
 
-	private Direction randomDirection(){
-		Random rand = new Random();
-		int num = rand.nextInt(3);
+	private double getDistanceToPacman(int Gx, int Gy, int Px, int Py){
+		double distance = 0;
+		distance = Math.sqrt(Math.pow((Px - Gx), 2) + Math.pow((Py - Gy), 2));
+		return distance;
+	}
+
+	private Direction getPacmanDirection(double XSpeed, double YSpeed){
 		Direction direction = Direction.LEFT;
-		if(num == 0){
-			direction = Direction.LEFT;
+		if(XSpeed == 0 ){
+			if(YSpeed > 0 ){
+				direction = Direction.DOWN;
+			}
+			else if(YSpeed < 0 ){
+				direction = Direction.UP;
+			}
+			else{
+				direction = null;
+			}
 		}
-		else if(num ==1){
-			direction = Direction.UP;
-		}
-		else if(num ==2){
-			direction = Direction.DOWN;
-		}
-		else {
-			direction = Direction.RIGHT;
+		else{
+			if(XSpeed > 0 ){
+				direction = Direction.RIGHT;
+			}
+			else if(XSpeed < 0 ){
+				direction = Direction.LEFT;;
+			}
+			else{
+				direction = null;
+			}
 		}
 		return direction;
 	}
