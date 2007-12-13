@@ -99,24 +99,12 @@ public class Clyde extends Ghost{
 						if (oppCounter++ == 50) {
 							moveOpposite = false;
 							oppCounter = 0;
-							System.out.println("opposite done");
 						}
-						if(curDirection == Direction.UP){
-							targetY += targetY/2;
-						}
-						else if(curDirection == Direction.DOWN){
-							targetY -= targetY/2;
-						}
-						else if(curDirection == Direction.LEFT){
-							targetX += targetX/2;
-						}
-						else{
-							targetX -= targetX/2;
-						}
+						targetX = 558 - targetX;
+						targetY = 551 - targetY;
 					} else {
 						if (numGen.nextInt(40) == 1) { // 1 in 10 chance
 							moveOpposite = true;
-							System.out.println("opposite");
 						}
 						if(curDirection == Direction.UP){
 							targetY -= minDistance/2;
