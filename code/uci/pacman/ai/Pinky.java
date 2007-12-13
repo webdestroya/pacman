@@ -13,11 +13,13 @@ import code.uci.pacman.objects.controllable.PacMan;
  *
  */
 public class Pinky extends Ghost{
-	private int countdownTimer = 150;
+	private final int COUNTDOWN = 150;
+	private int countdownTimer = 0;
 	private boolean directionUP = false;
 	private int mod = 7;
 	private int deathTimer = 40;
 	private int minDistance = 100;
+	private int pacLives = 5;
 
 	private final static int SPEED = 6;
 
@@ -43,6 +45,12 @@ public class Pinky extends Ghost{
 		int curY = this.y();
 		
 		// check to see if the game just started
+		GameState state = GameState.getInstance();
+		int currentLives = state.getLives();
+		if(currentLives != pacLives){
+			pacLives = currentLives;
+			countdownTimer = COUNTDOWN;
+		}
 		if(countdownTimer > 0){
 			if(countdownTimer%mod==0){
 				if(directionUP){
@@ -63,7 +71,8 @@ public class Pinky extends Ghost{
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
 				countdownTimer = deathTimer;
 			}
-			PacMan pm = GameState.getInstance().getPacMan();
+			
+			PacMan pm = state.getPacMan();
 			int targetX = 250, targetY = 350;
 			if(this.isScattered()){
 				targetX = 558 - pm.x();

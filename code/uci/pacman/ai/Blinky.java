@@ -12,11 +12,13 @@ import java.util.Random;
  */
 public class Blinky extends Ghost{
 
-	private int countdownTimer = 8;
+	private final int COUNTDOWN = 8;
+	private int countdownTimer = 0;
 	private boolean directionUP = true;
 	private final static int SPEED = 6;
 	private int mod = 7;
 	private int deathTimer = 40;
+	private int pacLives = 5;
 
 	public Blinky(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images/blinkyFINAL.png", x, y, SPEED, isPlayer);
@@ -37,7 +39,12 @@ public class Blinky extends Ghost{
 
 		int curX = this.x();
 		int curY = this.y();
-		// check to see if in center (just spawned)
+		GameState state = GameState.getInstance();
+		int currentLives = state.getLives();
+		if(currentLives != pacLives){
+			pacLives = currentLives;
+			countdownTimer = COUNTDOWN;
+		}
 		if(countdownTimer > 0){
 			if(countdownTimer%mod==0){
 				if(directionUP){
@@ -56,7 +63,7 @@ public class Blinky extends Ghost{
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
 				countdownTimer = deathTimer;
 			}
-			PacMan pm = GameState.getInstance().getPacMan();
+			PacMan pm = state.getPacMan();
 			int targetX = 250, targetY = 350;
 			if(this.isScattered()){
 				targetX = 558 - pm.x();
