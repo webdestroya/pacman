@@ -47,6 +47,8 @@ public class Inky extends Ghost{
 		if(currentLives != pacLives){
 			pacLives = currentLives;
 			cageTimer = COUNTDOWN;
+			isAttacking = false;
+			countdownTimer = SCATTER;
 		}
 		// check to see if in center (just spawned)
 		if(cageTimer > 0){
