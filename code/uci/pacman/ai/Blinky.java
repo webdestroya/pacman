@@ -57,7 +57,7 @@ public class Blinky extends Ghost{
 				directionUP = !directionUP;
 			}
 			cageTimer --;
-			if(cageTimer == 0){
+			if(cageTimer <= 0){
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {

@@ -62,7 +62,7 @@ public class Inky extends Ghost{
 				directionUP = !directionUP;
 			}
 			cageTimer --;
-			if(cageTimer == 0){
+			if(cageTimer <= 0){
 				lastDirection = Direction.LEFT;
 				this.position(getInitialOutOfCagePos());
 			}
