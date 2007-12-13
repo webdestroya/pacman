@@ -164,9 +164,9 @@ public class WallController extends SpriteController<Point, Wall> {
 		addWall(174,103,23,51);
 		addWall(197,103,57,22);
 		addWall(348,103,80,23);
-		addWall(463,103,24,26);
+		addWall(463,103,24,28);
 		addWall(405,126,23,28);
-		addWall(463,129,115,25);
+		addWall(463,130,115,24);
 		addWall(24,130,91,24);
 		addWall(230,160,142,23);
 		addWall(59,189,22,80);
