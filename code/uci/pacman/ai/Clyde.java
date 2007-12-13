@@ -54,6 +54,8 @@ public class Clyde extends Ghost{
 		if(currentLives != pacLives){
 			pacLives = currentLives;
 			cageTimer = COUNTDOWN;
+			isAttacking = false;
+			countdownTimer = SCATTER;
 		}
 		if(cageTimer > 0){
 			if(cageTimer%mod==0){
