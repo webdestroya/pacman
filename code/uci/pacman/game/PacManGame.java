@@ -528,16 +528,6 @@ public class PacManGame extends Ucigame {
 			}
 		}
 	}
-
-	// This kept messing up the Start Game button, since it would start the game before
-	// the button was pressed.   If you want to skip the intro, just press and hold "s" or the 
-	// spacebar to get to the menu.  If you still want to click to get to the menu, 
-	// click the area where the start game button would be
-	//public void onMousePressed() {
-		//if (isShowingScene(ScreenMode.INTRO)) {
-		//	showMenuScreen();
-		//}
-	//}
 	
 	public void onMousePressed() {
 		System.out.println("Mouse Clicked: " + mouse.x() + "," + mouse.y());
@@ -617,10 +607,6 @@ public class PacManGame extends Ucigame {
 			{
 				control.setPacManDirection(Direction.RIGHT);
 			}
-		}
-		//TODO i like being able to restart during the game for testing REMOVE this later
-		if (keyboard.isDown(keyboard.R) && isShowingScene(ScreenMode.GAME)) {
-			showGameScreen();	
 		}
 		
 	}
