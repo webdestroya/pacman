@@ -14,15 +14,13 @@ public class Blinky extends Ghost{
 
 	private int countdownTimer = 8;
 	private boolean directionUP = true;
-	private final static int SPEED = 7;
+	private final static int SPEED = 6;
 	private int mod = 7;
 	private int deathTimer = 40;
 
 	public Blinky(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images/blinkyFINAL.png", x, y, SPEED, isPlayer);
 	}
-
-
 
 
 	/**
