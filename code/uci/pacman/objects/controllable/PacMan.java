@@ -95,16 +95,16 @@ public class PacMan extends ControllableObject {
 	public boolean moveIsAllowed(Direction d) {
 		
 		int hCheck = 13;
-		int wCheck = 10;
+		int wCheck = 13;
 	
 		WallController walls = GameState.getInstance().getWalls();
 		if (d == Direction.UP && walls.willCollideAtPos(this, 0, -hCheck))
 			return true;
-		if (d == Direction.DOWN && walls.willCollideAtPos(this, 0, wCheck + this.height()))
+		if (d == Direction.DOWN && walls.willCollideAtPos(this, 0, wCheck))
 			return true;
 		if (d == Direction.LEFT && walls.willCollideAtPos(this, -hCheck, 0))
 			return true;
-		if (d == Direction.RIGHT && walls.willCollideAtPos(this, wCheck + this.width(), 0))
+		if (d == Direction.RIGHT && walls.willCollideAtPos(this, wCheck, 0))
 			return true;
 		else
 			return false;
