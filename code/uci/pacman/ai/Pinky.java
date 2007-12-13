@@ -13,7 +13,7 @@ import code.uci.pacman.objects.controllable.PacMan;
  *
  */
 public class Pinky extends Ghost{
-	private final int COUNTDOWN = 150;
+	private final int COUNTDOWN = 50;
 	private int cageTimer = 0;
 	private boolean directionUP = false;
 	private int mod = 7;

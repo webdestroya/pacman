@@ -15,7 +15,7 @@ import code.uci.pacman.objects.controllable.PacMan;
  */
 public class Clyde extends Ghost{
 
-	private final int COUNTDOWN = 50;
+	private final int COUNTDOWN = 150;
 	private int cageTimer = 0;
 	private boolean directionUP = false;
 	private final static int SPEED = 5;
