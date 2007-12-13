@@ -13,12 +13,17 @@ import java.util.Random;
 public class Blinky extends Ghost{
 
 	private final int COUNTDOWN = 8;
-	private int countdownTimer = 0;
+	private int cageTimer = 0;
 	private boolean directionUP = true;
 	private final static int SPEED = 6;
 	private int mod = 7;
 	private int deathTimer = 40;
 	private int pacLives = 5;
+	private final int ATTACK = 280;
+	private final int SCATTER = 100;
+	private int countdownTimer = 0;
+	private boolean isAttacking = false;
+	
 
 	public Blinky(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images/blinkyFINAL.png", x, y, SPEED, isPlayer);
@@ -36,17 +41,16 @@ public class Blinky extends Ghost{
 		// with some work, it could end up being very smart
 		// so for now this is just an example for one way of doing this
 
-
 		int curX = this.x();
 		int curY = this.y();
 		GameState state = GameState.getInstance();
 		int currentLives = state.getLives();
 		if(currentLives != pacLives){
 			pacLives = currentLives;
-			countdownTimer = COUNTDOWN;
+			cageTimer = COUNTDOWN;
 		}
-		if(countdownTimer > 0){
-			if(countdownTimer%mod==0){
+		if(cageTimer > 0){
+			if(cageTimer%mod==0){
 				if(directionUP){
 					curDirection = Direction.UP;
 				}
@@ -55,17 +59,17 @@ public class Blinky extends Ghost{
 				}
 				directionUP = !directionUP;
 			}
-			countdownTimer --;
-			if(countdownTimer == 0){
+			cageTimer --;
+			if(cageTimer == 0){
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				countdownTimer = deathTimer;
+				cageTimer = deathTimer;
 			}
 			PacMan pm = state.getPacMan();
 			int targetX = 250, targetY = 350;
-			if(this.isScattered()){
+			if(this.isScattered() || !isAttacking){
 				targetX = 558 - pm.x();
 				targetY = 551 - pm.y();
 			} else {
