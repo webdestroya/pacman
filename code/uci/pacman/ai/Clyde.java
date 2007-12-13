@@ -16,7 +16,7 @@ import code.uci.pacman.objects.controllable.PacMan;
 public class Clyde extends Ghost{
 
 	private final int COUNTDOWN = 50;
-	private int countdownTimer = 0;
+	private int cageTimer = 0;
 	private boolean directionUP = false;
 	private final static int SPEED = 5;
 	private int mod = 7;
@@ -51,10 +51,10 @@ public class Clyde extends Ghost{
 		int currentLives = state.getLives();
 		if(currentLives != pacLives){
 			pacLives = currentLives;
-			countdownTimer = COUNTDOWN;
+			cageTimer = COUNTDOWN;
 		}
-		if(countdownTimer > 0){
-			if(countdownTimer%mod==0){
+		if(cageTimer > 0){
+			if(cageTimer%mod==0){
 				if(directionUP){
 					curDirection = Direction.UP;
 				}
@@ -63,8 +63,8 @@ public class Clyde extends Ghost{
 				}
 				directionUP = !directionUP;
 			}
-			countdownTimer --;
-			if(countdownTimer == 0){
+			cageTimer --;
+			if(cageTimer == 0){
 				lastDirection = Direction.LEFT;
 				this.position(getInitialOutOfCagePos());
 			}
@@ -77,7 +77,11 @@ public class Clyde extends Ghost{
 			if(this.isScattered()){
 				targetX = 558 - pm.x();
 				targetY = 551 - pm.y();
-			} else {
+			}  else if(!isAttacking){
+				targetX = 558 - pm.x();
+				targetY = 551 - pm.y();
+				countdownTimer --;
+			}else {
 				targetX = pm.x();
 				targetY = pm.y();
 				if (getDistanceToPacman(curX, curY, targetX, targetY) > minDistance){
@@ -101,10 +105,13 @@ public class Clyde extends Ghost{
 					}
 				}
 				if (numGen.nextInt(5) == 1) {
-					
-				}
-			}			
 
+				}
+				countdownTimer --;
+			}			
+			if(countdownTimer <= 0){
+				flipAttack();
+			}
 			tryMove(curX, curY, targetX, targetY);
 
 		}

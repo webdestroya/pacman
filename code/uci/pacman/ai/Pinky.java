@@ -14,7 +14,7 @@ import code.uci.pacman.objects.controllable.PacMan;
  */
 public class Pinky extends Ghost{
 	private final int COUNTDOWN = 150;
-	private int countdownTimer = 0;
+	private int cageTimer = 0;
 	private boolean directionUP = false;
 	private int mod = 7;
 	private int deathTimer = 40;
@@ -49,10 +49,10 @@ public class Pinky extends Ghost{
 		int currentLives = state.getLives();
 		if(currentLives != pacLives){
 			pacLives = currentLives;
-			countdownTimer = COUNTDOWN;
+			cageTimer = COUNTDOWN;
 		}
-		if(countdownTimer > 0){
-			if(countdownTimer%mod==0){
+		if(cageTimer > 0){
+			if(cageTimer%mod==0){
 				if(directionUP){
 					curDirection = Direction.UP;
 				}
@@ -61,15 +61,15 @@ public class Pinky extends Ghost{
 				}
 				directionUP = !directionUP;
 			}
-			countdownTimer --;
-			if(countdownTimer == 0){
+			cageTimer --;
+			if(cageTimer == 0){
 				lastDirection = Direction.LEFT;
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {
 			// check to see if in center (just spawned)
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				countdownTimer = deathTimer;
+				cageTimer = deathTimer;
 			}
 			
 			PacMan pm = state.getPacMan();
@@ -77,9 +77,17 @@ public class Pinky extends Ghost{
 			if(this.isScattered()){
 				targetX = 558 - pm.x();
 				targetY = 551 - pm.y();
-			} else {
+			}  else if(!isAttacking){
+				targetX = 558 - pm.x();
+				targetY = 551 - pm.y();
+				countdownTimer --;
+			}else {
 				targetX = pm.x();
 				targetY = pm.y();
+				countdownTimer --;
+			}
+			if(countdownTimer <= 0){
+				flipAttack();
 			}
 			// if pinky is within a set distance from pacman
 			if(getDistanceToPacman(curX, curY, targetX, targetY) < minDistance){

@@ -18,12 +18,7 @@ public class Blinky extends Ghost{
 	private final static int SPEED = 6;
 	private int mod = 7;
 	private int deathTimer = 40;
-	private int pacLives = 5;
-	private final int ATTACK = 280;
-	private final int SCATTER = 100;
-	private int countdownTimer = 0;
-	private boolean isAttacking = false;
-	
+	private int pacLives = 5;	
 
 	public Blinky(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images/blinkyFINAL.png", x, y, SPEED, isPlayer);
@@ -69,12 +64,21 @@ public class Blinky extends Ghost{
 			}
 			PacMan pm = state.getPacMan();
 			int targetX = 250, targetY = 350;
-			if(this.isScattered() || !isAttacking){
+			if(this.isScattered()){
 				targetX = 558 - pm.x();
 				targetY = 551 - pm.y();
-			} else {
+			} else if(!isAttacking){
+				targetX = 558 - pm.x();
+				targetY = 551 - pm.y();
+				countdownTimer --;
+			}else {
 				targetX = pm.x();
 				targetY = pm.y();
+				countdownTimer --;
+			}
+			
+			if(countdownTimer <= 0){
+				flipAttack();
 			}
 
 			tryMove(curX, curY, targetX, targetY);
@@ -84,5 +88,6 @@ public class Blinky extends Ghost{
 		return curDirection;
 
 	}
+
 	
 }

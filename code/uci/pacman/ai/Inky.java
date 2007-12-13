@@ -14,7 +14,7 @@ import code.uci.pacman.objects.controllable.PacMan;
  */
 public class Inky extends Ghost{
 	private final int COUNTDOWN = 100;
-	private int countdownTimer = 0;
+	private int cageTimer = 0;
 	private boolean directionUP = true;
 	private final static int SPEED = 5;
 	private int mod = 7;
@@ -46,11 +46,11 @@ public class Inky extends Ghost{
 		int currentLives = state.getLives();
 		if(currentLives != pacLives){
 			pacLives = currentLives;
-			countdownTimer = COUNTDOWN;
+			cageTimer = COUNTDOWN;
 		}
 		// check to see if in center (just spawned)
-		if(countdownTimer > 0){
-			if(countdownTimer%mod==0){
+		if(cageTimer > 0){
+			if(cageTimer%mod==0){
 				if(directionUP){
 					curDirection = Direction.UP;
 				}
@@ -59,27 +59,34 @@ public class Inky extends Ghost{
 				}
 				directionUP = !directionUP;
 			}
-			countdownTimer --;
-			if(countdownTimer == 0){
+			cageTimer --;
+			if(cageTimer == 0){
 				lastDirection = Direction.LEFT;
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {
 			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				countdownTimer = deathTimer;
+				cageTimer = deathTimer;
 			}
 			PacMan pm = state.getPacMan();
 			int targetX = 250, targetY = 350;
 			if(this.isScattered()){
 				targetX = 558 - pm.x();
 				targetY = 551 - pm.y();
+			} else if(!isAttacking){
+				targetX = 558 - pm.x();
+				targetY = 551 - pm.y();
+				countdownTimer --;
 			} else {
 
 				targetX = pm.x();
 				targetY = pm.y();
+				countdownTimer --;
 			}			
 
-
+			if(countdownTimer <= 0){
+				flipAttack();
+			}
 			tryMove(curX, curY, targetX, targetY);
 
 		}
