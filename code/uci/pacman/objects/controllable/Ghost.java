@@ -32,6 +32,10 @@ public abstract class Ghost extends ControllableObject implements AI {
 	protected Direction curDirection;
 	
 	protected boolean isPlayer = false;
+	protected final int ATTACK = 280;
+	protected final int SCATTER = 100;
+	protected int countdownTimer = 0;
+	protected boolean isAttacking = false;
 	
 
 	/**
@@ -239,6 +243,15 @@ public abstract class Ghost extends ControllableObject implements AI {
 			return new Point(this.x(),185);
 	}
 
+	protected void flipAttack(){
+		if(isAttacking){
+			countdownTimer = SCATTER;
+		} else{
+			countdownTimer = ATTACK;
+		}
+		isAttacking = !isAttacking;
+	}
+	
 	protected void tryMove(int curX, int curY, int targetX, int targetY){
 		int horizontalDifference = curX - targetX;
 		int verticalDifference = curY - targetY;
