@@ -620,7 +620,7 @@ public class PacManGame extends Ucigame {
 		}
 		//TODO i like being able to restart during the game for testing REMOVE this later
 		if (keyboard.isDown(keyboard.R) && isShowingScene(ScreenMode.GAME)) {
-			showGameScreen();
+			showGameScreen();	
 		}
 		
 	}
