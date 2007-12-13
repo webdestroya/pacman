@@ -24,6 +24,8 @@ public class Clyde extends Ghost{
 	private int minDistance = 100;
 	private int pacLives = 5;
 	private Random numGen = new Random();
+	private boolean moveOpposite = false;
+	private int oppCounter = 0;
 
 	public Clyde(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images/clydeFINAL.png", x, y, SPEED, isPlayer);
@@ -91,21 +93,42 @@ public class Clyde extends Ghost{
 					catch(NullPointerException NPE){
 						curDirection = lastDirection;
 					}
-					if(curDirection == Direction.UP){
-						targetY -= minDistance/2;
+					if (moveOpposite) {
+						if (oppCounter++ == 50) {
+							moveOpposite = false;
+							oppCounter = 0;
+							System.out.println("opposite done");
+						}
+						if(curDirection == Direction.UP){
+							targetY += targetY/2;
+						}
+						else if(curDirection == Direction.DOWN){
+							targetY -= targetY/2;
+						}
+						else if(curDirection == Direction.LEFT){
+							targetX += targetX/2;
+						}
+						else{
+							targetX -= targetX/2;
+						}
+					} else {
+						if (numGen.nextInt(40) == 1) { // 1 in 10 chance
+							moveOpposite = true;
+							System.out.println("opposite");
+						}
+						if(curDirection == Direction.UP){
+							targetY -= minDistance/2;
+						}
+						else if(curDirection == Direction.DOWN){
+							targetY += minDistance/2;
+						}
+						else if(curDirection == Direction.LEFT){
+							targetX -= minDistance/2;
+						}
+						else{
+							targetX += minDistance/2;
+						}
 					}
-					else if(curDirection == Direction.DOWN){
-						targetY += minDistance/2;
-					}
-					else if(curDirection == Direction.LEFT){
-						targetX -= minDistance/2;
-					}
-					else{
-						targetX += minDistance/2;
-					}
-				}
-				if (numGen.nextInt(5) == 1) {
-
 				}
 				countdownTimer --;
 			}			
