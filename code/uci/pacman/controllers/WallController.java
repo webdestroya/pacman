@@ -37,7 +37,7 @@ public class WallController extends SpriteController<Point, Wall> {
 			break;
 		case 3:
 			curLevel = 3;
-			makeWalls1();
+			makeWalls3();
 			break;
 		}
 	}
@@ -208,6 +208,72 @@ public class WallController extends SpriteController<Point, Wall> {
 		addWall(234,535,134,22);
 		addWall(464,535,78,22);
 		addWall(24,592,554,14);
+
+	}
+	
+	private void makeWalls3(){
+		addWall(0,0,24,606);
+		addWall(24,0,555,8);
+		addWall(579,0,21,606);
+		addWall(203,8,22,116);
+		addWall(378,8,22,116);
+		addWall(59,44,109,22);
+		addWall(259,44,24,22);
+		addWall(321,44,23,22);
+		addWall(435,44,109,22);
+		addWall(59,101,22,82);
+		addWall(81,101,87,23);
+		addWall(259,101,85,23);
+		addWall(435,101,109,23);
+		addWall(522,124,22,58);
+		addWall(114,159,83,24);
+		addWall(231,159,52,51);
+		addWall(320,159,52,51);
+		addWall(406,159,23,195);
+		addWall(429,159,59,23);
+		addWall(174,183,23,171);
+		addWall(24,216,27,23);
+		addWall(88,216,51,23);
+		addWall(464,216,23,52);
+		addWall(487,216,28,23);
+		addWall(552,216,27,23);
+		addWall(116,239,23,29);
+		addWall(231,245,141,23);
+		addWall(231,268,23,86);
+		addWall(349,268,23,64);
+		addWall(59,275,22,22);
+		addWall(522,275,22,22);
+		addWall(116,303,23,79);
+		addWall(464,303,23,79);
+		addWall(59,332,57,22);
+		addWall(254,332,118,22);
+		addWall(487,332,57,22);
+		addWall(24,389,57,23);
+		addWall(174,389,51,51);
+		addWall(260,389,23,53);
+		addWall(283,389,37,23);
+		addWall(320,389,23,53);
+		addWall(378,389,22,87);
+		addWall(400,389,29,52);
+		addWall(522,389,22,53);
+		addWall(544,389,35,23);
+		addWall(59,412,22,30);
+		addWall(116,418,23,24);
+		addWall(464,418,23,23);
+		addWall(203,442,22,56);
+		addWall(59,476,22,22);
+		addWall(116,476,51,22);
+		addWall(225,476,175,22);
+		addWall(436,476,51,22);
+		addWall(522,476,22,22);
+		addWall(116,498,23,59);
+		addWall(289,498,25,59);
+		addWall(464,498,23,59);
+		addWall(24,532,57,25);
+		addWall(174,532,78,25);
+		addWall(351,532,77,25);
+		addWall(522,533,56,24);
+		addWall(24,592,555,14);
 
 	}
 

@@ -5,6 +5,8 @@ import code.uci.pacman.controllers.utilities.ActorController;
 import code.uci.pacman.game.Direction;
 import code.uci.pacman.objects.controllable.Ghost;
 import code.uci.pacman.objects.controllable.PacMan;
+import code.uci.pacman.game.GameState;
+import java.awt.Point;
 
 /**
  * 
@@ -38,10 +40,10 @@ public class GhostController extends ActorController<String, Ghost> {
 	 * 
 	 */
 	protected void constructActors() {
-		addObject("Blinky", new Blinky(250, 250, false));
-		addObject("Pinky", new Pinky(275, 250, false));
-		addObject("Inky", new Inky(300, 250, false));
-		addObject("Clyde", new Clyde(325, 250, false));
+		addObject("Blinky", new Blinky(getStartPos(1).x, getStartPos(1).y, false));
+		addObject("Pinky", new Pinky(getStartPos(2).x, getStartPos(2).y, false));
+		addObject("Inky", new Inky(getStartPos(3).x, getStartPos(3).y, false));
+		addObject("Clyde", new Clyde(getStartPos(4).x, getStartPos(4).y, false));
 
 	}
 
@@ -85,10 +87,10 @@ public class GhostController extends ActorController<String, Ghost> {
 	 */
 	public void respawn() {
 		unscatter();
-		getObjectAt("Blinky").position(250, 250);
-		getObjectAt("Pinky").position(275, 250);
-		getObjectAt("Inky").position(300, 250);
-		getObjectAt("Clyde").position(325, 250);
+		getObjectAt("Blinky").position(getStartPos(1));
+		getObjectAt("Pinky").position(getStartPos(2));
+		getObjectAt("Inky").position(getStartPos(3));
+		getObjectAt("Clyde").position(getStartPos(4));
 	}
 
 	/**
@@ -128,6 +130,32 @@ public class GhostController extends ActorController<String, Ghost> {
 	public void unscatter() {
 		for (Ghost g : getObjects()) {
 			g.unScatter();
+		}
+	}
+	
+	private Point getStartPos(int ghost)
+	{
+		if(GameState.getInstance().getLevel() < 3)
+		{
+			if(ghost == 1)
+				return new Point(250,250);
+			else if(ghost == 2)
+				return new Point(275,250);
+			else if(ghost == 3)
+				return new Point (300,250);
+			else
+				return new Point(325,250);
+		}
+		else
+		{
+			if(ghost == 1)
+				return new Point(265,310);
+			else if(ghost == 2)
+				return new Point(275,270);
+			else if(ghost == 3)
+				return new Point (300,310);
+			else
+				return new Point(310,270);
 		}
 	}
 }

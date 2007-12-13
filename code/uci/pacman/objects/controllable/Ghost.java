@@ -26,7 +26,10 @@ public abstract class Ghost extends ControllableObject implements AI {
 	private static final int GHOST_WIDTH = 22;
 	private static final int GHOST_HEIGHT = 22;
 	public static final int GHOST_FRAMERATE = 5;
+	
 	private static final int CAGE_POS = 250;
+	private int startX;
+	private int startY;
 
 	protected Direction lastDirection = Direction.LEFT;
 	protected Direction curDirection;
@@ -51,6 +54,8 @@ public abstract class Ghost extends ControllableObject implements AI {
 		super(imgPath, new int[] {0,0}, GHOST_WIDTH, GHOST_HEIGHT, GHOST_FRAMERATE, x, y);
 		super.addFramesForAnimation("scatter", "ghost_scatter.png", 0, 0, 22,0);
 		super.speed = speed;
+		startX = x;
+		startY = y;
 		scoreValue = 200;
 		// DO NOT SET isPlayer anywhere in this constructor
 	}
@@ -143,9 +148,7 @@ public abstract class Ghost extends ControllableObject implements AI {
 	 * Respawns the ghost back within the cage and disables scatter for the ghost.
 	 */
 	public void respawnInCage() {
-		Random r = new Random();
-		int randomOffset = r.nextInt(50);
-		super.position(CAGE_POS + randomOffset, CAGE_POS);
+		this.position(startX,startY);
 		this.unScatter();
 	}
 	
@@ -239,8 +242,10 @@ public abstract class Ghost extends ControllableObject implements AI {
 	{
 		if(GameState.getInstance().getLevel() == 1)
 			return new Point(this.x(),205);
-		else
+		else if(GameState.getInstance().getLevel() == 2)
 			return new Point(this.x(),185);
+		else
+			return new Point(this.x(),210);
 	}
 
 	protected void flipAttack(){
