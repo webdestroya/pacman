@@ -85,45 +85,4 @@ public class Blinky extends Ghost{
 
 	}
 	
-	private void tryMove(int curX, int curY, int targetX, int targetY){
-		int horizontalDifference = curX - targetX;
-		int verticalDifference = curY - targetY;
-		Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
-		Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
-		boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
-		if (verticalMoreImportant)
-			curDirection = preferredVertical;
-		else
-			curDirection = preferredHorizontal;
-		if (!this.moveIsAllowed(curDirection)) {
-			if (verticalMoreImportant) {
-				if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
-					curDirection = lastDirection;
-					if (!this.moveIsAllowed(curDirection))
-						curDirection = curDirection == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-				} else {
-					curDirection = preferredHorizontal;
-					if (!this.moveIsAllowed(curDirection)) {
-						curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-						if (!this.moveIsAllowed(curDirection))
-							curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-					}
-				}
-			} else {
-				if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
-					curDirection = lastDirection;
-					if (!this.moveIsAllowed(curDirection))
-						curDirection = curDirection == Direction.UP ? Direction.DOWN : Direction.UP;
-				} else {
-					curDirection = preferredVertical;
-					if (!this.moveIsAllowed(curDirection)) {
-						curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-						if (!this.moveIsAllowed(curDirection))
-							curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-					}
-				}
-			}
-		}
-	}
-
 }

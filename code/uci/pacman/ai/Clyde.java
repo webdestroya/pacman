@@ -23,6 +23,7 @@ public class Clyde extends Ghost{
 	private int deathTimer = 40;
 	private int minDistance = 100;
 	private int pacLives = 5;
+	private Random numGen = new Random();
 
 	public Clyde(int x, int y, boolean isPlayer) {
 		super("pac-man ghost images/clydeFINAL.png", x, y, SPEED, isPlayer);
@@ -79,7 +80,7 @@ public class Clyde extends Ghost{
 			} else {
 				targetX = pm.x();
 				targetY = pm.y();
-				if(getDistanceToPacman(curX, curY, targetX, targetY) > minDistance){
+				if (getDistanceToPacman(curX, curY, targetX, targetY) > minDistance){
 					try{
 						curDirection = getPacmanDirection(pm.xspeed(), pm.yspeed());
 					}
@@ -99,7 +100,9 @@ public class Clyde extends Ghost{
 						targetX += minDistance/2;
 					}
 				}
-
+				if (numGen.nextInt(5) == 1) {
+					
+				}
 			}			
 
 			tryMove(curX, curY, targetX, targetY);
@@ -108,46 +111,6 @@ public class Clyde extends Ghost{
 		lastDirection = curDirection;
 		return curDirection;
 
-	}
-	private void tryMove(int curX, int curY, int targetX, int targetY){
-		int horizontalDifference = curX - targetX;
-		int verticalDifference = curY - targetY;
-		Direction preferredHorizontal = horizontalDifference > 0 ? Direction.LEFT : Direction.RIGHT;
-		Direction preferredVertical = verticalDifference > 0 ? Direction.UP : Direction.DOWN;
-		boolean verticalMoreImportant = Math.abs(verticalDifference) > Math.abs(horizontalDifference);
-		if (verticalMoreImportant)
-			curDirection = preferredVertical;
-		else
-			curDirection = preferredHorizontal;
-		if (!this.moveIsAllowed(curDirection)) {
-			if (verticalMoreImportant) {
-				if (lastDirection == Direction.LEFT || lastDirection == Direction.RIGHT) {
-					curDirection = lastDirection;
-					if (!this.moveIsAllowed(curDirection))
-						curDirection = curDirection == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-				} else {
-					curDirection = preferredHorizontal;
-					if (!this.moveIsAllowed(curDirection)) {
-						curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-						if (!this.moveIsAllowed(curDirection))
-							curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-					}
-				}
-			} else {
-				if (lastDirection == Direction.UP || lastDirection == Direction.DOWN) {
-					curDirection = lastDirection;
-					if (!this.moveIsAllowed(curDirection))
-						curDirection = curDirection == Direction.UP ? Direction.DOWN : Direction.UP;
-				} else {
-					curDirection = preferredVertical;
-					if (!this.moveIsAllowed(curDirection)) {
-						curDirection = preferredVertical == Direction.UP ? Direction.DOWN : Direction.UP;
-						if (!this.moveIsAllowed(curDirection))
-							curDirection = preferredHorizontal == Direction.LEFT ? Direction.RIGHT : Direction.LEFT;
-					}
-				}
-			}
-		}
 	}
 
 	private double getDistanceToPacman(int Gx, int Gy, int Px, int Py){
