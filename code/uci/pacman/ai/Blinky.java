@@ -61,7 +61,7 @@ public class Blinky extends Ghost{
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {
-			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
+			if ((curY > 249 && curY <= 310) && (curX >= 230 && curX <= 370)) {
 				cageTimer = deathTimer;
 			}
 			PacMan pm = state.getPacMan();

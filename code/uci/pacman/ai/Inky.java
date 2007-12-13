@@ -67,7 +67,7 @@ public class Inky extends Ghost{
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {
-			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
+			if ((curY > 250 && curY <= 308) && (curX >= 231 && curX <= 368)) {
 				cageTimer = deathTimer;
 			}
 			PacMan pm = state.getPacMan();

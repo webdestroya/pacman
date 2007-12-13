@@ -45,7 +45,6 @@ public class Clyde extends Ghost{
 		// with some work, it could end up being very smart
 		// so for now this is just an example for one way of doing this
 
-
 		int curX = this.x();
 		int curY = this.y();
 
@@ -73,8 +72,8 @@ public class Clyde extends Ghost{
 				this.position(getInitialOutOfCagePos());
 			}
 		} else {
-			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
-				countdownTimer = deathTimer;
+			if ((curY > 249 && curY <= 310) && (curX >= 230 && curX <= 370)) {
+				cageTimer = deathTimer;
 			}
 			PacMan pm = state.getPacMan();
 			int targetX = 250, targetY = 350;
@@ -103,7 +102,7 @@ public class Clyde extends Ghost{
 						targetX = 558 - targetX;
 						targetY = 551 - targetY;
 					} else {
-						if (numGen.nextInt(40) == 1) { // 1 in 10 chance
+						if (numGen.nextInt(40) == 1) { // 1 in 40 chance
 							moveOpposite = true;
 						}
 						if(curDirection == Direction.UP){

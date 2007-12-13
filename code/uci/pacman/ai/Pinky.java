@@ -70,7 +70,7 @@ public class Pinky extends Ghost{
 			}
 		} else {
 			// check to see if in center (just spawned)
-			if ((curY > 215 && curY <= 250) && (curX >= 250 && curX <= 325)) {
+			if ((curY > 250 && curY <= 308) && (curX >= 231 && curX <= 368)) {
 				cageTimer = deathTimer;
 			}
 			
