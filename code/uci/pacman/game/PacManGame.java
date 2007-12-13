@@ -538,6 +538,10 @@ public class PacManGame extends Ucigame {
 		//	showMenuScreen();
 		//}
 	//}
+	
+	public void onMousePressed() {
+		System.out.println("Mouse Clicked: " + mouse.x() + "," + mouse.y());
+	}
 
 	/**
 	 * 
